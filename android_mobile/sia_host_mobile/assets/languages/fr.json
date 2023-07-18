@@ -20,5 +20,8 @@
   "current_host_text": "Hébergements \nActuellement Actifs",
   "total_network_text": "Stockage Total \nDu réseau",
   "total_used_text": "Stockage Total \nUtilisé",
-  "price_per_text": "Prix par TB/ \nMois"
+  "price_per_text": "Prix par TB/ \nMois",
+  "connexion_text": "Pas De Connexion",
+  "error_text": "Erreur Inconnue",
+  "retry_text": "Veuillez Réessayez !"
 }

@@ -1,3 +1,4 @@
 enum Errors {
-  elementError,
+  connexionError,
+  errorUnknown,
 }

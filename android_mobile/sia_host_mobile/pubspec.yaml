@@ -52,6 +52,7 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   bottom_navy_bar: ^6.0.0
   chart_sparkline: ^1.0.13
+  http: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -98,6 +99,8 @@ flutter:
       fonts:
         - asset: assets/fonts/roboto_bold.ttf
           weight: 700
+        - asset: assets/fonts/roboto_medium.ttf
+          weight: 600
 
     - family: Poppins
       fonts:

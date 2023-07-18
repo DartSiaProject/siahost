@@ -1,13 +1,13 @@
-// Remove the comment below to use the class and complete the code
+import '../enums/errors_enum.dart';
 
-// class ErrorsMessage {
-//   static String? typeErrors(BuildContext context, Errors errors) {
-//     switch (errors) {
-//       case Success.elementError:
-//         return "message Error"
+class ErrorsMessage {
+  static String networkError(Errors errors) {
+    switch (errors) {
+      case Errors.connexionError:
+        return "connexion_text";
 
-//       default:
-//         return "error";
-//     }
-//   }
-// }
+      default:
+        return "error_text";
+    }
+  }
+}

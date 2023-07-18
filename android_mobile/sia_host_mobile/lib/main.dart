@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'src/injection.dart' as insert;
 import 'src/logic/controllers/account_bloc/account_bloc.dart';
 import 'src/logic/controllers/bloc_observer.dart';
+import 'src/logic/controllers/network_bloc/network_bloc.dart';
 import 'src/logic/controllers/sia_bloc/sia_bloc.dart';
 import 'src/utils/constants/string_const.dart';
 import 'src/utils/enums/themes_enum.dart';
@@ -17,7 +19,8 @@ import 'src/utils/themes/themes_app.dart';
 void main() async {
   await insert.init();
 
-  Bloc.observer = MyBlocObserver();
+  if (kDebugMode) Bloc.observer = MyBlocObserver();
+
   runApp(
     MultiBlocProvider(
       providers: [
@@ -26,6 +29,10 @@ void main() async {
         ),
         BlocProvider(
           create: (context) => insert.sl<SiaBloc>(),
+        ),
+        BlocProvider(
+          create: (context) =>
+              insert.sl<NetworkBloc>()..add(GetAllHostsEvent()),
         )
       ],
       child: const SiaHostsMobile(),
