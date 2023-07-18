@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import '../../logic/controllers/sia_bloc/sia_bloc.dart';
 import '../../utils/constants/colors_const.dart' as color;
 import '../../utils/constants/string_const.dart';
@@ -32,6 +33,10 @@ class _SiaScreenState extends State<SiaScreen> {
           if (siaBuilderState is NextFragmentSelected) {
             _pageIndexSelected = siaBuilderState.nextFragment;
             BackPressHelper.backstack.add(_pageIndexSelected);
+            if (BackPressHelper.backstack.length > 4) {
+              BackPressHelper.backstack.clear();
+              BackPressHelper.backstack.add(0);
+            }
           }
 
           if (siaBuilderState is PreviousFragmentSelected) {
