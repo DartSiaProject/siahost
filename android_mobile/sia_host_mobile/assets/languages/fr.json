@@ -1,3 +1,24 @@
 {
-  "welcome_text": "Bienvenue à toi Grand Développeur 😉"
+  "host_title_text": "Contrôle d'hébergement",
+  "host_description_text": "Prenez facilement le contrôle de votre hôte, où que vous soyez, grâce à notre application mobile.",
+  "data_title_text": "Visualisation de données",
+  "data_description_text": "Visualisez en temps réel les données relatives à l'état de votre hôte ainsi que l'ensemble de ses activités sur le réseau Sia.",
+  "network_title_text": "Données réseau",
+  "network_description_text": "Vous pouvez visualiser l'état du réseau Sia ainsi que tous les échanges des hôtes.",
+  "start_text": "Commencez",
+  "login_description_text": "Pour commencer à interagir avec le réseau Sia, veuillez entrer l'adresse publique de votre serveur",
+  "connect_text": "Connexion",
+  "adress_public_text": "Renterd Adresse publique",
+  "adress_text": "Adresse IPV4",
+  "renterd_password_text": "Mot de passe Renterd",
+  "password_text": "Mot de passe",
+  "home_text": "Acceuil",
+  "search_text": "Recherche",
+  "chart_text": "Graphiques",
+  "clock_text": "Historiques",
+  "network_view_text": "Aperçu du réseau",
+  "current_host_text": "Hébergements \nActuellement Actifs",
+  "total_network_text": "Stockage Total \nDu réseau",
+  "total_used_text": "Stockage Total \nUtilisé",
+  "price_per_text": "Prix par TB/ \nMois"
 }
