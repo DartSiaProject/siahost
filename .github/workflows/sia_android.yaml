@@ -81,7 +81,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: ${{secrets.APP_NAME}}_${{steps.date.outputs.date}}
-          path: "android_mobile/${{env.PROJECT_NAME}}/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk"
+          path: android_mobile/${{env.PROJECT_NAME}}/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
 
       - name: Archive Files
         run: |
@@ -94,7 +94,7 @@ jobs:
         uses: adityak74/google-drive-upload-git-action@main
         with:
           credentials: ${{secrets.CREDENTIALS}}
-          filename: "android_mobile/${{env.PROJECT_NAME}}/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk"
+          filename: android_mobile/${{env.PROJECT_NAME}}/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
           folderId: ${{secrets.FOLDER_ID_DRIVE}}
           name: ${{secrets.APP_NAME}}_${{steps.date.outputs.date}}.apk
           overwrite: "true"
