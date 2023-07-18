@@ -82,11 +82,11 @@ jobs:
           name: ${{secrets.APP_NAME}}_${{steps.date.outputs.date}}
           path: android_mobile/${{env.PROJECT_NAME}}/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
 
-      - name: Archive Files
-        run: |
-         sudo apt-get update
-         sudo apt-get install zip
-         zip -r archive.zip *
+      # - name: Archive Files
+      #   run: |
+      #    sudo apt-get update
+      #    sudo apt-get install zip
+      #    zip -r archive.zip *
          
 
       - name: Deploy on Google Drive
