@@ -73,7 +73,6 @@ jobs:
  
       - name: Build the Android Apk
         run: |
-          flutter clean
           flutter pub get
           flutter build apk --release --split-per-abi --obfuscate --split-debug-info=android_mobile/${{env.PROJECT_NAME}}/build/app/outputs/symbols
 
