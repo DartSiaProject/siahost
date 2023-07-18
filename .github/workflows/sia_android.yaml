@@ -1,7 +1,7 @@
 name: Sia Hosts Mobile
 
 env:
-  PROJECT_NAME: "sia_host_mobile"
+  PROJECT_NAME: "sia_host_mobile" 
   VSCODE_VERSION: "1.80.1"
   DART_VERSION: "3.0.5"
   DART_CHANNEL: "stable"
