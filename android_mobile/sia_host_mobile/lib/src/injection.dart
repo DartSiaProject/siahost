@@ -5,8 +5,12 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
 
+import 'logic/abstracts/network_abst.dart';
 import 'logic/controllers/account_bloc/account_bloc.dart';
+import 'logic/controllers/network_bloc/network_bloc.dart';
 import 'logic/controllers/sia_bloc/sia_bloc.dart';
+import 'logic/services/network_impl.dart';
+import 'logic/usecases/network_overview_usecases/get_all_hosts_usecase.dart';
 import 'utils/constants/pngs_const.dart' as png;
 import 'utils/constants/svgs_const.dart' as icon;
 
@@ -65,30 +69,6 @@ Future<void> init() async {
     DeviceOrientation.portraitDown,
   ]);
 
-//! Firebase core and Emulators initialization
-//* Firebase core
-  //-- remove the slash and complete the firebase core initialisation after create the project on the plateform --//
-
-  // await Firebase.initializeApp(
-  //     name: 'AppName',
-  //     options: const FirebaseOptions(
-  //         appId: 'my_appId',
-  //         apiKey: 'my_apiKey',
-  //         messagingSenderId: 'my_messagingSenderId',
-  //         projectId: 'my_projectId'));
-
-//* Firebase Emulators
-
-  // In This place you will initialize the emulators if you use the Firebase Emulator Suite
-  // you will import the firebase_local_configs.dart as firebase
-
-  // if (const bool.fromEnvironment("USE_FIREBASE_EMU")) {
-  //   await firebase.configureFirebaseAuth();
-  //   await firebase.configureFirebaseStorage();
-  //   firebase.configureFirebaseFirestore();
-  //   firebase.configureFirebaseFunctions();
-  // }
-
 //! initialisation of dotenv
   // There you can initialize your env file, you can activate the below line
 
@@ -117,12 +97,12 @@ Future<void> init() async {
 
 //! services
 
-  // sl.registerLazySingleton<WelcomeAbst>(() => WelcomeImpl());
+  sl.registerLazySingleton<NetworkAbst>(() => NetworkImpl());
 
 //! Usecases
 
-  // sl.registerLazySingleton<WelcomeUsecase>(
-  //     () => WelcomeUsecase(welcomeAbst: sl.call()));
+  sl.registerLazySingleton<GetAllHostsUsecase>(
+      () => GetAllHostsUsecase(networkOverviewAbst: sl.call()));
 
 //! Bloc
 
@@ -131,4 +111,6 @@ Future<void> init() async {
    */
   sl.registerFactory<AccountBloc>(() => AccountBloc());
   sl.registerFactory<SiaBloc>(() => SiaBloc());
+  sl.registerFactory<NetworkBloc>(
+      () => NetworkBloc(getAllHostsUsecase: sl.call()));
 }

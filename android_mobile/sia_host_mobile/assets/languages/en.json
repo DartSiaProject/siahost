@@ -20,5 +20,8 @@
   "current_host_text": "Current Actives \nHost",
   "total_network_text": "Total Network \nStorage",
   "total_used_text": "Total Used \nStorage",
-  "price_per_text": "Price Per TB/ \nMonth"
+  "price_per_text": "Price Per TB/ \nMonth",
+  "connexion_text": "No Connexion",
+  "error_text": "Error Unknown",
+  "retry_text": "Retry Please !"
 }
