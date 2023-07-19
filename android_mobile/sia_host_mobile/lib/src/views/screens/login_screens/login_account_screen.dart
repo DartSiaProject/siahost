@@ -87,7 +87,7 @@ class _LoginAccountScreenState extends State<LoginAccountScreen> {
                           ),
                         ),
                         TextField(
-                          keyboardType: TextInputType.text,
+                          keyboardType: TextInputType.number,
                           textInputAction: TextInputAction.next,
                           controller: _adressController,
                           decoration: InputDecoration(
@@ -122,8 +122,7 @@ class _LoginAccountScreenState extends State<LoginAccountScreen> {
                         ),
                         BlocBuilder<AccountBloc, AccountState>(
                           builder: (context, accountBuilderState) {
-                            bool _passwordHidden = true;
-
+                            var _passwordHidden = true;
                             if (accountBuilderState is PasswordHidded) {
                               _passwordHidden =
                                   accountBuilderState.passWordIsHided;

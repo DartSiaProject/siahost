@@ -10,7 +10,7 @@ import 'logic/controllers/account_bloc/account_bloc.dart';
 import 'logic/controllers/network_bloc/network_bloc.dart';
 import 'logic/controllers/sia_bloc/sia_bloc.dart';
 import 'logic/services/network_impl.dart';
-import 'logic/usecases/network_overview_usecases/get_all_hosts_usecase.dart';
+import 'logic/usecases/network_overview_usecases/get_network_data_usecase.dart';
 import 'utils/constants/pngs_const.dart' as png;
 import 'utils/constants/svgs_const.dart' as icon;
 
@@ -101,8 +101,8 @@ Future<void> init() async {
 
 //! Usecases
 
-  sl.registerLazySingleton<GetAllHostsUsecase>(
-      () => GetAllHostsUsecase(networkOverviewAbst: sl.call()));
+  sl.registerLazySingleton<GetNetworkDataUsecase>(
+      () => GetNetworkDataUsecase(networkOverviewAbst: sl.call()));
 
 //! Bloc
 
@@ -112,5 +112,5 @@ Future<void> init() async {
   sl.registerFactory<AccountBloc>(() => AccountBloc());
   sl.registerFactory<SiaBloc>(() => SiaBloc());
   sl.registerFactory<NetworkBloc>(
-      () => NetworkBloc(getAllHostsUsecase: sl.call()));
+      () => NetworkBloc(getNetworkDataUsecase: sl.call()));
 }
