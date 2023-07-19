@@ -65,19 +65,19 @@ class _HomeFragmentState extends State<HomeFragment> {
             ),
             BlocBuilder<NetworkBloc, NetworkState>(
               builder: (context, networkBuilderState) {
-                var _totalCurrentHosts = 0;
-                var _totalNetworkStorage = 0;
-                var _totalUsedStorage = 0;
-                var _pricePerTb = 0;
+                var _totalCurrentHosts = 0.0;
+                var _totalNetworkStorage = 0.0;
+                var _totalUsedStorage = 0.0;
+                var _pricePerTb = 0.0;
 
                 if (networkBuilderState is NetworkDataGetSuccess) {
                   List<Host> _hostModelList =
                       networkBuilderState.networkData["hostModelList"];
                   Network _networDataModel =
                       networkBuilderState.networkData["networkModel"];
-                  _totalCurrentHosts = _hostModelList.length;
+                  _totalCurrentHosts = _hostModelList.length.toDouble();
                   _totalNetworkStorage = _networDataModel.networkCapacityTB;
-                  _totalUsedStorage = _networDataModel.usedStorageTB;
+                  _totalUsedStorage = _networDataModel.usedStorageTB.toDouble();
                   _pricePerTb = _networDataModel.pricePerTbUsd;
                 }
                 return Expanded(
