@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import '../../../utils/constants/colors_const.dart' as color;
 import '../../../utils/constants/svgs_const.dart' as icon;
 
 class CardNetworkWidget extends StatelessWidget {
-  final int value;
+  final double value;
   final String descriptifText;
-  final int valuePercent;
+  final double valuePercent;
 
   const CardNetworkWidget({
     super.key,

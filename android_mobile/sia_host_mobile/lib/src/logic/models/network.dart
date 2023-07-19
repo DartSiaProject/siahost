@@ -6,19 +6,19 @@ class Network extends Equatable {
   final int hashrate;
   final int difficulty;
   final int coinSupply;
-  final int coinPriceUSD;
+  final double coinPriceUSD;
   final int marketCapUSD;
   final int usedStorageTB;
-  final int networkCapacityTB;
+  final double networkCapacityTB;
   final int onlineHosts;
   final int countriesWithHosts;
   final int activeContracts;
   final int storageProofCount;
   final int skynetFiles;
-  final int skynetSize;
+  final double skynetSize;
   final int skynetPortalsNumber;
-  final int pricePerTbSc;
-  final int pricePerTbUsd;
+  final double pricePerTbSc;
+  final double pricePerTbUsd;
   final int revenue30d;
   final int revenue30dChange;
 
@@ -28,19 +28,19 @@ class Network extends Equatable {
     this.hashrate = 0,
     this.difficulty = 0,
     this.coinSupply = 0,
-    this.coinPriceUSD = 0,
+    this.coinPriceUSD = 0.0,
     this.marketCapUSD = 0,
     this.usedStorageTB = 0,
-    this.networkCapacityTB = 0,
+    this.networkCapacityTB = 0.0,
     this.onlineHosts = 0,
     this.countriesWithHosts = 0,
     this.activeContracts = 0,
     this.storageProofCount = 0,
     this.skynetFiles = 0,
-    this.skynetSize = 0,
+    this.skynetSize = 0.0,
     this.skynetPortalsNumber = 0,
-    this.pricePerTbSc = 0,
-    this.pricePerTbUsd = 0,
+    this.pricePerTbSc = 0.0,
+    this.pricePerTbUsd = 0.0,
     this.revenue30d = 0,
     this.revenue30dChange = 0,
   });
@@ -51,19 +51,19 @@ class Network extends Equatable {
     int? hashrate,
     int? difficulty,
     int? coinSupply,
-    int? coinPriceUSD,
+    double? coinPriceUSD,
     int? marketCapUSD,
     int? usedStorageTB,
-    int? networkCapacityTB,
+    double? networkCapacityTB,
     int? onlineHosts,
     int? countriesWithHosts,
     int? activeContracts,
     int? storageProofCount,
     int? skynetFiles,
-    int? skynetSize,
+    double? skynetSize,
     int? skynetPortalsNumber,
-    int? pricePerTbSc,
-    int? pricePerTbUsd,
+    double? pricePerTbSc,
+    double? pricePerTbUsd,
     int? revenue30d,
     int? revenue30dChange,
   }) {
@@ -123,19 +123,19 @@ class Network extends Equatable {
       hashrate: map['hashrate']?.toInt() ?? 0,
       difficulty: map['difficulty']?.toInt() ?? 0,
       coinSupply: map['coin_supply']?.toInt() ?? 0,
-      coinPriceUSD: map['coin_price_USD']?.toInt() ?? 0,
+      coinPriceUSD: map['coin_price_USD']?.toDouble() ?? 0.0,
       marketCapUSD: map['market_cap_USD']?.toInt() ?? 0,
       usedStorageTB: map['used_storage_TB']?.toInt() ?? 0,
-      networkCapacityTB: map['network_capacity_TB']?.toInt() ?? 0,
+      networkCapacityTB: map['network_capacity_TB']?.toDouble() ?? 0.0,
       onlineHosts: map['online_hosts']?.toInt() ?? 0,
       countriesWithHosts: map['countries_with_hosts']?.toInt() ?? 0,
       activeContracts: map['active_contracts']?.toInt() ?? 0,
       storageProofCount: map['storage_proof_count']?.toInt() ?? 0,
       skynetFiles: map['skynet_files']?.toInt() ?? 0,
-      skynetSize: map['skynet_size']?.toInt() ?? 0,
+      skynetSize: map['skynet_size']?.toDouble() ?? 0.0,
       skynetPortalsNumber: map['skynet_portals_number']?.toInt() ?? 0,
-      pricePerTbSc: map['price_per_tb_sc']?.toInt() ?? 0,
-      pricePerTbUsd: map['price_per_tb_usd']?.toInt() ?? 0,
+      pricePerTbSc: map['price_per_tb_sc']?.toDouble() ?? 0.0,
+      pricePerTbUsd: map['price_per_tb_usd']?.toDouble() ?? 0.0,
       revenue30d: map['revenue_30d']?.toInt() ?? 0,
       revenue30dChange: map['revenue_30d_change']?.toInt() ?? 0,
     );
