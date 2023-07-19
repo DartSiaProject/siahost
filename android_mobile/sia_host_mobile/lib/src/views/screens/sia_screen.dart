@@ -28,7 +28,7 @@ class _SiaScreenState extends State<SiaScreen> {
       onWillPop: () => BackPressHelper.siaBackFragment(context),
       child: BlocBuilder<SiaBloc, SiaState>(
         builder: (context, siaBuilderState) {
-          int _pageIndexSelected = 0;
+          var _pageIndexSelected = 0;
 
           if (siaBuilderState is NextFragmentSelected) {
             _pageIndexSelected = siaBuilderState.nextFragment;

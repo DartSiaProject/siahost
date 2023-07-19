@@ -10,8 +10,8 @@ class BackPressHelper {
   static Future<bool> siaBackFragment(
     BuildContext context,
   ) {
-    print("CustomPop is called");
-    print("backstackList = $backstack");
+    // print("CustomPop is called");
+    // print("backstackList = $backstack");
     if (backstack.length > 1) {
       backstack.removeAt(backstack.length - 1);
       BlocProvider.of<SiaBloc>(context)

@@ -1,24 +1,22 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:multiple_result/multiple_result.dart';
 
-import '../../models/host.dart';
-import '../../usecases/network_overview_usecases/get_all_hosts_usecase.dart';
+import '../../usecases/network_overview_usecases/get_network_data_usecase.dart';
 
 part 'network_event.dart';
 part 'network_state.dart';
 
 class NetworkBloc extends Bloc<NetworkEvent, NetworkState> {
-  final GetAllHostsUsecase getAllHostsUsecase;
+  final GetNetworkDataUsecase getNetworkDataUsecase;
   NetworkBloc({
-    required this.getAllHostsUsecase,
+    required this.getNetworkDataUsecase,
   }) : super(NetworkInitial()) {
     on<GetAllHostsEvent>((event, emit) async {
       emit(HostLoading());
-      Result<List<Host>, String> _result = await getAllHostsUsecase.call();
+      var _result = await getNetworkDataUsecase.call();
       _result.when(
-        (success) => emit(AllHostsGetSuccess(hostListLength: success.length)),
-        (error) => emit(AllHostsGetFailed(message: error)),
+        (success) => emit(NetworkDataGetSuccess(networkData: success)),
+        (error) => emit(NetworkDataGetFailed(message: error)),
       );
     });
   }

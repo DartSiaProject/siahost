@@ -11,20 +11,18 @@ class NetworkInitial extends NetworkState {}
 
 class HostLoading extends NetworkState {}
 
-class AllHostsGetSuccess extends NetworkState {
-  final int hostListLength;
+class NetworkDataGetSuccess extends NetworkState {
+  final Map<String, dynamic> networkData;
 
-  const AllHostsGetSuccess({
-    required this.hostListLength,
+  const NetworkDataGetSuccess({
+    required this.networkData,
   });
-  @override
-  List<Object> get props => [hostListLength];
 }
 
-class AllHostsGetFailed extends NetworkState {
+class NetworkDataGetFailed extends NetworkState {
   final String message;
 
-  const AllHostsGetFailed({
+  const NetworkDataGetFailed({
     required this.message,
   });
 

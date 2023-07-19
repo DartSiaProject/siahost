@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../logic/controllers/network_bloc/network_bloc.dart';
+import 'package:sia_host_mobile/src/logic/models/host.dart';
+import 'package:sia_host_mobile/src/logic/models/network.dart';
 
+import '../../../logic/controllers/network_bloc/network_bloc.dart';
 import '../../../utils/constants/colors_const.dart' as color;
 import '../../../utils/constants/svgs_const.dart' as icon;
 import '../../../utils/helpers/language_helpers/language_translation_helper.dart';
@@ -63,9 +65,20 @@ class _HomeFragmentState extends State<HomeFragment> {
             ),
             BlocBuilder<NetworkBloc, NetworkState>(
               builder: (context, networkBuilderState) {
-                int _totalCurrentHosts = 0;
-                if (networkBuilderState is AllHostsGetSuccess) {
-                  _totalCurrentHosts = networkBuilderState.hostListLength;
+                var _totalCurrentHosts = 0;
+                var _totalNetworkStorage = 0;
+                var _totalUsedStorage = 0;
+                var _pricePerTb = 0;
+
+                if (networkBuilderState is NetworkDataGetSuccess) {
+                  List<Host> _hostModelList =
+                      networkBuilderState.networkData["hostModelList"];
+                  Network _networDataModel =
+                      networkBuilderState.networkData["networkModel"];
+                  _totalCurrentHosts = _hostModelList.length;
+                  _totalNetworkStorage = _networDataModel.networkCapacityTB;
+                  _totalUsedStorage = _networDataModel.usedStorageTB;
+                  _pricePerTb = _networDataModel.pricePerTbUsd;
                 }
                 return Expanded(
                   child: networkBuilderState is HostLoading
@@ -74,7 +87,7 @@ class _HomeFragmentState extends State<HomeFragment> {
                             color: color.spearmintColor,
                           ),
                         )
-                      : networkBuilderState is AllHostsGetFailed
+                      : networkBuilderState is NetworkDataGetFailed
                           ? Center(
                               child: Flex(
                                 mainAxisSize: MainAxisSize.min,
@@ -151,7 +164,7 @@ class _HomeFragmentState extends State<HomeFragment> {
                                           valuePercent: 2,
                                         ),
                                         CardNetworkWidget(
-                                          value: 0,
+                                          value: _totalNetworkStorage,
                                           descriptifText:
                                               LanguageTranslationHelper.of(
                                                       context)!
@@ -160,7 +173,7 @@ class _HomeFragmentState extends State<HomeFragment> {
                                           valuePercent: 2,
                                         ),
                                         CardNetworkWidget(
-                                          value: 0,
+                                          value: _totalUsedStorage,
                                           descriptifText:
                                               LanguageTranslationHelper.of(
                                                       context)!
@@ -168,7 +181,7 @@ class _HomeFragmentState extends State<HomeFragment> {
                                           valuePercent: 2,
                                         ),
                                         CardNetworkWidget(
-                                          value: 0,
+                                          value: _pricePerTb,
                                           descriptifText:
                                               LanguageTranslationHelper.of(
                                                       context)!
