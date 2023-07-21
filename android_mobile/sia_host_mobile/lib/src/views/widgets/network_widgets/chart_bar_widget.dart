@@ -190,7 +190,7 @@ class BarChartNetwokingWidgetState extends State<BarChartNetwokingWidget> {
           //     : const BorderSide(color: Colors.white, width: 0),
           backDrawRodData: BackgroundBarChartRodData(
             show: true,
-            toY: 20,
+            toY: 25,
             color: blueChalkColor,
           ),
         ),
@@ -207,53 +207,110 @@ class BarChartNetwokingWidgetState extends State<BarChartNetwokingWidget> {
       //           point.toDouble(),
       //         ))
       //     .toList();
+      widget.activeContractCount.isEmpty
+          ? []
+          : List.generate(8, (index) {
+              return makeGroupData(
+                index, widget.activeContractCount[index].toDouble(),
+                // isTouched: i == touchedIndex
+              );
+              // switch (i) {
+              //   case 0:
+              //     return makeGroupData(
+              //       0, widget.activeContractCount[0].toDouble(),
+              //       // isTouched: i == touchedIndex
+              //     );
+              //   case 1:
+              //     return makeGroupData(
+              //       1, widget.activeContractCount[1].toDouble(),
+              //       // isTouched: i == touchedIndex
+              //     );
+              //   case 2:
+              //     return makeGroupData(
+              //       2, widget.activeContractCount[2].toDouble(),
+              //       // isTouched: i == touchedIndex,
+              //     );
+              //   case 3:
+              //     return makeGroupData(
+              //       3, widget.activeContractCount[3].toDouble(),
+              //       // isTouched: i == touchedIndex,
+              //     );
+              //   case 4:
+              //     return makeGroupData(
+              //       4, widget.activeContractCount[4].toDouble(),
+              //       // isTouched: i == touchedIndex
+              //     );
+              //   case 5:
+              //     return makeGroupData(
+              //       5, widget.activeContractCount[5].toDouble(),
+              //       // isTouched: i == touchedIndex
+              //     );
+              //   case 6:
+              //     return makeGroupData(
+              //       6, widget.activeContractCount[6].toDouble(),
+              //       // isTouched: i == touchedIndex
+              //     );
 
-      List.generate(widget.activeContractCount.length, (i) {
-        return makeGroupData(
-          i, 5,
-          // isTouched: i == touchedIndex
-        );
+              //   case 7:
+              //     return makeGroupData(
+              //       6, widget.activeContractCount[7].toDouble(),
+              //       // isTouched: i == touchedIndex
+              //     );
+              //   default:
+              //     return throw Error();
+              // }
 
-        // switch (i) {
-        //   case 0:
-        //     return makeGroupData(
-        //       0, 5,
-        //       // isTouched: i == touchedIndex
-        //     );
-        //   case 1:
-        //     return makeGroupData(
-        //       1, 6.5,
-        //       // isTouched: i == touchedIndex
-        //     );
-        //   case 2:
-        //     return makeGroupData(
-        //       2, 5,
-        //       // isTouched: i == touchedIndex,
-        //     );
-        //   case 3:
-        //     return makeGroupData(
-        //       3, 7.5,
-        //       // isTouched: i == touchedIndex,
-        //     );
-        //   case 4:
-        //     return makeGroupData(
-        //       4, 9,
-        //       // isTouched: i == touchedIndex
-        //     );
-        //   case 5:
-        //     return makeGroupData(
-        //       5, 11.5,
-        //       // isTouched: i == touchedIndex
-        //     );
-        //   case 6:
-        //     return makeGroupData(
-        //       6, 6.5,
-        //       // isTouched: i == touchedIndex
-        //     );
-        //   default:
-        //     return throw Error();
-        // }
-      });
+              // return makeGroupData(
+              //   i, widget.activeContractCount[i].toDouble(),
+              //   // isTouched: i == touchedIndex
+              // );
+
+              // switch (i) {
+              //   case 0:
+              //     return makeGroupData(
+              //       0, 5,
+              //       // isTouched: i == touchedIndex
+              //     );
+              //   case 1:
+              //     return makeGroupData(
+              //       1, 6.5,
+              //       // isTouched: i == touchedIndex
+              //     );
+              //   case 2:
+              //     return makeGroupData(
+              //       2, 5,
+              //       // isTouched: i == touchedIndex,
+              //     );
+              //   case 3:
+              //     return makeGroupData(
+              //       3, 7.5,
+              //       // isTouched: i == touchedIndex,
+              //     );
+              //   case 4:
+              //     return makeGroupData(
+              //       4, 9,
+              //       // isTouched: i == touchedIndex
+              //     );
+              //   case 5:
+              //     return makeGroupData(
+              //       5, 11.5,
+              //       // isTouched: i == touchedIndex
+              //     );
+              //   case 6:
+              //     return makeGroupData(
+              //       6, 6.5,
+              //       // isTouched: i == touchedIndex
+              //     );
+
+              //   case 7:
+              //     return makeGroupData(
+              //       7, 16.5,
+              //       // isTouched: i == touchedIndex
+              //     );
+              //   default:
+              //     return throw Error();
+              // }
+            });
 
   BarChartData mainBarData() {
     return BarChartData(

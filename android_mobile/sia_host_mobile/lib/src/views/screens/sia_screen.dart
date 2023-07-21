@@ -45,6 +45,7 @@ class _SiaScreenState extends State<SiaScreen> {
           }
           return Scaffold(
             appBar: AppBar(
+              automaticallyImplyLeading: false,
               actions: <Widget>[
                 Padding(
                   padding: const EdgeInsets.all(15.0),
