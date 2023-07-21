@@ -7,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../logic/controllers/sia_bloc/sia_bloc.dart';
 import '../../utils/constants/colors_const.dart' as color;
 import '../../utils/constants/string_const.dart';
+import '../../utils/constants/svgs_const.dart' as icon;
 import '../../utils/helpers/back_press_helpers/back_press_helper.dart';
 import '../../utils/helpers/language_helpers/language_translation_helper.dart';
 import '../fragments/sia_fragments/charts_fragment.dart';
@@ -43,16 +44,37 @@ class _SiaScreenState extends State<SiaScreen> {
             _pageIndexSelected = siaBuilderState.previousFragment;
           }
           return Scaffold(
-            body: SafeArea(
-              child: IndexedStack(
-                index: _pageIndexSelected,
-                children: const <Widget>[
-                  HomeFragment(),
-                  SearchFragment(),
-                  ChartsFragment(),
-                  ClockFragment()
-                ],
-              ),
+            appBar: AppBar(
+              actions: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Material(
+                    borderRadius: BorderRadius.circular(5.0.r),
+                    color: color.tunaColor,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(5.0.r),
+                      onTap: () {},
+                      child: Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: SvgPicture.asset(
+                          icon.smsNotifsSvg,
+                          width: 24.0.w,
+                          height: 24.0.h,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            body: IndexedStack(
+              index: _pageIndexSelected,
+              children: const <Widget>[
+                HomeFragment(),
+                SearchFragment(),
+                ChartsFragment(),
+                ClockFragment()
+              ],
             ),
             bottomNavigationBar: BottomNavyBar(
               backgroundColor: color.darkJungleGreenColor,

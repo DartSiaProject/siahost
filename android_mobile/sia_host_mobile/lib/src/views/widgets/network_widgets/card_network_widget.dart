@@ -20,8 +20,6 @@ class CardNetworkWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // width: 144.0.w,
-      // height: 121.0.h,
       decoration: BoxDecoration(
         color: color.tunaColor,
         borderRadius: BorderRadius.circular(12.0.r),
@@ -54,16 +52,17 @@ class CardNetworkWidget extends StatelessWidget {
             Flex(
               direction: Axis.horizontal,
               children: <Widget>[
-                SvgPicture.asset(icon.pyramidSvg),
-                SizedBox(
-                  width: 5.0.w,
+                SvgPicture.asset(
+                  icon.arrowDropUpSvg,
+                  width: 25.0.w,
+                  height: 25.0.h,
                 ),
                 Text(
-                  "$valuePercent%",
+                  "+$valuePercent%",
                   style: TextStyle(
-                    fontFamily: "Poppins",
-                    fontSize: 16.0.sp,
-                    color: color.spearmintColor,
+                    fontFamily: "DmSans",
+                    fontSize: 12.0.sp,
+                    color: color.caribbeanGreenColor,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
