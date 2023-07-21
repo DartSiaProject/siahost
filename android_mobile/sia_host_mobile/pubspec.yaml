@@ -52,6 +52,7 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   bottom_navy_bar: ^6.0.0
   chart_sparkline: ^1.0.13
+  fl_chart: ^0.63.0
   http: ^1.1.0
 
 dev_dependencies:
@@ -115,6 +116,14 @@ flutter:
           weight: 700
         - asset: assets/fonts/inter_regular.otf
           weight: 400
+
+    - family: DmSans
+      fonts:
+        - asset: assets/fonts/dm_sans_bold.ttf
+          weight: 700
+        - asset: assets/fonts/dm_sans_medium.ttf
+          weight: 600
+
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

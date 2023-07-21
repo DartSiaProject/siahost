@@ -2,8 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:multiple_result/multiple_result.dart';
+import 'package:sia_host_mobile/src/logic/models/contract.dart';
 import 'package:sia_host_mobile/src/logic/models/network.dart';
 import 'package:sia_host_mobile/src/utils/enums/http_request_enum.dart';
+import 'package:sia_host_mobile/src/utils/extras/node/apis/contract_api.dart'
+    as contract;
 import 'package:sia_host_mobile/src/utils/extras/node/apis/host_api.dart'
     as hosts;
 import 'package:sia_host_mobile/src/utils/extras/node/apis/network_api.dart'
@@ -42,18 +45,35 @@ class NetworkImpl implements NetworkAbst {
         apiUri: network.getNetworkApi,
       );
 
+      var _responseContract = await RequestHelper.httpMethod(
+          requestType: HttpRequestType.get,
+          apiUri: contract.getActiveContractsApi);
+
       if (_responseHost.statusCode == 200 &&
-          _responseNetwork.statusCode == 200) {
+          _responseNetwork.statusCode == 200 &&
+          _responseContract.statusCode == 200) {
         List<dynamic> _hostData = json.decode(_responseHost.body);
         List<Host> _hostModelList =
             _hostData.map((host) => Host.fromMap(host)).toList();
 
-        Network networkModel =
+        Network _networkModel =
             Network.fromMap(json.decode(_responseNetwork.body));
+
+        List<dynamic> _contractData = json.decode(_responseContract.body);
+        List<int> _activeContractCountList = _contractData
+            .map((contract) => Contract.fromMap(contract).activecontractcount)
+            .toList();
+
+        // List<int> _activeContractCountList = _contractList
+        //     .map((contractModel) => contractModel.activecontractcount)
+        //     .toList();
+
+        print(_activeContractCountList);
 
         Map<String, dynamic> _networkData = {
           "hostModelList": _hostModelList,
-          "networkModel": networkModel,
+          "networkModel": _networkModel,
+          "activeContractCountList": _activeContractCountList
         };
         _result = Result.success(_networkData);
       }

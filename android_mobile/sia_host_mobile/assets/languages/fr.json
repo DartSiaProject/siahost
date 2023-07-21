@@ -23,5 +23,10 @@
   "price_per_text": "Prix par TB/ \nMois",
   "connexion_text": "Pas De Connexion",
   "error_text": "Erreur Inconnue",
-  "retry_text": "Veuillez Réessayez !"
+  "retry_text": "Veuillez Réessayez !",
+  "daily_text": "Contrats d'actifs Journaliers",
+  "track_text": "En Cours",
+  "search_host_text": "Recherche d'un Hébergement",
+  "sia_host_text": "Entrer l'Adresse Publique de l'Hébergeur",
+  "host_key_text": "Clé publique de l'Hébergeur"
 }

@@ -37,7 +37,8 @@ Future<void> init() async {
       icon.chartSvg,
       icon.clockSvg,
       icon.smsNotifsSvg,
-      icon.pyramidSvg
+      icon.arrowDropUpSvg,
+      icon.checkTrackSvg,
     ];
     final imagesSvg = svgs.map((svgElement) => SvgAssetLoader(svgElement));
     imagesSvg.map((imageSvg) async => await svg.cache.putIfAbsent(

@@ -8,6 +8,10 @@ class ThemesApp {
   static final themes = {
     Themes.lightTheme: ThemeData(
       scaffoldBackgroundColor: color.bleachedCedarColor,
+      appBarTheme: const AppBarTheme(
+        elevation: 0.0,
+        color: color.bleachedCedarColor,
+      ),
       inputDecorationTheme: InputDecorationTheme(
         fillColor: color.seashellColor,
         filled: true,

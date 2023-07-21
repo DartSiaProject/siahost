@@ -23,5 +23,10 @@
   "price_per_text": "Price Per TB/ \nMonth",
   "connexion_text": "No Connexion",
   "error_text": "Error Unknown",
-  "retry_text": "Retry Please !"
+  "retry_text": "Retry Please !",
+  "daily_text": "Daily Actives Contracts",
+  "track_text": "On track",
+  "search_host_text": "Research a Host",
+  "sia_host_text": "Enter Sia host Public Address",
+  "host_key_text": "Host pub key"
 }
