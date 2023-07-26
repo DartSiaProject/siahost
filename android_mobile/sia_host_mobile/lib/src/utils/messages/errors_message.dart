@@ -4,7 +4,17 @@ class ErrorsMessage {
   static String networkError(Errors errors) {
     switch (errors) {
       case Errors.connexionError:
-        return "connexion_text";
+        return "search_no_found_text";
+
+      default:
+        return "error_text";
+    }
+  }
+
+  static String hostError(Errors errors) {
+    switch (errors) {
+      case Errors.listError:
+        return "search_no_found_text";
 
       default:
         return "error_text";

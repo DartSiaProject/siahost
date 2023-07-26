@@ -5,11 +5,16 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
 
+import 'logic/abstracts/host_abst.dart';
 import 'logic/abstracts/network_abst.dart';
 import 'logic/controllers/account_bloc/account_bloc.dart';
 import 'logic/controllers/network_bloc/network_bloc.dart';
+import 'logic/controllers/search_bloc/search_bloc.dart';
 import 'logic/controllers/sia_bloc/sia_bloc.dart';
+import 'logic/services/host_impl.dart';
 import 'logic/services/network_impl.dart';
+import 'logic/usecases/host_usecases/get_host_list_usecase.dart';
+import 'logic/usecases/host_usecases/get_host_searched_by_pub_key_usecase.dart';
 import 'logic/usecases/network_overview_usecases/get_network_data_usecase.dart';
 import 'utils/constants/pngs_const.dart' as png;
 import 'utils/constants/svgs_const.dart' as icon;
@@ -27,7 +32,7 @@ Future<void> init() async {
   // active these lines down
 
   WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((_) async {
-    Element? context = WidgetsFlutterBinding.ensureInitialized().rootElement;
+    Element context = WidgetsFlutterBinding.ensureInitialized().rootElement!;
 
     //! Prelod All the svg
     final svgs = [
@@ -39,6 +44,7 @@ Future<void> init() async {
       icon.smsNotifsSvg,
       icon.arrowDropUpSvg,
       icon.checkTrackSvg,
+      icon.moreVerticalSvg,
     ];
     final imagesSvg = svgs.map((svgElement) => SvgAssetLoader(svgElement));
     imagesSvg.map((imageSvg) async => await svg.cache.putIfAbsent(
@@ -52,13 +58,13 @@ Future<void> init() async {
       png.secureServerPng,
     ];
     final imagesPng = pngs.map(
-        (pngElement) => precacheImage(Image.asset(pngElement).image, context!));
+        (pngElement) => precacheImage(Image.asset(pngElement).image, context));
     await Future.wait(imagesPng);
 
     //! Prelod All the jpg
     final jpgs = [];
     final imagesJpg = jpgs.map(
-        (jpgElement) => precacheImage(Image.asset(jpgElement).image, context!));
+        (jpgElement) => precacheImage(Image.asset(jpgElement).image, context));
     await Future.wait(imagesJpg);
   });
 
@@ -99,11 +105,16 @@ Future<void> init() async {
 //! services
 
   sl.registerLazySingleton<NetworkAbst>(() => NetworkImpl());
+  sl.registerLazySingleton<HostAbst>(() => HostImpl());
 
 //! Usecases
 
   sl.registerLazySingleton<GetNetworkDataUsecase>(
       () => GetNetworkDataUsecase(networkOverviewAbst: sl.call()));
+  sl.registerLazySingleton<GetHostDataListUsecase>(
+      () => GetHostDataListUsecase(hostAbst: sl.call()));
+  sl.registerLazySingleton<GetHostSearchedByPubKeyUsecase>(
+      () => GetHostSearchedByPubKeyUsecase(hostAbst: sl.call()));
 
 //! Bloc
 
@@ -114,4 +125,8 @@ Future<void> init() async {
   sl.registerFactory<SiaBloc>(() => SiaBloc());
   sl.registerFactory<NetworkBloc>(
       () => NetworkBloc(getNetworkDataUsecase: sl.call()));
+  sl.registerFactory<SearchBloc>(() => SearchBloc(
+        getHostDataListUsecase: sl.call(),
+        getHostSearchedByPubKeyUsecase: sl.call(),
+      ));
 }

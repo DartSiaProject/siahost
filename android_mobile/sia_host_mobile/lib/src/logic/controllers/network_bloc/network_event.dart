@@ -7,4 +7,4 @@ abstract class NetworkEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetAllHostsEvent extends NetworkEvent {}
+class GetNetworkDataEvent extends NetworkEvent {}

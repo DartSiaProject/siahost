@@ -2,9 +2,9 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sia_host_mobile/src/utils/constants/colors_const.dart';
-import 'package:sia_host_mobile/src/utils/constants/svgs_const.dart' as icon;
-import 'package:sia_host_mobile/src/utils/helpers/language_helpers/language_translation_helper.dart';
+import '../../../utils/constants/colors_const.dart';
+import '../../../utils/constants/svgs_const.dart' as icon;
+import '../../../utils/helpers/language_helpers/language_translation_helper.dart';
 
 class BarChartNetwokingWidget extends StatefulWidget {
   final List<int> activeContractCount;

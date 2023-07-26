@@ -2,9 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:multiple_result/multiple_result.dart';
-import 'package:sia_host_mobile/src/logic/models/contract.dart';
-import 'package:sia_host_mobile/src/logic/models/network.dart';
-import 'package:sia_host_mobile/src/utils/enums/http_request_enum.dart';
 import 'package:sia_host_mobile/src/utils/extras/node/apis/contract_api.dart'
     as contract;
 import 'package:sia_host_mobile/src/utils/extras/node/apis/host_api.dart'
@@ -16,14 +13,16 @@ import 'package:sia_host_mobile/src/utils/messages/errors_message.dart';
 
 import '../../utils/enums/errors_enum.dart';
 import '../abstracts/network_abst.dart';
+import '../models/contract.dart';
 import '../models/host.dart';
+import '../models/network.dart';
 
 /// Project: [SiaHostsMobile],
 /// enterprise: [CotradeChain]
 /// description:  Dans ce fichier, nous avons les fonctions suivantes [getNetworkData]
 /// author: [James Brel]
 /// createdAt: 18/07/2023
-/// updatedAt: 19/07/2023
+/// updatedAt: 25/07/2023
 
 class NetworkImpl implements NetworkAbst {
   //* Note : Cette fonction me permet d'obtenir tous les Hosts list venant du Net
@@ -31,23 +30,17 @@ class NetworkImpl implements NetworkAbst {
   Future<Result<Map<String, dynamic>, String>> getNetworkData() async {
     Result<Map<String, dynamic>, String> _result = Result.error("");
     try {
-      var _responseHost = await RequestHelper.httpMethod(
-        requestType: HttpRequestType.post,
+      var _responseHost = await RequestHelper.post(
         contentBody: {
           "network": "sia",
           "list": "active",
         },
-        apiUri: hosts.getHostApi,
+        apiUri: hosts.getAllHostApi,
       );
-
-      var _responseNetwork = await RequestHelper.httpMethod(
-        requestType: HttpRequestType.get,
-        apiUri: network.getNetworkApi,
-      );
-
-      var _responseContract = await RequestHelper.httpMethod(
-          requestType: HttpRequestType.get,
-          apiUri: contract.getActiveContractsApi);
+      var _responseNetwork =
+          await RequestHelper.get(apiUri: network.getNetworkApi);
+      var _responseContract =
+          await RequestHelper.get(apiUri: contract.getActiveContractsApi);
 
       if (_responseHost.statusCode == 200 &&
           _responseNetwork.statusCode == 200 &&
@@ -63,12 +56,6 @@ class NetworkImpl implements NetworkAbst {
         List<int> _activeContractCountList = _contractData
             .map((contract) => Contract.fromMap(contract).activecontractcount)
             .toList();
-
-        // List<int> _activeContractCountList = _contractList
-        //     .map((contractModel) => contractModel.activecontractcount)
-        //     .toList();
-
-        print(_activeContractCountList);
 
         Map<String, dynamic> _networkData = {
           "hostModelList": _hostModelList,

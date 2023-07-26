@@ -11,7 +11,7 @@ class NetworkBloc extends Bloc<NetworkEvent, NetworkState> {
   NetworkBloc({
     required this.getNetworkDataUsecase,
   }) : super(NetworkInitial()) {
-    on<GetAllHostsEvent>((event, emit) async {
+    on<GetNetworkDataEvent>((event, emit) async {
       emit(HostLoading());
       var _result = await getNetworkDataUsecase.call();
       _result.when(

@@ -8,6 +8,7 @@ import 'src/injection.dart' as insert;
 import 'src/logic/controllers/account_bloc/account_bloc.dart';
 import 'src/logic/controllers/bloc_observer.dart';
 import 'src/logic/controllers/network_bloc/network_bloc.dart';
+import 'src/logic/controllers/search_bloc/search_bloc.dart';
 import 'src/logic/controllers/sia_bloc/sia_bloc.dart';
 import 'src/utils/constants/string_const.dart';
 import 'src/utils/enums/themes_enum.dart';
@@ -32,7 +33,11 @@ void main() async {
         ),
         BlocProvider(
           create: (context) =>
-              insert.sl<NetworkBloc>()..add(GetAllHostsEvent()),
+              insert.sl<NetworkBloc>()..add(GetNetworkDataEvent()),
+        ),
+        BlocProvider(
+          create: (context) =>
+              insert.sl<SearchBloc>()..add(GetAllHostsDataListEvent()),
         )
       ],
       child: const SiaHostsMobile(),

@@ -22,6 +22,7 @@ class _LoginAccountScreenState extends State<LoginAccountScreen> {
   late TextEditingController _adressController;
   late TextEditingController _passwordController;
   late ScrollController _scrollController;
+  late bool _passwordHidden;
 
   @override
   void initState() {
@@ -29,6 +30,7 @@ class _LoginAccountScreenState extends State<LoginAccountScreen> {
     _adressController = TextEditingController();
     _passwordController = TextEditingController();
     _scrollController = ScrollController();
+    _passwordHidden = true;
   }
 
   @override
@@ -122,7 +124,6 @@ class _LoginAccountScreenState extends State<LoginAccountScreen> {
                         ),
                         BlocBuilder<AccountBloc, AccountState>(
                           builder: (context, accountBuilderState) {
-                            var _passwordHidden = true;
                             if (accountBuilderState is PasswordHidded) {
                               _passwordHidden =
                                   accountBuilderState.passWordIsHided;
