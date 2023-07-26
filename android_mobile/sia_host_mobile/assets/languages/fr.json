@@ -28,5 +28,8 @@
   "track_text": "En Cours",
   "search_host_text": "Recherche d'un Hébergement",
   "sia_host_text": "Entrer l'Adresse Publique de l'Hébergeur",
-  "host_key_text": "Clé publique de l'Hébergeur"
+  "host_key_text": "Clé publique de l'Hébergeur",
+  "host_pub_key_text": "Hôte",
+  "total_text": "Stockage total",
+  "search_no_found_text": "Hôte introuvable"
 }

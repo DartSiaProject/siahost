@@ -6,7 +6,7 @@ class Host extends Equatable {
   final String pubkey;
   final String currentIp;
   final String countryCode;
-  final int totalStorage;
+  final double totalStorage;
   final bool acceptingContracts;
   final String version;
   final int usedStorage;
@@ -16,9 +16,9 @@ class Host extends Equatable {
   final int uploadPrice;
   final int downloadPrice;
   final int rank;
-  final dynamic cheating;
+  final int cheating;
   final int finalScore;
-  final dynamic errorType;
+  final String errorType;
 
   const Host({
     this.hostId = 0,
@@ -26,7 +26,7 @@ class Host extends Equatable {
     this.pubkey = "",
     this.currentIp = "",
     this.countryCode = "",
-    this.totalStorage = 0,
+    this.totalStorage = 0.0,
     this.acceptingContracts = false,
     this.version = "",
     this.usedStorage = 0,
@@ -36,9 +36,9 @@ class Host extends Equatable {
     this.uploadPrice = 0,
     this.downloadPrice = 0,
     this.rank = 0,
-    this.cheating = Null,
+    this.cheating = 0,
     this.finalScore = 0,
-    this.errorType = Null,
+    this.errorType = "",
   });
 
   Host copyWith({
@@ -47,7 +47,7 @@ class Host extends Equatable {
     String? pubkey,
     String? currentIp,
     String? countryCode,
-    int? totalStorage,
+    double? totalStorage,
     bool? acceptingContracts,
     String? version,
     int? usedStorage,
@@ -57,9 +57,9 @@ class Host extends Equatable {
     int? uploadPrice,
     int? downloadPrice,
     int? rank,
-    dynamic cheating,
+    int? cheating,
     int? finalScore,
-    dynamic errorType,
+    String? errorType,
   }) {
     return Host(
       hostId: hostId ?? this.hostId,
@@ -86,46 +86,46 @@ class Host extends Equatable {
   Map<String, dynamic> toMap() {
     return {
       'Id': hostId,
-      'online': online,
-      'pubkey': pubkey,
-      'currentIp': currentIp,
-      'countryCode': countryCode,
-      'totalStorage': totalStorage,
-      'acceptingContracts': acceptingContracts,
-      'version': version,
-      'usedStorage': usedStorage,
-      'collateral': collateral,
-      'contractPrice': contractPrice,
-      'storagePrice': storagePrice,
-      'uploadPrice': uploadPrice,
-      'downloadPrice': downloadPrice,
-      'rank': rank,
-      'cheating': cheating,
-      'finalScore': finalScore,
-      'errorType': errorType,
+      'Online': online,
+      'Pubkey': pubkey,
+      'CurrentIp': currentIp,
+      'CountryCode': countryCode,
+      'TotalStorage': totalStorage,
+      'AcceptingContracts': acceptingContracts,
+      'Version': version,
+      'UsedStorage': usedStorage,
+      'Collateral': collateral,
+      'ContractPrice': contractPrice,
+      'StoragePrice': storagePrice,
+      'UploadPrice': uploadPrice,
+      'DownloadPrice': downloadPrice,
+      'Rank': rank,
+      'Cheating': cheating,
+      'FinalScore': finalScore,
+      'ErrorType': errorType,
     };
   }
 
   factory Host.fromMap(Map<String, dynamic> map) {
     return Host(
       hostId: map['Id']?.toInt() ?? 0,
-      online: map['online'] ?? false,
-      pubkey: map['pubkey'] ?? '',
-      currentIp: map['currentIp'] ?? '',
-      countryCode: map['countryCode'] ?? '',
-      totalStorage: map['totalStorage']?.toInt() ?? 0,
-      acceptingContracts: map['acceptingContracts'] ?? false,
-      version: map['version'] ?? '',
-      usedStorage: map['usedStorage']?.toInt() ?? 0,
-      collateral: map['collateral']?.toInt() ?? 0,
-      contractPrice: map['contractPrice']?.toInt() ?? 0,
-      storagePrice: map['storagePrice']?.toInt() ?? 0,
-      uploadPrice: map['uploadPrice']?.toInt() ?? 0,
-      downloadPrice: map['downloadPrice']?.toInt() ?? 0,
-      rank: map['rank']?.toInt() ?? 0,
-      cheating: map['cheating'],
-      finalScore: map['finalScore']?.toInt() ?? 0,
-      errorType: map['errorType'],
+      online: map['Online'] ?? false,
+      pubkey: map['Pubkey'] ?? '',
+      currentIp: map['CurrentIp'] ?? '',
+      countryCode: map['CountryCode'] ?? '',
+      totalStorage: map['TotalStorage']?.toDouble() ?? 0,
+      acceptingContracts: map['AcceptingContracts'] ?? false,
+      version: map['Version'] ?? '',
+      usedStorage: map['UsedStorage']?.toInt() ?? 0,
+      collateral: map['Collateral']?.toInt() ?? 0,
+      contractPrice: map['ContractPrice']?.toInt() ?? 0,
+      storagePrice: map['StoragePrice']?.toInt() ?? 0,
+      uploadPrice: map['UploadPrice']?.toInt() ?? 0,
+      downloadPrice: map['DownloadPrice']?.toInt() ?? 0,
+      rank: map['Rank']?.toInt() ?? 0,
+      cheating: map['Cheating']?.toInt() ?? 0,
+      finalScore: map['FinalScore']?.toInt() ?? 0,
+      errorType: map['ErrorType'] ?? '',
     );
   }
 

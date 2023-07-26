@@ -54,6 +54,7 @@ dependencies:
   chart_sparkline: ^1.0.13
   fl_chart: ^0.63.0
   http: ^1.1.0
+  percent_indicator: ^4.2.3
 
 dev_dependencies:
   flutter_test:
@@ -98,31 +99,38 @@ flutter:
   fonts:
     - family: Roboto
       fonts:
-        - asset: assets/fonts/roboto_bold.ttf
+        - asset: assets/fonts/roboto/roboto_bold.ttf
           weight: 700
-        - asset: assets/fonts/roboto_medium.ttf
+        - asset: assets/fonts/roboto/roboto_medium.ttf
           weight: 600
 
     - family: Poppins
       fonts:
-        - asset: assets/fonts/poppins_medium.ttf
-          weight: 600
-        - asset: assets/fonts/poppins_bold.ttf
+        - asset: assets/fonts/poppins/poppins_medium.ttf
+          weight: 500
+        - asset: assets/fonts/poppins/poppins_bold.ttf
           weight: 700
 
     - family: Inter
       fonts:
-        - asset: assets/fonts/inter_bold.otf
+        - asset: assets/fonts/inter/inter_bold.otf
           weight: 700
-        - asset: assets/fonts/inter_regular.otf
+        - asset: assets/fonts/inter/inter_regular.otf
           weight: 400
 
     - family: DmSans
       fonts:
-        - asset: assets/fonts/dm_sans_bold.ttf
+        - asset: assets/fonts/dm_sans/dm_sans_bold.ttf
           weight: 700
-        - asset: assets/fonts/dm_sans_medium.ttf
+        - asset: assets/fonts/dm_sans/dm_sans_medium.ttf
+          weight: 500
+
+    - family: Manrope
+      fonts:
+        - asset: assets/fonts/manrope/manrope_semi_bold.ttf
           weight: 600
+        - asset: assets/fonts/manrope/manrope_regular.ttf
+          weight: 400
 
   #
   # For details regarding fonts from package dependencies,
