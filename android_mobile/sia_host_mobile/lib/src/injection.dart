@@ -19,12 +19,6 @@ import 'logic/usecases/network_overview_usecases/get_network_data_usecase.dart';
 import 'utils/constants/pngs_const.dart' as png;
 import 'utils/constants/svgs_const.dart' as icon;
 
-// import 'backend/data/reposit_impls/welcome_reposit_impl.dart';
-// import 'backend/data/services/welcome_services/welcome_abst.dart';
-// import 'backend/data/services/welcome_services/welcome_impl.dart';
-// import 'backend/domain/reposit_absts/welcome_reposit_abst.dart';
-// import 'backend/domain/usecases/welcome_usecases/welcome_usecase.dart';
-
 final sl = GetIt.instance;
 
 Future<void> init() async {
@@ -45,6 +39,7 @@ Future<void> init() async {
       icon.arrowDropUpSvg,
       icon.checkTrackSvg,
       icon.moreVerticalSvg,
+      icon.locationSvg,
     ];
     final imagesSvg = svgs.map((svgElement) => SvgAssetLoader(svgElement));
     imagesSvg.map((imageSvg) async => await svg.cache.putIfAbsent(

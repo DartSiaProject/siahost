@@ -195,6 +195,26 @@ class _LoginAccountScreenState extends State<LoginAccountScreen> {
                         ),
                       ),
                     ),
+                    SizedBox(
+                      height: 10.0.h,
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          LanguageTranslationHelper.of(context)!
+                              .translate("connect_later_text"),
+                          style: TextStyle(
+                            fontFamily: "Inter",
+                            fontSize: 16.0.sp,
+                            color: color.whiteColor,
+                            fontWeight: FontWeight.w400,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ],

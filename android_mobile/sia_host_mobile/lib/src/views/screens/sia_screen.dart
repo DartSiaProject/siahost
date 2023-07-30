@@ -23,14 +23,20 @@ class SiaScreen extends StatefulWidget {
 }
 
 class _SiaScreenState extends State<SiaScreen> {
+  late int _pageIndexSelected;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageIndexSelected = 0;
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () => BackPressHelper.siaBackFragment(context),
       child: BlocBuilder<SiaBloc, SiaState>(
         builder: (context, siaBuilderState) {
-          var _pageIndexSelected = 0;
-
           if (siaBuilderState is NextFragmentSelected) {
             _pageIndexSelected = siaBuilderState.nextFragment;
             BackPressHelper.backstack.add(_pageIndexSelected);
