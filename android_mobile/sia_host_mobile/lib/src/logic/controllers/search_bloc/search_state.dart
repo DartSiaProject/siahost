@@ -38,3 +38,27 @@ class HostDataSearchedListEmpty extends SearchState {
   @override
   List<Object> get props => [message];
 }
+
+class HostInfoGetLoading extends SearchState {}
+
+class NextSubFragmentSelected extends SearchState {
+  final int nextSubFragmentIndex;
+  final Host hostModel;
+
+  const NextSubFragmentSelected({
+    required this.nextSubFragmentIndex,
+    required this.hostModel,
+  });
+  @override
+  List<Object> get props => [nextSubFragmentIndex];
+}
+
+class PreviousSubFragmentSelected extends SearchState {
+  final int previousSubFragmentIndex;
+
+  const PreviousSubFragmentSelected({
+    required this.previousSubFragmentIndex,
+  });
+  @override
+  List<Object> get props => [previousSubFragmentIndex];
+}

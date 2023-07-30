@@ -129,6 +129,8 @@ flutter:
       fonts:
         - asset: assets/fonts/manrope/manrope_semi_bold.ttf
           weight: 600
+        - asset: assets/fonts/manrope/manrope_bold.ttf
+          weight: 700
         - asset: assets/fonts/manrope/manrope_regular.ttf
           weight: 400
 

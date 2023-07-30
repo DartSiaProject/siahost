@@ -58,10 +58,8 @@ class HostImpl implements HostAbst {
     print(_hostSearched);
 
     if (_hostSearched.isNotEmpty) {
-      print("object");
       _result = Result.success(_hostSearched);
     } else {
-      print(" no object");
       _result = Result.error(ErrorsMessage.hostError(Errors.listError));
     }
     return _result;

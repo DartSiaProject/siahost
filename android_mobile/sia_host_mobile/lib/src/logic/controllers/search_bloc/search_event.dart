@@ -16,3 +16,21 @@ class GetHostSearchedByPubKeyEvent extends SearchEvent {
     required this.pubKey,
   });
 }
+
+class NextSubPageIndexEvent extends SearchEvent {
+  final int index;
+  final Host hostModel;
+
+  const NextSubPageIndexEvent({
+    required this.index,
+    required this.hostModel,
+  });
+}
+
+class PreviousSubPageIndexEvent extends SearchEvent {
+  final int index;
+
+  const PreviousSubPageIndexEvent({
+    required this.index,
+  });
+}

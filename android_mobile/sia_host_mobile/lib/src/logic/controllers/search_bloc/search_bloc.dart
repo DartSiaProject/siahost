@@ -12,6 +12,7 @@ part 'search_state.dart';
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   final GetHostDataListUsecase getHostDataListUsecase;
   final GetHostSearchedByPubKeyUsecase getHostSearchedByPubKeyUsecase;
+
   SearchBloc({
     required this.getHostDataListUsecase,
     required this.getHostSearchedByPubKeyUsecase,
@@ -33,6 +34,15 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       _result.when(
           (success) => emit(HostDataListLoaded(hostModelList: success)),
           (error) => emit(HostDataSearchedListEmpty(message: error)));
+    });
+
+    on<NextSubPageIndexEvent>((event, emit) {
+      emit(NextSubFragmentSelected(
+          nextSubFragmentIndex: event.index, hostModel: event.hostModel));
+    });
+
+    on<PreviousSubPageIndexEvent>((event, emit) {
+      emit(PreviousSubFragmentSelected(previousSubFragmentIndex: event.index));
     });
   }
 }

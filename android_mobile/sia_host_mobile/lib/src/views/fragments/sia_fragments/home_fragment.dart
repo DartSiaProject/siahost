@@ -34,7 +34,7 @@ class _HomeFragmentState extends State<HomeFragment> {
     _pricePerTb = 0.0;
     _activeContractCount = [];
     _hostModelList = [];
-    _networDataModel = Network();
+    // _networDataModel = Network();
   }
 
   @override
@@ -45,14 +45,17 @@ class _HomeFragmentState extends State<HomeFragment> {
         child: Flex(
           direction: Axis.vertical,
           children: <Widget>[
-            Text(
-              LanguageTranslationHelper.of(context)!
-                  .translate("network_view_text"),
-              style: TextStyle(
-                fontFamily: "DmSans",
-                fontSize: 28.0.sp,
-                color: color.whiteColor,
-                fontWeight: FontWeight.w700,
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                LanguageTranslationHelper.of(context)!
+                    .translate("network_view_text"),
+                style: TextStyle(
+                  fontFamily: "DmSans",
+                  fontSize: 28.0.sp,
+                  color: color.whiteColor,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
             SizedBox(
