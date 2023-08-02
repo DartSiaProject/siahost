@@ -7,4 +7,7 @@ abstract class HostAbst {
   Future<Result<List<Host>, String>> getHostByPubKey({
     required String pubKey,
   });
+  Future<Host> getOneHostByPubKey({
+    required String pubKey,
+  });
 }

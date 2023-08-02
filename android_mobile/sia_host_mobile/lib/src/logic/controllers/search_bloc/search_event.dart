@@ -19,11 +19,11 @@ class GetHostSearchedByPubKeyEvent extends SearchEvent {
 
 class NextSubPageIndexEvent extends SearchEvent {
   final int index;
-  final Host hostModel;
+  final String hostPubKey;
 
   const NextSubPageIndexEvent({
     required this.index,
-    required this.hostModel,
+    required this.hostPubKey,
   });
 }
 
@@ -33,4 +33,10 @@ class PreviousSubPageIndexEvent extends SearchEvent {
   const PreviousSubPageIndexEvent({
     required this.index,
   });
+}
+
+class GetOneHostEvent extends SearchEvent {
+  final String pubKey;
+
+  const GetOneHostEvent({required this.pubKey});
 }

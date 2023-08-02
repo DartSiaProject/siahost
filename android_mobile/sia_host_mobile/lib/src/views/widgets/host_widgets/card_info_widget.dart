@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sia_host_mobile/src/utils/constants/colors_const.dart' as color;
-import 'package:sia_host_mobile/src/utils/helpers/language_helpers/language_translation_helper.dart';
+import '../../../utils/constants/colors_const.dart' as color;
+import '../../../utils/helpers/language_helpers/language_translation_helper.dart';
 
 class CardInfoWidget extends StatelessWidget {
   final String title;

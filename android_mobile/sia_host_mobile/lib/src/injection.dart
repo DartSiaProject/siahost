@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -15,9 +17,11 @@ import 'logic/services/host_impl.dart';
 import 'logic/services/network_impl.dart';
 import 'logic/usecases/host_usecases/get_host_list_usecase.dart';
 import 'logic/usecases/host_usecases/get_host_searched_by_pub_key_usecase.dart';
+import 'logic/usecases/host_usecases/get_one_host_usecase.dart';
 import 'logic/usecases/network_overview_usecases/get_network_data_usecase.dart';
 import 'utils/constants/pngs_const.dart' as png;
 import 'utils/constants/svgs_const.dart' as icon;
+import 'utils/helpers/request_helpers/http_overrides_helper.dart';
 
 final sl = GetIt.instance;
 
@@ -76,9 +80,8 @@ Future<void> init() async {
 
   await dotenv.load(fileName: "assets/envs/.env");
 
-//! Database internal initialisation
-  // There you can initialize your Internal Database
-  // like sqflite, Hive or Adapter s' Hive generate or ObjectBox
+//! initialisation of httpOverride
+  HttpOverrides.global = new MyHttpOverridesHelper();
 
 //! final Instances Variables
 // variables of instance's class
@@ -110,6 +113,8 @@ Future<void> init() async {
       () => GetHostDataListUsecase(hostAbst: sl.call()));
   sl.registerLazySingleton<GetHostSearchedByPubKeyUsecase>(
       () => GetHostSearchedByPubKeyUsecase(hostAbst: sl.call()));
+  sl.registerLazySingleton<GetOneHostUsecase>(
+      () => GetOneHostUsecase(hostAbst: sl.call()));
 
 //! Bloc
 
@@ -123,5 +128,6 @@ Future<void> init() async {
   sl.registerFactory<SearchBloc>(() => SearchBloc(
         getHostDataListUsecase: sl.call(),
         getHostSearchedByPubKeyUsecase: sl.call(),
+        getOneHostUsecase: sl.call(),
       ));
 }

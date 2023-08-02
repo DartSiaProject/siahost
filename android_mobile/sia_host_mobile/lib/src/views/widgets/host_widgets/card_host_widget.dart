@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:sia_host_mobile/src/logic/controllers/search_bloc/search_bloc.dart';
+import '../../../logic/controllers/search_bloc/search_bloc.dart';
 
 import '../../../logic/models/host.dart';
 import '../../../utils/constants/colors_const.dart' as color;
@@ -21,7 +21,7 @@ class CardHostWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => BlocProvider.of<SearchBloc>(context)
-          .add(NextSubPageIndexEvent(index: 1, hostModel: host)),
+          .add(NextSubPageIndexEvent(index: 1, hostPubKey: host.pubkey)),
       child: Container(
           margin: EdgeInsets.only(bottom: 15.0.h),
           decoration: BoxDecoration(

@@ -9,7 +9,7 @@ class Host extends Equatable {
   final double totalStorage;
   final bool acceptingContracts;
   final String version;
-  final int usedStorage;
+  final double usedStorage;
   final int collateral;
   final int contractPrice;
   final int storagePrice;
@@ -19,6 +19,7 @@ class Host extends Equatable {
   final int cheating;
   final int finalScore;
   final String errorType;
+  final String addressLocationIp; //*note: new variable of hostModel
 
   const Host({
     this.hostId = 0,
@@ -29,7 +30,7 @@ class Host extends Equatable {
     this.totalStorage = 0.0,
     this.acceptingContracts = false,
     this.version = "",
-    this.usedStorage = 0,
+    this.usedStorage = 0.0,
     this.collateral = 0,
     this.contractPrice = 0,
     this.storagePrice = 0,
@@ -39,6 +40,7 @@ class Host extends Equatable {
     this.cheating = 0,
     this.finalScore = 0,
     this.errorType = "",
+    this.addressLocationIp = "",
   });
 
   Host copyWith({
@@ -50,7 +52,7 @@ class Host extends Equatable {
     double? totalStorage,
     bool? acceptingContracts,
     String? version,
-    int? usedStorage,
+    double? usedStorage,
     int? collateral,
     int? contractPrice,
     int? storagePrice,
@@ -60,6 +62,7 @@ class Host extends Equatable {
     int? cheating,
     int? finalScore,
     String? errorType,
+    String? addressLocationIp,
   }) {
     return Host(
       hostId: hostId ?? this.hostId,
@@ -80,6 +83,7 @@ class Host extends Equatable {
       cheating: cheating ?? this.cheating,
       finalScore: finalScore ?? this.finalScore,
       errorType: errorType ?? this.errorType,
+      addressLocationIp: addressLocationIp ?? this.addressLocationIp,
     );
   }
 
@@ -116,7 +120,7 @@ class Host extends Equatable {
       totalStorage: map['TotalStorage']?.toDouble() ?? 0,
       acceptingContracts: map['AcceptingContracts'] ?? false,
       version: map['Version'] ?? '',
-      usedStorage: map['UsedStorage']?.toInt() ?? 0,
+      usedStorage: map['UsedStorage']?.toDouble() ?? 0.0,
       collateral: map['Collateral']?.toInt() ?? 0,
       contractPrice: map['ContractPrice']?.toInt() ?? 0,
       storagePrice: map['StoragePrice']?.toInt() ?? 0,

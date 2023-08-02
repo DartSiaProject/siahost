@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:sia_host_mobile/src/logic/models/host.dart';
-import 'package:sia_host_mobile/src/utils/helpers/language_helpers/language_translation_helper.dart';
-import 'package:sia_host_mobile/src/views/widgets/host_widgets/card_info_widget.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import '../../../logic/models/host.dart';
+import '../../../utils/constants/colors_const.dart' as color;
+import '../../../utils/helpers/language_helpers/language_translation_helper.dart';
+import 'card_info_widget.dart';
 
 class InfoListWidget extends StatelessWidget {
   final Host hostModel;
@@ -21,9 +25,27 @@ class InfoListWidget extends StatelessWidget {
           value: LanguageTranslationHelper.of(context)!
               .translate(hostModel.acceptingContracts ? "yes_text" : "no_text"),
         ),
-        CardInfoWidget(
-          title: "host_address_text",
-          value: hostModel.pubkey,
+        GestureDetector(
+          onTap: () {
+            Clipboard.setData(new ClipboardData(text: hostModel.pubkey))
+                .whenComplete(
+              () {
+                Fluttertoast.showToast(
+                  msg: LanguageTranslationHelper.of(context)!
+                      .translate("copied_text"),
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  backgroundColor: color.paleTealColor,
+                  textColor: color.whiteColor,
+                  fontSize: 20.0.sp,
+                );
+              },
+            );
+          },
+          child: CardInfoWidget(
+            title: "host_address_text",
+            value: hostModel.pubkey,
+          ),
         ),
         CardInfoWidget(
           title: "contract_price_text",
@@ -37,10 +59,10 @@ class InfoListWidget extends StatelessWidget {
           title: "used_storage_text",
           value: "${hostModel.usedStorage} Tb",
         ),
-        // CardInfoWidget(
-        //   title: "available_storage_text",
-        //   value: hostModel,
-        // ), // todo :  il manque available storage
+        CardInfoWidget(
+          title: "available_storage_text",
+          value: "${hostModel.totalStorage - hostModel.usedStorage} Tb",
+        ),
       ],
     );
   }
