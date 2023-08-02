@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:sia_host_mobile/src/logic/controllers/search_bloc/search_bloc.dart';
-import 'package:sia_host_mobile/src/logic/models/host.dart';
 
+import '../../../logic/controllers/search_bloc/search_bloc.dart';
+import '../../../logic/models/host.dart';
 import '../../../utils/constants/colors_const.dart' as color;
 import '../../../utils/helpers/language_helpers/language_translation_helper.dart';
 import '../../widgets/host_widgets/card_host_widget.dart';

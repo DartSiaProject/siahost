@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sia_host_mobile/src/logic/controllers/search_bloc/search_bloc.dart';
 
 import '../../logic/controllers/sia_bloc/sia_bloc.dart';
 import '../../utils/constants/colors_const.dart' as color;
@@ -34,7 +35,9 @@ class _SiaScreenState extends State<SiaScreen> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => BackPressHelper.siaBackFragment(context),
+      onWillPop: () => _pageIndexSelected == 1
+          ? BackPressHelper.searchBackFragment(context)
+          : BackPressHelper.siaBackFragment(context),
       child: BlocBuilder<SiaBloc, SiaState>(
         builder: (context, siaBuilderState) {
           if (siaBuilderState is NextFragmentSelected) {
@@ -43,6 +46,14 @@ class _SiaScreenState extends State<SiaScreen> {
             if (BackPressHelper.backstack.length > 4) {
               BackPressHelper.backstack.clear();
               BackPressHelper.backstack.add(0);
+            }
+
+            if (BackPressHelper.searchBackstack.length > 1) {
+              BackPressHelper.searchBackstack.clear();
+              BackPressHelper.searchBackstack.add(0);
+              BlocProvider.of<SearchBloc>(context).add(
+                const PreviousSubPageIndexEvent(index: 0),
+              );
             }
           }
 
