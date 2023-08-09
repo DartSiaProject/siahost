@@ -11,9 +11,9 @@ import '../../utils/constants/string_const.dart';
 import '../../utils/constants/svgs_const.dart' as icon;
 import '../../utils/helpers/back_press_helpers/back_press_helper.dart';
 import '../../utils/helpers/language_helpers/language_translation_helper.dart';
-import '../fragments/sia_fragments/charts_fragment.dart';
-import '../fragments/sia_fragments/clock_fragment.dart';
 import '../fragments/sia_fragments/home_fragment.dart';
+import '../fragments/sia_fragments/host_config_fragment.dart';
+import '../fragments/sia_fragments/my_host_fragment.dart';
 import '../fragments/sia_fragments/search_fragment.dart';
 
 class SiaScreen extends StatefulWidget {
@@ -90,8 +90,8 @@ class _SiaScreenState extends State<SiaScreen> {
               children: const <Widget>[
                 HomeFragment(),
                 SearchFragment(),
-                ChartsFragment(),
-                ClockFragment()
+                MyHostFragment(),
+                HostConfigFragment()
               ],
             ),
             bottomNavigationBar: BottomNavyBar(

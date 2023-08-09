@@ -44,6 +44,7 @@ Future<void> init() async {
       icon.checkTrackSvg,
       icon.moreVerticalSvg,
       icon.locationSvg,
+      icon.settingsSvg,
     ];
     final imagesSvg = svgs.map((svgElement) => SvgAssetLoader(svgElement));
     imagesSvg.map((imageSvg) async => await svg.cache.putIfAbsent(
