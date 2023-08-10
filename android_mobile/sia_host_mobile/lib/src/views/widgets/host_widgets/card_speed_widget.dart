@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:sia_host_mobile/src/utils/constants/colors_const.dart' as color;
-import 'package:sia_host_mobile/src/utils/helpers/language_helpers/language_translation_helper.dart';
+
+import '../../../utils/constants/colors_const.dart' as color;
+import '../../../utils/helpers/language_helpers/language_translation_helper.dart';
 
 class CardSpeedWidget extends StatelessWidget {
   final String title;
@@ -32,11 +33,12 @@ class CardSpeedWidget extends StatelessWidget {
             child: Text(
               LanguageTranslationHelper.of(context)!.translate(title),
               style: TextStyle(
-                fontFamily: "Manrope",
-                fontSize: 12.0.sp,
-                color: color.cottonSeedColor,
-                fontWeight: FontWeight.w500,
-              ),
+                  fontFamily: "Manrope",
+                  fontSize: 12.0.sp,
+                  color: color.cottonSeedColor,
+                  fontWeight: FontWeight.w500,
+                  overflow: TextOverflow.ellipsis),
+              maxLines: 1,
             ),
           ),
           SizedBox(

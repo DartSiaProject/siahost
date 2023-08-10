@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sia_host_mobile/src/utils/constants/colors_const.dart' as color;
-import 'package:sia_host_mobile/src/utils/helpers/language_helpers/language_translation_helper.dart';
+
+import '../../../utils/constants/colors_const.dart' as color;
+import '../../../utils/helpers/language_helpers/language_translation_helper.dart';
 
 class CardMyHostInfoWidget extends StatelessWidget {
   final String title;
@@ -39,7 +40,7 @@ class CardMyHostInfoWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              value,
+              value.isEmpty ? "" : value.substring(0, 3),
               style: TextStyle(
                 fontFamily: "Manrope",
                 fontSize: 32.0.sp,

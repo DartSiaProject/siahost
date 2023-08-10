@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sia_host_mobile/src/logic/controllers/search_bloc/search_bloc.dart';
 
+import '../../logic/controllers/search_bloc/search_bloc.dart';
 import '../../logic/controllers/sia_bloc/sia_bloc.dart';
 import '../../utils/constants/colors_const.dart' as color;
 import '../../utils/constants/string_const.dart';

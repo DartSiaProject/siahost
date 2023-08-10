@@ -1,3 +1,3 @@
-enum Success {
-  elementSuccess,
+enum SuccessType {
+  configSuccess,
 }

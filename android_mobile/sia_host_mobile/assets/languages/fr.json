@@ -68,5 +68,7 @@
   "speed_down_field_text": "Vitesse de téléchargement",
   "upload_speed_field_text": "Vitesse d'envoi",
   "config_button_text": "Configurer",
-  "host_config_text": "Host\nConfiguration"
+  "host_config_text": "Host\nConfiguration",
+  "my_host_no_found_text": "Hôte introuvable",
+  "config_host_success_text": "Configuration Hôte Réussi"
 }

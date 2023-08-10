@@ -6,6 +6,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
+import 'package:sia_host_mobile/src/logic/controllers/hoster_bloc/hoster_bloc.dart';
+import 'package:sia_host_mobile/src/logic/usecases/host_usecases/get_some_host_from_renterd_usecase.dart';
+import 'package:sia_host_mobile/src/logic/usecases/host_usecases/update_some_host_from_renterd_usecase.dart';
 
 import 'logic/abstracts/host_abst.dart';
 import 'logic/abstracts/network_abst.dart';
@@ -78,11 +81,12 @@ Future<void> init() async {
 
 //! initialisation of dotenv
   // There you can initialize your env file, you can activate the below line
-
   await dotenv.load(fileName: "assets/envs/.env");
 
 //! initialisation of httpOverride
   HttpOverrides.global = new MyHttpOverridesHelper();
+
+//! initialisation of renterd package
 
 //! final Instances Variables
 // variables of instance's class
@@ -116,6 +120,10 @@ Future<void> init() async {
       () => GetHostSearchedByPubKeyUsecase(hostAbst: sl.call()));
   sl.registerLazySingleton<GetOneHostUsecase>(
       () => GetOneHostUsecase(hostAbst: sl.call()));
+  sl.registerLazySingleton<GetSomeHostFromRenterdUsecase>(
+      () => GetSomeHostFromRenterdUsecase(hostAbst: sl.call()));
+  sl.registerLazySingleton<UpdateSomeHostFromRenterdUsecase>(
+      () => UpdateSomeHostFromRenterdUsecase(hostAbst: sl.call()));
 
 //! Bloc
 
@@ -130,5 +138,9 @@ Future<void> init() async {
         getHostDataListUsecase: sl.call(),
         getHostSearchedByPubKeyUsecase: sl.call(),
         getOneHostUsecase: sl.call(),
+      ));
+  sl.registerFactory<HosterBloc>(() => HosterBloc(
+        getSomeHostFromRenterdUsecase: sl.call(),
+        updateSomeHostFromRenterdUsecase: sl.call(),
       ));
 }

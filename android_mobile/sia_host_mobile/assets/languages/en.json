@@ -68,5 +68,7 @@
   "max_rpc_field_text": "Max RPC Price",
   "speed_down_field_text": "Download Speed",
   "upload_speed_field_text": "Upload Speed",
-  "config_button_text": "Configure"
+  "my_host_no_found_text": "Host Not Found",
+  "config_button_text": "Configure",
+  "config_host_success_text": "Configuration Host Success"
 }

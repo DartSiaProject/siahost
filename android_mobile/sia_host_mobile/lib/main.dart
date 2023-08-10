@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:renterd/renterd.dart';
+import 'package:sia_host_mobile/src/logic/controllers/hoster_bloc/hoster_bloc.dart';
 
 import 'src/injection.dart' as insert;
 import 'src/logic/controllers/account_bloc/account_bloc.dart';
@@ -16,6 +18,7 @@ import 'src/utils/routes/go_routers.dart';
 import 'src/utils/themes/themes_app.dart';
 
 void main() async {
+  await initialization();
   await insert.init();
 
   // if (kDebugMode) Bloc.observer = MyBlocObserver();
@@ -36,6 +39,10 @@ void main() async {
         BlocProvider(
           create: (context) =>
               insert.sl<SearchBloc>()..add(GetAllHostsDataListEvent()),
+        ),
+        BlocProvider(
+          create: (context) =>
+              insert.sl<HosterBloc>()..add(GetMyHostFromRenterdEvent()),
         )
       ],
       child: const SiaHostsMobile(),

@@ -225,10 +225,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: b33a88c67816312597e5e0f5906c5139a0b9bd9bb137346e872c788da7af8ea0
+      sha256: edbceb4c06758652fc9d12e58edb371cd977011b032e298dae0eb357167baad2
       url: "https://pub.dev"
     source: hosted
-    version: "9.0.3"
+    version: "9.1.1"
   html:
     dependency: transitive
     description:
@@ -241,10 +241,10 @@ packages:
     dependency: "direct main"
     description:
       name: http
-      sha256: "759d1a329847dd0f39226c688d3e06a6b8679668e350e2891a6474f8b4bb8525"
+      sha256: "5895291c13fa8a3bd82e76d5627f69e0d85ca6a30dcac95c4ea19a5d555879c2"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.0"
+    version: "0.13.6"
   http_parser:
     dependency: transitive
     description:
@@ -321,10 +321,10 @@ packages:
     dependency: "direct main"
     description:
       name: multiple_result
-      sha256: "9aba99bd75f28ac6519980580636348c0327e225d950a239fa59d2d983af4ce4"
+      sha256: a7a8aa7a068648521ebd41e8c7296a990cd7ec5e15e7efa210c26fefd6e4f193
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.0"
+    version: "5.1.0"
   nested:
     dependency: transitive
     description:
@@ -381,6 +381,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.5"
+  renterd:
+    dependency: "direct main"
+    description:
+      path: "../../../../Dart Packages/Renterd/dart_renterd/packages/renterd"
+      relative: true
+    source: path
+    version: "0.1.0"
   sky_engine:
     dependency: transitive
     description: flutter
