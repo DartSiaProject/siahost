@@ -61,6 +61,7 @@ class _SiaScreenState extends State<SiaScreen> {
             _pageIndexSelected = siaBuilderState.previousFragment;
           }
           return Scaffold(
+            resizeToAvoidBottomInset: false,
             appBar: AppBar(
               automaticallyImplyLeading: false,
               actions: <Widget>[

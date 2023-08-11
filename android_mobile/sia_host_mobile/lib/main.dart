@@ -41,8 +41,7 @@ void main() async {
               insert.sl<SearchBloc>()..add(GetAllHostsDataListEvent()),
         ),
         BlocProvider(
-          create: (context) =>
-              insert.sl<HosterBloc>()..add(GetMyHostFromRenterdEvent()),
+          create: (context) => insert.sl<HosterBloc>(),
         )
       ],
       child: const SiaHostsMobile(),

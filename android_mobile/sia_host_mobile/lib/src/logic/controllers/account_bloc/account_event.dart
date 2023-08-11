@@ -12,3 +12,21 @@ class HideThePassWordEvent extends AccountEvent {
 
   const HideThePassWordEvent({required this.hideThePassWord});
 }
+
+class MakeLoginEvent extends AccountEvent {
+  final Account account;
+
+  const MakeLoginEvent({
+    required this.account,
+  });
+}
+
+class MakeNewLoginEvent extends AccountEvent {
+  final Account account;
+
+  const MakeNewLoginEvent({
+    required this.account,
+  });
+}
+
+class CheckAccountCredentialEvent extends AccountEvent {}

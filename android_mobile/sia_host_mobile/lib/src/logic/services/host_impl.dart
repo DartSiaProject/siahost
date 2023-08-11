@@ -1,12 +1,15 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:multiple_result/multiple_result.dart';
 import 'package:renterd/renterd.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sia_host_mobile/src/logic/models/host_setting.dart';
 import 'package:sia_host_mobile/src/utils/enums/success_enum.dart';
 import 'package:sia_host_mobile/src/utils/extras/node/apis/host_api.dart'
     as hosts;
+import 'package:sia_host_mobile/src/utils/helpers/encrytion_helpers/encrypter_helper.dart';
 import 'package:sia_host_mobile/src/utils/helpers/host_helpers/host_helper.dart';
 import 'package:sia_host_mobile/src/utils/helpers/request_helpers/request_helper.dart';
 import 'package:sia_host_mobile/src/utils/messages/errors_message.dart';
@@ -23,6 +26,10 @@ import '../models/host.dart';
 /// createdAt: 25/07/2023
 /// updatedAt: 09/08/2023
 class HostImpl implements HostAbst {
+  final SharedPreferences sharedPreferences;
+
+  HostImpl({required this.sharedPreferences});
+
   var _hostModelList = <Host>[];
 
   /// Note : Cette fonction me permet d'obtenir tous les Hosts data list venant du Net
@@ -86,20 +93,43 @@ class HostImpl implements HostAbst {
   @override
   Future<Result<HostSetting, String>> getSomeHostFromRenterd() async {
     Result<HostSetting, String> _result = const Result.error("");
+
     try {
-      var _responseHoster = await Hoster.fetchSomeHost(password: "renterd");
-      if (_responseHoster.statusCode == 200) {
-        var _responseBody = json.decode(_responseHoster.body);
+      if (sharedPreferences.getString("${dotenv.env['IP_ADRESS']}") == null &&
+          sharedPreferences.getString("${dotenv.env['PASSWRD']}") == null) {
+        _result = Result.error(ErrorsMessage.error(Errors.loginError));
+      } else {
+        var _ipAdressDecrypt = EncrypterHelper.decrypt(
+            dataEncrypted:
+                sharedPreferences.getString("${dotenv.env['IP_ADRESS']}")!);
 
-        if (_responseBody == null) {
-          _result = Result.error(ErrorsMessage.error(Errors.myHostError));
-        } else {
-          HostSetting _hostSetting = HostSetting.fromMap(_responseBody);
-          _result = Result.success(_hostSetting);
+        var _passWordEncrypt = EncrypterHelper.decrypt(
+            dataEncrypted:
+                sharedPreferences.getString("${dotenv.env['PASSWRD']}")!);
+
+        var _responseHoster = await Hoster.fetchSomeHost(
+            password: _passWordEncrypt, ipAdress: _ipAdressDecrypt);
+
+        var _responseConsensus = await Consensus.getState(
+            password: _passWordEncrypt, ipAdress: _ipAdressDecrypt);
+
+        if (_responseHoster.statusCode == 200 ||
+            _responseConsensus.statusCode == 200) {
+          var _responseHosterBody = json.decode(_responseHoster.body);
+          var _responseConsensusBody = json.decode(_responseConsensus.body);
+
+          if (_responseHosterBody == null || _responseConsensusBody == null) {
+            _result = Result.error(ErrorsMessage.error(Errors.myHostError));
+          } else {
+            HostSetting _oldHostSetting =
+                HostSetting.fromMap(_responseHosterBody);
+            var _blockHeight = _responseConsensusBody["BlockHeight"].toString();
+
+            HostSetting _newHostSetting =
+                _oldHostSetting.copyWith(blockHeight: _blockHeight);
+            _result = Result.success(_newHostSetting);
+          }
         }
-
-        HostSetting _hostSetting = HostSetting.fromMap(_responseBody);
-        _result = Result.success(_hostSetting);
       }
     } on SocketException {
       _result = Result.error(ErrorsMessage.error(Errors.connexionError));
@@ -116,9 +146,20 @@ class HostImpl implements HostAbst {
   }) async {
     Result<String, String> _result = const Result.error("");
     try {
+      var _ipAdressDecrypt = EncrypterHelper.decrypt(
+          dataEncrypted:
+              sharedPreferences.getString("${dotenv.env['IP_ADRESS']}")!);
+
+      var _passWordEncrypt = EncrypterHelper.decrypt(
+          dataEncrypted:
+              sharedPreferences.getString("${dotenv.env['PASSWRD']}")!);
+
       var _hostSettingMap = hostSetting.toMap();
       var _responseHoster = await Hoster.updateSomeHost(
-          password: "renterd", hostConfig: _hostSettingMap);
+        hostConfig: _hostSettingMap,
+        password: _passWordEncrypt,
+        ipAdress: _ipAdressDecrypt,
+      );
       if (_responseHoster.statusCode == 200) {
         _result =
             Result.success(SuccessMessage.success(SuccessType.configSuccess));

@@ -23,7 +23,9 @@ class HosterBloc extends Bloc<HosterEvent, HosterState> {
 
       _result.when(
           (success) => emit(MyHostDataGetSuccess(hostSetting: success)),
-          (error) => emit(MyHostDataGetFailed(message: error)));
+          (error) => emit(error == "make_login_demand_text"
+              ? MakLoginPlease(message: error)
+              : MyHostDataGetFailed(message: error)));
     });
 
     on<UpdateMyHostFromRenterdEvent>((event, emit) async {

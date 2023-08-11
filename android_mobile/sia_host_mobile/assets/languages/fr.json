@@ -8,8 +8,8 @@
   "start_text": "Commencez",
   "login_description_text": "Pour commencer à interagir avec le réseau Sia, veuillez entrer l'adresse publique de votre serveur",
   "connect_text": "Connexion",
-  "adress_public_text": "Renterd Adresse publique",
-  "adress_text": "Adresse IPV4",
+  "adress_public_text": "Renterd Adresse publique Ou DNS",
+  "adress_text": "Adresse IPV4 Ou DNS",
   "renterd_password_text": "Mot de passe Renterd",
   "password_text": "Mot de passe",
   "home_text": "Acceuil",
@@ -70,5 +70,9 @@
   "config_button_text": "Configurer",
   "host_config_text": "Host\nConfiguration",
   "my_host_no_found_text": "Hôte introuvable",
-  "config_host_success_text": "Configuration Hôte Réussi"
+  "config_host_success_text": "Configuration Hôte Réussi",
+  "fill_fields_text": "Remplissez les Champs !",
+  "make_login_demand_text": "Faites votre login s'il vous plait !",
+  "credential_error_text": "Vos informations d'identification ne sont pas correctes, réessayez !",
+  "credential_success_text": "Connexion Réussi"
 }

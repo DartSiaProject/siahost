@@ -12,6 +12,12 @@ class ErrorsMessage {
       case Errors.myHostError:
         return "my_host_no_found_text";
 
+      case Errors.loginError:
+        return "make_login_demand_text";
+
+      case Errors.verificationError:
+        return "credential_error_text";
+
       default:
         return "error_text";
     }

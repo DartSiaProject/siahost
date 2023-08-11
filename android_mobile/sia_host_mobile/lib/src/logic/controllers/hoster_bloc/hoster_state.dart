@@ -55,3 +55,14 @@ class MyHostConfigFailed extends HosterState {
   @override
   List<Object> get props => [message];
 }
+
+class MakLoginPlease extends HosterState {
+  final String message;
+
+  const MakLoginPlease({
+    required this.message,
+  });
+
+  @override
+  List<Object> get props => [message];
+}

@@ -55,6 +55,8 @@ dependencies:
   fl_chart: ^0.63.0
   http: ^0.13.6
   percent_indicator: ^4.2.3
+  shared_preferences: ^2.2.0
+  encrypt: ^5.0.1
   renterd:
     # git:
     #   url: https://github.com/DartSiaProject/dartsia.git

@@ -6,6 +6,9 @@ class SuccessMessage {
       case SuccessType.configSuccess:
         return "config_host_success_text";
 
+      case SuccessType.verificationSuccess:
+        return "credential_success_text";
+
       default:
         return "success";
     }

@@ -1,3 +1,4 @@
 enum SuccessType {
   configSuccess,
+  verificationSuccess,
 }

@@ -6,7 +6,12 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sia_host_mobile/src/logic/abstracts/account_abst.dart';
 import 'package:sia_host_mobile/src/logic/controllers/hoster_bloc/hoster_bloc.dart';
+import 'package:sia_host_mobile/src/logic/services/account_impl.dart';
+import 'package:sia_host_mobile/src/logic/usecases/account_usecases/check_account_credential_usecase.dart';
+import 'package:sia_host_mobile/src/logic/usecases/account_usecases/make_login_usecase.dart';
 import 'package:sia_host_mobile/src/logic/usecases/host_usecases/get_some_host_from_renterd_usecase.dart';
 import 'package:sia_host_mobile/src/logic/usecases/host_usecases/update_some_host_from_renterd_usecase.dart';
 
@@ -90,25 +95,21 @@ Future<void> init() async {
 
 //! final Instances Variables
 // variables of instance's class
-/**
-   *  exemples : 
-   *  final sharedPreference = await SharedPreferences.getInstance();
-   * 
-   */
+  var _sharedPreference = await SharedPreferences.getInstance();
+
 //! External Variables
 
   // serviceLocator.registerLazySingleton code
 
-  /**
-   *  exemples : 
-   *  sl.registerLazySingleton(() => sharedPreference);
-   * 
-   */
+  sl.registerLazySingleton(() => _sharedPreference);
 
 //! services
 
   sl.registerLazySingleton<NetworkAbst>(() => NetworkImpl());
-  sl.registerLazySingleton<HostAbst>(() => HostImpl());
+  sl.registerLazySingleton<HostAbst>(
+      () => HostImpl(sharedPreferences: sl.call()));
+  sl.registerLazySingleton<AccountAbst>(
+      () => AccountImpl(sharedPreferences: sl.call()));
 
 //! Usecases
 
@@ -124,13 +125,21 @@ Future<void> init() async {
       () => GetSomeHostFromRenterdUsecase(hostAbst: sl.call()));
   sl.registerLazySingleton<UpdateSomeHostFromRenterdUsecase>(
       () => UpdateSomeHostFromRenterdUsecase(hostAbst: sl.call()));
+  sl.registerLazySingleton<MakeLoginUsecase>(
+      () => MakeLoginUsecase(accountAbst: sl.call()));
+
+  sl.registerLazySingleton<CheckAccountCredentialUsecase>(
+      () => CheckAccountCredentialUsecase(accountAbst: sl.call()));
 
 //! Bloc
 
   /**
    *  here you must register the bloc state manager using : sl.registerFactory(() => null);
    */
-  sl.registerFactory<AccountBloc>(() => AccountBloc());
+  sl.registerFactory<AccountBloc>(() => AccountBloc(
+        makeLoginUsecase: sl.call(),
+        checkAccountCredentialUsecase: sl.call(),
+      ));
   sl.registerFactory<SiaBloc>(() => SiaBloc());
   sl.registerFactory<NetworkBloc>(
       () => NetworkBloc(getNetworkDataUsecase: sl.call()));

@@ -46,7 +46,7 @@ class FieldsWidget extends StatelessWidget {
             ),
             TextField(
               keyboardType: TextInputType.number,
-              textInputAction: TextInputAction.next,
+              textInputAction: TextInputAction.done,
               controller: maxDownloadController,
               decoration: InputDecoration(
                 hintText: LanguageTranslationHelper.of(context)!
@@ -83,7 +83,7 @@ class FieldsWidget extends StatelessWidget {
             ),
             TextField(
               keyboardType: TextInputType.number,
-              textInputAction: TextInputAction.next,
+              textInputAction: TextInputAction.done,
               controller: maxUploadController,
               decoration: InputDecoration(
                 hintText: LanguageTranslationHelper.of(context)!
@@ -120,7 +120,7 @@ class FieldsWidget extends StatelessWidget {
             ),
             TextField(
               keyboardType: TextInputType.number,
-              textInputAction: TextInputAction.next,
+              textInputAction: TextInputAction.done,
               controller: maxStorageController,
               decoration: InputDecoration(
                 hintText: LanguageTranslationHelper.of(context)!
@@ -157,7 +157,7 @@ class FieldsWidget extends StatelessWidget {
             ),
             TextField(
               keyboardType: TextInputType.number,
-              textInputAction: TextInputAction.next,
+              textInputAction: TextInputAction.done,
               controller: maxContractController,
               decoration: InputDecoration(
                 hintText: LanguageTranslationHelper.of(context)!
@@ -194,7 +194,7 @@ class FieldsWidget extends StatelessWidget {
             ),
             TextField(
               keyboardType: TextInputType.number,
-              textInputAction: TextInputAction.next,
+              textInputAction: TextInputAction.done,
               controller: minAccountController,
               decoration: InputDecoration(
                 hintText: LanguageTranslationHelper.of(context)!
@@ -231,7 +231,7 @@ class FieldsWidget extends StatelessWidget {
             ),
             TextField(
               keyboardType: TextInputType.number,
-              textInputAction: TextInputAction.next,
+              textInputAction: TextInputAction.done,
               controller: maxRpcController,
               decoration: InputDecoration(
                 hintText: LanguageTranslationHelper.of(context)!

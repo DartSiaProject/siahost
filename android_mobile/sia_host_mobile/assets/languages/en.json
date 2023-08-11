@@ -8,8 +8,8 @@
   "start_text": "Get Started",
   "login_description_text": "To start interacting with the Sia network, please enter the public address of your server",
   "connect_text": "Connect",
-  "adress_public_text": "Renterd Public Address",
-  "adress_text": "IPV4 Address",
+  "adress_public_text": "Renterd Public Address Or DNS",
+  "adress_text": "IPV4 Address Or DNS",
   "renterd_password_text": "Renterd Password",
   "password_text": "Password",
   "home_text": "Home",
@@ -70,5 +70,9 @@
   "upload_speed_field_text": "Upload Speed",
   "my_host_no_found_text": "Host Not Found",
   "config_button_text": "Configure",
-  "config_host_success_text": "Configuration Host Success"
+  "config_host_success_text": "Configuration Host Success",
+  "fill_fields_text": "Fill The Fields !",
+  "make_login_demand_text": "Make Your Login Please !",
+  "credential_error_text": "Your Credentials are note correct, retry !",
+  "credential_success_text": "login Success"
 }

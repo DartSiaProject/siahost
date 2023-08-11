@@ -9,6 +9,7 @@ class HostSetting extends Equatable {
   final String maxUploadPrice;
   final String minMaxCollateral;
   final String minAccountExpiry;
+  final String blockHeight;
 
   const HostSetting({
     this.hostBlockHeightLeeway = 0,
@@ -19,6 +20,7 @@ class HostSetting extends Equatable {
     this.maxUploadPrice = "",
     this.minMaxCollateral = "",
     this.minAccountExpiry = "",
+    this.blockHeight = "",
   });
 
   HostSetting copyWith({
@@ -30,6 +32,7 @@ class HostSetting extends Equatable {
     String? maxUploadPrice,
     String? minMaxCollateral,
     String? minAccountExpiry,
+    String? blockHeight,
   }) {
     return HostSetting(
       hostBlockHeightLeeway:
@@ -41,6 +44,7 @@ class HostSetting extends Equatable {
       maxUploadPrice: maxUploadPrice ?? this.maxUploadPrice,
       minMaxCollateral: minMaxCollateral ?? this.minMaxCollateral,
       minAccountExpiry: minAccountExpiry ?? this.minAccountExpiry,
+      blockHeight: blockHeight ?? this.blockHeight,
     );
   }
 
@@ -81,6 +85,7 @@ class HostSetting extends Equatable {
       maxUploadPrice,
       minMaxCollateral,
       minAccountExpiry,
+      blockHeight,
     ];
   }
 }
