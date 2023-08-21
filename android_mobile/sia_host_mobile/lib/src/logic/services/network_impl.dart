@@ -64,9 +64,9 @@ class NetworkImpl implements NetworkAbst {
         _result = Result.success(_networkData);
       }
     } on SocketException {
-      _result = Result.error(ErrorsMessage.error(Errors.connexionError));
+      _result = Result.error(ErrorsMessage.error(ErrorsType.connexionError));
     } on Exception catch (_) {
-      _result = Result.error(ErrorsMessage.error(Errors.errorUnknown));
+      _result = Result.error(ErrorsMessage.error(ErrorsType.errorUnknown));
     }
 
     return _result;

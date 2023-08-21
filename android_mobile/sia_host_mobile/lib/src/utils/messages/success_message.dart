@@ -1,4 +1,4 @@
-import 'package:sia_host_mobile/src/utils/enums/success_enum.dart';
+import '../enums/success_enum.dart';
 
 class SuccessMessage {
   static String success(SuccessType success) {

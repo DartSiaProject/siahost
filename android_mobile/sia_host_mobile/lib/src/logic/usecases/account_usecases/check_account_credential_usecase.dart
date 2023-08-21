@@ -1,4 +1,4 @@
-import 'package:sia_host_mobile/src/logic/abstracts/account_abst.dart';
+import '../../abstracts/account_abst.dart';
 
 class CheckAccountCredentialUsecase {
   final AccountAbst accountAbst;

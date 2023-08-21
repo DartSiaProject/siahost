@@ -5,7 +5,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:multiple_result/multiple_result.dart';
 import 'package:renterd/renterd.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sia_host_mobile/src/logic/models/host_setting.dart';
 import 'package:sia_host_mobile/src/utils/enums/success_enum.dart';
 import 'package:sia_host_mobile/src/utils/extras/node/apis/host_api.dart'
     as hosts;
@@ -18,6 +17,7 @@ import 'package:sia_host_mobile/src/utils/messages/success_message.dart';
 import '../../utils/enums/errors_enum.dart';
 import '../abstracts/host_abst.dart';
 import '../models/host.dart';
+import '../models/host_setting.dart';
 
 /// Project: [SiaHostsMobile],
 /// enterprise: [CotradeChain]
@@ -35,7 +35,7 @@ class HostImpl implements HostAbst {
   /// Note : Cette fonction me permet d'obtenir tous les Hosts data list venant du Net
   @override
   Future<Result<List<Host>, String>> getHostDataList() async {
-    Result<List<Host>, String> _result = Result.error("");
+    Result<List<Host>, String> _result = const Result.error("");
     try {
       var _responseHost = await RequestHelper.post(
         contentBody: {
@@ -50,9 +50,9 @@ class HostImpl implements HostAbst {
         _result = Result.success(_hostModelList);
       }
     } on SocketException {
-      _result = Result.error(ErrorsMessage.error(Errors.connexionError));
+      _result = Result.error(ErrorsMessage.error(ErrorsType.connexionError));
     } on Exception catch (_) {
-      _result = Result.error(ErrorsMessage.error(Errors.errorUnknown));
+      _result = Result.error(ErrorsMessage.error(ErrorsType.errorUnknown));
     }
     return _result;
   }
@@ -70,7 +70,7 @@ class HostImpl implements HostAbst {
     if (_hostSearched.isNotEmpty) {
       _result = Result.success(_hostSearched);
     } else {
-      _result = Result.error(ErrorsMessage.error(Errors.listError));
+      _result = Result.error(ErrorsMessage.error(ErrorsType.listError));
     }
     return _result;
   }
@@ -97,7 +97,7 @@ class HostImpl implements HostAbst {
     try {
       if (sharedPreferences.getString("${dotenv.env['IP_ADRESS']}") == null &&
           sharedPreferences.getString("${dotenv.env['PASSWRD']}") == null) {
-        _result = Result.error(ErrorsMessage.error(Errors.loginError));
+        _result = Result.error(ErrorsMessage.error(ErrorsType.loginError));
       } else {
         var _ipAdressDecrypt = EncrypterHelper.decrypt(
             dataEncrypted:
@@ -119,11 +119,12 @@ class HostImpl implements HostAbst {
           var _responseConsensusBody = json.decode(_responseConsensus.body);
 
           if (_responseHosterBody == null || _responseConsensusBody == null) {
-            _result = Result.error(ErrorsMessage.error(Errors.myHostError));
+            _result = Result.error(ErrorsMessage.error(ErrorsType.myHostError));
           } else {
             HostSetting _oldHostSetting =
                 HostSetting.fromMap(_responseHosterBody);
-            var _blockHeight = _responseConsensusBody["BlockHeight"].toString();
+
+            var _blockHeight = _responseConsensusBody["blockHeight"].toString();
 
             HostSetting _newHostSetting =
                 _oldHostSetting.copyWith(blockHeight: _blockHeight);
@@ -132,9 +133,9 @@ class HostImpl implements HostAbst {
         }
       }
     } on SocketException {
-      _result = Result.error(ErrorsMessage.error(Errors.connexionError));
+      _result = Result.error(ErrorsMessage.error(ErrorsType.connexionError));
     } on Exception catch (_) {
-      _result = Result.error(ErrorsMessage.error(Errors.errorUnknown));
+      _result = Result.error(ErrorsMessage.error(ErrorsType.errorUnknown));
     }
     return _result;
   }
@@ -155,19 +156,39 @@ class HostImpl implements HostAbst {
               sharedPreferences.getString("${dotenv.env['PASSWRD']}")!);
 
       var _hostSettingMap = hostSetting.toMap();
+
       var _responseHoster = await Hoster.updateSomeHost(
         hostConfig: _hostSettingMap,
+
+        // {
+        //   "hostBlockHeightLeeway": 9,
+        //   "maxContractPrice": "159",
+        //   "maxDownloadPrice": "309",
+        //   "maxRPCPrice": "101",
+        //   "maxStoragePrice": "635",
+        //   "maxUploadPrice": "301",
+        //   "minAccountExpiry": 86400000000000,
+        //   "minMaxCollateral": "101",
+        //   // "minMaxEphemeralAccountBalance": "106",
+        //   "minPriceTableValidity": 308
+        // },
+
+        //  _hostSettingMap,
         password: _passWordEncrypt,
         ipAdress: _ipAdressDecrypt,
       );
+
+      print(_responseHoster.body);
       if (_responseHoster.statusCode == 200) {
         _result =
             Result.success(SuccessMessage.success(SuccessType.configSuccess));
+      } else {
+        _result = Result.success(ErrorsMessage.error(ErrorsType.updateError));
       }
     } on SocketException {
-      _result = Result.error(ErrorsMessage.error(Errors.connexionError));
+      _result = Result.error(ErrorsMessage.error(ErrorsType.connexionError));
     } on Exception catch (_) {
-      _result = Result.error(ErrorsMessage.error(Errors.errorUnknown));
+      _result = Result.error(ErrorsMessage.error(ErrorsType.errorUnknown));
     }
     return _result;
   }

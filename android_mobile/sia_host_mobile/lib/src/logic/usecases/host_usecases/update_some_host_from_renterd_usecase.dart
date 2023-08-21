@@ -1,7 +1,7 @@
 import 'package:multiple_result/multiple_result.dart';
-import 'package:sia_host_mobile/src/logic/models/host_setting.dart';
 
 import '../../abstracts/host_abst.dart';
+import '../../models/host_setting.dart';
 
 class UpdateSomeHostFromRenterdUsecase {
   final HostAbst hostAbst;

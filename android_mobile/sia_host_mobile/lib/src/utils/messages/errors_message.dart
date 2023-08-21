@@ -1,22 +1,25 @@
 import '../enums/errors_enum.dart';
 
 class ErrorsMessage {
-  static String error(Errors error) {
+  static String error(ErrorsType error) {
     switch (error) {
-      case Errors.connexionError:
+      case ErrorsType.connexionError:
         return "connexion_text";
 
-      case Errors.listError:
+      case ErrorsType.listError:
         return "search_no_found_text";
 
-      case Errors.myHostError:
+      case ErrorsType.myHostError:
         return "my_host_no_found_text";
 
-      case Errors.loginError:
+      case ErrorsType.loginError:
         return "make_login_demand_text";
 
-      case Errors.verificationError:
+      case ErrorsType.verificationError:
         return "credential_error_text";
+
+      case ErrorsType.updateError:
+        return "update_error_text";
 
       default:
         return "error_text";

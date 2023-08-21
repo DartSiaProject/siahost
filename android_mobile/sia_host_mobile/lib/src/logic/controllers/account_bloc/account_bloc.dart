@@ -1,9 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:multiple_result/multiple_result.dart';
-import 'package:sia_host_mobile/src/logic/models/account.dart';
-import 'package:sia_host_mobile/src/logic/usecases/account_usecases/check_account_credential_usecase.dart';
-import 'package:sia_host_mobile/src/logic/usecases/account_usecases/make_login_usecase.dart';
+
+import '../../models/account.dart';
+import '../../usecases/account_usecases/check_account_credential_usecase.dart';
+import '../../usecases/account_usecases/make_login_usecase.dart';
 
 part 'account_event.dart';
 part 'account_state.dart';

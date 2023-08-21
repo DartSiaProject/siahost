@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sia_host_mobile/src/logic/controllers/hoster_bloc/hoster_bloc.dart';
-import 'package:sia_host_mobile/src/logic/models/host_setting.dart';
-import 'package:sia_host_mobile/src/views/widgets/host_widgets/login_widget.dart';
 
+import '../../../logic/controllers/hoster_bloc/hoster_bloc.dart';
+import '../../../logic/models/host_setting.dart';
 import '../../../utils/constants/colors_const.dart' as color;
 import '../../../utils/helpers/language_helpers/language_translation_helper.dart';
 import '../../widgets/host_widgets/card_my_host_info_widget.dart';
 import '../../widgets/host_widgets/card_speed_widget.dart';
+import '../../widgets/host_widgets/login_widget.dart';
 
 class MyHostFragment extends StatefulWidget {
   const MyHostFragment({super.key});
@@ -139,10 +139,9 @@ class _MyHostFragmentState extends State<MyHostFragment> {
                             crossAxisCount: 2,
                             crossAxisSpacing: 20,
                             mainAxisSpacing: 20,
-                            childAspectRatio: 0.73.r,
+                            childAspectRatio: 0.67.r,
                             children: <Widget>[
                               Container(
-                                height: 251.0.h,
                                 decoration: BoxDecoration(
                                   color: color.tunaColor,
                                   borderRadius: BorderRadius.circular(12.0.r),
@@ -204,7 +203,7 @@ class _MyHostFragmentState extends State<MyHostFragment> {
                                     padding: const EdgeInsets.only(left: 10.0),
                                   ),
                                   SizedBox(
-                                    height: 15.0.h,
+                                    height: 18.9.h,
                                   ),
                                   CardMyHostInfoWidget(
                                     title: "max_upload_text",
@@ -244,7 +243,7 @@ class _MyHostFragmentState extends State<MyHostFragment> {
                             crossAxisCount: 2,
                             crossAxisSpacing: 20,
                             mainAxisSpacing: 20,
-                            childAspectRatio: 1.62.r,
+                            childAspectRatio: 1.34.r,
                             children: <Widget>[
                               CardMyHostInfoWidget(
                                 title: "max_storage_text",

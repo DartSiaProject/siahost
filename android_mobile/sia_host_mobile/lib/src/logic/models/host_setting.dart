@@ -57,7 +57,7 @@ class HostSetting extends Equatable {
       'maxStoragePrice': maxStoragePrice,
       'maxUploadPrice': maxUploadPrice,
       'minMaxCollateral': minMaxCollateral,
-      'minAccountExpiry': int.parse(minAccountExpiry),
+      'minAccountExpiry': minAccountExpiry
     };
   }
 

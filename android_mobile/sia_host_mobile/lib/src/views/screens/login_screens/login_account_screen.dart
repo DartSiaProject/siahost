@@ -4,9 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sia_host_mobile/src/logic/models/account.dart';
 
 import '../../../logic/controllers/account_bloc/account_bloc.dart';
+import '../../../logic/models/account.dart';
 import '../../../utils/constants/colors_const.dart' as color;
 import '../../../utils/constants/pngs_const.dart' as png;
 import '../../../utils/constants/routes_const.dart' as route;
@@ -50,7 +50,8 @@ class _LoginAccountScreenState extends State<LoginAccountScreen> {
               backgroundColor: color.tunaColor,
               textColor: Colors.white,
               fontSize: 16.0,
-            ).whenComplete(() => GoRouter.of(context).push(route.siaScreen));
+            ).whenComplete(
+                () => GoRouter.of(context).pushReplacement(route.siaScreen));
           }
 
           if (accountListenerState is LoginFailed) {
@@ -121,7 +122,7 @@ class _LoginAccountScreenState extends State<LoginAccountScreen> {
                               ),
                             ),
                             TextField(
-                              keyboardType: TextInputType.number,
+                              keyboardType: TextInputType.text,
                               textInputAction: TextInputAction.next,
                               controller: _adressController,
                               decoration: InputDecoration(
@@ -244,8 +245,8 @@ class _LoginAccountScreenState extends State<LoginAccountScreen> {
                         Align(
                           alignment: Alignment.centerLeft,
                           child: TextButton(
-                            onPressed: () =>
-                                GoRouter.of(context).push(route.siaScreen),
+                            onPressed: () => GoRouter.of(context)
+                                .pushReplacement(route.siaScreen),
                             child: Text(
                               LanguageTranslationHelper.of(context)!
                                   .translate("connect_later_text"),

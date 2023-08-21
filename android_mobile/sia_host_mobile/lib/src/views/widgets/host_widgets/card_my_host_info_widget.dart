@@ -40,7 +40,11 @@ class CardMyHostInfoWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              value.isEmpty ? "" : value.substring(0, 3),
+              value.isEmpty
+                  ? ""
+                  : value.length > 2
+                      ? value.substring(0, 3)
+                      : value,
               style: TextStyle(
                 fontFamily: "Manrope",
                 fontSize: 32.0.sp,

@@ -74,5 +74,6 @@
   "fill_fields_text": "Fill The Fields !",
   "make_login_demand_text": "Make Your Login Please !",
   "credential_error_text": "Your Credentials are note correct, retry !",
-  "credential_success_text": "login Success"
+  "credential_success_text": "login Success",
+  "update_error_text": "Host Configuration Error"
 }

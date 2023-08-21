@@ -1,6 +1,7 @@
 import 'package:multiple_result/multiple_result.dart';
-import 'package:sia_host_mobile/src/logic/abstracts/account_abst.dart';
-import 'package:sia_host_mobile/src/logic/models/account.dart';
+
+import '../../abstracts/account_abst.dart';
+import '../../models/account.dart';
 
 class MakeLoginUsecase {
   final AccountAbst accountAbst;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../utils/constants/colors_const.dart' as color;
 import '../../../utils/helpers/language_helpers/language_translation_helper.dart';
 

@@ -1,9 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:multiple_result/multiple_result.dart';
-import 'package:sia_host_mobile/src/logic/models/host_setting.dart';
-import 'package:sia_host_mobile/src/logic/usecases/host_usecases/get_some_host_from_renterd_usecase.dart';
-import 'package:sia_host_mobile/src/logic/usecases/host_usecases/update_some_host_from_renterd_usecase.dart';
+
+import '../../models/host_setting.dart';
+import '../../usecases/host_usecases/get_some_host_from_renterd_usecase.dart';
+import '../../usecases/host_usecases/update_some_host_from_renterd_usecase.dart';
 
 part 'hoster_event.dart';
 part 'hoster_state.dart';

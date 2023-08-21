@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:sia_host_mobile/src/logic/controllers/hoster_bloc/hoster_bloc.dart';
-import 'package:sia_host_mobile/src/logic/models/host_setting.dart';
-import 'package:sia_host_mobile/src/views/widgets/host_widgets/login_widget.dart';
 
+import '../../../logic/controllers/hoster_bloc/hoster_bloc.dart';
+import '../../../logic/models/host_setting.dart';
 import '../../../utils/constants/colors_const.dart' as color;
 import '../../../utils/helpers/language_helpers/language_translation_helper.dart';
 import '../../widgets/host_widgets/fields_widget.dart';
+import '../../widgets/host_widgets/login_widget.dart';
 
 class HostConfigFragment extends StatefulWidget {
   const HostConfigFragment({super.key});
@@ -76,21 +76,44 @@ class _HostConfigFragmentState extends State<HostConfigFragment> {
               }
             },
             builder: (context, hosterBuilderState) {
+              if (hosterBuilderState is MyHostLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    color: color.spearmintColor,
+                  ),
+                );
+              }
               if (hosterBuilderState is MyHostDataGetSuccess) {
                 var _hostSetting = hosterBuilderState.hostSetting;
 
                 _maxDownloadController.text =
-                    _hostSetting.maxDownloadPrice.substring(0, 3);
+                    _hostSetting.maxDownloadPrice.length > 2
+                        ? _hostSetting.maxDownloadPrice.substring(0, 3)
+                        : _hostSetting.maxDownloadPrice;
+
                 _maxUploadController.text =
-                    _hostSetting.maxUploadPrice.substring(0, 3);
+                    _hostSetting.maxUploadPrice.length > 2
+                        ? _hostSetting.maxUploadPrice.substring(0, 3)
+                        : _hostSetting.maxUploadPrice;
+
                 _maxStorageController.text =
-                    _hostSetting.maxStoragePrice.substring(0, 3);
+                    _hostSetting.maxStoragePrice.length > 2
+                        ? _hostSetting.maxStoragePrice.substring(0, 3)
+                        : _hostSetting.maxStoragePrice;
+
                 _maxContractController.text =
-                    _hostSetting.maxContractPrice.substring(0, 3);
+                    _hostSetting.maxContractPrice.length > 2
+                        ? _hostSetting.maxContractPrice.substring(0, 3)
+                        : _hostSetting.maxContractPrice;
+
                 _minAccountController.text =
-                    _hostSetting.minAccountExpiry.toString().substring(0, 3);
-                _maxRpcController.text =
-                    _hostSetting.maxRPCPrice.substring(0, 3);
+                    _hostSetting.minAccountExpiry.length > 2
+                        ? _hostSetting.minAccountExpiry.substring(0, 3)
+                        : _hostSetting.minAccountExpiry;
+
+                _maxRpcController.text = _hostSetting.maxRPCPrice.length > 2
+                    ? _hostSetting.maxRPCPrice.substring(0, 3)
+                    : _hostSetting.maxRPCPrice;
               }
 
               if (hosterBuilderState is MakLoginPlease) {

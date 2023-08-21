@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:sia_host_mobile/src/logic/controllers/account_bloc/account_bloc.dart';
-import 'package:sia_host_mobile/src/logic/controllers/hoster_bloc/hoster_bloc.dart';
-import 'package:sia_host_mobile/src/logic/models/account.dart';
 
+import '../../../logic/controllers/account_bloc/account_bloc.dart';
+import '../../../logic/controllers/hoster_bloc/hoster_bloc.dart';
+import '../../../logic/models/account.dart';
 import '../../../utils/constants/colors_const.dart' as color;
 import '../../../utils/constants/svgs_const.dart' as icon;
 import '../../../utils/helpers/language_helpers/language_translation_helper.dart';

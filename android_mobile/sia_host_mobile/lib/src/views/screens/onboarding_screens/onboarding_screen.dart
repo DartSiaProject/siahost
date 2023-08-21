@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
 import '../../../utils/constants/colors_const.dart' as color;
 import '../../../utils/constants/routes_const.dart' as route;
 import '../../../utils/constants/string_const.dart';
 import '../../../utils/helpers/language_helpers/language_translation_helper.dart';
 import '../../fragments/onboarding_fragments/onboarding_dynamic_fragment.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -65,10 +66,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   child: InkWell(
                     borderRadius: BorderRadius.circular(12.0.r),
                     onTap: () {
-                      GoRouter.of(context).push(route.loginAccountScreen);
-
-                      //! .pushReplacement(route.loginAccountScreen);
-                      // todo : remplacer après
+                      GoRouter.of(context)
+                          .pushReplacement(route.loginAccountScreen);
                     },
                     child: Center(
                       child: Text(

@@ -4,14 +4,15 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:multiple_result/multiple_result.dart';
 import 'package:renterd/renterd.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sia_host_mobile/src/logic/abstracts/account_abst.dart';
-import 'package:sia_host_mobile/src/logic/models/account.dart';
-import 'package:sia_host_mobile/src/utils/enums/errors_enum.dart';
-import 'package:sia_host_mobile/src/utils/enums/success_enum.dart';
-import 'package:sia_host_mobile/src/utils/helpers/encrytion_helpers/encrypter_helper.dart';
-import 'package:sia_host_mobile/src/utils/helpers/host_helpers/host_helper.dart';
-import 'package:sia_host_mobile/src/utils/messages/errors_message.dart';
-import 'package:sia_host_mobile/src/utils/messages/success_message.dart';
+
+import '../../utils/enums/errors_enum.dart';
+import '../../utils/enums/success_enum.dart';
+import '../../utils/helpers/encrytion_helpers/encrypter_helper.dart';
+// import '../../utils/helpers/host_helpers/host_helper.dart';
+import '../../utils/messages/errors_message.dart';
+import '../../utils/messages/success_message.dart';
+import '../abstracts/account_abst.dart';
+import '../models/account.dart';
 
 /// Project: [SiaHostsMobile],
 /// enterprise: [CotradeChain]
@@ -31,14 +32,19 @@ class AccountImpl implements AccountAbst {
   }) async {
     Result<String, String> _result = const Result.error("");
     try {
-      var _ipAdressConverted =
-          await HostHelper.convertDnsToIp(dnsAddress: account.ipAddress);
+      // var _ipAdressConverted =
+      //     await HostHelper.convertDnsToIp(dnsAddress: account.ipAddress); // todo : ici je le commente pour le test mais après , il faudra chercher à savoir si c'est un dns valide ou pas
+
       var _responseAccount = await Accounts.getAllAccounts(
-          password: account.passWord, ipAdress: _ipAdressConverted);
+          password: account.passWord, ipAdress: account.ipAddress
+          // _ipAdressConverted
+
+          );
 
       if (_responseAccount.statusCode == 200) {
-        var _ipAdressEncrypt =
-            EncrypterHelper.encrypt(data: _ipAdressConverted);
+        var _ipAdressEncrypt = EncrypterHelper.encrypt(data: account.ipAddress
+            // _ipAdressConverted
+            );
         var _passWordEncrypt = EncrypterHelper.encrypt(data: account.passWord);
 
         sharedPreferences.setString(
@@ -49,19 +55,20 @@ class AccountImpl implements AccountAbst {
         _result = Result.success(
             SuccessMessage.success(SuccessType.verificationSuccess));
       } else if (_responseAccount.statusCode == 401) {
-        print(ErrorsMessage.error(Errors.verificationError));
-        _result = Result.error(ErrorsMessage.error(Errors.verificationError));
+        print(ErrorsMessage.error(ErrorsType.verificationError));
+        _result =
+            Result.error(ErrorsMessage.error(ErrorsType.verificationError));
       }
     } on SocketException {
-      _result = Result.error(ErrorsMessage.error(Errors.connexionError));
+      _result = Result.error(ErrorsMessage.error(ErrorsType.connexionError));
     } on Exception catch (_) {
-      _result = Result.error(ErrorsMessage.error(Errors.errorUnknown));
+      _result = Result.error(ErrorsMessage.error(ErrorsType.errorUnknown));
     }
 
     return _result;
   }
 
-  // Note : cette fonction permet de vérifier ssi , l'utilisateur s'est déjà connecté
+  /// Note : cette fonction permet de vérifier ssi , l'utilisateur s'est déjà connecté
   @override
   Future<bool> credentialsArePresent() async {
     bool _result = false;

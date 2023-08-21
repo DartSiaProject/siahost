@@ -74,5 +74,6 @@
   "fill_fields_text": "Remplissez les Champs !",
   "make_login_demand_text": "Faites votre login s'il vous plait !",
   "credential_error_text": "Vos informations d'identification ne sont pas correctes, réessayez !",
-  "credential_success_text": "Connexion Réussi"
+  "credential_success_text": "Connexion Réussi",
+  "update_error_text": "Configuration Hôte Échouée"
 }
