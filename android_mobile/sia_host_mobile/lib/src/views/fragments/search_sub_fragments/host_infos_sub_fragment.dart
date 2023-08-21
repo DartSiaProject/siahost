@@ -33,7 +33,7 @@ class _HostInfoSubFragmentState extends State<HostInfoSubFragment> {
                 LanguageTranslationHelper.of(context)!
                     .translate("host_info_text"),
                 style: TextStyle(
-                  fontFamily: "DmSans",
+                  fontFamily: "Manrope",
                   fontSize: 28.0.sp,
                   color: color.whiteColor,
                   fontWeight: FontWeight.w700,

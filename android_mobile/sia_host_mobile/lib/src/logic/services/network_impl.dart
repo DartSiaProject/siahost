@@ -22,10 +22,9 @@ import '../models/network.dart';
 /// description:  Dans ce fichier, nous avons les fonctions suivantes [getNetworkData]
 /// author: [James Brel]
 /// createdAt: 18/07/2023
-/// updatedAt: 25/07/2023
-
+/// updatedAt: 09/08/2023
 class NetworkImpl implements NetworkAbst {
-  //* Note : Cette fonction me permet d'obtenir tous les Hosts list venant du Net
+  /// Note : Cette fonction me permet d'obtenir tous les Hosts list venant du Net
   @override
   Future<Result<Map<String, dynamic>, String>> getNetworkData() async {
     Result<Map<String, dynamic>, String> _result = Result.error("");
@@ -65,10 +64,11 @@ class NetworkImpl implements NetworkAbst {
         _result = Result.success(_networkData);
       }
     } on SocketException {
-      _result = Result.error(ErrorsMessage.networkError(Errors.connexionError));
+      _result = Result.error(ErrorsMessage.error(ErrorsType.connexionError));
     } on Exception catch (_) {
-      _result = Result.error(ErrorsMessage.networkError(Errors.errorUnknown));
+      _result = Result.error(ErrorsMessage.error(ErrorsType.errorUnknown));
     }
+
     return _result;
   }
 }

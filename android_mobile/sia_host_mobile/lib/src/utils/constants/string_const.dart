@@ -49,7 +49,7 @@ const bottomNavigatorItems = <Map<String, dynamic>>[
     "label": "chart_text",
   },
   {
-    "icon": icon.clockSvg,
-    "label": "clock_text",
+    "icon": icon.settingsSvg,
+    "label": "config_text",
   },
 ];

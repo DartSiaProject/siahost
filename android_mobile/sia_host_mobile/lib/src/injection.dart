@@ -6,18 +6,26 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import 'logic/abstracts/account_abst.dart';
 import 'logic/abstracts/host_abst.dart';
 import 'logic/abstracts/network_abst.dart';
 import 'logic/controllers/account_bloc/account_bloc.dart';
+import 'logic/controllers/hoster_bloc/hoster_bloc.dart';
 import 'logic/controllers/network_bloc/network_bloc.dart';
 import 'logic/controllers/search_bloc/search_bloc.dart';
 import 'logic/controllers/sia_bloc/sia_bloc.dart';
+import 'logic/services/account_impl.dart';
 import 'logic/services/host_impl.dart';
 import 'logic/services/network_impl.dart';
+import 'logic/usecases/account_usecases/check_account_credential_usecase.dart';
+import 'logic/usecases/account_usecases/make_login_usecase.dart';
 import 'logic/usecases/host_usecases/get_host_list_usecase.dart';
 import 'logic/usecases/host_usecases/get_host_searched_by_pub_key_usecase.dart';
 import 'logic/usecases/host_usecases/get_one_host_usecase.dart';
+import 'logic/usecases/host_usecases/get_some_host_from_renterd_usecase.dart';
+import 'logic/usecases/host_usecases/update_some_host_from_renterd_usecase.dart';
 import 'logic/usecases/network_overview_usecases/get_network_data_usecase.dart';
 import 'utils/constants/pngs_const.dart' as png;
 import 'utils/constants/svgs_const.dart' as icon;
@@ -44,6 +52,7 @@ Future<void> init() async {
       icon.checkTrackSvg,
       icon.moreVerticalSvg,
       icon.locationSvg,
+      icon.settingsSvg,
     ];
     final imagesSvg = svgs.map((svgElement) => SvgAssetLoader(svgElement));
     imagesSvg.map((imageSvg) async => await svg.cache.putIfAbsent(
@@ -77,33 +86,30 @@ Future<void> init() async {
 
 //! initialisation of dotenv
   // There you can initialize your env file, you can activate the below line
-
   await dotenv.load(fileName: "assets/envs/.env");
 
 //! initialisation of httpOverride
   HttpOverrides.global = new MyHttpOverridesHelper();
 
+//! initialisation of renterd package
+
 //! final Instances Variables
 // variables of instance's class
-/**
-   *  exemples : 
-   *  final sharedPreference = await SharedPreferences.getInstance();
-   * 
-   */
+  var _sharedPreference = await SharedPreferences.getInstance();
+
 //! External Variables
 
   // serviceLocator.registerLazySingleton code
 
-  /**
-   *  exemples : 
-   *  sl.registerLazySingleton(() => sharedPreference);
-   * 
-   */
+  sl.registerLazySingleton(() => _sharedPreference);
 
 //! services
 
   sl.registerLazySingleton<NetworkAbst>(() => NetworkImpl());
-  sl.registerLazySingleton<HostAbst>(() => HostImpl());
+  sl.registerLazySingleton<HostAbst>(
+      () => HostImpl(sharedPreferences: sl.call()));
+  sl.registerLazySingleton<AccountAbst>(
+      () => AccountImpl(sharedPreferences: sl.call()));
 
 //! Usecases
 
@@ -115,13 +121,25 @@ Future<void> init() async {
       () => GetHostSearchedByPubKeyUsecase(hostAbst: sl.call()));
   sl.registerLazySingleton<GetOneHostUsecase>(
       () => GetOneHostUsecase(hostAbst: sl.call()));
+  sl.registerLazySingleton<GetSomeHostFromRenterdUsecase>(
+      () => GetSomeHostFromRenterdUsecase(hostAbst: sl.call()));
+  sl.registerLazySingleton<UpdateSomeHostFromRenterdUsecase>(
+      () => UpdateSomeHostFromRenterdUsecase(hostAbst: sl.call()));
+  sl.registerLazySingleton<MakeLoginUsecase>(
+      () => MakeLoginUsecase(accountAbst: sl.call()));
+
+  sl.registerLazySingleton<CheckAccountCredentialUsecase>(
+      () => CheckAccountCredentialUsecase(accountAbst: sl.call()));
 
 //! Bloc
 
   /**
    *  here you must register the bloc state manager using : sl.registerFactory(() => null);
    */
-  sl.registerFactory<AccountBloc>(() => AccountBloc());
+  sl.registerFactory<AccountBloc>(() => AccountBloc(
+        makeLoginUsecase: sl.call(),
+        checkAccountCredentialUsecase: sl.call(),
+      ));
   sl.registerFactory<SiaBloc>(() => SiaBloc());
   sl.registerFactory<NetworkBloc>(
       () => NetworkBloc(getNetworkDataUsecase: sl.call()));
@@ -129,5 +147,9 @@ Future<void> init() async {
         getHostDataListUsecase: sl.call(),
         getHostSearchedByPubKeyUsecase: sl.call(),
         getOneHostUsecase: sl.call(),
+      ));
+  sl.registerFactory<HosterBloc>(() => HosterBloc(
+        getSomeHostFromRenterdUsecase: sl.call(),
+        updateSomeHostFromRenterdUsecase: sl.call(),
       ));
 }

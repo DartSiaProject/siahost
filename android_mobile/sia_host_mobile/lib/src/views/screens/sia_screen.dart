@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sia_host_mobile/src/logic/controllers/search_bloc/search_bloc.dart';
 
+import '../../logic/controllers/search_bloc/search_bloc.dart';
 import '../../logic/controllers/sia_bloc/sia_bloc.dart';
 import '../../utils/constants/colors_const.dart' as color;
 import '../../utils/constants/string_const.dart';
 import '../../utils/constants/svgs_const.dart' as icon;
 import '../../utils/helpers/back_press_helpers/back_press_helper.dart';
 import '../../utils/helpers/language_helpers/language_translation_helper.dart';
-import '../fragments/sia_fragments/charts_fragment.dart';
-import '../fragments/sia_fragments/clock_fragment.dart';
 import '../fragments/sia_fragments/home_fragment.dart';
+import '../fragments/sia_fragments/host_config_fragment.dart';
+import '../fragments/sia_fragments/my_host_fragment.dart';
 import '../fragments/sia_fragments/search_fragment.dart';
 
 class SiaScreen extends StatefulWidget {
@@ -61,6 +61,7 @@ class _SiaScreenState extends State<SiaScreen> {
             _pageIndexSelected = siaBuilderState.previousFragment;
           }
           return Scaffold(
+            resizeToAvoidBottomInset: false,
             appBar: AppBar(
               automaticallyImplyLeading: false,
               actions: <Widget>[
@@ -90,8 +91,8 @@ class _SiaScreenState extends State<SiaScreen> {
               children: const <Widget>[
                 HomeFragment(),
                 SearchFragment(),
-                ChartsFragment(),
-                ClockFragment()
+                MyHostFragment(),
+                HostConfigFragment()
               ],
             ),
             bottomNavigationBar: BottomNavyBar(

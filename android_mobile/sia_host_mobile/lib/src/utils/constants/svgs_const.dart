@@ -9,3 +9,4 @@ const arrowDropUpSvg = "assets/images/svg/arrow_drop_up.svg";
 const checkTrackSvg = "assets/images/svg/check_track.svg";
 const moreVerticalSvg = "assets/images/svg/more_vertical.svg";
 const locationSvg = "assets/images/svg/location.svg";
+const settingsSvg = "assets/images/svg/settings.svg";

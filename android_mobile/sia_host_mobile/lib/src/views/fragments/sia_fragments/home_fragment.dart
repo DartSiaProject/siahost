@@ -51,7 +51,7 @@ class _HomeFragmentState extends State<HomeFragment> {
                 LanguageTranslationHelper.of(context)!
                     .translate("network_view_text"),
                 style: TextStyle(
-                  fontFamily: "DmSans",
+                  fontFamily: "Manrope",
                   fontSize: 28.0.sp,
                   color: color.whiteColor,
                   fontWeight: FontWeight.w700,

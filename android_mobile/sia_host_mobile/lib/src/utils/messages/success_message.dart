@@ -1,13 +1,16 @@
-// Remove the comment below to use the class and complete the code
+import '../enums/success_enum.dart';
 
-// class SuccessMessage {
-//   static String? typeSuccess(BuildContext context, Success success) {
-//     switch (success) {
-//       case Success.elementSuccess:
-//         return "message success"
+class SuccessMessage {
+  static String success(SuccessType success) {
+    switch (success) {
+      case SuccessType.configSuccess:
+        return "config_host_success_text";
 
-//       default:
-//         return "success";
-//     }
-//   }
-// }
+      case SuccessType.verificationSuccess:
+        return "credential_success_text";
+
+      default:
+        return "success";
+    }
+  }
+}

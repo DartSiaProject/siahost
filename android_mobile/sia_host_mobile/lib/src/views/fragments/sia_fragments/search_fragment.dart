@@ -42,7 +42,9 @@ class _SearchFragmentState extends State<SearchFragment> {
           children: <Widget>[
             const SearchSubFragment(),
             searchBuilderState is HostInfoGot
-                ? HostInfoSubFragment(hostModel: searchBuilderState.hostModel)
+                ? HostInfoSubFragment(
+                    hostModel: searchBuilderState.hostModel,
+                  )
                 : const Center(
                     child:
                         CircularProgressIndicator(color: color.spearmintColor),

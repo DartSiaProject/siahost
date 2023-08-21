@@ -47,7 +47,7 @@ class _SearchSubFragmentState extends State<SearchSubFragment> {
                 LanguageTranslationHelper.of(context)!
                     .translate("search_host_text"),
                 style: TextStyle(
-                  fontFamily: "DmSans",
+                  fontFamily: "Manrope",
                   fontSize: 28.0.sp,
                   color: color.whiteColor,
                   fontWeight: FontWeight.w700,
