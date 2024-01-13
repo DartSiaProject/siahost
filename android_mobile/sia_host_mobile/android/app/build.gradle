@@ -1,0 +1,127 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+
+android {
+    signingConfigs {
+        profile {
+            storeFile file('sia_host_mobile_apk.jks')
+            storePassword 'siaHostMobileApk'
+            keyAlias 'siaHostMobileApk'
+            keyPassword 'siaHostMobileApk'
+        }
+        release {
+        storeFile file('sia_host_mobile_bundle.jks')
+            storePassword 'siaHostMobileBundle'
+            keyAlias 'siaHostMobileBundle'
+            keyPassword 'siaHostMobileBundle'
+        }
+    }
+    namespace "com.sia.sia_host_mobile"
+    compileSdk 34
+    ndkVersion flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    defaultConfig {
+        applicationId "com.sia.sia_host_mobile"
+        minSdk 16
+        targetSdk 34
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            debuggable false
+            jniDebuggable false
+            renderscriptDebuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+            jniDebuggable true
+            renderscriptDebuggable true
+            renderscriptOptimLevel 4
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+        }
+        profile {
+            debuggable false
+            jniDebuggable false
+            renderscriptDebuggable false
+            signingConfig signingConfigs.profile
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    flavorDimensions 'sia_host_mobile_env'
+    productFlavors {
+        dev {
+            dimension 'sia_host_mobile_env'
+            applicationId 'com.sia.sia_host_mobile'
+            applicationIdSuffix '.dev'
+            versionNameSuffix '-dev'
+            resValue 'string', 'app_name', 'Sia Host Mobile Dev'
+            signingConfig signingConfigs.debug
+        }
+        staging {
+            dimension 'sia_host_mobile_env'
+            applicationId 'com.sia.sia_host_mobile'
+            applicationIdSuffix '.staging'
+            versionNameSuffix '-staging'
+            resValue 'string', 'app_name', 'Sia Host Mobile Staging'
+            signingConfig signingConfigs.profile
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        prod {
+            dimension 'sia_host_mobile_env'
+            applicationId 'com.sia.sia_host_mobile'
+            resValue 'string', 'app_name', 'Sia Host Mobile'
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+    implementation 'com.android.support:multidex:1.0.3'
+}
