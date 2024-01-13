@@ -1,4 +1,0 @@
-enum Themes {
-  lightTheme,
-  darkTheme,
-}

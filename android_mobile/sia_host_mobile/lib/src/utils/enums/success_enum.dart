@@ -1,4 +1,0 @@
-enum SuccessType {
-  configSuccess,
-  verificationSuccess,
-}
