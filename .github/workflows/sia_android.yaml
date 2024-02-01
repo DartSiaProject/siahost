@@ -1,0 +1,298 @@
+# name: Sia Hosts Mobile
+# env:
+#   PROJECT_NAME: "sia_host_mobile" 
+#   VSCODE_VERSION: "1.80.1"
+#   DART_VERSION: "3.0.5"
+#   DART_CHANNEL: "stable"
+#   FLUTTER_VERSION: "3.10.5"
+#   FLUTTER_CHANNEL: "stable"
+#   JAVA_VERSION: "17.x"
+#   JAVA_DISTRIBUTION: "zulu"
+
+
+
+# on:
+#   push:
+#    branches:
+#     - release
+#     - main
+
+# jobs:
+  
+#   # job 1 : ${{env.PROJECT_NAME}}_app_testing
+#   project_testing:
+#     runs-on: ubuntu-22.04
+#     defaults:
+#       run:
+#         working-directory: ./android_mobile/${{env.PROJECT_NAME}}/
+#     steps:
+#       - name: Checkout Repository
+#         uses: actions/checkout@v3
+      
+#       - name: Checkout Flutter Actions
+#         uses: subosito/flutter-action@v2
+#         with:
+#           flutter-version: ${{env.FLUTTER_VERSION}}
+#           channel: ${{env.FLUTTER_CHANNEL}}
+      
+#       - name: Flutter test
+#         run: |
+#           flutter clean
+#           flutter pub get
+          
+#         # flutter analyze
+#         # flutter test
+
+#   # jobs 2 : ${{env.PROJECT_NAME}}_app_android_build_deploy_on_drive
+#   project_android_build_deploy_on_drive:
+#     if: github.event.ref == 'refs/heads/release'
+#     needs: project_testing
+#     runs-on: ubuntu-22.04
+#     defaults:
+#       run:
+#         working-directory: ./android_mobile/${{env.PROJECT_NAME}}/
+#     steps:
+#       - name: Checkout Repository
+#         uses: actions/checkout@v3
+
+#       - name: Checkout Java Actions
+#         uses: actions/setup-java@v3
+#         with:
+#           distribution: ${{env.JAVA_DISTRIBUTION}}
+#           java-version: ${{env.JAVA_VERSION}}
+
+#       - name: Checkout Flutter Actions
+#         uses: subosito/flutter-action@v2
+#         with:
+#           flutter-version: ${{env.FLUTTER_VERSION}}
+#           channel: ${{env.FLUTTER_CHANNEL}}
+
+#       - name: Get Today Date
+#         id: date
+#         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+ 
+#       - name: Build the Android Apk
+#         run: |
+#           flutter pub get
+#           flutter build apk --release --split-per-abi --obfuscate --split-debug-info=android_mobile/${{env.PROJECT_NAME}}/build/app/outputs/symbols
+
+#       - name: Upload an Apk into The Artifact's Github
+#         uses: actions/upload-artifact@v1
+#         with:
+#           name: ${{secrets.APP_NAME}}_${{steps.date.outputs.date}}
+#           path: android_mobile/${{env.PROJECT_NAME}}/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
+          
+#       - name: Deploy on Google Drive
+#         uses: adityak74/google-drive-upload-git-action@main
+#         with:
+#           credentials: ${{secrets.CREDENTIALS}}
+#           filename: android_mobile/${{env.PROJECT_NAME}}/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
+#           folderId: ${{secrets.FOLDER_ID_DRIVE}}
+#           name: ${{secrets.APP_NAME}}_${{steps.date.outputs.date}}.apk
+#           overwrite: "true"
+#           mimeType: "application/vnd.android.package-archive"
+
+
+#   # jobs 3 : ${{env.PROJECT_NAME}}_app_android_build_deploy_on_playstore
+#   project_android_build_deploy_on_playstore:
+#     if: github.event.ref == 'refs/heads/main'
+#     needs: project_testing
+#     runs-on: ubuntu-22.04
+#     defaults:
+#       run:
+#         working-directory: ./android_mobile/${{env.PROJECT_NAME}}/
+#     steps:
+#       - name: Checkout Repository
+#         uses: actions/checkout@v3
+
+#       - name: Checkout Java Actions
+#         uses: actions/setup-java@v3
+#         with:
+#           distribution: ${{env.JAVA_DISTRIBUTION}}
+#           java-version: ${{env.JAVA_VERSION}}
+
+#       - name: Checkout Flutter Actions
+#         uses: subosito/flutter-action@v2
+#         with:
+#           flutter-version: ${{env.FLUTTER_VERSION}}
+#           channel: ${{env.FLUTTER_CHANNEL}}
+
+#       - name: Get Today Date
+#         id: date
+#         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+ 
+#       - name: Build the Android Apk
+#         run: |
+#           flutter clean
+#           flutter pub get
+#           flutter build apk --release --split-per-abi --obfuscate --split-debug-info=android_mobile/${{env.PROJECT_NAME}}/build/app/outputs/symbols
+
+#       - name: Upload an Apk into The Artifact's Github
+#         uses: actions/upload-artifact@v1
+#         with:
+#           name: ${{secrets.APP_NAME}}_${{steps.date.outputs.date}}
+#           path: "android_mobile/${{env.PROJECT_NAME}}/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk"
+
+#       - name: Deploy on Google Drive
+#         uses: adityak74/google-drive-upload-git-action@main
+#         with:
+#           credentials: ${{secrets.CREDENTIALS}}
+#           filename: "android_mobile/${{env.PROJECT_NAME}}/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk"
+#           folderId: ${{secrets.FOLDER_ID_DRIVE}}
+#           name: ${{secrets.APP_NAME}}_${{steps.date.outputs.date}}.apk
+#           overwrite: "true"
+#           mimeType: "application/vnd.android.package-archive"
+
+
+
+
+name: Sia Hosts Mobile
+
+env:
+  PROJECT_NAME: "sia_host_mobile"
+  VSCODE_VERSION: "1.85.1"
+  DART_VERSION: "3.1.5"
+  DART_CHANNEL: "stable"
+  FLUTTER_VERSION: "3.13.9"
+  FLUTTER_CHANNEL: "stable"
+  JAVA_VERSION: "17.x"
+  JAVA_DISTRIBUTION: "zulu"
+
+
+
+on:
+  push:
+   branches:
+    - staging
+    - prod
+
+jobs:
+  
+  # job 1 : ${{env.PROJECT_NAME}}_app_testing
+  project_testing:
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: ./android_mobile/${{env.PROJECT_NAME}}/
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      
+      - name: Checkout Flutter Actions
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{env.FLUTTER_VERSION}}
+          channel: ${{env.FLUTTER_CHANNEL}}
+      
+      - name: Flutter test
+        run: |
+            flutter clean
+            flutter pub get
+        # flutter analyze
+        # flutter test
+
+  # jobs 2 : ${{env.PROJECT_NAME}}_app_android_build_deploy_on_drive
+  project_android_build_deploy_on_drive:
+    if: github.event.ref == 'refs/heads/staging'
+    needs: project_testing
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: ./android_mobile/${{env.PROJECT_NAME}}/
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Checkout Java Actions
+        uses: actions/setup-java@v3
+        with:
+          distribution: ${{env.JAVA_DISTRIBUTION}}
+          java-version: ${{env.JAVA_VERSION}}
+
+      - name: Checkout Flutter Actions
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{env.FLUTTER_VERSION}}
+          channel: ${{env.FLUTTER_CHANNEL}}
+
+      - name: Get Today Date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+ 
+      - name: Build the Android Apk
+        run: |
+          flutter clean
+          flutter pub get
+          flutter build apk --flavor staging --profile --split-per-abi --obfuscate --split-debug-info=android_mobile/${{env.PROJECT_NAME}}/build/app/outputs/symbols
+
+      - name: Upload an Apk into The Artifact's Github
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{secrets.APP_NAME_STAGING}}_${{steps.date.outputs.date}}
+          path: android_mobile/${{env.PROJECT_NAME}}/build/app/outputs/flutter-apk/app-armeabi-v7a-staging-profile.apk
+
+      - name: Deploy on Google Drive
+        uses: adityak74/google-drive-upload-git-action@main
+        with:
+          credentials: ${{secrets.CREDENTIALS}}
+          filename: android_mobile/${{env.PROJECT_NAME}}/build/app/outputs/flutter-apk/app-armeabi-v7a-staging-profile.apk
+          folderId: ${{secrets.FOLDER_ID_DRIVE}}
+          name: ${{secrets.APP_NAME_STAGING}}_${{steps.date.outputs.date}}.apk
+          overwrite: "true"
+          mimeType: "application/vnd.android.package-archive"
+
+
+  # jobs 3 : ${{env.PROJECT_NAME}}_app_android_build_deploy_on_playstore
+  project_android_build_deploy_on_playstore:
+    if: github.event.ref == 'refs/heads/prod'
+    needs: project_testing
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: ./android_mobile/${{env.PROJECT_NAME}}/
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Checkout Java Actions
+        uses: actions/setup-java@v3
+        with:
+          distribution: ${{env.JAVA_DISTRIBUTION}}
+          java-version: ${{env.JAVA_VERSION}}
+
+      - name: Checkout Flutter Actions
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{env.FLUTTER_VERSION}}
+          channel: ${{env.FLUTTER_CHANNEL}}
+
+      - name: Get Today Date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+ 
+      - name: Build the Android AppBundle
+        run: |
+          flutter clean
+          flutter pub get
+          flutter build appbundle --flavor prod --release --obfuscate --split-debug-info=android_mobile/${{env.PROJECT_NAME}}/build/app/outputs/symbols
+          
+
+      - name: Upload an AppBundle into The Artifact's Github
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{secrets.APP_NAME_PROD}}_${{steps.date.outputs.date}}
+          path: "android_mobile/${{env.PROJECT_NAME}}/build/app/outputs/bundle/prodRelease/app-prod-release.aab"
+                                                     
+
+      # - name: Deploy on Google Drive
+      #   uses: adityak74/google-drive-upload-git-action@main
+      #   with:
+      #     credentials: ${{secrets.CREDENTIALS}}
+      #     filename: "android_mobile/${{env.PROJECT_NAME}}/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk"
+      #     folderId: ${{secrets.FOLDER_ID_DRIVE}}
+      #     name: ${{secrets.APP_NAME_PROD}}_${{steps.date.outputs.date}}.aab
+      #     overwrite: "true"
+      #     mimeType: "application/vnd.android.package-archive"
+
+
+          

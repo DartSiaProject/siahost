@@ -1,0 +1,143 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sia_host_mobile/src/shared/constants/colors_const.dart'
+    as color;
+import 'package:sia_host_mobile/src/shared/constants/lang_const.dart' as lang;
+
+import '../../../../core/configs/language_config/translator.dart';
+import '../../features/fetch_and_show_one_host/domain/entities/host_info_entity.dart';
+
+class PriceInfoBarWidget extends StatelessWidget {
+  final HostInfoEntity hostModel;
+  const PriceInfoBarWidget({
+    super.key,
+    required this.hostModel,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Flex(
+      direction: Axis.horizontal,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        Flex(
+          direction: Axis.vertical,
+          children: <Widget>[
+            Text(
+              Translator.of(context)!.translate(lang.uploadPriceText),
+              style: TextStyle(
+                fontFamily: "Manrope",
+                fontSize: 12.0.sp,
+                color: color.rockBlueColor,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            RichText(
+              strutStyle: const StrutStyle(
+                fontFamily: "Manrope",
+              ),
+              text: TextSpan(
+                text: hostModel.uploadPrice.toString().substring(0, 2),
+                style: TextStyle(
+                  fontFamily: "Manrope",
+                  fontSize: 24.0.sp,
+                  color: color.whiteColor,
+                  fontWeight: FontWeight.w700,
+                ),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: "sc/tb",
+                    style: TextStyle(
+                      fontFamily: "Manrope",
+                      fontSize: 10.0.sp,
+                      color: color.whiteColor,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        Flex(
+          direction: Axis.vertical,
+          children: <Widget>[
+            Text(
+              Translator.of(context)!.translate(lang.downloadPriceText),
+              style: TextStyle(
+                fontFamily: "Manrope",
+                fontSize: 12.0.sp,
+                color: color.rockBlueColor,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            RichText(
+              strutStyle: const StrutStyle(
+                fontFamily: "Manrope",
+              ),
+              text: TextSpan(
+                text: hostModel.downloadPrice.toString().substring(0, 2),
+                style: TextStyle(
+                  fontFamily: "Manrope",
+                  fontSize: 24.0.sp,
+                  color: color.whiteColor,
+                  fontWeight: FontWeight.w700,
+                ),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: "sc/tb",
+                    style: TextStyle(
+                      fontFamily: "Manrope",
+                      fontSize: 10.0.sp,
+                      color: color.rockBlueColor,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        Flex(
+          direction: Axis.vertical,
+          children: <Widget>[
+            Text(
+              Translator.of(context)!.translate(lang.storagePriceText),
+              style: TextStyle(
+                fontFamily: "Manrope",
+                fontSize: 12.0.sp,
+                color: color.rockBlueColor,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            RichText(
+              strutStyle: const StrutStyle(
+                fontFamily: "Manrope",
+              ),
+              text: TextSpan(
+                text: hostModel.storagePrice.toString().substring(0, 2),
+                style: TextStyle(
+                  fontFamily: "Manrope",
+                  fontSize: 24.0.sp,
+                  color: color.whiteColor,
+                  fontWeight: FontWeight.w700,
+                ),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: "sc/tb",
+                    style: TextStyle(
+                      fontFamily: "Manrope",
+                      fontSize: 10.0.sp,
+                      color: color.rockBlueColor,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        )
+      ],
+    );
+  }
+}
