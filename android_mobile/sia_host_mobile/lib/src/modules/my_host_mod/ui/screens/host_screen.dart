@@ -2,12 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sia_host_mobile/src/shared/constants/colors_const.dart'
-    as color;
-import 'package:sia_host_mobile/src/shared/constants/lang_const.dart' as lang;
-import 'package:sia_host_mobile/src/shared/ui/widgets/login_widget.dart';
 
 import '../../../../core/configs/language_config/translator.dart';
+import '../../../../shared/constants/colors_const.dart';
+import '../../../../shared/constants/lang_const.dart';
+import '../../../../shared/ui/widgets/login_widget.dart';
 import '../../features/fetch_host_from_renter/states_holder/fetch_my_hoster_bloc/fetch_my_hoster_bloc.dart';
 import '../widgets/card_my_host_info_widget.dart';
 import '../widgets/card_speed_widget.dart';
@@ -31,11 +30,11 @@ class _HostScreenState extends State<HostScreen> {
           Align(
             alignment: Alignment.topLeft,
             child: Text(
-              Translator.of(context)!.translate(lang.myHostText),
+              Translator.of(context)!.translate(Lang.myHostText),
               style: TextStyle(
                 fontFamily: "Manrope",
                 fontSize: 28.0.sp,
-                color: color.whiteColor,
+                color: ColorsApp.whiteColor,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -71,7 +70,7 @@ class _HostScreenState extends State<HostScreen> {
                           style: TextStyle(
                             fontFamily: "Roboto",
                             fontSize: 20.0.sp,
-                            color: color.whiteColor,
+                            color: ColorsApp.whiteColor,
                             fontWeight: FontWeight.w600,
                           ),
                           textAlign: TextAlign.center,
@@ -80,7 +79,7 @@ class _HostScreenState extends State<HostScreen> {
                           height: 10.0.h,
                         ),
                         Material(
-                          color: color.spearmintColor,
+                          color: ColorsApp.spearmintColor,
                           borderRadius: BorderRadius.circular(12.0.r),
                           child: InkWell(
                             borderRadius: BorderRadius.circular(12.0.r),
@@ -91,11 +90,11 @@ class _HostScreenState extends State<HostScreen> {
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
                                 Translator.of(context)!
-                                    .translate(lang.retryText),
+                                    .translate(Lang.retryText),
                                 style: TextStyle(
                                   fontFamily: "Roboto",
                                   fontSize: 20.0.sp,
-                                  color: color.whiteColor,
+                                  color: ColorsApp.whiteColor,
                                   fontWeight: FontWeight.w600,
                                 ),
                                 textAlign: TextAlign.center,
@@ -112,8 +111,8 @@ class _HostScreenState extends State<HostScreen> {
                   var _myHostDataEntity = hosterBuilderState.myHostDataEntity;
 
                   return RefreshIndicator(
-                    color: color.spearmintColor,
-                    backgroundColor: color.bleachedCedarColor,
+                    color: ColorsApp.spearmintColor,
+                    backgroundColor: ColorsApp.bleachedCedarColor,
                     onRefresh: () async => context
                         .read<FetchMyHosterBloc>()
                         .add(FetchMyHostFromRenterdEvent()),
@@ -127,13 +126,12 @@ class _HostScreenState extends State<HostScreen> {
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
                               crossAxisCount: 2,
-                              crossAxisSpacing: 20,
-                              mainAxisSpacing: 20,
-                              childAspectRatio: 0.65.r,
+                              crossAxisSpacing: 20.0,
+                              childAspectRatio: 0.56,
                               children: <Widget>[
                                 Container(
                                   decoration: BoxDecoration(
-                                    color: color.tunaColor,
+                                    color: ColorsApp.tunaColor,
                                     borderRadius: BorderRadius.circular(12.0.r),
                                   ),
                                   padding: EdgeInsets.all(15.0.r),
@@ -141,7 +139,7 @@ class _HostScreenState extends State<HostScreen> {
                                     decoration: const BoxDecoration(
                                       border: Border(
                                         left: BorderSide(
-                                          color: color.spearmintColor,
+                                          color: ColorsApp.spearmintColor,
                                           width: 3.0,
                                         ),
                                       ),
@@ -158,11 +156,11 @@ class _HostScreenState extends State<HostScreen> {
                                       children: <Widget>[
                                         Text(
                                           Translator.of(context)!
-                                              .translate(lang.serverHostText),
+                                              .translate(Lang.serverHostText),
                                           style: TextStyle(
                                             fontFamily: "Manrope",
                                             fontSize: 12.0.sp,
-                                            color: color.cottonSeedColor,
+                                            color: ColorsApp.cottonSeedColor,
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),
@@ -177,7 +175,7 @@ class _HostScreenState extends State<HostScreen> {
                                           style: TextStyle(
                                             fontFamily: "Manrope",
                                             fontSize: 24.0.sp,
-                                            color: color.whiteColor,
+                                            color: ColorsApp.whiteColor,
                                             fontWeight: FontWeight.w700,
                                           ),
                                         ),
@@ -189,16 +187,16 @@ class _HostScreenState extends State<HostScreen> {
                                   direction: Axis.vertical,
                                   children: <Widget>[
                                     CardMyHostInfoWidget(
-                                      title: lang.maxDownloadText,
+                                      title: Lang.maxDownloadText,
                                       value: _myHostDataEntity.maxDownloadPrice,
                                       padding:
                                           const EdgeInsets.only(left: 10.0),
                                     ),
-                                    const SizedBox(
-                                      height: 15.0,
+                                    SizedBox(
+                                      height: 20.0.h,
                                     ),
                                     CardMyHostInfoWidget(
-                                      title: lang.maxUploadText,
+                                      title: Lang.maxUploadText,
                                       value: _myHostDataEntity.maxUploadPrice,
                                       padding:
                                           const EdgeInsets.only(left: 10.0),
@@ -214,15 +212,14 @@ class _HostScreenState extends State<HostScreen> {
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
                               crossAxisCount: 2,
-                              crossAxisSpacing: 20,
-                              mainAxisSpacing: 20,
+                              crossAxisSpacing: 20.0.w,
                               children: const <Widget>[
                                 CardSpeedWidget(
-                                  title: lang.speedDownText,
+                                  title: Lang.speedDownText,
                                   value: 9,
                                 ),
                                 CardSpeedWidget(
-                                  title: lang.uploadSpeedText,
+                                  title: Lang.uploadSpeedText,
                                   value: 5,
                                 ),
                               ],
@@ -234,28 +231,27 @@ class _HostScreenState extends State<HostScreen> {
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
                               crossAxisCount: 2,
-                              crossAxisSpacing: 20,
-                              mainAxisSpacing: 20,
-                              // childAspectRatio: 1.34.r,
+                              crossAxisSpacing: 20.0.w,
+                              mainAxisSpacing: 20.0.h,
                               children: <Widget>[
                                 CardMyHostInfoWidget(
-                                  title: lang.maxStorageText,
+                                  title: Lang.maxStorageText,
                                   value: _myHostDataEntity.maxStoragePrice,
                                   padding: const EdgeInsets.only(left: 10.0),
                                 ),
                                 CardMyHostInfoWidget(
-                                  title: lang.maxContractText,
+                                  title: Lang.maxContractText,
                                   value: _myHostDataEntity.maxContractPrice,
                                   padding: const EdgeInsets.only(left: 10.0),
                                 ),
                                 CardMyHostInfoWidget(
-                                  title: lang.minAccountText,
+                                  title: Lang.minAccountText,
                                   value: _myHostDataEntity.minAccountExpiry
                                       .toString(),
                                   padding: const EdgeInsets.only(left: 10.0),
                                 ),
                                 CardMyHostInfoWidget(
-                                  title: lang.maxRpcText,
+                                  title: Lang.maxRpcText,
                                   value: _myHostDataEntity.maxRPCPrice,
                                   padding: const EdgeInsets.only(left: 10.0),
                                 ),
@@ -270,7 +266,7 @@ class _HostScreenState extends State<HostScreen> {
 
                 return const Center(
                   child: CircularProgressIndicator(
-                    color: color.spearmintColor,
+                    color: ColorsApp.spearmintColor,
                   ),
                 );
               },

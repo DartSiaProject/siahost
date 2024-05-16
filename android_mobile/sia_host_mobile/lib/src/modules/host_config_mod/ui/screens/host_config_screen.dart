@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:sia_host_mobile/src/shared/constants/colors_const.dart'
-    as color;
-import 'package:sia_host_mobile/src/shared/constants/lang_const.dart' as lang;
-import 'package:sia_host_mobile/src/shared/constants/string_const.dart';
-import 'package:sia_host_mobile/src/shared/ui/widgets/login_widget.dart';
 
 import '../../../../core/configs/language_config/translator.dart';
+import '../../../../shared/constants/colors_const.dart';
+import '../../../../shared/constants/lang_const.dart';
+import '../../../../shared/constants/string_const.dart';
+import '../../../../shared/ui/widgets/login_widget.dart';
+import '../../../my_host_mod/features/fetch_host_from_renter/states_holder/fetch_my_hoster_bloc/fetch_my_hoster_bloc.dart';
 import '../../features/fetch_the_hoster_for_config/states_holder/fetch_the_hoster_for_config_bloc/fetch_the_hoster_for_config_bloc.dart';
 import '../../features/update_the_hoster_with_new_data/domain/entities/the_new_data_host_entity.dart';
 import '../../features/update_the_hoster_with_new_data/states_holder/reconfig_the_host_data_bloc/reconfig_the_host_data_bloc.dart';
@@ -56,11 +56,11 @@ class _HostConfigScreenState extends State<HostConfigScreen> {
           Align(
             alignment: Alignment.topLeft,
             child: Text(
-              Translator.of(context)!.translate(lang.hostConfigText),
+              Translator.of(context)!.translate(Lang.hostConfigText),
               style: TextStyle(
                 fontFamily: "Manrope",
                 fontSize: 28.0.sp,
-                color: color.whiteColor,
+                color: ColorsApp.whiteColor,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -105,7 +105,7 @@ class _HostConfigScreenState extends State<HostConfigScreen> {
                           style: TextStyle(
                             fontFamily: "Roboto",
                             fontSize: 20.0.sp,
-                            color: color.whiteColor,
+                            color: ColorsApp.whiteColor,
                             fontWeight: FontWeight.w600,
                           ),
                           textAlign: TextAlign.center,
@@ -114,7 +114,7 @@ class _HostConfigScreenState extends State<HostConfigScreen> {
                           height: 10.0.h,
                         ),
                         Material(
-                          color: color.spearmintColor,
+                          color: ColorsApp.spearmintColor,
                           borderRadius: BorderRadius.circular(12.0.r),
                           child: InkWell(
                             borderRadius: BorderRadius.circular(12.0.r),
@@ -125,11 +125,11 @@ class _HostConfigScreenState extends State<HostConfigScreen> {
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
                                 Translator.of(context)!
-                                    .translate(lang.retryText),
+                                    .translate(Lang.retryText),
                                 style: TextStyle(
                                   fontFamily: "Roboto",
                                   fontSize: 20.0.sp,
-                                  color: color.whiteColor,
+                                  color: ColorsApp.whiteColor,
                                   fontWeight: FontWeight.w600,
                                 ),
                                 textAlign: TextAlign.center,
@@ -187,14 +187,17 @@ class _HostConfigScreenState extends State<HostConfigScreen> {
                               reconfigTheHostDataListenerState.message),
                           toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.TOP,
-                          backgroundColor: color.tunaColor,
+                          backgroundColor: ColorsApp.tunaColor,
                           textColor: Colors.white,
                           fontSize: 16.0,
-                        ).whenComplete(
-                          () => context
+                        ).whenComplete(() {
+                          context
+                              .read<FetchMyHosterBloc>()
+                              .add(FetchMyHostFromRenterdEvent());
+                          context
                               .read<FetchTheHosterForConfigBloc>()
-                              .add(FetchTheHostFromRenterdForConfigEvent()),
-                        );
+                              .add(FetchTheHostFromRenterdForConfigEvent());
+                        });
                       }
 
                       if (reconfigTheHostDataListenerState
@@ -204,7 +207,7 @@ class _HostConfigScreenState extends State<HostConfigScreen> {
                               reconfigTheHostDataListenerState.message),
                           toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.TOP,
-                          backgroundColor: color.tunaColor,
+                          backgroundColor: ColorsApp.tunaColor,
                           textColor: Colors.white,
                           fontSize: 16.0,
                         );
@@ -236,7 +239,7 @@ class _HostConfigScreenState extends State<HostConfigScreen> {
                               width: 327.0.w,
                               height: 56.0.h,
                               child: Material(
-                                color: color.spearmintColor,
+                                color: ColorsApp.spearmintColor,
                                 borderRadius: BorderRadius.circular(12.0.r),
                                 child: InkWell(
                                   borderRadius: BorderRadius.circular(12.0.r),
@@ -272,15 +275,15 @@ class _HostConfigScreenState extends State<HostConfigScreen> {
                                   child: Center(
                                     child: _isLoading
                                         ? const CircularProgressIndicator(
-                                            color: color.whiteColor,
+                                            color: ColorsApp.whiteColor,
                                           )
                                         : Text(
                                             Translator.of(context)!.translate(
-                                                lang.configButtonText),
+                                                Lang.configButtonText),
                                             style: TextStyle(
                                               fontFamily: "Roboto",
                                               fontSize: 20.0.sp,
-                                              color: color.whiteColor,
+                                              color: ColorsApp.whiteColor,
                                               fontWeight: FontWeight.w700,
                                             ),
                                           ),
@@ -299,7 +302,7 @@ class _HostConfigScreenState extends State<HostConfigScreen> {
                 }
                 return const Center(
                   child: CircularProgressIndicator(
-                    color: color.spearmintColor,
+                    color: ColorsApp.spearmintColor,
                   ),
                 );
               },

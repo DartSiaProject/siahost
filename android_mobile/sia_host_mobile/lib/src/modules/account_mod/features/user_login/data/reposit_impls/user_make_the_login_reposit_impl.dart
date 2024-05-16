@@ -3,10 +3,10 @@ import 'dart:io';
 
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
+import 'package:sia_host_mobile/src/shared/extensions/string_ext.dart';
 
-import '../../../../../../shared/constants/lang_const.dart' as lang;
+import '../../../../../../shared/constants/lang_const.dart';
 import '../../../../../../shared/global/map_variable.dart' as global;
-import '../../../../../../shared/helpers/address_validation_helper.dart';
 import '../../../../../../shared/services/connection/requests/connection_request.dart';
 import '../../../../../../shared/services/security/requests/encrypter_request.dart';
 import '../../domain/entities/user_login_entity.dart';
@@ -38,9 +38,8 @@ class UserMakeTheLoginRepositImpl implements UserMakeTheLoginRepositAbst {
     required UserLoginEntity userLoginEntity,
   }) async {
     if ((await ConnectionRequest.checkConnectivity())) {
-      if (!AddressValidationHelper.hasValidAddress(
-          address: userLoginEntity.serverAddress)) {
-        return const Result.error(lang.sendGoodAddressErrorText);
+      if (!userLoginEntity.serverAddress.hasValidAddress()) {
+        return const Result.error(Lang.sendGoodAddressErrorText);
       } else {
         var _userLoginModel = UserLoginModel(
           serverAddress: userLoginEntity.serverAddress,
@@ -65,16 +64,16 @@ class UserMakeTheLoginRepositImpl implements UserMakeTheLoginRepositAbst {
             await _cacheTheUserCredentialAfterLoginAbst
                 .cacheUserCredentialAfterLogin(userPresence: "PRESENT");
 
-            return const Result.success(lang.credentialSuccessText);
+            return const Result.success(Lang.credentialSuccessText);
           } else if (_result.statusCode == HttpStatus.unauthorized) {
-            return const Result.error(lang.credentialErrorText);
+            return const Result.error(Lang.credentialErrorText);
           } else {
-            return const Result.error(lang.internalServerErrorText);
+            return const Result.error(Lang.internalServerErrorText);
           }
         });
       }
     } else {
-      return const Result.error(lang.noConnectionText);
+      return const Result.error(Lang.noConnectionText);
     }
   }
 }

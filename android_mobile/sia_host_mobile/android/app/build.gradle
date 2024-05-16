@@ -22,21 +22,24 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 android {
+
     signingConfigs {
-        profile {
-            storeFile file('sia_host_mobile_apk.jks')
-            storePassword 'siaHostMobileApk'
-            keyAlias 'siaHostMobileApk'
-            keyPassword 'siaHostMobileApk'
-        }
         release {
-        storeFile file('sia_host_mobile_bundle.jks')
-            storePassword 'siaHostMobileBundle'
-            keyAlias 'siaHostMobileBundle'
-            keyPassword 'siaHostMobileBundle'
-        }
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            storePassword keystoreProperties['storePassword']
+       }
     }
+
+
     namespace "com.sia.sia_host_mobile"
     compileSdk 34
     ndkVersion flutter.ndkVersion
@@ -60,6 +63,9 @@ android {
         targetSdk 34
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        ndk {
+            abiFilters 'arm64-v8a', 'armeabi-v7a'
+        }
         multiDexEnabled true
     }
 
@@ -71,6 +77,9 @@ android {
             renderscriptDebuggable false
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            ndk {
+                abiFilters 'arm64-v8a', 'armeabi-v7a'
+            }
         }
         debug {
             debuggable true
@@ -79,14 +88,9 @@ android {
             renderscriptOptimLevel 4
             signingConfig signingConfigs.debug
             minifyEnabled false
-        }
-        profile {
-            debuggable false
-            jniDebuggable false
-            renderscriptDebuggable false
-            signingConfig signingConfigs.profile
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            ndk {
+                abiFilters 'x86_64', 'x86'
+            }
         }
     }
     flavorDimensions 'sia_host_mobile_env'
@@ -105,7 +109,7 @@ android {
             applicationIdSuffix '.staging'
             versionNameSuffix '-staging'
             resValue 'string', 'app_name', 'Sia Host Mobile Staging'
-            signingConfig signingConfigs.profile
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         prod {
@@ -123,5 +127,6 @@ flutter {
 }
 
 dependencies {
+    implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'com.android.support:multidex:1.0.3'
 }

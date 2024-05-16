@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:sia_host_mobile/src/shared/constants/colors_const.dart'
-    as color;
-import 'package:sia_host_mobile/src/shared/constants/lang_const.dart' as lang;
-import 'package:sia_host_mobile/src/shared/constants/routes_const.dart';
-import 'package:sia_host_mobile/src/shared/constants/svgs_const.dart' as icon;
 
 import '../../../../../core/configs/language_config/translator.dart';
+import '../../../../../shared/constants/colors_const.dart';
+import '../../../../../shared/constants/lang_const.dart';
+import '../../../../../shared/constants/routes_const.dart';
+import '../../../../../shared/constants/svgs_const.dart';
 import '../../../features/fetch_the_hosts_data/domain/entities/card_of_host_entity.dart';
 
 class CardHostWidget extends StatelessWidget {
@@ -28,7 +27,7 @@ class CardHostWidget extends StatelessWidget {
       child: Container(
           margin: EdgeInsets.only(bottom: 15.0.h),
           decoration: BoxDecoration(
-              color: color.tunaColor,
+              color: ColorsApp.tunaColor,
               borderRadius: BorderRadius.circular(12.0.r),
               border: const Border.fromBorderSide(BorderSide.none)),
           child: ListTile(
@@ -36,7 +35,7 @@ class CardHostWidget extends StatelessWidget {
             leading: Container(
               margin: EdgeInsets.only(left: 15.0.w),
               decoration: BoxDecoration(
-                color: color.paleTealColor.withOpacity(0.46),
+                color: ColorsApp.paleTealColor.withOpacity(0.46),
                 borderRadius: BorderRadius.circular(12.0.r),
                 border: const Border.fromBorderSide(BorderSide.none),
               ),
@@ -47,39 +46,39 @@ class CardHostWidget extends StatelessWidget {
                   lineWidth: 4.0,
                   animation: true,
                   reverse: true,
-                  backgroundColor: color.spearmintColor.withOpacity(0.4),
+                  backgroundColor: ColorsApp.spearmintColor.withOpacity(0.4),
                   percent: host.finalScore / 10,
                   center: Text(
                     host.finalScore.toString(),
                     style: TextStyle(
                       fontFamily: "Manrope",
                       fontWeight: FontWeight.w400,
-                      color: color.whiteColor,
+                      color: ColorsApp.whiteColor,
                       fontSize: 12.0.sp,
                     ),
                   ),
-                  progressColor: color.whiteColor,
+                  progressColor: ColorsApp.whiteColor,
                   circularStrokeCap: CircularStrokeCap.round,
                 ),
               ),
             ),
             title: Text(
-              "${Translator.of(context)!.translate(lang.hostPubKeyText)} : ${host.pubKey}",
+              "${Translator.of(context)!.translate(Lang.hostPubKeyText)} : ${host.pubKey}",
               style: TextStyle(
                 fontFamily: "Manrope",
                 fontWeight: FontWeight.w600,
-                color: color.cottonSeedColor,
+                color: ColorsApp.cottonSeedColor,
                 fontSize: 12.0.sp,
               ),
               maxLines: 1,
               overflow: TextOverflow.clip,
             ),
             subtitle: Text(
-              "${Translator.of(context)!.translate(lang.totalText)} : ${host.totalStorage.toStringAsPrecision(5).substring(0, 4)} Tb",
+              "${Translator.of(context)!.translate(Lang.totalText)} : ${host.totalStorage.toStringAsPrecision(5).substring(0, 4)} Tb",
               style: TextStyle(
                 fontFamily: "Manrope",
                 fontWeight: FontWeight.w400,
-                color: color.whiteColor,
+                color: ColorsApp.whiteColor,
                 fontSize: 12.0.sp,
               ),
             ),
@@ -88,7 +87,7 @@ class CardHostWidget extends StatelessWidget {
               position: PopupMenuPosition.under,
               splashRadius: 20.0.r,
               icon: SvgPicture.asset(
-                icon.moreVerticalSvg,
+                IconSvgs.moreVerticalSvg,
                 width: 4.25.w,
                 height: 18.0.h,
               ),

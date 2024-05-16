@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sia_host_mobile/src/shared/constants/colors_const.dart'
-    as color;
-import 'package:sia_host_mobile/src/shared/constants/lang_const.dart' as lang;
 
 import '../../../../core/configs/language_config/translator.dart';
+import '../../../../shared/constants/colors_const.dart';
+import '../../../../shared/constants/lang_const.dart';
 import '../../features/fetch_and_show_one_host/domain/entities/host_info_entity.dart';
 
 class PriceInfoBarWidget extends StatelessWidget {
@@ -24,11 +23,11 @@ class PriceInfoBarWidget extends StatelessWidget {
           direction: Axis.vertical,
           children: <Widget>[
             Text(
-              Translator.of(context)!.translate(lang.uploadPriceText),
+              Translator.of(context)!.translate(Lang.uploadPriceText),
               style: TextStyle(
                 fontFamily: "Manrope",
                 fontSize: 12.0.sp,
-                color: color.rockBlueColor,
+                color: ColorsApp.rockBlueColor,
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -41,7 +40,7 @@ class PriceInfoBarWidget extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: "Manrope",
                   fontSize: 24.0.sp,
-                  color: color.whiteColor,
+                  color: ColorsApp.whiteColor,
                   fontWeight: FontWeight.w700,
                 ),
                 children: <TextSpan>[
@@ -50,7 +49,7 @@ class PriceInfoBarWidget extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: "Manrope",
                       fontSize: 10.0.sp,
-                      color: color.whiteColor,
+                      color: ColorsApp.whiteColor,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -63,11 +62,11 @@ class PriceInfoBarWidget extends StatelessWidget {
           direction: Axis.vertical,
           children: <Widget>[
             Text(
-              Translator.of(context)!.translate(lang.downloadPriceText),
+              Translator.of(context)!.translate(Lang.downloadPriceText),
               style: TextStyle(
                 fontFamily: "Manrope",
                 fontSize: 12.0.sp,
-                color: color.rockBlueColor,
+                color: ColorsApp.rockBlueColor,
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -80,7 +79,7 @@ class PriceInfoBarWidget extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: "Manrope",
                   fontSize: 24.0.sp,
-                  color: color.whiteColor,
+                  color: ColorsApp.whiteColor,
                   fontWeight: FontWeight.w700,
                 ),
                 children: <TextSpan>[
@@ -89,7 +88,7 @@ class PriceInfoBarWidget extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: "Manrope",
                       fontSize: 10.0.sp,
-                      color: color.rockBlueColor,
+                      color: ColorsApp.rockBlueColor,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -102,11 +101,11 @@ class PriceInfoBarWidget extends StatelessWidget {
           direction: Axis.vertical,
           children: <Widget>[
             Text(
-              Translator.of(context)!.translate(lang.storagePriceText),
+              Translator.of(context)!.translate(Lang.storagePriceText),
               style: TextStyle(
                 fontFamily: "Manrope",
                 fontSize: 12.0.sp,
-                color: color.rockBlueColor,
+                color: ColorsApp.rockBlueColor,
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -119,7 +118,7 @@ class PriceInfoBarWidget extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: "Manrope",
                   fontSize: 24.0.sp,
-                  color: color.whiteColor,
+                  color: ColorsApp.whiteColor,
                   fontWeight: FontWeight.w700,
                 ),
                 children: <TextSpan>[
@@ -128,7 +127,7 @@ class PriceInfoBarWidget extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: "Manrope",
                       fontSize: 10.0.sp,
-                      color: color.rockBlueColor,
+                      color: ColorsApp.rockBlueColor,
                       fontWeight: FontWeight.w400,
                     ),
                   ),

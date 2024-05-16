@@ -3,12 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:sia_host_mobile/src/shared/constants/colors_const.dart'
-    as color;
-import 'package:sia_host_mobile/src/shared/constants/lang_const.dart' as lang;
-import 'package:sia_host_mobile/src/shared/constants/svgs_const.dart' as icon;
+import '../../constants/lang_const.dart';
+import '../../constants/colors_const.dart';
+import '../../constants/svgs_const.dart';
 
-import '../../../core/configs/language_config/translator.dart';
+import '../../../core/configs/Language_config/translator.dart';
 import '../../../modules/account_mod/features/user_login/domain/entities/user_login_entity.dart';
 import '../../../modules/account_mod/features/user_login/states_holder/login_account_bloc/login_account_bloc.dart';
 
@@ -51,7 +50,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 Translator.of(context)!.translate(accountListenerState.message),
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.TOP,
-            backgroundColor: color.tunaColor,
+            backgroundColor: ColorsApp.tunaColor,
             textColor: Colors.white,
             fontSize: 16.0,
           ).whenComplete(widget.onCallback);
@@ -63,7 +62,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 Translator.of(context)!.translate(accountListenerState.message),
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.TOP,
-            backgroundColor: color.tunaColor,
+            backgroundColor: ColorsApp.tunaColor,
             textColor: Colors.white,
             fontSize: 16.0,
           );
@@ -86,7 +85,7 @@ class _LoginWidgetState extends State<LoginWidget> {
               style: TextStyle(
                 fontFamily: "Roboto",
                 fontSize: 20.0.sp,
-                color: color.whiteColor,
+                color: ColorsApp.whiteColor,
                 fontWeight: FontWeight.w600,
               ),
               textAlign: TextAlign.center,
@@ -105,11 +104,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                       padding: const EdgeInsets.all(5.0),
                       child: Text(
                         Translator.of(context)!
-                            .translate(lang.adressPublicText),
+                            .translate(Lang.adressPublicText),
                         style: TextStyle(
                           fontFamily: "Inter",
                           fontSize: 16.0.sp,
-                          color: color.whiteColor,
+                          color: ColorsApp.whiteColor,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -120,12 +119,12 @@ class _LoginWidgetState extends State<LoginWidget> {
                       controller: _adressController,
                       decoration: InputDecoration(
                         hintText:
-                            Translator.of(context)!.translate(lang.adressText),
+                            Translator.of(context)!.translate(Lang.adressText),
                       ),
                       style: TextStyle(
                         fontFamily: "Inter",
                         fontWeight: FontWeight.w400,
-                        color: color.ironsideGreyColor,
+                        color: ColorsApp.ironsideGreyColor,
                         fontSize: 16.0.sp,
                       ),
                     ),
@@ -139,11 +138,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                       padding: const EdgeInsets.all(5.0),
                       child: Text(
                         Translator.of(context)!
-                            .translate(lang.renterdPasswordText),
+                            .translate(Lang.renterdPasswordText),
                         style: TextStyle(
                           fontFamily: "Inter",
                           fontSize: 16.0.sp,
-                          color: color.whiteColor,
+                          color: ColorsApp.whiteColor,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -155,7 +154,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                       controller: _passwordController,
                       decoration: InputDecoration(
                         hintText: Translator.of(context)!
-                            .translate(lang.passwordText),
+                            .translate(Lang.passwordText),
                         suffixIcon: IconButton(
                           splashRadius: 23.0.r,
                           onPressed: () {
@@ -164,16 +163,18 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     hideThePassWord: !_passwordHidden));
                             BlocProvider.of<LoginAccountBloc>(context);
                           },
-                          color: color.whiteColor,
+                          color: ColorsApp.whiteColor,
                           icon: SvgPicture.asset(
-                            _passwordHidden ? icon.eyeOnSvg : icon.eyeOffSvg,
+                            _passwordHidden
+                                ? IconSvgs.eyeOnSvg
+                                : IconSvgs.eyeOffSvg,
                           ),
                         ),
                       ),
                       style: TextStyle(
                         fontFamily: "Inter",
                         fontWeight: FontWeight.w400,
-                        color: color.ironsideGreyColor,
+                        color: ColorsApp.ironsideGreyColor,
                         fontSize: 16.0.sp,
                       ),
                     ),
@@ -186,7 +187,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                   width: double.infinity,
                   height: 58.0.h,
                   child: Material(
-                    color: color.spearmintColor,
+                    color: ColorsApp.spearmintColor,
                     borderRadius: BorderRadius.circular(12.0.r),
                     child: InkWell(
                       borderRadius: BorderRadius.circular(12.0.r),
@@ -195,10 +196,10 @@ class _LoginWidgetState extends State<LoginWidget> {
                             _passwordController.text.isEmpty) {
                           Fluttertoast.showToast(
                             msg: Translator.of(context)!
-                                .translate(lang.fillFieldsText),
+                                .translate(Lang.fillFieldsText),
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.TOP,
-                            backgroundColor: color.tunaColor,
+                            backgroundColor: ColorsApp.tunaColor,
                             textColor: Colors.white,
                             fontSize: 16.0,
                           );
@@ -215,7 +216,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                       child: Center(
                         child: _isLoading
                             ? const CircularProgressIndicator(
-                                color: color.whiteColor,
+                                color: ColorsApp.whiteColor,
                               )
                             : Text(
                                 Translator.of(context)!
@@ -223,7 +224,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 style: TextStyle(
                                   fontFamily: "Roboto",
                                   fontSize: 20.0.sp,
-                                  color: color.whiteColor,
+                                  color: ColorsApp.whiteColor,
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),

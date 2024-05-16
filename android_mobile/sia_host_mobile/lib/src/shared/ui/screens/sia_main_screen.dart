@@ -1,16 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:sia_host_mobile/src/shared/constants/colors_const.dart'
-    as color;
-import 'package:sia_host_mobile/src/shared/constants/string_const.dart';
-import 'package:sia_host_mobile/src/shared/constants/svgs_const.dart' as icon;
-import 'package:sia_host_mobile/src/shared/helpers/tab_router_helper.dart';
 
 import '../../../core/configs/language_config/translator.dart';
 import '../../../core/router/auto_routes.dart';
+import '../../constants/colors_const.dart';
+import '../../constants/string_const.dart';
+import '../../constants/svgs_const.dart';
+import '../../helpers/tab_router_helper.dart';
 
 @RoutePage()
 class SiaMainScreen extends StatefulWidget {
@@ -32,9 +32,13 @@ class _SiaMainScreenState extends State<SiaMainScreen> {
       ],
       builder: (context, child) {
         var _tabsRouter = AutoTabsRouter.of(context);
-        return WillPopScope(
-          onWillPop: () async =>
-              TabRouterHelper.siaBackSubScreen(_tabsRouter, context),
+        return PopScope(
+          canPop: false,
+          onPopInvoked: (value) async {
+            if (TabRouterHelper.siaBackSubScreen(_tabsRouter, context)) {
+              await SystemNavigator.pop();
+            }
+          },
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
@@ -44,14 +48,14 @@ class _SiaMainScreenState extends State<SiaMainScreen> {
                   padding: const EdgeInsets.all(15.0),
                   child: Material(
                     borderRadius: BorderRadius.circular(5.0.r),
-                    color: color.tunaColor,
+                    color: ColorsApp.tunaColor,
                     child: InkWell(
                       borderRadius: BorderRadius.circular(5.0.r),
                       onTap: () {},
                       child: Padding(
                         padding: const EdgeInsets.all(3.0),
                         child: SvgPicture.asset(
-                          icon.smsNotifsSvg,
+                          IconSvgs.smsNotifsSvg,
                           width: 24.0.w,
                           height: 24.0.h,
                         ),
@@ -63,7 +67,7 @@ class _SiaMainScreenState extends State<SiaMainScreen> {
             ),
             body: child,
             bottomNavigationBar: BottomNavyBar(
-              backgroundColor: color.darkJungleGreenColor,
+              backgroundColor: ColorsApp.darkJungleGreenColor,
               selectedIndex: _tabsRouter.activeIndex,
               showElevation: true,
               onItemSelected: (pageIndex) =>
@@ -77,8 +81,8 @@ class _SiaMainScreenState extends State<SiaMainScreen> {
                     height: 24.0.h,
                     colorFilter: ColorFilter.mode(
                       _tabsRouter.activeIndex == navItemIndex
-                          ? color.spearmintColor
-                          : color.mistBlueColor,
+                          ? ColorsApp.spearmintColor
+                          : ColorsApp.mistBlueColor,
                       BlendMode.srcIn,
                     ),
                   ),
@@ -88,11 +92,11 @@ class _SiaMainScreenState extends State<SiaMainScreen> {
                     style: TextStyle(
                       fontFamily: "Poppins",
                       fontSize: 12.0.sp,
-                      color: color.spearmintColor,
+                      color: ColorsApp.spearmintColor,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  activeColor: color.paleTealColor.withOpacity(0.46),
+                  activeColor: ColorsApp.paleTealColor.withOpacity(0.46),
                 ),
               ),
             ),
