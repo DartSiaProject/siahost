@@ -4,12 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:sia_host_mobile/src/shared/constants/colors_const.dart'
-    as color;
-import 'package:sia_host_mobile/src/shared/constants/lang_const.dart' as lang;
-import 'package:sia_host_mobile/src/shared/constants/svgs_const.dart' as icon;
 
 import '../../../../core/configs/language_config/translator.dart';
+import '../../../../shared/constants/colors_const.dart';
+import '../../../../shared/constants/lang_const.dart';
+import '../../../../shared/constants/svgs_const.dart';
 import '../../features/fetch_and_show_one_host/states_holder/fetch_one_host_data_and_show_it_bloc/fetch_one_host_data_and_show_it_bloc.dart';
 import '../widgets/infos_list_widget.dart';
 import '../widgets/price_info_bar_widget.dart';
@@ -51,11 +50,11 @@ class _HostInfoScreenState extends State<HostInfoScreen> {
                   Align(
                     alignment: Alignment.topLeft,
                     child: Text(
-                      Translator.of(context)!.translate(lang.hostInfoText),
+                      Translator.of(context)!.translate(Lang.hostInfoText),
                       style: TextStyle(
                         fontFamily: "Manrope",
                         fontSize: 28.0.sp,
-                        color: color.whiteColor,
+                        color: ColorsApp.whiteColor,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -65,7 +64,7 @@ class _HostInfoScreenState extends State<HostInfoScreen> {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                      color: color.paleTealColor.withOpacity(0.46),
+                      color: ColorsApp.paleTealColor.withOpacity(0.46),
                       shape: BoxShape.circle,
                     ),
                     child: Padding(
@@ -75,18 +74,19 @@ class _HostInfoScreenState extends State<HostInfoScreen> {
                         lineWidth: 8.0,
                         animation: true,
                         reverse: true,
-                        backgroundColor: color.spearmintColor.withOpacity(0.4),
+                        backgroundColor:
+                            ColorsApp.spearmintColor.withOpacity(0.4),
                         percent: _hostInfoEntity.finalScore / 10,
                         center: Text(
                           _hostInfoEntity.finalScore.toString(),
                           style: TextStyle(
                             fontFamily: "Manrope",
                             fontWeight: FontWeight.w400,
-                            color: color.whiteColor,
+                            color: ColorsApp.whiteColor,
                             fontSize: 30.0.sp,
                           ),
                         ),
-                        progressColor: color.whiteColor,
+                        progressColor: ColorsApp.whiteColor,
                         circularStrokeCap: CircularStrokeCap.round,
                       ),
                     ),
@@ -101,7 +101,7 @@ class _HostInfoScreenState extends State<HostInfoScreen> {
                       style: TextStyle(
                         fontFamily: "DmSans",
                         fontSize: 17.0.sp,
-                        color: color.lightGreyColor,
+                        color: ColorsApp.lightGreyColor,
                         fontWeight: FontWeight.w700,
                         overflow: TextOverflow.clip,
                       ),
@@ -116,7 +116,7 @@ class _HostInfoScreenState extends State<HostInfoScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      SvgPicture.asset(icon.locationSvg),
+                      SvgPicture.asset(IconSvgs.locationSvg),
                       SizedBox(
                         width: 5.0.w,
                       ),
@@ -125,7 +125,7 @@ class _HostInfoScreenState extends State<HostInfoScreen> {
                         style: TextStyle(
                           fontFamily: "DmSans",
                           fontSize: 17.0.sp,
-                          color: color.paleTealColor,
+                          color: ColorsApp.paleTealColor,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -151,7 +151,7 @@ class _HostInfoScreenState extends State<HostInfoScreen> {
           );
         }
         return const Center(
-          child: CircularProgressIndicator(color: color.spearmintColor),
+          child: CircularProgressIndicator(color: ColorsApp.spearmintColor),
         );
       },
     );

@@ -2,12 +2,11 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sia_host_mobile/src/shared/constants/colors_const.dart'
-    as color;
-import 'package:sia_host_mobile/src/shared/constants/lang_const.dart' as lang;
-import 'package:sia_host_mobile/src/shared/constants/svgs_const.dart' as icon;
 
 import '../../../../../core/configs/language_config/translator.dart';
+import '../../../../../shared/constants/colors_const.dart';
+import '../../../../../shared/constants/lang_const.dart';
+import '../../../../../shared/constants/svgs_const.dart';
 
 class BarChartNetwokingWidget extends StatefulWidget {
   final List<int> activeContractCount;
@@ -22,7 +21,7 @@ class BarChartNetwokingWidgetState extends State<BarChartNetwokingWidget> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: color.tunaColor,
+      color: ColorsApp.tunaColor,
       borderRadius: BorderRadius.circular(12.0.r),
       child: AspectRatio(
         aspectRatio: 1,
@@ -34,10 +33,10 @@ class BarChartNetwokingWidgetState extends State<BarChartNetwokingWidget> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Text(
-                    Translator.of(context)!.translate(lang.dailytext),
+                    Translator.of(context)!.translate(Lang.dailytext),
                     style: TextStyle(
                       fontFamily: "DmSans",
-                      color: color.rockBlueColor,
+                      color: ColorsApp.rockBlueColor,
                       fontSize: 14.0.sp,
                       fontWeight: FontWeight.w600,
                     ),
@@ -49,7 +48,7 @@ class BarChartNetwokingWidgetState extends State<BarChartNetwokingWidget> {
                     widget.activeContractCount.length.toString(),
                     style: TextStyle(
                       fontFamily: "DmSans",
-                      color: color.whiteColor,
+                      color: ColorsApp.whiteColor,
                       fontSize: 34.0.sp,
                       fontWeight: FontWeight.w700,
                     ),
@@ -62,7 +61,7 @@ class BarChartNetwokingWidgetState extends State<BarChartNetwokingWidget> {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       SvgPicture.asset(
-                        icon.checkTrackSvg,
+                        IconSvgs.checkTrackSvg,
                         width: 15.0.w,
                         height: 15.0.h,
                       ),
@@ -70,10 +69,10 @@ class BarChartNetwokingWidgetState extends State<BarChartNetwokingWidget> {
                         width: 4.0.w,
                       ),
                       Text(
-                        Translator.of(context)!.translate(lang.trackText),
+                        Translator.of(context)!.translate(Lang.trackText),
                         style: TextStyle(
                           fontFamily: "DmSans",
-                          color: color.caribbeanGreenColor,
+                          color: ColorsApp.caribbeanGreenColor,
                           fontSize: 16.0.sp,
                           fontWeight: FontWeight.w700,
                         ),
@@ -107,7 +106,7 @@ class BarChartNetwokingWidgetState extends State<BarChartNetwokingWidget> {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       SvgPicture.asset(
-                        icon.arrowDropUpSvg,
+                        IconSvgs.arrowDropUpSvg,
                         width: 25.0.w,
                         height: 25.0.h,
                       ),
@@ -116,7 +115,7 @@ class BarChartNetwokingWidgetState extends State<BarChartNetwokingWidget> {
                         style: TextStyle(
                           fontFamily: "DmSans",
                           fontSize: 12.0.sp,
-                          color: color.caribbeanGreenColor,
+                          color: ColorsApp.caribbeanGreenColor,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -139,15 +138,15 @@ class BarChartNetwokingWidgetState extends State<BarChartNetwokingWidget> {
       barRods: [
         BarChartRodData(
           toY: y,
-          color: color.spearmintColor,
+          color: ColorsApp.spearmintColor,
           width: 18.0.w,
           borderSide: const BorderSide(
-            color: color.spearmintColor,
+            color: ColorsApp.spearmintColor,
           ),
           backDrawRodData: BackgroundBarChartRodData(
             show: true,
             toY: 25,
-            color: color.blueChalkColor,
+            color: ColorsApp.blueChalkColor,
           ),
         ),
       ],

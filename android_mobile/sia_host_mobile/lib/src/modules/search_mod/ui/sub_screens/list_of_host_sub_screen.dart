@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:sia_host_mobile/src/shared/constants/colors_const.dart'
-    as color;
-import 'package:sia_host_mobile/src/shared/constants/lang_const.dart' as lang;
 
 import '../../../../core/configs/language_config/translator.dart';
+import '../../../../shared/constants/colors_const.dart';
+import '../../../../shared/constants/lang_const.dart';
 import '../../features/fetch_the_hosts_data/domain/entities/card_of_host_entity.dart';
 import '../../features/fetch_the_hosts_data/states_holder/fetch_all_hosts_data_bloc/fetch_all_hosts_data_bloc.dart';
 import '../widgets/card_widgets/card_host_widget.dart';
@@ -48,11 +47,11 @@ class _ListOfHostScreenState extends State<ListOfHostScreen> {
             Align(
               alignment: Alignment.topLeft,
               child: Text(
-                Translator.of(context)!.translate(lang.searchHostText),
+                Translator.of(context)!.translate(Lang.searchHostText),
                 style: TextStyle(
                   fontFamily: "Manrope",
                   fontSize: 28.0.sp,
-                  color: color.whiteColor,
+                  color: ColorsApp.whiteColor,
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -69,11 +68,11 @@ class _ListOfHostScreenState extends State<ListOfHostScreen> {
                   Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Text(
-                      Translator.of(context)!.translate(lang.siaHostText),
+                      Translator.of(context)!.translate(Lang.siaHostText),
                       style: TextStyle(
                         fontFamily: "Inter",
                         fontSize: 16.0.sp,
-                        color: color.whiteColor,
+                        color: ColorsApp.whiteColor,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
@@ -87,12 +86,12 @@ class _ListOfHostScreenState extends State<ListOfHostScreen> {
                     controller: _reaSearchController,
                     decoration: InputDecoration(
                       hintText:
-                          Translator.of(context)!.translate(lang.hostKeyText),
+                          Translator.of(context)!.translate(Lang.hostKeyText),
                     ),
                     style: TextStyle(
                       fontFamily: "Inter",
                       fontWeight: FontWeight.w400,
-                      color: color.ironsideGreyColor,
+                      color: ColorsApp.ironsideGreyColor,
                       fontSize: 16.0.sp,
                     ),
                   ),
@@ -110,7 +109,7 @@ class _ListOfHostScreenState extends State<ListOfHostScreen> {
                           .translate(fetchAllHostsDataListenerState.message),
                       toastLength: Toast.LENGTH_SHORT,
                       gravity: ToastGravity.TOP,
-                      backgroundColor: color.tunaColor,
+                      backgroundColor: ColorsApp.tunaColor,
                       textColor: Colors.white,
                       fontSize: 16.0,
                     );
@@ -133,7 +132,7 @@ class _ListOfHostScreenState extends State<ListOfHostScreen> {
                             style: TextStyle(
                               fontFamily: "Roboto",
                               fontSize: 20.0.sp,
-                              color: color.whiteColor,
+                              color: ColorsApp.whiteColor,
                               fontWeight: FontWeight.w600,
                             ),
                             textAlign: TextAlign.center,
@@ -142,7 +141,7 @@ class _ListOfHostScreenState extends State<ListOfHostScreen> {
                             height: 10.0.h,
                           ),
                           Material(
-                            color: color.spearmintColor,
+                            color: ColorsApp.spearmintColor,
                             borderRadius: BorderRadius.circular(12.0.r),
                             child: InkWell(
                               borderRadius: BorderRadius.circular(12.0.r),
@@ -153,11 +152,11 @@ class _ListOfHostScreenState extends State<ListOfHostScreen> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
                                   Translator.of(context)!
-                                      .translate(lang.retryText),
+                                      .translate(Lang.retryText),
                                   style: TextStyle(
                                     fontFamily: "Roboto",
                                     fontSize: 20.0.sp,
-                                    color: color.whiteColor,
+                                    color: ColorsApp.whiteColor,
                                     fontWeight: FontWeight.w600,
                                   ),
                                   textAlign: TextAlign.center,
@@ -173,11 +172,11 @@ class _ListOfHostScreenState extends State<ListOfHostScreen> {
                   return _hostDataList.isEmpty
                       ? const Center(
                           child: CircularProgressIndicator(
-                              color: color.spearmintColor),
+                              color: ColorsApp.spearmintColor),
                         )
                       : RefreshIndicator(
-                          color: color.spearmintColor,
-                          backgroundColor: color.bleachedCedarColor,
+                          color: ColorsApp.spearmintColor,
+                          backgroundColor: ColorsApp.bleachedCedarColor,
                           onRefresh: () async {
                             context
                                 .read<FetchAllHostsDataBloc>()

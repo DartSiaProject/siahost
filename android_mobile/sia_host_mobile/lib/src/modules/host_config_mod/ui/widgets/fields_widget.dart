@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sia_host_mobile/src/shared/constants/colors_const.dart'
-    as color;
-import 'package:sia_host_mobile/src/shared/constants/lang_const.dart' as lang;
 
 import '../../../../core/configs/language_config/translator.dart';
+import '../../../../shared/constants/colors_const.dart';
+import '../../../../shared/constants/lang_const.dart';
 
 class FieldsWidget extends StatelessWidget {
   final TextEditingController maxDownloadController;
@@ -36,11 +35,11 @@ class FieldsWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Text(
-                Translator.of(context)!.translate(lang.maxDownloadFieldText),
+                Translator.of(context)!.translate(Lang.maxDownloadFieldText),
                 style: TextStyle(
                   fontFamily: "Inter",
                   fontSize: 16.0.sp,
-                  color: color.whiteColor,
+                  color: ColorsApp.whiteColor,
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -53,12 +52,12 @@ class FieldsWidget extends StatelessWidget {
               decoration: InputDecoration(
                 counterText: "",
                 hintText: Translator.of(context)!
-                    .translate(lang.maxDownloadFieldText),
+                    .translate(Lang.maxDownloadFieldText),
               ),
               style: TextStyle(
                 fontFamily: "Inter",
                 fontWeight: FontWeight.w400,
-                color: color.ironsideGreyColor,
+                color: ColorsApp.ironsideGreyColor,
                 fontSize: 16.0.sp,
               ),
             ),
@@ -74,11 +73,11 @@ class FieldsWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Text(
-                Translator.of(context)!.translate(lang.maxUploadFieldText),
+                Translator.of(context)!.translate(Lang.maxUploadFieldText),
                 style: TextStyle(
                   fontFamily: "Inter",
                   fontSize: 16.0.sp,
-                  color: color.whiteColor,
+                  color: ColorsApp.whiteColor,
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -91,12 +90,12 @@ class FieldsWidget extends StatelessWidget {
               decoration: InputDecoration(
                 counterText: "",
                 hintText:
-                    Translator.of(context)!.translate(lang.maxUploadFieldText),
+                    Translator.of(context)!.translate(Lang.maxUploadFieldText),
               ),
               style: TextStyle(
                 fontFamily: "Inter",
                 fontWeight: FontWeight.w400,
-                color: color.ironsideGreyColor,
+                color: ColorsApp.ironsideGreyColor,
                 fontSize: 16.0.sp,
               ),
             ),
@@ -112,11 +111,11 @@ class FieldsWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Text(
-                Translator.of(context)!.translate(lang.maxStorageFieldText),
+                Translator.of(context)!.translate(Lang.maxStorageFieldText),
                 style: TextStyle(
                   fontFamily: "Inter",
                   fontSize: 16.0.sp,
-                  color: color.whiteColor,
+                  color: ColorsApp.whiteColor,
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -129,12 +128,12 @@ class FieldsWidget extends StatelessWidget {
               decoration: InputDecoration(
                 counterText: "",
                 hintText:
-                    Translator.of(context)!.translate(lang.maxStorageFieldText),
+                    Translator.of(context)!.translate(Lang.maxStorageFieldText),
               ),
               style: TextStyle(
                 fontFamily: "Inter",
                 fontWeight: FontWeight.w400,
-                color: color.ironsideGreyColor,
+                color: ColorsApp.ironsideGreyColor,
                 fontSize: 16.0.sp,
               ),
             ),
@@ -150,11 +149,11 @@ class FieldsWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Text(
-                Translator.of(context)!.translate(lang.maxContractFieldText),
+                Translator.of(context)!.translate(Lang.maxContractFieldText),
                 style: TextStyle(
                   fontFamily: "Inter",
                   fontSize: 16.0.sp,
-                  color: color.whiteColor,
+                  color: ColorsApp.whiteColor,
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -167,12 +166,12 @@ class FieldsWidget extends StatelessWidget {
               decoration: InputDecoration(
                 counterText: "",
                 hintText: Translator.of(context)!
-                    .translate(lang.maxContractFieldText),
+                    .translate(Lang.maxContractFieldText),
               ),
               style: TextStyle(
                 fontFamily: "Inter",
                 fontWeight: FontWeight.w400,
-                color: color.ironsideGreyColor,
+                color: ColorsApp.ironsideGreyColor,
                 fontSize: 16.0.sp,
               ),
             ),
@@ -188,11 +187,11 @@ class FieldsWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Text(
-                Translator.of(context)!.translate(lang.minAccountFieldText),
+                Translator.of(context)!.translate(Lang.minAccountFieldText),
                 style: TextStyle(
                   fontFamily: "Inter",
                   fontSize: 16.0.sp,
-                  color: color.whiteColor,
+                  color: ColorsApp.whiteColor,
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -205,12 +204,12 @@ class FieldsWidget extends StatelessWidget {
               decoration: InputDecoration(
                 counterText: "",
                 hintText:
-                    Translator.of(context)!.translate(lang.minAccountFieldText),
+                    Translator.of(context)!.translate(Lang.minAccountFieldText),
               ),
               style: TextStyle(
                 fontFamily: "Inter",
                 fontWeight: FontWeight.w400,
-                color: color.ironsideGreyColor,
+                color: ColorsApp.ironsideGreyColor,
                 fontSize: 16.0.sp,
               ),
             ),
@@ -226,11 +225,11 @@ class FieldsWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Text(
-                Translator.of(context)!.translate(lang.maxRpcFieldText),
+                Translator.of(context)!.translate(Lang.maxRpcFieldText),
                 style: TextStyle(
                   fontFamily: "Inter",
                   fontSize: 16.0.sp,
-                  color: color.whiteColor,
+                  color: ColorsApp.whiteColor,
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -243,12 +242,12 @@ class FieldsWidget extends StatelessWidget {
               decoration: InputDecoration(
                 counterText: "",
                 hintText:
-                    Translator.of(context)!.translate(lang.maxRpcFieldText),
+                    Translator.of(context)!.translate(Lang.maxRpcFieldText),
               ),
               style: TextStyle(
                 fontFamily: "Inter",
                 fontWeight: FontWeight.w400,
-                color: color.ironsideGreyColor,
+                color: ColorsApp.ironsideGreyColor,
                 fontSize: 16.0.sp,
               ),
             ),

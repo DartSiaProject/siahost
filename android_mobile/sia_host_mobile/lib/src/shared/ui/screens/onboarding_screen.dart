@@ -1,15 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sia_host_mobile/src/shared/constants/colors_const.dart'
-    as color;
-import 'package:sia_host_mobile/src/shared/constants/lang_const.dart' as lang;
-import 'package:sia_host_mobile/src/shared/constants/routes_const.dart';
-import 'package:sia_host_mobile/src/shared/constants/string_const.dart';
-import 'package:sia_host_mobile/src/shared/ui/sub_pages/onboarding_dynamic_sub_page.dart';
+import 'package:sia_host_mobile/src/core/configs/language_config/translator.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../../core/configs/language_config/translator.dart';
+import '../../constants/colors_const.dart';
+import '../../constants/lang_const.dart';
+import '../../constants/routes_const.dart';
+import '../../constants/string_const.dart';
+import '../sub_pages/onboarding_dynamic_sub_page.dart';
 
 @RoutePage()
 class OnboardingScreen extends StatefulWidget {
@@ -50,9 +49,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               effect: WormEffect(
                 dotWidth: 16.0.w,
                 dotHeight: 16.0.h,
-                dotColor: color.neptuneColor,
+                dotColor: ColorsApp.neptuneColor,
                 spacing: 10.0.w,
-                activeDotColor: color.spearmintColor,
+                activeDotColor: ColorsApp.spearmintColor,
               ),
             ),
             Padding(
@@ -64,7 +63,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 width: 208.0.w,
                 height: 58.0.h,
                 child: Material(
-                  color: color.spearmintColor,
+                  color: ColorsApp.spearmintColor,
                   borderRadius: BorderRadius.circular(12.0.r),
                   child: InkWell(
                     borderRadius: BorderRadius.circular(12.0.r),
@@ -73,11 +72,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     },
                     child: Center(
                       child: Text(
-                        Translator.of(context)!.translate(lang.startText),
+                        Translator.of(context)!.translate(Lang.startText),
                         style: TextStyle(
                           fontFamily: "Roboto",
                           fontSize: 21.0.sp,
-                          color: color.whiteColor,
+                          color: ColorsApp.whiteColor,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
