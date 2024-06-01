@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sia_host_mobile/src/modules/files_mod/features/fetch_all_files/states_holder/files_bloc/files_bloc.dart';
 
 import 'src/core/configs/device_config/device_size.dart';
 import 'src/core/configs/injectors_config/injector.dart';
@@ -52,6 +53,9 @@ void main() async {
       ),
       BlocProvider(
         create: (context) => sl<ReconfigTheHostDataBloc>(),
+      ),
+      BlocProvider(
+        create: (context) => sl<FilesBloc>(),
       ),
     ],
     child: SiaHostMobile(),

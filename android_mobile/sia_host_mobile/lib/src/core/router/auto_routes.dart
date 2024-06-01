@@ -1,5 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:sia_host_mobile/src/modules/files_mod/ui/screens/files_screen.dart';
+import 'package:sia_host_mobile/src/modules/files_mod/ui/sub_screens/files_list_categorised_sub_screen.dart';
+import 'package:sia_host_mobile/src/modules/files_mod/ui/sub_screens/files_list_sub_screen.dart';
 
 import '../../modules/account_mod/ui/screens/login_account_screen.dart';
 import '../../modules/account_mod/ui/screens/main_screen.dart';
@@ -42,22 +45,37 @@ class AutoRoutes extends _$AutoRoutes {
                 page: HomeRoute.page,
                 initial: true,
               ),
-              AutoRoute(page: SearchRoute.page, children: <AutoRoute>[
-                AutoRoute(
-                  path: RoutePath.listOfHostSubPath,
-                  page: ListOfHostRoute.page,
-                  initial: true,
-                ),
-                AutoRoute(
-                  path: "${RoutePath.hostInfoSubPath}/:hostPubKey",
-                  page: HostInfoRoute.page,
-                ),
-              ]),
+              AutoRoute(
+                page: SearchRoute.page,
+                children: <AutoRoute>[
+                  AutoRoute(
+                    page: ListOfHostRoute.page,
+                    initial: true,
+                  ),
+                  AutoRoute(
+                    path: "${RoutePath.hostInfoSubPath}/:hostPubKey",
+                    page: HostInfoRoute.page,
+                  ),
+                ],
+              ),
               AutoRoute(
                 page: HostRoute.page,
               ),
               AutoRoute(
                 page: HostConfigRoute.page,
+              ),
+              AutoRoute(
+                page: FilesRoute.page,
+                children: <AutoRoute>[
+                  AutoRoute(
+                    page: FilesListCategorisedRoute.page,
+                    initial: true,
+                  ),
+                  AutoRoute(
+                    path: RoutePath.filesListSubPath,
+                    page: FilesListRoute.page,
+                  ),
+                ],
               ),
             ]),
       ];

@@ -82,6 +82,8 @@
   "request_error_try_again_text": "Request error, Try again!",
   "no_content_text": "No content",
   "internal_server_error_text": "Server error",
-  "host_not_exist_text": "This host does not exist"
+  "host_not_exist_text": "This host does not exist",
+  "files_text":"Files",
+  "buckets_file_text":"My Buckets"
   
 }

@@ -44,6 +44,7 @@ class Init {
         Pngs.fileSynchronizationPng,
         Pngs.serverStatusPng,
         Pngs.secureServerPng,
+        Pngs.folderPng,
       ];
       for (var pngImage in pngs) {
         await precacheImage(Image.asset(pngImage).image, context!);

@@ -54,9 +54,18 @@ const bottomNavigatorItems = <Map<String, dynamic>>[
     "icon": IconSvgs.settingsSvg,
     "label": Lang.configText,
   },
+  {
+    "icon": IconSvgs.filesSvg,
+    "label": Lang.filesText,
+  },
 ];
 
 const zeroCompletion_1 = "00000000000000000";
 const zeroCompletion_2 = "0000000000000000";
 const urlPattern =
     r"(https?|http)://([-A-Z0-9.]+)(/[-A-Z0-9+&@#/%=~_|!:,.;]*)?(\?[A-Z0-9+&@#/%=~_|!:‌​,.;]*)?";
+
+const bucketsListItems = <Map<String, dynamic>>[
+  {"image": Pngs.folderPng, "label": "Bucket 1", "files": []},
+  {"image": Pngs.folderPng, "label": "Bucket 2", "files": []},
+];

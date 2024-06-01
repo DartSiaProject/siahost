@@ -4,6 +4,9 @@ class RoutePath {
   static const loginAccountPath = "/loginAccountRoute";
   static const siaMainPath = "/siaMainRoute";
 
-  static const listOfHostSubPath = "listOfHostRoute";
-  static const hostInfoSubPath = "hostInfoRoute";
+  static const listOfHostSubPath = "listOfHostSubRoute";
+  static const hostInfoSubPath = "hostInfoSubRoute";
+
+  static const filesListCategorisedSubPath = "filesListCategorisedSubRoute";
+  static const filesListSubPath = "filesListSubRoute";
 }

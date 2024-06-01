@@ -84,4 +84,6 @@ class Lang {
   static const noContentText = "no_content_text";
   static const internalServerErrorText = "internal_server_error_text";
   static const hostNotExistText = "host_not_exist_text";
+  static const filesText = "files_text";
+  static const bucketsFileText = "buckets_file_text";
 }

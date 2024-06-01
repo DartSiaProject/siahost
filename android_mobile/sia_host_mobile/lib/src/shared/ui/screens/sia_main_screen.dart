@@ -29,6 +29,7 @@ class _SiaMainScreenState extends State<SiaMainScreen> {
         SearchRoute(),
         HostRoute(),
         HostConfigRoute(),
+        FilesRoute(),
       ],
       builder: (context, child) {
         var _tabsRouter = AutoTabsRouter.of(context);
