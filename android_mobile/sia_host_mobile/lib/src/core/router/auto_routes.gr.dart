@@ -15,6 +15,24 @@ abstract class _$AutoRoutes extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    FilesListCategorisedRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const FilesListCategorisedScreen(),
+      );
+    },
+    FilesListRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const FilesListScreen(),
+      );
+    },
+    FilesRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const FilesScreen(),
+      );
+    },
     HomeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -83,6 +101,48 @@ abstract class _$AutoRoutes extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [FilesListCategorisedScreen]
+class FilesListCategorisedRoute extends PageRouteInfo<void> {
+  const FilesListCategorisedRoute({List<PageRouteInfo>? children})
+      : super(
+          FilesListCategorisedRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'FilesListCategorisedRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [FilesListScreen]
+class FilesListRoute extends PageRouteInfo<void> {
+  const FilesListRoute({List<PageRouteInfo>? children})
+      : super(
+          FilesListRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'FilesListRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [FilesScreen]
+class FilesRoute extends PageRouteInfo<void> {
+  const FilesRoute({List<PageRouteInfo>? children})
+      : super(
+          FilesRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'FilesRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

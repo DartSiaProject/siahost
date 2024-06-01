@@ -4,4 +4,5 @@ class Pngs {
       "assets/images/png/file_synchronization.png";
   static const serverStatusPng = "assets/images/png/server_status.png";
   static const secureServerPng = "assets/images/png/secure_server.png";
+  static const folderPng = "assets/images/png/folder.png";
 }
