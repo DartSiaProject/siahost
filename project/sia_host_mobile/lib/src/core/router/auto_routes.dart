@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:sia_host_mobile/src/modules/files_mod/ui/screens/files_screen.dart';
-import 'package:sia_host_mobile/src/modules/files_mod/ui/sub_screens/files_list_categorised_sub_screen.dart';
-import 'package:sia_host_mobile/src/modules/files_mod/ui/sub_screens/files_list_sub_screen.dart';
 
 import '../../modules/account_mod/ui/screens/login_account_screen.dart';
 import '../../modules/account_mod/ui/screens/main_screen.dart';
+import '../../modules/files_mod/ui/screens/files_screen.dart';
+import '../../modules/files_mod/ui/sub_screens/list_of_bucket_sub_screen.dart';
+import '../../modules/files_mod/ui/sub_screens/list_of_file_fetched_from_bucket_sub_screen.dart';
 import '../../modules/home_mod/ui/screens/home_screen.dart';
 import '../../modules/host_config_mod/ui/screens/host_config_screen.dart';
 import '../../modules/my_host_mod/ui/screens/host_screen.dart';
@@ -68,12 +68,13 @@ class AutoRoutes extends _$AutoRoutes {
                 page: FilesRoute.page,
                 children: <AutoRoute>[
                   AutoRoute(
-                    page: FilesListCategorisedRoute.page,
+                    page: ListOfBucketRoute.page,
                     initial: true,
                   ),
                   AutoRoute(
-                    path: RoutePath.filesListSubPath,
-                    page: FilesListRoute.page,
+                    path:
+                        "${RoutePath.listOfFileFetchedFromBucketSubPath}/:bucketName",
+                    page: ListOfFileFetchedFromBucketRoute.page,
                   ),
                 ],
               ),

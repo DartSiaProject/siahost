@@ -1,1 +1,1 @@
-const splashDuration = 5;
+const splashDuration = 1;

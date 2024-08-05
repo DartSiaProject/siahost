@@ -45,6 +45,9 @@ class Init {
         Pngs.serverStatusPng,
         Pngs.secureServerPng,
         Pngs.folderPng,
+        Pngs.pngFilePng,
+        Pngs.jpgFilePng,
+        Pngs.pdfFilePng,
       ];
       for (var pngImage in pngs) {
         await precacheImage(Image.asset(pngImage).image, context!);
@@ -77,7 +80,7 @@ class Init {
     //   env: await EnvChecker.fetchEnv(),
     // );
     HttpOverrides.global = new HttpOverridesHelper();
-    Renterd.init();
+    renterdInit();
 
     //! initialisation of service locator
     await initSl();

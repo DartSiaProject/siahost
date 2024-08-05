@@ -17,5 +17,6 @@ class ColorsApp {
   static const caribbeanGreenColor = Color(0xFF05CD99);
   static const rockBlueColor = Color(0xFFA3AED0);
   static const blueChalkColor = Color(0xFFE9EDF7);
+  static const greyColor = Color(0xFF909090);
   static const transparentColor = Colors.transparent;
 }

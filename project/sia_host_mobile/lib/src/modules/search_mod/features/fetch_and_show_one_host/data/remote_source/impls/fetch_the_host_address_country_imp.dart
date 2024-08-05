@@ -17,8 +17,9 @@ class FetchTheHostAddressCountryImpl implements FetchTheHostAddressCountryAbst {
   // Note: cette fonction permet de récupérer le pays d'une adress
 
   @override
-  Future<Response> fetchTheAddressCountry(
-      {required String ipAddressConverted}) async {
+  Future<Response> fetchTheAddressCountry({
+    required String ipAddressConverted,
+  }) async {
     return await HttpRequests.get(
         apiUri: getAddressCountryHostApi(hostIp: ipAddressConverted));
   }

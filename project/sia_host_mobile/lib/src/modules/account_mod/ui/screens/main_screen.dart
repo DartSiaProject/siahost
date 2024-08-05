@@ -26,7 +26,7 @@ class _MainScreenState extends State<MainScreen> {
           context.router.replaceNamed(RoutePath.siaMainPath);
         }
       },
-      child: const Material(),
+      child: const Scaffold(),
     );
   }
 }

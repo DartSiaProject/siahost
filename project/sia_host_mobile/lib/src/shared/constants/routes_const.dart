@@ -7,6 +7,6 @@ class RoutePath {
   static const listOfHostSubPath = "listOfHostSubRoute";
   static const hostInfoSubPath = "hostInfoSubRoute";
 
-  static const filesListCategorisedSubPath = "filesListCategorisedSubRoute";
-  static const filesListSubPath = "filesListSubRoute";
+  static const listOfFileFetchedFromBucketSubPath =
+      "listOfFileFetchedFromBucketRoute";
 }

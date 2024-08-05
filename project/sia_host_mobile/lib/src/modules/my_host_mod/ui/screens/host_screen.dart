@@ -46,6 +46,7 @@ class _HostScreenState extends State<HostScreen> {
             child: BlocBuilder<FetchMyHosterBloc, FetchMyHosterState>(
               builder: (context, hosterBuilderState) {
                 if (hosterBuilderState is MakLoginPlease) {
+                  print("message : ${hosterBuilderState.message}");
                   return Center(
                     child: LoginWidget(
                       messageError: hosterBuilderState.message,

@@ -86,4 +86,13 @@ class Lang {
   static const hostNotExistText = "host_not_exist_text";
   static const filesText = "files_text";
   static const bucketsFileText = "buckets_file_text";
+  static const noFileText = "no_file_text";
+  static const noBucketText = "no_buckets_text";
+  static const addFileText = "add_file_text";
+
+  static const renameFileText = "rename_file_text";
+  static const copyAndPasteFileText = "copy_and_paste_file_text";
+  static const deleteFileText = "delete_file_text";
+  static const fileDeletedSuccessText = "file_deleted_success_text";
+  static const wantDeleteFileOrNotText = "want_delete_file_or_not_text";
 }

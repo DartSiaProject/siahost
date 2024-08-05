@@ -66,7 +66,10 @@ class _SiaMainScreenState extends State<SiaMainScreen> {
                 ),
               ],
             ),
-            body: child,
+            body: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 5.0.w),
+              child: child,
+            ),
             bottomNavigationBar: BottomNavyBar(
               backgroundColor: ColorsApp.darkJungleGreenColor,
               selectedIndex: _tabsRouter.activeIndex,

@@ -65,7 +65,8 @@ const zeroCompletion_2 = "0000000000000000";
 const urlPattern =
     r"(https?|http)://([-A-Z0-9.]+)(/[-A-Z0-9+&@#/%=~_|!:,.;]*)?(\?[A-Z0-9+&@#/%=~_|!:‌​,.;]*)?";
 
-const bucketsListItems = <Map<String, dynamic>>[
-  {"image": Pngs.folderPng, "label": "Bucket 1", "files": []},
-  {"image": Pngs.folderPng, "label": "Bucket 2", "files": []},
+const menuVerticalForFilesList = <String>[
+  Lang.addFileText,
 ];
+
+var mimeTypeText = "text/plain";

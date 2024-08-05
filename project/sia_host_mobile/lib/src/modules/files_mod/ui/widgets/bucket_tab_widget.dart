@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sia_host_mobile/src/shared/constants/colors_const.dart';
+
+import '../../../../core/configs/language_config/translator.dart';
+import '../../../../shared/constants/colors_const.dart';
+import '../../../../shared/constants/lang_const.dart';
 
 class BucketTabWidget extends StatelessWidget {
   final VoidCallback onPressed;
@@ -38,7 +41,7 @@ class BucketTabWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  "$totalFiles Files",
+                  "$totalFiles ${Translator.of(context)!.translate(Lang.filesText)}",
                   style: TextStyle(
                     color: ColorsApp.whiteColor.withOpacity(0.7),
                     fontSize: pageIsSelected ? 12.0.sp : 9.0.sp,

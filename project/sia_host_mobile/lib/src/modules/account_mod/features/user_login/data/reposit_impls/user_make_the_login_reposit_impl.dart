@@ -3,9 +3,9 @@ import 'dart:io';
 
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
-import 'package:sia_host_mobile/src/shared/extensions/string_ext.dart';
 
 import '../../../../../../shared/constants/lang_const.dart';
+import '../../../../../../shared/extensions/string_ext.dart';
 import '../../../../../../shared/global/map_variable.dart' as global;
 import '../../../../../../shared/services/connection/requests/connection_request.dart';
 import '../../../../../../shared/services/security/requests/encrypter_request.dart';
@@ -62,7 +62,7 @@ class UserMakeTheLoginRepositImpl implements UserMakeTheLoginRepositAbst {
                 userCredentialsJsoned: _userInfoJsoned);
 
             await _cacheTheUserCredentialAfterLoginAbst
-                .cacheUserCredentialAfterLogin(userPresence: "PRESENT");
+                .cacheUserCredentialAfterLogin(userPresence: _userInfoJsoned);
 
             return const Result.success(Lang.credentialSuccessText);
           } else if (_result.statusCode == HttpStatus.unauthorized) {

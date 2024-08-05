@@ -15,18 +15,6 @@ abstract class _$AutoRoutes extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    FilesListCategorisedRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const FilesListCategorisedScreen(),
-      );
-    },
-    FilesListRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const FilesListScreen(),
-      );
-    },
     FilesRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -62,6 +50,25 @@ abstract class _$AutoRoutes extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const HostScreen(),
+      );
+    },
+    ListOfBucketRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ListOfBucketScreen(),
+      );
+    },
+    ListOfFileFetchedFromBucketRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<ListOfFileFetchedFromBucketRouteArgs>(
+          orElse: () => ListOfFileFetchedFromBucketRouteArgs(
+              bucketName: pathParams.getString('bucketName')));
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ListOfFileFetchedFromBucketScreen(
+          key: args.key,
+          bucketName: args.bucketName,
+        ),
       );
     },
     ListOfHostRoute.name: (routeData) {
@@ -101,34 +108,6 @@ abstract class _$AutoRoutes extends RootStackRouter {
       );
     },
   };
-}
-
-/// generated route for
-/// [FilesListCategorisedScreen]
-class FilesListCategorisedRoute extends PageRouteInfo<void> {
-  const FilesListCategorisedRoute({List<PageRouteInfo>? children})
-      : super(
-          FilesListCategorisedRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'FilesListCategorisedRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [FilesListScreen]
-class FilesListRoute extends PageRouteInfo<void> {
-  const FilesListRoute({List<PageRouteInfo>? children})
-      : super(
-          FilesListRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'FilesListRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -224,6 +203,60 @@ class HostRoute extends PageRouteInfo<void> {
   static const String name = 'HostRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ListOfBucketScreen]
+class ListOfBucketRoute extends PageRouteInfo<void> {
+  const ListOfBucketRoute({List<PageRouteInfo>? children})
+      : super(
+          ListOfBucketRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ListOfBucketRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ListOfFileFetchedFromBucketScreen]
+class ListOfFileFetchedFromBucketRoute
+    extends PageRouteInfo<ListOfFileFetchedFromBucketRouteArgs> {
+  ListOfFileFetchedFromBucketRoute({
+    Key? key,
+    required String bucketName,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ListOfFileFetchedFromBucketRoute.name,
+          args: ListOfFileFetchedFromBucketRouteArgs(
+            key: key,
+            bucketName: bucketName,
+          ),
+          rawPathParams: {'bucketName': bucketName},
+          initialChildren: children,
+        );
+
+  static const String name = 'ListOfFileFetchedFromBucketRoute';
+
+  static const PageInfo<ListOfFileFetchedFromBucketRouteArgs> page =
+      PageInfo<ListOfFileFetchedFromBucketRouteArgs>(name);
+}
+
+class ListOfFileFetchedFromBucketRouteArgs {
+  const ListOfFileFetchedFromBucketRouteArgs({
+    this.key,
+    required this.bucketName,
+  });
+
+  final Key? key;
+
+  final String bucketName;
+
+  @override
+  String toString() {
+    return 'ListOfFileFetchedFromBucketRouteArgs{key: $key, bucketName: $bucketName}';
+  }
 }
 
 /// generated route for

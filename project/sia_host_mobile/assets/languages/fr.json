@@ -84,6 +84,14 @@
   "internal_server_error_text": "Erreur sur le serveur",
   "host_not_exist_text": "Cet hôte n'existe pas",
   "files_text":"Fichiers",
-  "buckets_file_text":"Mes Fichiers"
+  "buckets_file_text":"Mes Fichiers",
+  "no_file_text":"Aucun Fichiers",
+  "add_file_text":"Ajouter un Fichier",
+  
+  "file_deleted_success_text":"Fichier Supprimé",
+  "want_delete_file_or_not_text":"Supprimer ce fichier ?",
+  "rename_file_text":"Renommer le Fichier",
+  "copy_and_paste_file_text":"Copier le Fichier",
+  "delete_file_text":"Supprimer le Fichier"
   
 }

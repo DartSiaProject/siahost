@@ -84,6 +84,13 @@
   "internal_server_error_text": "Server error",
   "host_not_exist_text": "This host does not exist",
   "files_text":"Files",
-  "buckets_file_text":"My Buckets"
+  "buckets_file_text":"My Buckets",
+  "no_file_text":"No Files",
+  "add_file_text":"Add a File",
+  "file_deleted_success_text":"File Deleted",
+  "want_delete_file_or_not_text":"Delete this file ?",
+  "rename_file_text":"Rename the File",
+  "copy_and_paste_file_text":"Copy the File",
+  "delete_file_text":"Delete the File"
   
 }
