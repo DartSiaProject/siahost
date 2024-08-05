@@ -92,6 +92,17 @@
   "want_delete_file_or_not_text":"Supprimer ce fichier ?",
   "rename_file_text":"Renommer le Fichier",
   "copy_and_paste_file_text":"Copier le Fichier",
-  "delete_file_text":"Supprimer le Fichier"
+  "delete_file_text":"Supprimer le Fichier",
+  "the_bucket_destination_not_exist_text":"Cet emplacement n'existe pas",
+  "copy_is_done_text":"Copie est terminé",
+  "add_bucket_name_text":"Nom du bucket de Destination",
+  "add_the_new_file_name_text":"Nom du Fichier de Destination",
+  "file_copier_text":"Copieur du Fichier",
+  "submit_text":"Copier",
+  "the_src_object_not_exist_text":"L'objet source n'existe pas",
+  "file_renamed_text":"Fichier Renomé",
+  "rename_the_file_text":"Renommer le Fichier",
+  "rename_text":"Renommer",
+  "not_rename_folder_text":"Ne peut pas renommer les dossiers avec le mode simple"
   
 }

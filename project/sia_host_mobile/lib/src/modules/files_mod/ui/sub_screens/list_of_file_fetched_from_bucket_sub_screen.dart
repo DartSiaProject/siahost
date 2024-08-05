@@ -219,6 +219,7 @@ class _ListOfFileFetchedFromBucketScreenState
                           fileSize: _fileData.size,
                           fileType: _fileData.fileType,
                           totalFiles: _fileData.totalFiles,
+                          bucketName: widget.bucketName,
                         );
                       },
                     ),

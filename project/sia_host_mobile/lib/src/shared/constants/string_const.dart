@@ -70,3 +70,11 @@ const menuVerticalForFilesList = <String>[
 ];
 
 var mimeTypeText = "text/plain";
+
+var errorDstBucket =
+    "couldn't copy object: failed to fetch dst bucket: record not found";
+
+var errorSrcObject =
+    "couldn't copy object: failed to fetch src object: record not found";
+
+var errorRenameObject = "can't rename dirs with mode single";

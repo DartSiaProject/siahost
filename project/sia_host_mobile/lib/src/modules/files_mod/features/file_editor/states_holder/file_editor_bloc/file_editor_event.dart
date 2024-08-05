@@ -14,3 +14,19 @@ class UserDeleteTheFileEvent extends FileEditorEvent {
     required this.fileNameWithExtension,
   });
 }
+
+class UserCopyAndPasteTheFileEvent extends FileEditorEvent {
+  final CopyFileInfoEntity copyFileInfoEntity;
+
+  const UserCopyAndPasteTheFileEvent({
+    required this.copyFileInfoEntity,
+  });
+}
+
+class UserRenameAFileEvent extends FileEditorEvent {
+  final RenameFileInfoEntity renameFileInfoEntity;
+
+  const UserRenameAFileEvent({
+    required this.renameFileInfoEntity,
+  });
+}

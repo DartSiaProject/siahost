@@ -95,4 +95,19 @@ class Lang {
   static const deleteFileText = "delete_file_text";
   static const fileDeletedSuccessText = "file_deleted_success_text";
   static const wantDeleteFileOrNotText = "want_delete_file_or_not_text";
+
+  static const theBucketDestinationNotExistText =
+      "the_bucket_destination_not_exist_text";
+
+  static const copyIsDoneText = "copy_is_done_text";
+
+  static const addBucketNameText = "add_bucket_name_text";
+  static const addTheNewFileNameText = "add_the_new_file_name_text";
+  static const fileCopierText = "file_copier_text";
+  static const submitText = "submit_text";
+  static const theSrcObjectNotExistText = "the_src_object_not_exist_text";
+  static const fileRenamedText = "file_renamed_text";
+  static const renameTheFileText = "rename_the_file_text";
+  static const renameText = "rename_text";
+  static const notRenameFolderText = "not_rename_folder_text";
 }

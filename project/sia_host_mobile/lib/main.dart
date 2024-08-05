@@ -15,6 +15,7 @@ import 'src/modules/files_mod/features/fetch_all_buckets_and_files/states_holder
 import 'src/modules/files_mod/features/fetch_all_buckets_and_files/states_holder/fetch_all_file_bloc/fetch_all_files_bloc.dart';
 import 'src/modules/files_mod/features/fetch_all_buckets_and_files/states_holder/files_bloc/files_bloc.dart';
 import 'src/modules/files_mod/features/file_editor/states_holder/file_editor_bloc/file_editor_bloc.dart';
+import 'src/modules/files_mod/features/view_a_file_content/states_holder/view_the_file_content_bloc/view_the_file_content_bloc.dart';
 import 'src/modules/home_mod/features/fetch_the_network_data/states_holder/network_data_fetching_bloc/network_data_fetching_bloc.dart';
 import 'src/modules/host_config_mod/features/fetch_the_hoster_for_config/states_holder/fetch_the_hoster_for_config_bloc/fetch_the_hoster_for_config_bloc.dart';
 import 'src/modules/host_config_mod/features/update_the_hoster_with_new_data/states_holder/reconfig_the_host_data_bloc/reconfig_the_host_data_bloc.dart';
@@ -87,6 +88,9 @@ void main() async {
       ),
       BlocProvider(
         create: (context) => sl<FileEditorBloc>(),
+      ),
+      BlocProvider(
+        create: (context) => sl<ViewTheFileContentBloc>(),
       ),
     ],
     child: SiaHostMobile(),

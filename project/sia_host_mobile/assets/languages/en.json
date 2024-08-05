@@ -91,6 +91,16 @@
   "want_delete_file_or_not_text":"Delete this file ?",
   "rename_file_text":"Rename the File",
   "copy_and_paste_file_text":"Copy the File",
-  "delete_file_text":"Delete the File"
+  "delete_file_text":"Delete the File",
+  "the_bucket_destination_not_exist_text":"The bucket destination does not exist",
+  "copy_is_done_text": "Copy is done",
+  "add_bucket_name_text":"Add a Bucket Name",
+  "file_copier_text":"File copier",
+  "submit_text":"Copy",
+  "the_src_object_not_exist_text":"The source object does not exist",
+  "file_renamed_text":"File Renamed",
+  "rename_the_file_text":"Rename the File",
+  "rename_text":"Rename",
+  "not_rename_folder_text":"Can't rename dirs with mode single"
   
 }

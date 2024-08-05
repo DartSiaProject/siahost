@@ -24,7 +24,7 @@ class QuestionDialogBoxWidget extends StatelessWidget {
         ),
         style: TextStyle(
           fontFamily: "ReadexPro",
-          fontSize: 20.0.sp,
+          fontSize: 15.0.sp,
           fontWeight: FontWeight.w600,
         ),
       ),

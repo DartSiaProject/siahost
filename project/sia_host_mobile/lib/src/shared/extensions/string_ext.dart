@@ -29,4 +29,10 @@ extension StringExtensions on String {
         return Pngs.folderPng;
     }
   }
+
+  String getExtFile() {
+    var _fileName = this;
+    var _extFile = ".${_fileName.split('.').last}";
+    return _extFile;
+  }
 }
