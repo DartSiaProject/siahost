@@ -1,8 +1,0 @@
-{
-    "LABEL":"Staging",
-    "USER_CREDENTIALS":"credentials staging",
-    "USER_PRESENCE":"presence staging",
-    "ROOT_OLD_API":"https://siastats.info",
-    "ROOT_API":"https://api.siacentral.com",
-    "ROOT_IP":"https://ipinfo.io"
-}

@@ -1,0 +1,1 @@
+const splashDuration = 1;
