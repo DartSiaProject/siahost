@@ -6,6 +6,8 @@ sealed class FileEditorState {
 
 final class FileEditorInitial extends FileEditorState {}
 
+final class FileEditedLoading extends FileEditorState {}
+
 class FileEditedSuccess extends FileEditorState {
   final String message;
 

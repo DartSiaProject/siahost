@@ -7,5 +7,6 @@ class Pngs {
   static const folderPng = "assets/images/png/folder.png";
   static const pngFilePng = "assets/images/png/png_file.png";
   static const jpgFilePng = "assets/images/png/jpg_file.png";
+  static const jpegFilePng = "assets/images/png/jpeg_file.png";
   static const pdfFilePng = "assets/images/png/pdf_file.png";
 }

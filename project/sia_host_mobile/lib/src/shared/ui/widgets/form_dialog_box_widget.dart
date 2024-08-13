@@ -32,7 +32,7 @@ class FormDialogBoxWidget extends StatelessWidget {
         Translator.of(context)!.translate(title),
         style: TextStyle(
           fontFamily: "ReadexPro",
-          fontSize: 15.0.sp,
+          fontSize: 18.0.sp,
           fontWeight: FontWeight.w600,
         ),
       ),

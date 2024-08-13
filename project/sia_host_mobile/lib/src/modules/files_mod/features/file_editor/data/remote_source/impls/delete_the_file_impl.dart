@@ -9,7 +9,7 @@ import '../absts/delete_the_file_abst.dart';
 /// author: [James Brel]
 /// version: 1.1.0
 /// createdAt: 04/08/2024
-/// updatedAt: #
+/// updatedAt: 08/08/2024
 @LazySingleton(as: DeleteTheFileAbst)
 class DeleteTheFileImpl implements DeleteTheFileAbst {
   /// Note : This function allow to delete a file
@@ -17,12 +17,13 @@ class DeleteTheFileImpl implements DeleteTheFileAbst {
   Future<Response> deleteTheFile({
     required String serverAddress,
     required String password,
-    required String fileNameWithExtension,
+    required String fileName,
+    required String bucketName,
   }) async {
     return await Object.deleteTheObject(
-      password: password,
-      serverAddress: serverAddress,
-      fileNameWithExtension: fileNameWithExtension,
-    );
+        password: password,
+        serverAddress: serverAddress,
+        fileName: fileName,
+        bucketName: bucketName);
   }
 }

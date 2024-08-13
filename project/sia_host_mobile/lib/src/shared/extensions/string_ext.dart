@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 import '../constants/pngs_const.dart';
 import '../constants/string_const.dart';
 
@@ -23,6 +25,8 @@ extension StringExtensions on String {
         return Pngs.pngFilePng;
       case ".jpg":
         return Pngs.jpgFilePng;
+      case ".jpeg":
+        return Pngs.jpegFilePng;
       case ".pdf":
         return Pngs.pdfFilePng;
       default:
@@ -34,5 +38,10 @@ extension StringExtensions on String {
     var _fileName = this;
     var _extFile = ".${_fileName.split('.').last}";
     return _extFile;
+  }
+
+  String timeConverter() {
+    var _time = DateFormat('dd:MM:yyyy').format(DateTime.parse(this));
+    return _time;
   }
 }

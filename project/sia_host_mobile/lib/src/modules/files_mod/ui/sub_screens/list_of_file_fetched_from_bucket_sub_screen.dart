@@ -90,7 +90,8 @@ class _ListOfFileFetchedFromBucketScreenState
               onSelected: (actionMenuIndex) {
                 switch (actionMenuIndex) {
                   case 0:
-                    print("ajouter un fichier");
+                    context.read<FileEditorBloc>().add(
+                        UserUploadTheFileEvent(bucketName: widget.bucketName));
                     break;
                 }
               },
@@ -101,86 +102,65 @@ class _ListOfFileFetchedFromBucketScreenState
           height: 20.0.h,
         ),
         Expanded(
-          child: BlocListener<FileEditorBloc, FileEditorState>(
-            listener: (context, fileEditorListenerState) {
-              if (fileEditorListenerState is FileEditedSuccess) {
-                Fluttertoast.showToast(
-                  msg: Translator.of(context)!
-                      .translate(fileEditorListenerState.message),
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.TOP,
-                  backgroundColor: ColorsApp.tunaColor,
-                  textColor: Colors.white,
-                  fontSize: 16.0,
-                ).whenComplete(() => context.read<FetchAllFilesBloc>().add(
-                    FetchTheFilesFromBucketEvent(
-                        bucketName: widget.bucketName)));
-              }
+            child: BlocConsumer<FileEditorBloc, FileEditorState>(
+          listener: (context, fileEditorListenerState) {
+            if (fileEditorListenerState is FileEditedSuccess) {
+              Fluttertoast.showToast(
+                msg: Translator.of(context)!
+                    .translate(fileEditorListenerState.message),
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.TOP,
+                backgroundColor: ColorsApp.tunaColor,
+                textColor: Colors.white,
+                fontSize: 16.0,
+              ).whenComplete(() => context.read<FetchAllFilesBloc>().add(
+                  FetchTheFilesFromBucketEvent(bucketName: widget.bucketName)));
+            }
 
-              if (fileEditorListenerState is FileEditedFailed) {
-                Fluttertoast.showToast(
-                  msg: Translator.of(context)!
-                      .translate(fileEditorListenerState.message),
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.TOP,
-                  backgroundColor: ColorsApp.tunaColor,
-                  textColor: Colors.white,
-                  fontSize: 16.0,
-                );
-              }
-            },
-            child: BlocBuilder<FetchAllFilesBloc, FetchAllFilesState>(
-              builder: (context, fetchAllFilesBuilderState) {
-                if (fetchAllFilesBuilderState is FilesFoundWithEmpty) {
-                  return Center(
-                    child: Text(
-                      Translator.of(context)!
-                          .translate(fetchAllFilesBuilderState.message),
-                      style: TextStyle(
-                        fontFamily: "Roboto",
-                        fontSize: 20.0.sp,
-                        color: ColorsApp.whiteColor,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  );
-                }
-                if (fetchAllFilesBuilderState is FilesFoundWithFailed) {
-                  return Center(
-                    child: Flex(
-                      mainAxisSize: MainAxisSize.min,
-                      direction: Axis.vertical,
-                      children: <Widget>[
-                        Text(
-                          Translator.of(context)!
-                              .translate(fetchAllFilesBuilderState.message),
-                          style: TextStyle(
-                            fontFamily: "Roboto",
-                            fontSize: 20.0.sp,
-                            color: ColorsApp.whiteColor,
-                            fontWeight: FontWeight.w600,
+            if (fileEditorListenerState is FileEditedFailed) {
+              Fluttertoast.showToast(
+                msg: Translator.of(context)!
+                    .translate(fileEditorListenerState.message),
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.TOP,
+                backgroundColor: ColorsApp.tunaColor,
+                textColor: Colors.white,
+                fontSize: 16.0,
+              );
+            }
+          },
+          builder: (context, fileEditorBuilderState) {
+            return fileEditorBuilderState is FileEditedLoading
+                ? const Center(
+                    child: CircularProgressIndicator(
+                        color: ColorsApp.spearmintColor),
+                  )
+                : BlocBuilder<FetchAllFilesBloc, FetchAllFilesState>(
+                    builder: (context, fetchAllFilesBuilderState) {
+                      if (fetchAllFilesBuilderState is FilesFoundWithEmpty) {
+                        return Center(
+                          child: Text(
+                            Translator.of(context)!
+                                .translate(fetchAllFilesBuilderState.message),
+                            style: TextStyle(
+                              fontFamily: "Roboto",
+                              fontSize: 20.0.sp,
+                              color: ColorsApp.whiteColor,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                          textAlign: TextAlign.center,
-                        ),
-                        SizedBox(
-                          height: 10.0.h,
-                        ),
-                        Material(
-                          color: ColorsApp.spearmintColor,
-                          borderRadius: BorderRadius.circular(12.0.r),
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(12.0.r),
-                            onTap: () {
-                              context.read<FetchAllFilesBloc>().add(
-                                  FetchTheFilesFromBucketEvent(
-                                      bucketName: widget.bucketName));
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                Translator.of(context)!
-                                    .translate(Lang.retryText),
+                        );
+                      }
+                      if (fetchAllFilesBuilderState is FilesFoundWithFailed) {
+                        return Center(
+                          child: Flex(
+                            mainAxisSize: MainAxisSize.min,
+                            direction: Axis.vertical,
+                            children: <Widget>[
+                              Text(
+                                Translator.of(context)!.translate(
+                                    fetchAllFilesBuilderState.message),
                                 style: TextStyle(
                                   fontFamily: "Roboto",
                                   fontSize: 20.0.sp,
@@ -189,52 +169,79 @@ class _ListOfFileFetchedFromBucketScreenState
                                 ),
                                 textAlign: TextAlign.center,
                               ),
-                            ),
+                              SizedBox(
+                                height: 10.0.h,
+                              ),
+                              Material(
+                                color: ColorsApp.spearmintColor,
+                                borderRadius: BorderRadius.circular(12.0.r),
+                                child: InkWell(
+                                  borderRadius: BorderRadius.circular(12.0.r),
+                                  onTap: () {
+                                    context.read<FetchAllFilesBloc>().add(
+                                        FetchTheFilesFromBucketEvent(
+                                            bucketName: widget.bucketName));
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      Translator.of(context)!
+                                          .translate(Lang.retryText),
+                                      style: TextStyle(
+                                        fontFamily: "Roboto",
+                                        fontSize: 20.0.sp,
+                                        color: ColorsApp.whiteColor,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
-                  );
-                }
-                if (fetchAllFilesBuilderState is FilesFoundWithSuccess) {
-                  return RefreshIndicator.adaptive(
-                    onRefresh: () async {
-                      context.read<FetchAllFilesBloc>().add(
-                          FetchTheFilesFromBucketEvent(
-                              bucketName: widget.bucketName));
-                    },
-                    child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 2,
-                      ),
-                      itemCount: fetchAllFilesBuilderState.allFiles.length,
-                      itemBuilder: (BuildContext context, int fileIndex) {
-                        var _fileData =
-                            fetchAllFilesBuilderState.allFiles[fileIndex];
-
-                        return CardFileWidget(
-                          fileName: _fileData.name,
-                          fileSize: _fileData.size,
-                          fileType: _fileData.fileType,
-                          totalFiles: _fileData.totalFiles,
-                          bucketName: widget.bucketName,
                         );
-                      },
-                    ),
+                      }
+                      if (fetchAllFilesBuilderState is FilesFoundWithSuccess) {
+                        return RefreshIndicator.adaptive(
+                          onRefresh: () async {
+                            context.read<FetchAllFilesBloc>().add(
+                                FetchTheFilesFromBucketEvent(
+                                    bucketName: widget.bucketName));
+                          },
+                          child: GridView.builder(
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              childAspectRatio: 2,
+                            ),
+                            itemCount:
+                                fetchAllFilesBuilderState.allFiles.length,
+                            itemBuilder: (BuildContext context, int fileIndex) {
+                              var _fileData =
+                                  fetchAllFilesBuilderState.allFiles[fileIndex];
+
+                              return CardFileWidget(
+                                fileName: _fileData.name,
+                                fileSize: _fileData.size,
+                                fileType: _fileData.fileType,
+                                totalFiles: _fileData.totalFiles,
+                                bucketName: widget.bucketName,
+                              );
+                            },
+                          ),
+                        );
+                      }
+                      return fetchAllFilesBuilderState is FetchAllFilesLoading
+                          ? const Center(
+                              child: CircularProgressIndicator(
+                                  color: ColorsApp.spearmintColor),
+                            )
+                          : Container();
+                    },
                   );
-                }
-                return fetchAllFilesBuilderState is FetchAllFilesLoading
-                    ? const Center(
-                        child: CircularProgressIndicator(
-                            color: ColorsApp.spearmintColor),
-                      )
-                    : Container();
-              },
-            ),
-          ),
-        )
+          },
+        ))
       ],
     );
   }

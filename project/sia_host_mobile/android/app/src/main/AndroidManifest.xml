@@ -9,7 +9,9 @@ xmlns:tools="http://schemas.android.com/tools">
     com.it_nomads.fluttersecurestorage, 
     io.flutter.plugins.sharedpreferences, 
     io.flutter.plugins.pathprovider, 
-    dev.fluttercommunity.plus.connectivity"/>
+    dev.fluttercommunity.plus.connectivity, 
+    com.mr.flutter.plugin.filepicker, 
+    io.flutter.plugins.flutter_plugin_android_lifecycles"/>
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>

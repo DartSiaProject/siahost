@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:sia_host_mobile/src/modules/files_mod/features/view_a_file_details/states_holder/view_the_file_content_bloc/view_the_file_details_bloc.dart';
+import 'package:sia_host_mobile/src/modules/files_mod/ui/widgets/fields_of_file_details_widget.dart';
 
 import '../../../../core/configs/language_config/translator.dart';
 import '../../../../shared/constants/colors_const.dart';
@@ -85,10 +87,10 @@ class _CardFileWidgetState extends State<CardFileWidget> {
                       .maybePop()
                       .whenComplete(() => context.read<FileEditorBloc>().add(
                             UserDeleteTheFileEvent(
-                                fileNameWithExtension:
-                                    widget.fileType == "folder"
-                                        ? widget.fileName.replaceFirst('/', '')
-                                        : widget.fileName.replaceAll('/', '')),
+                                bucketName: widget.bucketName,
+                                fileName: widget.fileType == "folder"
+                                    ? widget.fileName.replaceFirst('/', '')
+                                    : widget.fileName.replaceAll('/', '')),
                           ));
                 },
               ),
@@ -277,6 +279,59 @@ class _CardFileWidgetState extends State<CardFileWidget> {
     );
   }
 
+  void _showFileDetailsDialogBox({
+    required BuildContext context,
+  }) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      useSafeArea: false,
+      builder: (BuildContext context) {
+        return FormDialogBoxWidget(
+          title: Lang.viewDetailFileText,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          width: 300.0.w,
+          height: 150.0.h,
+          children: <Widget>[
+            BlocBuilder<ViewTheFileDetailsBloc, ViewTheFileDetailsState>(
+              bloc: context.read<ViewTheFileDetailsBloc>()
+                ..add(
+                  UserViewTheFileDetailsEvent(
+                    bucketName: widget.bucketName,
+                    fileName: widget.fileType == "folder"
+                        ? widget.fileName.replaceFirst('/', '')
+                        : widget.fileName.replaceAll('/', ''),
+                  ),
+                ),
+              builder: (context, viewTheFileContentBuilderState) {
+                if (viewTheFileContentBuilderState is FileDetailsSuccess) {
+                  return FieldsOfFileDetailsWidget(
+                    fileName: viewTheFileContentBuilderState
+                        .fileDetailsEntity.fileName
+                        .replaceAll('/', ''),
+                    fileSize: CalculatorHelper.getFileSize(
+                        viewTheFileContentBuilderState
+                            .fileDetailsEntity.fileSize,
+                        2),
+                    createdAt: viewTheFileContentBuilderState
+                        .fileDetailsEntity.modTime
+                        .timeConverter(),
+                  );
+                }
+                // if (viewTheFileContentBuilderState is FileDetailsFailed) {
+                //   print("FAILED");
+                // }
+                // todo : je reviendrai ici
+
+                return Container();
+              },
+            )
+          ],
+        );
+      },
+    );
+  }
+
   OverlayEntry _createOverlayEntry(
     BuildContext context,
     Offset position,
@@ -293,6 +348,29 @@ class _CardFileWidgetState extends State<CardFileWidget> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                Visibility(
+                  visible: widget.fileType != "folder",
+                  child: TextButton(
+                    style: ButtonStyle(
+                      overlayColor:
+                          WidgetStateProperty.all(ColorsApp.transparentColor),
+                    ),
+                    onPressed: () {
+                      if (widget.fileType != "folder") {
+                        _showFileDetailsDialogBox(context: context);
+                      }
+
+                      _hideMenu();
+                    },
+                    child: Text(
+                        Translator.of(context)!
+                            .translate(Lang.viewDetailFileText),
+                        style: const TextStyle(
+                          color: ColorsApp.bleachedCedarColor,
+                          fontWeight: FontWeight.w400,
+                        )),
+                  ),
+                ),
                 TextButton(
                   style: ButtonStyle(
                     overlayColor:
@@ -365,12 +443,6 @@ class _CardFileWidgetState extends State<CardFileWidget> {
             width: 80.w,
             height: 80.h,
           ),
-          onTap: () {
-            if (_overlayEntry != null) {
-              _hideMenu();
-            }
-            print("view the file");
-          },
           onLongPressStart: (details) {
             _hideMenu();
             if (_overlayEntry == null) {

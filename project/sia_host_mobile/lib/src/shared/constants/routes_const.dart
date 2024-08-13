@@ -9,4 +9,6 @@ class RoutePath {
 
   static const listOfFileFetchedFromBucketSubPath =
       "listOfFileFetchedFromBucketRoute";
+
+  static const previewTheFileContentSubPath = "previewTheFileContentRoute";
 }

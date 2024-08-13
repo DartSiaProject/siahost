@@ -47,6 +47,7 @@ class Init {
         Pngs.folderPng,
         Pngs.pngFilePng,
         Pngs.jpgFilePng,
+        Pngs.jpegFilePng,
         Pngs.pdfFilePng,
       ];
       for (var pngImage in pngs) {

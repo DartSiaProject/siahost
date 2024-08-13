@@ -7,11 +7,21 @@ sealed class FileEditorEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class UserUploadTheFileEvent extends FileEditorEvent {
+  final String bucketName;
+
+  const UserUploadTheFileEvent({
+    required this.bucketName,
+  });
+}
+
 class UserDeleteTheFileEvent extends FileEditorEvent {
-  final String fileNameWithExtension;
+  final String fileName;
+  final String bucketName;
 
   const UserDeleteTheFileEvent({
-    required this.fileNameWithExtension,
+    required this.fileName,
+    required this.bucketName,
   });
 }
 

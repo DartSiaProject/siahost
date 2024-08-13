@@ -103,6 +103,9 @@
   "file_renamed_text":"Fichier Renomé",
   "rename_the_file_text":"Renommer le Fichier",
   "rename_text":"Renommer",
-  "not_rename_folder_text":"Ne peut pas renommer les dossiers avec le mode simple"
+  "not_rename_folder_text":"Ne peut pas renommer les dossiers avec le mode simple",
+  "view_detail_file_text":"Détails du Fichier",
+  "file_uploaded_text":"Fichier Uploadé",
+  "no_file_picked_text":"Aucun Fichier Choisi"
   
 }

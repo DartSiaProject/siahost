@@ -101,6 +101,9 @@
   "file_renamed_text":"File Renamed",
   "rename_the_file_text":"Rename the File",
   "rename_text":"Rename",
-  "not_rename_folder_text":"Can't rename dirs with mode single"
+  "not_rename_folder_text":"Can't rename dirs with mode single",
+  "view_detail_file_text":"File Details",
+  "file_uploaded_text":"File Uploaded",
+  "no_file_picked_text":"No File Selected"
   
 }

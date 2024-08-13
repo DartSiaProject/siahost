@@ -62,6 +62,7 @@ dependencies:
   percent_indicator: ^4.2.3
   encrypt: ^5.0.3
   crypto: ^3.0.3
+  file_picker: ^8.0.7
   renterd:
     # git:
     #   url: https://github.com/DartSiaProject/dartsia.git

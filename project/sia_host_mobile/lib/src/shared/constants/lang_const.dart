@@ -110,4 +110,7 @@ class Lang {
   static const renameTheFileText = "rename_the_file_text";
   static const renameText = "rename_text";
   static const notRenameFolderText = "not_rename_folder_text";
+  static const viewDetailFileText = "view_detail_file_text";
+  static const fileUploadedText = "file_uploaded_text";
+  static const noFilePickedText = "no_file_picked_text";
 }
