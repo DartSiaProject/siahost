@@ -1,20 +1,22 @@
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
 
-import '../reposit_absts/the_file_editor_reposit_abst.dart';
+import '../reposit_absts/delete_the_file_reposit_abst.dart';
 
 @lazySingleton
 class DeleteTheFileUsecase {
-  final TheFileEditorRepositAbst _theFileEditorRepositAbst;
+  final DeleteTheFileRepositAbst _deleteTheFileRepositAbst;
 
   DeleteTheFileUsecase({
-    required TheFileEditorRepositAbst theFileEditorRepositAbst,
-  }) : _theFileEditorRepositAbst = theFileEditorRepositAbst;
+    required DeleteTheFileRepositAbst deleteTheFileRepositAbst,
+  }) : _deleteTheFileRepositAbst = deleteTheFileRepositAbst;
 
   Future<Result<String, String>> call({
-    required String fileNameWithExtension,
+    required String fileName,
+    required String bucketName,
   }) async =>
-      await _theFileEditorRepositAbst.deleteOneFile(
-        fileNameWithExtension: fileNameWithExtension,
+      await _deleteTheFileRepositAbst.deleteOneFile(
+        fileName: fileName,
+        bucketName: bucketName,
       );
 }

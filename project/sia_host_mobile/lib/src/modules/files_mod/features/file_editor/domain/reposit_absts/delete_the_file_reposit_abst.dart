@@ -1,7 +1,8 @@
 import 'package:multiple_result/multiple_result.dart';
 
-abstract class TheFileEditorRepositAbst {
+abstract class DeleteTheFileRepositAbst {
   Future<Result<String, String>> deleteOneFile({
-    required String fileNameWithExtension,
+    required String fileName,
+    required String bucketName,
   });
 }

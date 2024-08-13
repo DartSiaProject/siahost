@@ -4,6 +4,7 @@ abstract class DeleteTheFileAbst {
   Future<Response> deleteTheFile({
     required String serverAddress,
     required String password,
-    required String fileNameWithExtension,
+    required String fileName,
+    required String bucketName,
   });
 }

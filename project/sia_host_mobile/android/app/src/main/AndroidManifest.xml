@@ -9,17 +9,22 @@ xmlns:tools="http://schemas.android.com/tools">
     com.it_nomads.fluttersecurestorage, 
     io.flutter.plugins.sharedpreferences, 
     io.flutter.plugins.pathprovider, 
-    dev.fluttercommunity.plus.connectivity"/>
+    dev.fluttercommunity.plus.connectivity, 
+    com.mr.flutter.plugin.filepicker, 
+    io.flutter.plugins.flutter_plugin_android_lifecycles"/>
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:label="@string/app_name"
         android:name="${applicationName}"
         android:logo="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:requestLegacyExternalStorage="true">
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -76,6 +76,10 @@ class AutoRoutes extends _$AutoRoutes {
                         "${RoutePath.listOfFileFetchedFromBucketSubPath}/:bucketName",
                     page: ListOfFileFetchedFromBucketRoute.page,
                   ),
+                  // AutoRoute(
+                  //   path: "${RoutePath.previewTheFileContentSubPath}/:fileName",
+                  //   page: PreviewTheFileContentRoute.page,
+                  // ),
                 ],
               ),
             ]),
