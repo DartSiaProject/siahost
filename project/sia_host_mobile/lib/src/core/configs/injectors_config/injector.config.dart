@@ -43,14 +43,6 @@ import '../../../modules/account_mod/features/user_login/domain/usecases/user_ma
     as _i473;
 import '../../../modules/account_mod/features/user_login/states_holder/login_account_bloc/login_account_bloc.dart'
     as _i301;
-import '../../../modules/files_mod/features/download_file/data/remote_source/absts/download_the_file_abst.dart'
-    as _i88;
-import '../../../modules/files_mod/features/download_file/data/reposit_impls/user_download_the_file_reposit_impl.dart'
-    as _i566;
-import '../../../modules/files_mod/features/download_file/domain/reposit_absts/user_download_the_file_reposit_abst.dart'
-    as _i341;
-import '../../../modules/files_mod/features/download_file/domain/usecases/user_dowload_a_file_usecase.dart'
-    as _i206;
 import '../../../modules/files_mod/features/fetch_all_buckets_and_files/data/remote_source/absts/fetch_all_buckets_abst.dart'
     as _i744;
 import '../../../modules/files_mod/features/fetch_all_buckets_and_files/data/remote_source/absts/fetch_files_from_bucket_abst.dart'
@@ -75,12 +67,18 @@ import '../../../modules/files_mod/features/fetch_all_buckets_and_files/states_h
     as _i154;
 import '../../../modules/files_mod/features/file_editor/data/local_source/absts/pick_the_file_from_phone_abst.dart'
     as _i1006;
+import '../../../modules/files_mod/features/file_editor/data/local_source/absts/save_the_file_downloaded_abst.dart'
+    as _i238;
 import '../../../modules/files_mod/features/file_editor/data/local_source/impls/pick_the_file_from_phone_impl.dart'
     as _i259;
+import '../../../modules/files_mod/features/file_editor/data/local_source/impls/save_the_file_downloaded_impl.dart'
+    as _i109;
 import '../../../modules/files_mod/features/file_editor/data/remote_source/absts/copy_the_file_abst.dart'
     as _i247;
 import '../../../modules/files_mod/features/file_editor/data/remote_source/absts/delete_the_file_abst.dart'
     as _i113;
+import '../../../modules/files_mod/features/file_editor/data/remote_source/absts/download_the_file_abst.dart'
+    as _i755;
 import '../../../modules/files_mod/features/file_editor/data/remote_source/absts/rename_the_file_abst.dart'
     as _i814;
 import '../../../modules/files_mod/features/file_editor/data/remote_source/absts/upload_file_on_server_abst.dart'
@@ -103,6 +101,8 @@ import '../../../modules/files_mod/features/file_editor/data/reposit_impls/renam
     as _i728;
 import '../../../modules/files_mod/features/file_editor/data/reposit_impls/upload_a_file_reposit_impl.dart'
     as _i546;
+import '../../../modules/files_mod/features/file_editor/data/reposit_impls/user_download_the_file_reposit_impl.dart'
+    as _i104;
 import '../../../modules/files_mod/features/file_editor/domain/reposit_absts/copy_and_paste_reposit_abst.dart'
     as _i315;
 import '../../../modules/files_mod/features/file_editor/domain/reposit_absts/delete_the_file_reposit_abst.dart'
@@ -111,10 +111,14 @@ import '../../../modules/files_mod/features/file_editor/domain/reposit_absts/ren
     as _i286;
 import '../../../modules/files_mod/features/file_editor/domain/reposit_absts/upload_a_file_reposit_abst.dart'
     as _i1018;
+import '../../../modules/files_mod/features/file_editor/domain/reposit_absts/user_download_the_file_reposit_abst.dart'
+    as _i135;
 import '../../../modules/files_mod/features/file_editor/domain/usecases/copy_and_paste_usecase.dart'
     as _i167;
 import '../../../modules/files_mod/features/file_editor/domain/usecases/delete_the_file_usecase.dart'
     as _i62;
+import '../../../modules/files_mod/features/file_editor/domain/usecases/user_dowload_a_file_usecase.dart'
+    as _i28;
 import '../../../modules/files_mod/features/file_editor/domain/usecases/user_rename_the_file_usecase.dart'
     as _i834;
 import '../../../modules/files_mod/features/file_editor/domain/usecases/user_upload_the_file_usecase.dart'
@@ -242,8 +246,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i154.FilesBloc>(() => _i154.FilesBloc());
     gh.lazySingleton<_i106.FetchTheHostAddressCountryAbst>(
         () => _i825.FetchTheHostAddressCountryImpl());
-    gh.lazySingleton<_i88.DownloadTheFileAbst>(
-        () => _i998.DownloadTheFileImpl());
     gh.lazySingleton<_i639.FetchAllExistantHostsAbst>(
         () => _i936.FetchAllExistantHostsImpl());
     gh.lazySingleton<_i814.RenameTheFileAbst>(() => _i157.RenameTheFileImpl());
@@ -254,6 +256,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i208.FetchHosterFromRenterForConfigImpl());
     gh.lazySingleton<_i1048.FetchHosterFromRenterAbst>(
         () => _i429.FetchHosterFromRenterImpl());
+    gh.lazySingleton<_i238.SaveTheFileDownloadedAbst>(
+        () => _i109.SaveTheFileDownloadedImpl());
     gh.lazySingleton<_i83.FetchConsensusFromRenterAbst>(
         () => _i334.FetchConsensusFromRenterImpl());
     gh.lazySingleton<_i1006.PickTheFileFromPhoneAbst>(
@@ -282,6 +286,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i868.UploadFileOnServerImpl());
     gh.lazySingleton<_i17.FetchActiveContractCountAbst>(
         () => _i603.FetchActiveContractCountImpl());
+    gh.lazySingleton<_i755.DownloadTheFileAbst>(
+        () => _i998.DownloadTheFileImpl());
     gh.lazySingleton<_i247.CopyTheFileAbst>(() => _i405.CopyTheFileImpl());
     gh.lazySingleton<_i582.FetchTheHostDataFromRenterForConfigRepositAbst>(
         () => _i737.FetchTheHostDataFromRenterForConfigRepositImpl(
@@ -313,6 +319,11 @@ extension GetItInjectableX on _i174.GetIt {
               fetchTheHostAddressCountryAbst:
                   gh<_i106.FetchTheHostAddressCountryAbst>(),
             ));
+    gh.lazySingleton<_i135.UserDownloadTheFileRepositAbst>(
+        () => _i104.UserDownloadTheFileRepositImpl(
+              downloadTheFileAbst: gh<_i755.DownloadTheFileAbst>(),
+              saveTheFileDownloadedAbst: gh<_i238.SaveTheFileDownloadedAbst>(),
+            ));
     gh.lazySingleton<_i145.FetchOneHostInfoDataUsecase>(() =>
         _i145.FetchOneHostInfoDataUsecase(
             fetchOneHostDataRepositAbst:
@@ -324,9 +335,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i286.RenameTheFileRepositAbst>(() =>
         _i728.RenameTheFileRepositImpl(
             renameTheFileAbst: gh<_i814.RenameTheFileAbst>()));
-    gh.lazySingleton<_i341.UserDownloadTheFileRepositAbst>(() =>
-        _i566.UserDownloadTheFileRepositImpl(
-            downloadTheFileAbst: gh<_i88.DownloadTheFileAbst>()));
     gh.lazySingleton<_i315.CopyAndPasteRepositAbst>(() =>
         _i799.CopyAndPasteRepositImpl(
             copyTheFileAbst: gh<_i247.CopyTheFileAbst>()));
@@ -365,10 +373,10 @@ extension GetItInjectableX on _i174.GetIt {
         _i38.UpdateTheHosterWithNewDataRepositImpl(
             updateTheHosterWithNewDataAbst:
                 gh<_i371.UpdateTheHosterWithNewDataAbst>()));
-    gh.lazySingleton<_i206.UserDowloadAFileUsecase>(() =>
-        _i206.UserDowloadAFileUsecase(
+    gh.lazySingleton<_i28.UserDowloadAFileUsecase>(() =>
+        _i28.UserDowloadAFileUsecase(
             userDownloadTheFileRepositAbst:
-                gh<_i341.UserDownloadTheFileRepositAbst>()));
+                gh<_i135.UserDownloadTheFileRepositAbst>()));
     gh.lazySingleton<_i1018.UploadAFileRepositAbst>(
         () => _i546.UploadAFileRepositImpl(
               uploadFileOnServerAbst: gh<_i866.UploadFileOnServerAbst>(),
@@ -430,6 +438,13 @@ extension GetItInjectableX on _i174.GetIt {
         _i395.ReconfigTheHostUsecase(
             updateTheHosterWithNewDataRepositAbst:
                 gh<_i163.UpdateTheHosterWithNewDataRepositAbst>()));
+    gh.factory<_i73.FileEditorBloc>(() => _i73.FileEditorBloc(
+          userUploadTheFileUsecase: gh<_i828.UserUploadTheFileUsecase>(),
+          userDowloadAFileUsecase: gh<_i28.UserDowloadAFileUsecase>(),
+          deleteTheFileUsecase: gh<_i62.DeleteTheFileUsecase>(),
+          copyAndPasteUsecase: gh<_i167.CopyAndPasteUsecase>(),
+          userRenameTheFileUsecase: gh<_i834.UserRenameTheFileUsecase>(),
+        ));
     gh.factory<_i891.FetchAllBucketBloc>(() => _i891.FetchAllBucketBloc(
         fetchAllBucketsUsecase: gh<_i413.FetchAllBucketsUsecase>()));
     gh.factory<_i318.NetworkDataFetchingBloc>(() =>
@@ -448,12 +463,6 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i301.LoginAccountBloc>(() => _i301.LoginAccountBloc(
         userMakeTheLoginUsecase: gh<_i473.UserMakeTheLoginUsecase>()));
-    gh.factory<_i73.FileEditorBloc>(() => _i73.FileEditorBloc(
-          userUploadTheFileUsecase: gh<_i828.UserUploadTheFileUsecase>(),
-          deleteTheFileUsecase: gh<_i62.DeleteTheFileUsecase>(),
-          copyAndPasteUsecase: gh<_i167.CopyAndPasteUsecase>(),
-          userRenameTheFileUsecase: gh<_i834.UserRenameTheFileUsecase>(),
-        ));
     return this;
   }
 }

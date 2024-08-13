@@ -106,6 +106,9 @@
   "not_rename_folder_text":"Ne peut pas renommer les dossiers avec le mode simple",
   "view_detail_file_text":"Détails du Fichier",
   "file_uploaded_text":"Fichier Uploadé",
-  "no_file_picked_text":"Aucun Fichier Choisi"
+  "no_file_picked_text":"Aucun Fichier Choisi",
+  "download_file_text":"Télécharger le Fichier",
+  "file_download_success_text":"Fichier Téléchargé",
+  "file_download_failed_text":"Echec durant le téléchargement"
   
 }

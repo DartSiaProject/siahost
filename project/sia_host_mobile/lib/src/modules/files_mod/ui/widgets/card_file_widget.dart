@@ -357,6 +357,32 @@ class _CardFileWidgetState extends State<CardFileWidget> {
                     ),
                     onPressed: () {
                       if (widget.fileType != "folder") {
+                        context.read<FileEditorBloc>().add(
+                            UserDownloadTheFileEvent(
+                                fileName: widget.fileName.replaceAll('/', ''),
+                                bucketName: widget.bucketName));
+                      }
+
+                      _hideMenu();
+                    },
+                    child: Text(
+                        Translator.of(context)!
+                            .translate(Lang.downloadFileText),
+                        style: const TextStyle(
+                          color: ColorsApp.bleachedCedarColor,
+                          fontWeight: FontWeight.w400,
+                        )),
+                  ),
+                ),
+                Visibility(
+                  visible: widget.fileType != "folder",
+                  child: TextButton(
+                    style: ButtonStyle(
+                      overlayColor:
+                          WidgetStateProperty.all(ColorsApp.transparentColor),
+                    ),
+                    onPressed: () {
+                      if (widget.fileType != "folder") {
                         _showFileDetailsDialogBox(context: context);
                       }
 

@@ -104,6 +104,9 @@
   "not_rename_folder_text":"Can't rename dirs with mode single",
   "view_detail_file_text":"File Details",
   "file_uploaded_text":"File Uploaded",
-  "no_file_picked_text":"No File Selected"
+  "no_file_picked_text":"No File Selected",
+  "download_file_text":"Download File",
+  "file_download_success_text":"File Downloaded",
+  "file_download_failed_text":"File Download Failed"
   
 }

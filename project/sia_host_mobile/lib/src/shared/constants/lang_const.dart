@@ -113,4 +113,7 @@ class Lang {
   static const viewDetailFileText = "view_detail_file_text";
   static const fileUploadedText = "file_uploaded_text";
   static const noFilePickedText = "no_file_picked_text";
+  static const downloadFileText = "download_file_text";
+  static const fileDownloadSuccessText = "file_download_success_text";
+  static const fileDownloadFailedText = "file_download_failed_text";
 }

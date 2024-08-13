@@ -15,6 +15,16 @@ class UserUploadTheFileEvent extends FileEditorEvent {
   });
 }
 
+class UserDownloadTheFileEvent extends FileEditorEvent {
+  final String fileName;
+  final String bucketName;
+
+  const UserDownloadTheFileEvent({
+    required this.fileName,
+    required this.bucketName,
+  });
+}
+
 class UserDeleteTheFileEvent extends FileEditorEvent {
   final String fileName;
   final String bucketName;
