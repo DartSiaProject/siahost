@@ -31,7 +31,7 @@ class CardOfBucketWidget extends StatelessWidget {
             height: 140.h,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 30.0, bottom: 20.0),
+            padding: const EdgeInsets.only(left: 30.0, bottom: 30.0),
             child: Flex(
               direction: Axis.vertical,
               mainAxisSize: MainAxisSize.min,

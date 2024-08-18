@@ -1,4 +1,4 @@
-import 'package:sia_host_mobile/src/modules/files_mod/features/view_a_file_details/domain/entities/file_details_entity.dart';
+import '../../../domain/entities/file_details_entity.dart';
 
 class FileDetailsModel extends FileDetailsEntity {
   const FileDetailsModel({

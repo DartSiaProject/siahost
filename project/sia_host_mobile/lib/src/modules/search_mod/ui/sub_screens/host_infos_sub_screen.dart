@@ -41,113 +41,107 @@ class _HostInfoScreenState extends State<HostInfoScreen> {
           var _hostInfoEntity =
               fetchOneHostDataAndShowItBuilderstate.hostInfoEntity;
 
-          return Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Flex(
-                direction: Axis.vertical,
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      Translator.of(context)!.translate(Lang.hostInfoText),
+          return Flex(
+            direction: Axis.vertical,
+            children: <Widget>[
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  Translator.of(context)!.translate(Lang.hostInfoText),
+                  style: TextStyle(
+                    fontFamily: "Manrope",
+                    fontSize: 28.0.sp,
+                    color: ColorsApp.whiteColor,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 15.0.h,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: ColorsApp.paleTealColor.withOpacity(0.46),
+                  shape: BoxShape.circle,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(25.0),
+                  child: CircularPercentIndicator(
+                    radius: 35.0,
+                    lineWidth: 8.0,
+                    animation: true,
+                    reverse: true,
+                    backgroundColor: ColorsApp.spearmintColor.withOpacity(0.4),
+                    percent: _hostInfoEntity.finalScore / 10,
+                    center: Text(
+                      _hostInfoEntity.finalScore.toString(),
                       style: TextStyle(
                         fontFamily: "Manrope",
-                        fontSize: 28.0.sp,
+                        fontWeight: FontWeight.w400,
                         color: ColorsApp.whiteColor,
-                        fontWeight: FontWeight.w700,
+                        fontSize: 30.0.sp,
                       ),
                     ),
+                    progressColor: ColorsApp.whiteColor,
+                    circularStrokeCap: CircularStrokeCap.round,
                   ),
+                ),
+              ),
+              SizedBox(
+                height: 15.0.h,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                child: Text(
+                  _hostInfoEntity.currentIp,
+                  style: TextStyle(
+                    fontFamily: "DmSans",
+                    fontSize: 17.0.sp,
+                    color: ColorsApp.lightGreyColor,
+                    fontWeight: FontWeight.w700,
+                    overflow: TextOverflow.clip,
+                  ),
+                  maxLines: 1,
+                ),
+              ),
+              SizedBox(
+                height: 15.0.h,
+              ),
+              Flex(
+                direction: Axis.horizontal,
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  SvgPicture.asset(IconSvgs.locationSvg),
                   SizedBox(
-                    height: 15.0.h,
+                    width: 5.0.w,
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: ColorsApp.paleTealColor.withOpacity(0.46),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(25.0),
-                      child: CircularPercentIndicator(
-                        radius: 35.0,
-                        lineWidth: 8.0,
-                        animation: true,
-                        reverse: true,
-                        backgroundColor:
-                            ColorsApp.spearmintColor.withOpacity(0.4),
-                        percent: _hostInfoEntity.finalScore / 10,
-                        center: Text(
-                          _hostInfoEntity.finalScore.toString(),
-                          style: TextStyle(
-                            fontFamily: "Manrope",
-                            fontWeight: FontWeight.w400,
-                            color: ColorsApp.whiteColor,
-                            fontSize: 30.0.sp,
-                          ),
-                        ),
-                        progressColor: ColorsApp.whiteColor,
-                        circularStrokeCap: CircularStrokeCap.round,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15.0.h,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 60.0),
-                    child: Text(
-                      _hostInfoEntity.currentIp,
-                      style: TextStyle(
-                        fontFamily: "DmSans",
-                        fontSize: 17.0.sp,
-                        color: ColorsApp.lightGreyColor,
-                        fontWeight: FontWeight.w700,
-                        overflow: TextOverflow.clip,
-                      ),
-                      maxLines: 1,
+                  Text(
+                    _hostInfoEntity.addressLocationIp,
+                    style: TextStyle(
+                      fontFamily: "DmSans",
+                      fontSize: 17.0.sp,
+                      color: ColorsApp.paleTealColor,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
-                  SizedBox(
-                    height: 15.0.h,
-                  ),
-                  Flex(
-                    direction: Axis.horizontal,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      SvgPicture.asset(IconSvgs.locationSvg),
-                      SizedBox(
-                        width: 5.0.w,
-                      ),
-                      Text(
-                        _hostInfoEntity.addressLocationIp,
-                        style: TextStyle(
-                          fontFamily: "DmSans",
-                          fontSize: 17.0.sp,
-                          color: ColorsApp.paleTealColor,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15.0.h,
-                  ),
-                  PriceInfoBarWidget(
-                    hostModel: _hostInfoEntity,
-                  ),
-                  SizedBox(
-                    height: 15.0.h,
-                  ),
-                  Expanded(
-                    child: InfoListWidget(
-                      hostModel: _hostInfoEntity,
-                    ),
-                  )
                 ],
               ),
-            ),
+              SizedBox(
+                height: 15.0.h,
+              ),
+              PriceInfoBarWidget(
+                hostModel: _hostInfoEntity,
+              ),
+              SizedBox(
+                height: 15.0.h,
+              ),
+              Expanded(
+                child: InfoListWidget(
+                  hostModel: _hostInfoEntity,
+                ),
+              )
+            ],
           );
         }
         return const Center(

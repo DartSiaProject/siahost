@@ -6,6 +6,8 @@ sealed class NetworkDataFetchingState {
 
 final class NetworkDataFetchingInitial extends NetworkDataFetchingState {}
 
+class NetworkDataFetchedLoading extends NetworkDataFetchingState {}
+
 class NetworkDataFetchedSuccess extends NetworkDataFetchingState {
   final NetworkDataEntity networkDataEntity;
 

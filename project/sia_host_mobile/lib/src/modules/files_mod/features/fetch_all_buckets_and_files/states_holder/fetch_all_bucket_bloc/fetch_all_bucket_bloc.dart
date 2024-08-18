@@ -26,7 +26,9 @@ class FetchAllBucketBloc
           (success) => emit(AllBucketFetchedSuccess(allBuckets: success)),
           (error) => emit(error == Lang.noBucketText
               ? AllBucketFetchedEmpty(message: error)
-              : AllBucketFetchedFailed(message: error)));
+              : error == Lang.makeLoginDemandText
+                  ? MakLoginToSeeTheBucket(message: error)
+                  : AllBucketFetchedFailed(message: error)));
     });
   }
 }

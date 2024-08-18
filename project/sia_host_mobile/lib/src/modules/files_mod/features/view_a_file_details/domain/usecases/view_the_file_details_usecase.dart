@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
-import 'package:sia_host_mobile/src/modules/files_mod/features/view_a_file_details/domain/entities/file_details_entity.dart';
 
+import '../entities/file_details_entity.dart';
 import '../reposit_absts/user_view_the_file_details_reposit_abst.dart';
 
 @lazySingleton

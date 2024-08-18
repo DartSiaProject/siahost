@@ -5,36 +5,34 @@ import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
 
 import '../../../../../../shared/constants/lang_const.dart';
+import '../../../../../../shared/features/fetch_user_credentials/data/local_source/absts/fetch_the_user_credential_abst.dart';
 import '../../../../../../shared/global/map_variable.dart' as global;
 import '../../../../../../shared/services/connection/requests/connection_request.dart';
 import '../../../../../../shared/services/security/requests/encrypter_request.dart';
 import '../../../../../my_host_mod/features/fetch_host_from_renter/data/remote_source/absts/fetch_hoster_from_renter_abst.dart';
 import '../../domain/entities/the_host_data_entity.dart';
 import '../../domain/reposit_absts/fetch_the_host_data_from_renter_for_config_reposit_abst.dart';
-import '../local_source/absts/fetch_the_user_credential_for_config_abst.dart';
 import '../remote_source/models/the_host_data_model.dart';
 
 @LazySingleton(as: FetchTheHostDataFromRenterForConfigRepositAbst)
 class FetchTheHostDataFromRenterForConfigRepositImpl
     implements FetchTheHostDataFromRenterForConfigRepositAbst {
-  final FetchTheUserCredentialForConfigAbst
-      _fetchTheUserCredentialForConfigAbst;
+  final FetchTheUserCredentialAbst _fetchTheUserCredentialAbst;
+
   final FetchHosterFromRenterAbst _fetchHosterFromRenterAbst;
 
   FetchTheHostDataFromRenterForConfigRepositImpl({
-    required FetchTheUserCredentialForConfigAbst
-        fetchTheUserCredentialForConfigAbst,
+    required FetchTheUserCredentialAbst fetchTheUserCredentialAbst,
     required FetchHosterFromRenterAbst fetchHosterFromRenterAbst,
-  })  : _fetchTheUserCredentialForConfigAbst =
-            fetchTheUserCredentialForConfigAbst,
+  })  : _fetchTheUserCredentialAbst = fetchTheUserCredentialAbst,
         _fetchHosterFromRenterAbst = fetchHosterFromRenterAbst;
 
   @override
   Future<Result<TheHostDataEntity, String>>
       fetchTheHostDataFromRenterForConfig() async {
     if ((await ConnectionRequest.checkConnectivity())) {
-      return _fetchTheUserCredentialForConfigAbst
-          .fetchUserCredentialForConfig()
+      return _fetchTheUserCredentialAbst
+          .fetchUserCredential()
           .then((_resultCredential) async {
         if (_resultCredential["status"] == false) {
           return const Result.error(Lang.makeLoginDemandText);

@@ -31,3 +31,11 @@ class AllBucketFetchedFailed extends FetchAllBucketState {
     required this.message,
   });
 }
+
+class MakLoginToSeeTheBucket extends FetchAllBucketState {
+  final String message;
+
+  const MakLoginToSeeTheBucket({
+    required this.message,
+  });
+}

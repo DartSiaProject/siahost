@@ -9,7 +9,7 @@ import 'src/core/configs/language_config/translations_delegate.dart';
 import 'src/core/init.dart';
 import 'src/core/router/auto_routes.dart';
 import 'src/core/themes/dark_theme.dart';
-import 'src/modules/account_mod/features/fetch_user_account_present/states_holder/fetch_user_credential_bloc/fetch_user_credential_bloc.dart';
+import 'src/modules/account_mod/features/fetch_the_user_credentials/states_holder/fetch_user_credential_bloc/fetch_user_credential_bloc.dart';
 import 'src/modules/account_mod/features/user_login/states_holder/login_account_bloc/login_account_bloc.dart';
 import 'src/modules/files_mod/features/fetch_all_buckets_and_files/states_holder/fetch_all_bucket_bloc/fetch_all_bucket_bloc.dart';
 import 'src/modules/files_mod/features/fetch_all_buckets_and_files/states_holder/fetch_all_file_bloc/fetch_all_files_bloc.dart';

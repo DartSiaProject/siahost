@@ -17,6 +17,7 @@ class FetchMyHosterBloc extends Bloc<FetchMyHosterEvent, FetchMyHosterState> {
   FetchMyHosterBloc({required this.fetchMyHostFromRenterUsecase})
       : super(FetchMyHosterInitial()) {
     on<FetchMyHostFromRenterdEvent>((event, emit) async {
+      emit(MyHostDataGetLoading());
       Result<MyHostDataEntity, String> _result =
           await fetchMyHostFromRenterUsecase.call();
 

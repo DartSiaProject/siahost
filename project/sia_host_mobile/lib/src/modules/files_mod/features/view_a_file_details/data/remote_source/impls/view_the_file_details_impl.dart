@@ -1,7 +1,8 @@
 import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:renterd/renterd.dart';
-import 'package:sia_host_mobile/src/modules/files_mod/features/view_a_file_details/data/remote_source/absts/view_the_file_details_abst.dart';
+
+import '../absts/view_the_file_details_abst.dart';
 
 /// Project: [SiaHostsMobile],
 /// description:  Dans ce fichier, nous avons les fonctions suivantes [viewTheDetailsFile]

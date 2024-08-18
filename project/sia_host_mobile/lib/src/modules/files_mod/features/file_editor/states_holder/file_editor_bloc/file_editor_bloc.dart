@@ -2,14 +2,14 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
-import 'package:sia_host_mobile/src/modules/files_mod/features/file_editor/domain/usecases/user_dowload_a_file_usecase.dart';
-import 'package:sia_host_mobile/src/modules/files_mod/features/file_editor/domain/usecases/user_upload_the_file_usecase.dart';
 
 import '../../domain/entities/copy_file_info_entity.dart';
 import '../../domain/entities/rename_file_info_entity.dart';
 import '../../domain/usecases/copy_and_paste_usecase.dart';
 import '../../domain/usecases/delete_the_file_usecase.dart';
+import '../../domain/usecases/user_dowload_a_file_usecase.dart';
 import '../../domain/usecases/user_rename_the_file_usecase.dart';
+import '../../domain/usecases/user_upload_the_file_usecase.dart';
 
 part 'file_editor_event.dart';
 part 'file_editor_state.dart';

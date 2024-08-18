@@ -41,7 +41,7 @@ class _SiaMainScreenState extends State<SiaMainScreen> {
             }
           },
           child: Scaffold(
-            resizeToAvoidBottomInset: false,
+            resizeToAvoidBottomInset: true,
             appBar: AppBar(
               automaticallyImplyLeading: false,
               actions: <Widget>[
@@ -52,7 +52,9 @@ class _SiaMainScreenState extends State<SiaMainScreen> {
                     color: ColorsApp.tunaColor,
                     child: InkWell(
                       borderRadius: BorderRadius.circular(5.0.r),
-                      onTap: () {},
+                      onTap: () {
+                        print("NOTIFICATION");
+                      },
                       child: Padding(
                         padding: const EdgeInsets.all(3.0),
                         child: SvgPicture.asset(
@@ -66,9 +68,11 @@ class _SiaMainScreenState extends State<SiaMainScreen> {
                 ),
               ],
             ),
-            body: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5.0.w),
-              child: child,
+            body: Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                child: child,
+              ),
             ),
             bottomNavigationBar: BottomNavyBar(
               backgroundColor: ColorsApp.darkJungleGreenColor,

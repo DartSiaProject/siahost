@@ -8,7 +8,7 @@ class DarkTheme {
     scaffoldBackgroundColor: ColorsApp.bleachedCedarColor,
     appBarTheme: const AppBarTheme(
       elevation: 0.0,
-      color: ColorsApp.bleachedCedarColor,
+      color: ColorsApp.transparentColor,
     ),
     inputDecorationTheme: InputDecorationTheme(
       fillColor: ColorsApp.seashellColor,

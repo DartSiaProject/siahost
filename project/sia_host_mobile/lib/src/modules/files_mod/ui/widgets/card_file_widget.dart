@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:sia_host_mobile/src/modules/files_mod/features/view_a_file_details/states_holder/view_the_file_content_bloc/view_the_file_details_bloc.dart';
-import 'package:sia_host_mobile/src/modules/files_mod/ui/widgets/fields_of_file_details_widget.dart';
 
 import '../../../../core/configs/language_config/translator.dart';
 import '../../../../shared/constants/colors_const.dart';
@@ -17,7 +15,9 @@ import '../../../../shared/ui/widgets/question_dialog_box_widget.dart';
 import '../../features/file_editor/domain/entities/copy_file_info_entity.dart';
 import '../../features/file_editor/domain/entities/rename_file_info_entity.dart';
 import '../../features/file_editor/states_holder/file_editor_bloc/file_editor_bloc.dart';
+import '../../features/view_a_file_details/states_holder/view_the_file_content_bloc/view_the_file_details_bloc.dart';
 import 'fields_of_file_copy_widget.dart';
+import 'fields_of_file_details_widget.dart';
 import 'fields_of_file_rename_widget.dart';
 
 class CardFileWidget extends StatefulWidget {

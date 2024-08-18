@@ -6,6 +6,8 @@ sealed class FetchAllHostsDataState {
 
 final class FetchAllHostsDataInitial extends FetchAllHostsDataState {}
 
+class HostDataListLoading extends FetchAllHostsDataState {}
+
 class HostDataListLoaded extends FetchAllHostsDataState {
   final List<CardOfHostEntity> hostModelList;
 

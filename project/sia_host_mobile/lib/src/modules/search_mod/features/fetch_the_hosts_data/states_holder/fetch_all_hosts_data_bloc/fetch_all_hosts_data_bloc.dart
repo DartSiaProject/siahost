@@ -21,6 +21,7 @@ class FetchAllHostsDataBloc
     required this.fetchAllTheHostUsecase,
   }) : super(FetchAllHostsDataInitial()) {
     on<FetchAllHostsDataListEvent>((event, emit) async {
+      emit(HostDataListLoading());
       Result<List<CardOfHostEntity>, String> _result =
           await fetchAllTheHostUsecase.call();
       _result.when(
@@ -29,6 +30,7 @@ class FetchAllHostsDataBloc
     });
 
     on<SearchHostSearchedByPubKeyEvent>((event, emit) async {
+      emit(HostDataListLoading());
       Result<List<CardOfHostEntity>, String> _result =
           await searchTheHostByPubKeyUsecase.call(pubKey: event.pubKey);
       _result.when(
