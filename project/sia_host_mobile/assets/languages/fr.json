@@ -84,7 +84,7 @@
   "internal_server_error_text": "Erreur sur le serveur",
   "host_not_exist_text": "Cet hôte n'existe pas",
   "files_text":"Fichiers",
-  "buckets_file_text":"Mes Fichiers",
+  "buckets_file_text":"Mes Buckets",
   "no_file_text":"Aucun Fichiers",
   "add_file_text":"Ajouter un Fichier",
   
@@ -110,5 +110,7 @@
   "download_file_text":"Télécharger le Fichier",
   "file_download_success_text":"Fichier Téléchargé",
   "file_download_failed_text":"Echec durant le téléchargement"
+
+  
   
 }

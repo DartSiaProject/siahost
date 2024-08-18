@@ -3,14 +3,15 @@ import 'dart:io';
 
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
-import 'package:sia_host_mobile/src/modules/files_mod/features/view_a_file_details/data/remote_source/absts/view_the_file_details_abst.dart';
-import 'package:sia_host_mobile/src/modules/files_mod/features/view_a_file_details/data/remote_source/models/file_details_model.dart';
-import 'package:sia_host_mobile/src/modules/files_mod/features/view_a_file_details/domain/entities/file_details_entity.dart';
-import 'package:sia_host_mobile/src/modules/files_mod/features/view_a_file_details/domain/reposit_absts/user_view_the_file_details_reposit_abst.dart';
-import 'package:sia_host_mobile/src/shared/constants/lang_const.dart';
-import 'package:sia_host_mobile/src/shared/global/map_variable.dart' as global;
-import 'package:sia_host_mobile/src/shared/services/connection/requests/connection_request.dart';
-import 'package:sia_host_mobile/src/shared/services/security/requests/encrypter_request.dart';
+
+import '../../../../../../shared/constants/lang_const.dart';
+import '../../../../../../shared/global/map_variable.dart' as global;
+import '../../../../../../shared/services/connection/requests/connection_request.dart';
+import '../../../../../../shared/services/security/requests/encrypter_request.dart';
+import '../../domain/entities/file_details_entity.dart';
+import '../../domain/reposit_absts/user_view_the_file_details_reposit_abst.dart';
+import '../remote_source/absts/view_the_file_details_abst.dart';
+import '../remote_source/models/file_details_model.dart';
 
 @LazySingleton(as: UserViewTheFileDetailsRepositAbst)
 class UserViewTheFileDetailsRepositImpl

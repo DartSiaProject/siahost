@@ -1,7 +1,8 @@
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
-import 'package:sia_host_mobile/src/modules/files_mod/features/file_editor/data/local_source/absts/save_the_file_downloaded_abst.dart';
-import 'package:sia_host_mobile/src/shared/services/files/requests/save_file_request.dart';
+
+import '../../../../../../../shared/services/files/requests/save_file_request.dart';
+import '../absts/save_the_file_downloaded_abst.dart';
 
 /// Project: [SiaHostsMobile],
 /// description:  Dans ce fichier, nous avons les fonctions suivantes [saveTheFileDownloaded]

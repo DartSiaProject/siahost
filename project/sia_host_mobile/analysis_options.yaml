@@ -15,6 +15,7 @@ analyzer:
     invalid_assignment: warning
     missing_return: error
     dead_code: info
+    must_be_immutable: ignore
 
 linter:
   # The lint rules applied to this project can be customized in the

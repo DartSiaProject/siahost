@@ -9,6 +9,8 @@ sealed class FetchMyHosterState extends Equatable {
 
 final class FetchMyHosterInitial extends FetchMyHosterState {}
 
+class MyHostDataGetLoading extends FetchMyHosterState {}
+
 class MyHostDataGetSuccess extends FetchMyHosterState {
   final MyHostDataEntity myHostDataEntity;
 

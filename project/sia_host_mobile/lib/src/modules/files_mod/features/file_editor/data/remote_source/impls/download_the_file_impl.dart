@@ -1,7 +1,8 @@
 import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:renterd/renterd.dart';
-import 'package:sia_host_mobile/src/modules/files_mod/features/file_editor/data/remote_source/absts/download_the_file_abst.dart';
+
+import '../absts/download_the_file_abst.dart';
 
 /// Project: [SiaHostsMobile],
 /// description:  Dans ce fichier, nous avons les fonctions suivantes [downloadTheFile]

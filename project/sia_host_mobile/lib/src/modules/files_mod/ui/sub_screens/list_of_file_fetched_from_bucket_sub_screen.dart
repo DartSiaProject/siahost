@@ -61,12 +61,12 @@ class _ListOfFileFetchedFromBucketScreenState
               position: PopupMenuPosition.under,
               color: ColorsApp.bleachedCedarColor,
               icon: SizedBox(
-                width: 30.0.w,
-                height: 30.0.h,
+                width: 24.0.w,
+                height: 24.0.h,
                 child: Icon(
                   Icons.more_vert_rounded,
                   color: ColorsApp.greyColor,
-                  size: 44.0.r,
+                  size: 30.0.r,
                 ),
               ),
               iconSize: 50.0.r,

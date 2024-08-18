@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
-import '../../../../../../../shared/constants/envs_const.dart';
+import '../../../../../constants/envs_const.dart';
+import '../../../../../services/cache/requests/secure_storage_request.dart';
 
-import '../../../../../../../shared/services/cache/requests/secure_storage_request.dart';
 import '../absts/fetch_the_user_credential_abst.dart';
 
 /// Project: [SiaHostsMobile],

@@ -2,14 +2,15 @@ import 'dart:io';
 
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
-import 'package:sia_host_mobile/src/modules/files_mod/features/file_editor/data/local_source/absts/pick_the_file_from_phone_abst.dart';
-import 'package:sia_host_mobile/src/modules/files_mod/features/file_editor/data/remote_source/absts/upload_file_on_server_abst.dart';
-import 'package:sia_host_mobile/src/modules/files_mod/features/file_editor/domain/reposit_absts/upload_a_file_reposit_abst.dart';
-import 'package:sia_host_mobile/src/shared/constants/lang_const.dart';
-import 'package:sia_host_mobile/src/shared/extensions/file_ext.dart';
-import 'package:sia_host_mobile/src/shared/global/map_variable.dart';
-import 'package:sia_host_mobile/src/shared/services/connection/requests/connection_request.dart';
-import 'package:sia_host_mobile/src/shared/services/security/requests/encrypter_request.dart';
+
+import '../../../../../../shared/constants/lang_const.dart';
+import '../../../../../../shared/extensions/file_ext.dart';
+import '../../../../../../shared/global/map_variable.dart';
+import '../../../../../../shared/services/connection/requests/connection_request.dart';
+import '../../../../../../shared/services/security/requests/encrypter_request.dart';
+import '../../domain/reposit_absts/upload_a_file_reposit_abst.dart';
+import '../local_source/absts/pick_the_file_from_phone_abst.dart';
+import '../remote_source/absts/upload_file_on_server_abst.dart';
 
 @LazySingleton(as: UploadAFileRepositAbst)
 class UploadAFileRepositImpl implements UploadAFileRepositAbst {

@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:sia_host_mobile/src/modules/files_mod/features/view_a_file_details/states_holder/view_the_file_content_bloc/view_the_file_details_bloc.dart';
-import 'package:sia_host_mobile/src/modules/files_mod/ui/widgets/fields_of_file_details_widget.dart';
+import 'package:popover/popover.dart';
 
 import '../../../../core/configs/language_config/translator.dart';
 import '../../../../shared/constants/colors_const.dart';
@@ -17,7 +16,9 @@ import '../../../../shared/ui/widgets/question_dialog_box_widget.dart';
 import '../../features/file_editor/domain/entities/copy_file_info_entity.dart';
 import '../../features/file_editor/domain/entities/rename_file_info_entity.dart';
 import '../../features/file_editor/states_holder/file_editor_bloc/file_editor_bloc.dart';
+import '../../features/view_a_file_details/states_holder/view_the_file_content_bloc/view_the_file_details_bloc.dart';
 import 'fields_of_file_copy_widget.dart';
+import 'fields_of_file_details_widget.dart';
 import 'fields_of_file_rename_widget.dart';
 
 class CardFileWidget extends StatefulWidget {
@@ -52,20 +53,20 @@ class _CardFileWidgetState extends State<CardFileWidget> {
     _fileRenameController = TextEditingController();
   }
 
-  OverlayEntry? _overlayEntry;
+  // OverlayEntry? _overlayEntry;
 
-  void _showMenu(BuildContext context, Offset position) {
-    _overlayEntry = _createOverlayEntry(
-      context,
-      position,
-    );
-    Overlay.of(context).insert(_overlayEntry!);
-  }
+  // void _showMenu(BuildContext context, Offset position) {
+  //   _overlayEntry = _createOverlayEntry(
+  //     context,
+  //     position,
+  //   );
+  //   Overlay.of(context).insert(_overlayEntry!);
+  // }
 
-  void _hideMenu() {
-    _overlayEntry?.remove();
-    _overlayEntry = null;
-  }
+  // void _hideMenu() {
+  //   _overlayEntry?.remove();
+  //   _overlayEntry = null;
+  // }
 
   void _showQuestionDialogBox({
     required BuildContext context,
@@ -332,286 +333,268 @@ class _CardFileWidgetState extends State<CardFileWidget> {
     );
   }
 
-  OverlayEntry _createOverlayEntry(
-    BuildContext context,
-    Offset position,
-  ) {
-    return OverlayEntry(
-      builder: (context) => Positioned(
-        left: position.dx,
-        top: position.dy - 65,
-        child: Material(
-          color: ColorsApp.transparentColor,
-          child: Container(
-            color: ColorsApp.whiteColor,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Visibility(
-                  visible: widget.fileType != "folder",
-                  child: TextButton(
+  // OverlayEntry _createOverlayEntry(
+  //   BuildContext context,
+  //   Offset position,
+  // ) {
+  //   return OverlayEntry(
+  //     builder: (context) => Positioned(
+  //       left: position.dx,
+  //       top: position.dy - 65,
+  //       child: Material(
+  //         color: ColorsApp.transparentColor,
+  //         child: Container(
+  //           color: ColorsApp.whiteColor,
+  //           child: Column(
+  //             mainAxisSize: MainAxisSize.min,
+  //             crossAxisAlignment: CrossAxisAlignment.start,
+  //             children: <Widget>[
+  //               Visibility(
+  //                 visible: widget.fileType != "folder",
+  //                 child: TextButton(
+  //                   style: ButtonStyle(
+  //                     overlayColor:
+  //                         WidgetStateProperty.all(ColorsApp.transparentColor),
+  //                   ),
+  //                   onPressed: () {
+  //                     if (widget.fileType != "folder") {
+  //                       context.read<FileEditorBloc>().add(
+  //                           UserDownloadTheFileEvent(
+  //                               fileName: widget.fileName.replaceAll('/', ''),
+  //                               bucketName: widget.bucketName));
+  //                     }
+
+  //                     _hideMenu();
+  //                   },
+  //                   child: Text(
+  //                       Translator.of(context)!
+  //                           .translate(Lang.downloadFileText),
+  //                       style: const TextStyle(
+  //                         color: ColorsApp.bleachedCedarColor,
+  //                         fontWeight: FontWeight.w400,
+  //                       )),
+  //                 ),
+  //               ),
+  //               Visibility(
+  //                 visible: widget.fileType != "folder",
+  //                 child: TextButton(
+  //                   style: ButtonStyle(
+  //                     overlayColor:
+  //                         WidgetStateProperty.all(ColorsApp.transparentColor),
+  //                   ),
+  //                   onPressed: () {
+  //                     if (widget.fileType != "folder") {
+  //                       _showFileDetailsDialogBox(context: context);
+  //                     }
+
+  //                     _hideMenu();
+  //                   },
+  //                   child: Text(
+  //                       Translator.of(context)!
+  //                           .translate(Lang.viewDetailFileText),
+  //                       style: const TextStyle(
+  //                         color: ColorsApp.bleachedCedarColor,
+  //                         fontWeight: FontWeight.w400,
+  //                       )),
+  //                 ),
+  //               ),
+  //               TextButton(
+  //                 style: ButtonStyle(
+  //                   overlayColor:
+  //                       WidgetStateProperty.all(ColorsApp.transparentColor),
+  //                 ),
+  //                 onPressed: () {
+  //                   _showRenameFileDialogBox(context: context);
+  //                   _hideMenu();
+  //                 },
+  //                 child: Text(
+  //                     Translator.of(context)!.translate(Lang.renameFileText),
+  //                     style: const TextStyle(
+  //                       color: ColorsApp.bleachedCedarColor,
+  //                       fontWeight: FontWeight.w400,
+  //                     )),
+  //               ),
+  //               TextButton(
+  //                 style: ButtonStyle(
+  //                   overlayColor: WidgetStateProperty.all(Colors.transparent),
+  //                 ),
+  //                 onPressed: () {
+  //                   _showFileCopyDialogBox(context: context);
+  //                   _hideMenu();
+  //                 },
+  //                 child: Text(
+  //                   Translator.of(context)!
+  //                       .translate(Lang.copyAndPasteFileText),
+  //                   style: const TextStyle(
+  //                     color: ColorsApp.bleachedCedarColor,
+  //                     fontWeight: FontWeight.w400,
+  //                   ),
+  //                 ),
+  //               ),
+  //               TextButton(
+  //                 style: ButtonStyle(
+  //                   overlayColor: WidgetStateProperty.all(Colors.transparent),
+  //                 ),
+  //                 onPressed: () {
+  //                   _showQuestionDialogBox(context: context);
+  //                   _hideMenu();
+  //                 },
+  //                 child: Text(
+  //                     Translator.of(context)!.translate(Lang.deleteFileText),
+  //                     style: const TextStyle(
+  //                       color: ColorsApp.bleachedCedarColor,
+  //                       fontWeight: FontWeight.w400,
+  //                     )),
+  //               )
+  //             ],
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      leading: GestureDetector(
+        child: Image.asset(
+          widget.fileName.hasFileOrFolderTypeByExtension(),
+          width: 80.w,
+          height: 80.h,
+        ),
+        onTap: () {
+          showPopover(
+            context: context,
+            bodyBuilder: (context) => Container(
+              color: ColorsApp.whiteColor,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Visibility(
+                    visible: widget.fileType != "folder",
+                    child: TextButton(
+                      style: ButtonStyle(
+                        overlayColor:
+                            WidgetStateProperty.all(ColorsApp.transparentColor),
+                      ),
+                      onPressed: () {
+                        if (widget.fileType != "folder") {
+                          context.read<FileEditorBloc>().add(
+                              UserDownloadTheFileEvent(
+                                  fileName: widget.fileName.replaceAll('/', ''),
+                                  bucketName: widget.bucketName));
+                        }
+                      },
+                      child: Text(
+                          Translator.of(context)!
+                              .translate(Lang.downloadFileText),
+                          style: const TextStyle(
+                            color: ColorsApp.bleachedCedarColor,
+                            fontWeight: FontWeight.w400,
+                          )),
+                    ),
+                  ),
+                  Visibility(
+                    visible: widget.fileType != "folder",
+                    child: TextButton(
+                      style: ButtonStyle(
+                        overlayColor:
+                            WidgetStateProperty.all(ColorsApp.transparentColor),
+                      ),
+                      onPressed: () {
+                        if (widget.fileType != "folder") {
+                          _showFileDetailsDialogBox(context: context);
+                        }
+                      },
+                      child: Text(
+                          Translator.of(context)!
+                              .translate(Lang.viewDetailFileText),
+                          style: const TextStyle(
+                            color: ColorsApp.bleachedCedarColor,
+                            fontWeight: FontWeight.w400,
+                          )),
+                    ),
+                  ),
+                  TextButton(
                     style: ButtonStyle(
                       overlayColor:
                           WidgetStateProperty.all(ColorsApp.transparentColor),
                     ),
                     onPressed: () {
-                      if (widget.fileType != "folder") {
-                        context.read<FileEditorBloc>().add(
-                            UserDownloadTheFileEvent(
-                                fileName: widget.fileName.replaceAll('/', ''),
-                                bucketName: widget.bucketName));
-                      }
-
-                      _hideMenu();
+                      _showRenameFileDialogBox(context: context);
                     },
                     child: Text(
-                        Translator.of(context)!
-                            .translate(Lang.downloadFileText),
+                        Translator.of(context)!.translate(Lang.renameFileText),
                         style: const TextStyle(
                           color: ColorsApp.bleachedCedarColor,
                           fontWeight: FontWeight.w400,
                         )),
                   ),
-                ),
-                Visibility(
-                  visible: widget.fileType != "folder",
-                  child: TextButton(
+                  TextButton(
                     style: ButtonStyle(
-                      overlayColor:
-                          WidgetStateProperty.all(ColorsApp.transparentColor),
+                      overlayColor: WidgetStateProperty.all(Colors.transparent),
                     ),
                     onPressed: () {
-                      if (widget.fileType != "folder") {
-                        _showFileDetailsDialogBox(context: context);
-                      }
-
-                      _hideMenu();
+                      _showFileCopyDialogBox(context: context);
                     },
                     child: Text(
-                        Translator.of(context)!
-                            .translate(Lang.viewDetailFileText),
-                        style: const TextStyle(
-                          color: ColorsApp.bleachedCedarColor,
-                          fontWeight: FontWeight.w400,
-                        )),
-                  ),
-                ),
-                TextButton(
-                  style: ButtonStyle(
-                    overlayColor:
-                        WidgetStateProperty.all(ColorsApp.transparentColor),
-                  ),
-                  onPressed: () {
-                    _showRenameFileDialogBox(context: context);
-                    _hideMenu();
-                  },
-                  child: Text(
-                      Translator.of(context)!.translate(Lang.renameFileText),
+                      Translator.of(context)!
+                          .translate(Lang.copyAndPasteFileText),
                       style: const TextStyle(
                         color: ColorsApp.bleachedCedarColor,
                         fontWeight: FontWeight.w400,
-                      )),
-                ),
-                TextButton(
-                  style: ButtonStyle(
-                    overlayColor: WidgetStateProperty.all(Colors.transparent),
-                  ),
-                  onPressed: () {
-                    _showFileCopyDialogBox(context: context);
-                    _hideMenu();
-                  },
-                  child: Text(
-                    Translator.of(context)!
-                        .translate(Lang.copyAndPasteFileText),
-                    style: const TextStyle(
-                      color: ColorsApp.bleachedCedarColor,
-                      fontWeight: FontWeight.w400,
+                      ),
                     ),
                   ),
-                ),
-                TextButton(
-                  style: ButtonStyle(
-                    overlayColor: WidgetStateProperty.all(Colors.transparent),
-                  ),
-                  onPressed: () {
-                    _showQuestionDialogBox(context: context);
-                    _hideMenu();
-                  },
-                  child: Text(
+                  TextButton(
+                    style: ButtonStyle(
+                      overlayColor: WidgetStateProperty.all(Colors.transparent),
+                    ),
+                    onPressed: () {
+                      _showQuestionDialogBox(context: context);
+                    },
+                    child: Text(
                       Translator.of(context)!.translate(Lang.deleteFileText),
                       style: const TextStyle(
                         color: ColorsApp.bleachedCedarColor,
                         fontWeight: FontWeight.w400,
-                      )),
-                )
-              ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
+            direction: PopoverDirection.bottom,
+            width: 200,
+          );
+        },
+      ),
+      title: Text(
+        "${widget.fileType == "folder" ? "${widget.totalFiles.toString()} ${Translator.of(context)!.translate(Lang.filesText)}\n" : ""}${CalculatorHelper.getFileSize(widget.fileSize, 2)}",
+        style: TextStyle(
+          fontFamily: "Manrope",
+          fontSize: 12.0.sp,
+          fontWeight: FontWeight.w500,
+          color: ColorsApp.cottonSeedColor,
         ),
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+      ),
+      subtitle: Text(
+        widget.fileName.replaceAll('/', '').capitalizeLetter(),
+        style: TextStyle(
+          fontFamily: "Manrope",
+          fontSize: 16.0.sp,
+          fontWeight: FontWeight.bold,
+          color: ColorsApp.whiteColor,
+        ),
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
       ),
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        if (_overlayEntry != null) {
-          _hideMenu();
-        }
-      },
-      child: ListTile(
-        contentPadding: EdgeInsets.zero,
-        leading: GestureDetector(
-          child: Image.asset(
-            widget.fileName.hasFileOrFolderTypeByExtension(),
-            width: 80.w,
-            height: 80.h,
-          ),
-          onLongPressStart: (details) {
-            _hideMenu();
-            if (_overlayEntry == null) {
-              _showMenu(context, details.globalPosition);
-            }
-          },
-        ),
-        title: Text(
-          "${widget.fileType == "folder" ? "${widget.totalFiles.toString()} ${Translator.of(context)!.translate(Lang.filesText)}\n" : ""}${CalculatorHelper.getFileSize(widget.fileSize, 2)}",
-          style: TextStyle(
-            fontFamily: "Manrope",
-            fontSize: 12.0.sp,
-            fontWeight: FontWeight.w500,
-            color: ColorsApp.cottonSeedColor,
-          ),
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        ),
-        subtitle: Text(
-          widget.fileName.replaceAll('/', '').capitalizeLetter(),
-          style: TextStyle(
-            fontFamily: "Manrope",
-            fontSize: 16.0.sp,
-            fontWeight: FontWeight.bold,
-            color: ColorsApp.whiteColor,
-          ),
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        ),
-      ),
-    );
-
-    //  Flex(
-    //   direction: Axis.horizontal,
-    //   mainAxisSize: MainAxisSize.min,
-    //   children: <Widget>[
-    //     GestureDetector(
-    //       onTap: () {
-    //         if (_overlayEntry != null) {
-    //           _hideMenu();
-    //         }
-    //         print("view the file");
-    //       },
-    //       onLongPressStart: (details) {
-    //         _hideMenu();
-    //         if (_overlayEntry == null) {
-    //           _showMenu(context, details.globalPosition);
-    //         }
-    //       },
-    //       child: Image.asset(
-    //         widget.fileName.hasFileOrFolderTypeByExtension(),
-    //         width: 75.w,
-    //         height: 75.h,
-    //       ),
-    //     ),
-
-    //     Flex(
-    //       direction: Axis.vertical,
-    //       mainAxisSize: MainAxisSize.min,
-    //       mainAxisAlignment: MainAxisAlignment.center,
-    //       crossAxisAlignment: CrossAxisAlignment.start,
-    //       children: <Widget>[
-    //         SizedBox(
-    //           width: 80.0.w,
-    //           child: Flex(
-    //             direction: Axis.horizontal,
-    //             mainAxisSize: MainAxisSize.min,
-    //             children: <Widget>[
-    //               Text(
-    //                 "${widget.fileType == "folder" ? "${widget.totalFiles.toString()} ${Translator.of(context)!.translate(Lang.filesText)}\n | " : ""}${CalculatorHelper.getFileSize(widget.fileSize, 2)}",
-    //                 style: TextStyle(
-    //                   fontFamily: "Manrope",
-    //                   fontSize: 12.0.sp,
-    //                   fontWeight: FontWeight.w500,
-    //                   color: ColorsApp.cottonSeedColor,
-    //                 ),
-    //                 maxLines: 2,
-    //                 overflow: TextOverflow.ellipsis,
-    //               ),
-    //               PopupMenuButton(
-    //                 splashRadius: 22.0.r,
-    //                 padding: EdgeInsets.zero,
-    //                 position: PopupMenuPosition.under,
-    //                 color: ColorsApp.bleachedCedarColor,
-    //                 icon: SizedBox(
-    //                   width: 5.0.w,
-    //                   height: 5.0.h,
-    //                   child: Icon(
-    //                     Icons.more_vert_rounded,
-    //                     color: ColorsApp.greyColor,
-    //                     size: 44.0.r,
-    //                   ),
-    //                 ),
-    //                 iconSize: 50.0.r,
-    //                 itemBuilder: (context) {
-    //                   return List.generate(
-    //                     menuVerticalForFilesList.length,
-    //                     (indexMenu) => PopupMenuItem(
-    //                       value: indexMenu,
-    //                       child: Text(
-    //                         Translator.of(context)!.translate(
-    //                           menuVerticalForFilesList[indexMenu],
-    //                         ),
-    //                         style: const TextStyle(
-    //                           color: ColorsApp.whiteColor,
-    //                           fontWeight: FontWeight.w400,
-    //                         ),
-    //                       ),
-    //                     ),
-    //                   );
-    //                 },
-    //                 onSelected: (actionMenuIndex) {
-    //                   switch (actionMenuIndex) {
-    //                     case 0:
-    //                       print("ajouter un fichier");
-    //                       break;
-    //                   }
-    //                 },
-    //               ),
-    //             ],
-    //           ),
-    //         ),
-    //         const SizedBox(
-    //           height: 5.0,
-    //         ),
-    //         SizedBox(
-    //           width: 85.0.w,
-    //           child: Text(
-    //             widget.fileName.replaceAll('/', '').capitalizeLetter(),
-    //             style: TextStyle(
-    //               fontFamily: "Manrope",
-    //               fontSize: 16.0.sp,
-    //               fontWeight: FontWeight.bold,
-    //               color: ColorsApp.whiteColor,
-    //             ),
-    //             maxLines: 2,
-    //             overflow: TextOverflow.ellipsis,
-    //           ),
-    //         ),
-    //       ],
-    //     )
-    //   ],
-    // );
   }
 
   @override

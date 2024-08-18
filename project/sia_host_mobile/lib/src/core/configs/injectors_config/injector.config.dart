@@ -11,18 +11,18 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
-import '../../../modules/account_mod/features/fetch_user_account_present/data/local_source/absts/fech_user_credential_abst.dart'
-    as _i965;
-import '../../../modules/account_mod/features/fetch_user_account_present/data/local_source/impls/fetch_user_credential_impl.dart'
-    as _i83;
-import '../../../modules/account_mod/features/fetch_user_account_present/data/reposit_impls/fetch_user_credential_reposit_impl.dart'
-    as _i382;
-import '../../../modules/account_mod/features/fetch_user_account_present/domain/reposit_absts/fetch_user_credential_reposit_abst.dart'
-    as _i281;
-import '../../../modules/account_mod/features/fetch_user_account_present/domain/usecases/fetch_user_credential_usecase.dart'
-    as _i392;
-import '../../../modules/account_mod/features/fetch_user_account_present/states_holder/fetch_user_credential_bloc/fetch_user_credential_bloc.dart'
-    as _i1057;
+import '../../../modules/account_mod/features/fetch_the_user_credentials/data/local_source/absts/fech_user_credential_abst.dart'
+    as _i419;
+import '../../../modules/account_mod/features/fetch_the_user_credentials/data/local_source/impls/fetch_user_credential_impl.dart'
+    as _i629;
+import '../../../modules/account_mod/features/fetch_the_user_credentials/data/reposit_impls/fetch_user_credential_reposit_impl.dart'
+    as _i619;
+import '../../../modules/account_mod/features/fetch_the_user_credentials/domain/reposit_absts/fetch_user_credential_reposit_abst.dart'
+    as _i1073;
+import '../../../modules/account_mod/features/fetch_the_user_credentials/domain/usecases/fetch_user_credential_usecase.dart'
+    as _i605;
+import '../../../modules/account_mod/features/fetch_the_user_credentials/states_holder/fetch_user_credential_bloc/fetch_user_credential_bloc.dart'
+    as _i826;
 import '../../../modules/account_mod/features/user_login/data/local_source/absts/cache_the_user_credential_after_login_abst.dart'
     as _i11;
 import '../../../modules/account_mod/features/user_login/data/local_source/absts/secure_the_user_credential_abst.dart'
@@ -153,10 +153,6 @@ import '../../../modules/home_mod/features/fetch_the_network_data/domain/usecase
     as _i595;
 import '../../../modules/home_mod/features/fetch_the_network_data/states_holder/network_data_fetching_bloc/network_data_fetching_bloc.dart'
     as _i318;
-import '../../../modules/host_config_mod/features/fetch_the_hoster_for_config/data/local_source/absts/fetch_the_user_credential_for_config_abst.dart'
-    as _i941;
-import '../../../modules/host_config_mod/features/fetch_the_hoster_for_config/data/local_source/impls/fetch_the_user_credential_for_config_impl.dart'
-    as _i918;
 import '../../../modules/host_config_mod/features/fetch_the_hoster_for_config/data/remote_source/absts/fetch_hoster_from_renter_for_config_abst.dart'
     as _i927;
 import '../../../modules/host_config_mod/features/fetch_the_hoster_for_config/data/remote_source/impls/fetch_hoster_from_renter_for_config_impl.dart'
@@ -181,10 +177,6 @@ import '../../../modules/host_config_mod/features/update_the_hoster_with_new_dat
     as _i395;
 import '../../../modules/host_config_mod/features/update_the_hoster_with_new_data/states_holder/reconfig_the_host_data_bloc/reconfig_the_host_data_bloc.dart'
     as _i940;
-import '../../../modules/my_host_mod/features/fetch_host_from_renter/data/local_source/absts/fetch_the_user_credential_abst.dart'
-    as _i46;
-import '../../../modules/my_host_mod/features/fetch_host_from_renter/data/local_source/impls/fetch_the_user_credential_impl.dart'
-    as _i961;
 import '../../../modules/my_host_mod/features/fetch_host_from_renter/data/remote_source/absts/fetch_consensus_from_renter_abst.dart'
     as _i83;
 import '../../../modules/my_host_mod/features/fetch_host_from_renter/data/remote_source/absts/fetch_hoster_from_renter_abst.dart'
@@ -231,6 +223,10 @@ import '../../../modules/search_mod/features/fetch_the_hosts_data/domain/usecase
     as _i781;
 import '../../../modules/search_mod/features/fetch_the_hosts_data/states_holder/fetch_all_hosts_data_bloc/fetch_all_hosts_data_bloc.dart'
     as _i144;
+import '../../../shared/features/fetch_user_credentials/data/local_source/absts/fetch_the_user_credential_abst.dart'
+    as _i760;
+import '../../../shared/features/fetch_user_credentials/data/local_source/impls/fetch_the_user_credential_impl.dart'
+    as _i1035;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -248,7 +244,11 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i825.FetchTheHostAddressCountryImpl());
     gh.lazySingleton<_i639.FetchAllExistantHostsAbst>(
         () => _i936.FetchAllExistantHostsImpl());
+    gh.lazySingleton<_i760.FetchTheUserCredentialAbst>(
+        () => _i1035.FetchTheUserCredentialImpl());
     gh.lazySingleton<_i814.RenameTheFileAbst>(() => _i157.RenameTheFileImpl());
+    gh.lazySingleton<_i419.FetchUserCredentialAbst>(
+        () => _i629.FetchUserCredentialImpl());
     gh.lazySingleton<_i113.DeleteTheFileAbst>(() => _i279.DeleteTheFileImpl());
     gh.lazySingleton<_i112.ViewTheFileDetailsAbst>(
         () => _i114.ViewTheFileDetailsImpl());
@@ -262,12 +262,15 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i334.FetchConsensusFromRenterImpl());
     gh.lazySingleton<_i1006.PickTheFileFromPhoneAbst>(
         () => _i259.PickTheFileFromPhoneImpl());
-    gh.lazySingleton<_i941.FetchTheUserCredentialForConfigAbst>(
-        () => _i918.FetchTheUserCredentialForConfigImpl());
     gh.lazySingleton<_i159.FetchAllHostDataAbst>(
         () => _i850.FetchAllHostDataImpl());
     gh.lazySingleton<_i371.UpdateTheHosterWithNewDataAbst>(
         () => _i812.UpdateTheHosterWithNewDataImpl());
+    gh.lazySingleton<_i582.FetchTheHostDataFromRenterForConfigRepositAbst>(() =>
+        _i737.FetchTheHostDataFromRenterForConfigRepositImpl(
+          fetchTheUserCredentialAbst: gh<_i760.FetchTheUserCredentialAbst>(),
+          fetchHosterFromRenterAbst: gh<_i1048.FetchHosterFromRenterAbst>(),
+        ));
     gh.lazySingleton<_i56.FetchAllCurrentsHostPresentAbst>(
         () => _i67.FetchAllCurrentsHostPresentImpl());
     gh.lazySingleton<_i744.FetchAllBucketsAbst>(
@@ -278,8 +281,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i41.CacheTheUserCredentialsAfterLoginImpl());
     gh.lazySingleton<_i600.FetchFilesFromBucketAbst>(
         () => _i652.FetchFilesFromBucketImpl());
-    gh.lazySingleton<_i46.FetchTheUserCredentialAbst>(
-        () => _i961.FetchTheUserCredentialImpl());
     gh.lazySingleton<_i269.UserMakeHisLoginAbst>(
         () => _i624.UserMakeHisLoginImpl());
     gh.lazySingleton<_i866.UploadFileOnServerAbst>(
@@ -289,30 +290,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i755.DownloadTheFileAbst>(
         () => _i998.DownloadTheFileImpl());
     gh.lazySingleton<_i247.CopyTheFileAbst>(() => _i405.CopyTheFileImpl());
-    gh.lazySingleton<_i582.FetchTheHostDataFromRenterForConfigRepositAbst>(
-        () => _i737.FetchTheHostDataFromRenterForConfigRepositImpl(
-              fetchTheUserCredentialForConfigAbst:
-                  gh<_i941.FetchTheUserCredentialForConfigAbst>(),
-              fetchHosterFromRenterAbst: gh<_i1048.FetchHosterFromRenterAbst>(),
-            ));
-    gh.lazySingleton<_i965.FetchUserCredentialAbst>(
-        () => _i83.FetchUserCredentialImpl());
-    gh.lazySingleton<_i281.FetchUserCredentialRepositAbst>(() =>
-        _i382.FetchUserCredentialRepositImpl(
-            fetchUserCredentialAbst: gh<_i965.FetchUserCredentialAbst>()));
     gh.lazySingleton<_i1044.UserViewTheFileDetailsRepositAbst>(() =>
         _i411.UserViewTheFileDetailsRepositImpl(
             viewTheFileDetailsAbst: gh<_i112.ViewTheFileDetailsAbst>()));
-    gh.lazySingleton<_i743.FetchMyHostDataFromRenterRepositAbst>(() =>
-        _i502.FetchMyHostDataFromRenterRepositImpl(
-          fetchTheUserCredentialAbst: gh<_i46.FetchTheUserCredentialAbst>(),
-          fetchHosterFromRenterAbst: gh<_i1048.FetchHosterFromRenterAbst>(),
-          fetchConsensusFromRenterAbst: gh<_i83.FetchConsensusFromRenterAbst>(),
-        ));
-    gh.lazySingleton<_i392.FetchUserCredentialUsecase>(() =>
-        _i392.FetchUserCredentialUsecase(
-            fetchUserCredentialRepositAbst:
-                gh<_i281.FetchUserCredentialRepositAbst>()));
     gh.lazySingleton<_i1027.FetchOneHostDataRepositAbst>(
         () => _i191.FetchOneHostDataRepositImpl(
               fetchAllExistantHostsAbst: gh<_i639.FetchAllExistantHostsAbst>(),
@@ -324,6 +304,12 @@ extension GetItInjectableX on _i174.GetIt {
               downloadTheFileAbst: gh<_i755.DownloadTheFileAbst>(),
               saveTheFileDownloadedAbst: gh<_i238.SaveTheFileDownloadedAbst>(),
             ));
+    gh.lazySingleton<_i743.FetchMyHostDataFromRenterRepositAbst>(() =>
+        _i502.FetchMyHostDataFromRenterRepositImpl(
+          fetchTheUserCredentialAbst: gh<_i760.FetchTheUserCredentialAbst>(),
+          fetchHosterFromRenterAbst: gh<_i1048.FetchHosterFromRenterAbst>(),
+          fetchConsensusFromRenterAbst: gh<_i83.FetchConsensusFromRenterAbst>(),
+        ));
     gh.lazySingleton<_i145.FetchOneHostInfoDataUsecase>(() =>
         _i145.FetchOneHostInfoDataUsecase(
             fetchOneHostDataRepositAbst:
@@ -338,23 +324,13 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i315.CopyAndPasteRepositAbst>(() =>
         _i799.CopyAndPasteRepositImpl(
             copyTheFileAbst: gh<_i247.CopyTheFileAbst>()));
-    gh.lazySingleton<_i87.FetchAllBucketsAndFilesRepositAbst>(
-        () => _i198.FetchAllBucketsAndFilesRepositImpl(
-              fetchAllBucketsAbst: gh<_i744.FetchAllBucketsAbst>(),
-              fetchFilesFromBucketAbst: gh<_i600.FetchFilesFromBucketAbst>(),
-            ));
+    gh.lazySingleton<_i1073.FetchUserCredentialRepositAbst>(() =>
+        _i619.FetchUserCredentialRepositImpl(
+            fetchUserCredentialAbst: gh<_i419.FetchUserCredentialAbst>()));
     gh.factory<_i660.FetchTheHosterForConfigBloc>(() =>
         _i660.FetchTheHosterForConfigBloc(
             fetchTheHosterForConfigUsecase:
                 gh<_i383.FetchTheHosterForConfigUsecase>()));
-    gh.lazySingleton<_i413.FetchAllBucketsUsecase>(() =>
-        _i413.FetchAllBucketsUsecase(
-            fetchAllBucketsAndFilesRepositAbst:
-                gh<_i87.FetchAllBucketsAndFilesRepositAbst>()));
-    gh.lazySingleton<_i529.FetchFilesFromBucketUsecase>(() =>
-        _i529.FetchFilesFromBucketUsecase(
-            fetchAllBucketsAndFilesRepositAbst:
-                gh<_i87.FetchAllBucketsAndFilesRepositAbst>()));
     gh.lazySingleton<_i349.DeleteTheFileRepositAbst>(() =>
         _i664.DeleteTheFileRepositImpl(
             deleteTheFileAbst: gh<_i113.DeleteTheFileAbst>()));
@@ -382,6 +358,10 @@ extension GetItInjectableX on _i174.GetIt {
               uploadFileOnServerAbst: gh<_i866.UploadFileOnServerAbst>(),
               pickTheFileFromPhoneAbst: gh<_i1006.PickTheFileFromPhoneAbst>(),
             ));
+    gh.lazySingleton<_i605.FetchUserCredentialUsecase>(() =>
+        _i605.FetchUserCredentialUsecase(
+            fetchUserCredentialRepositAbst:
+                gh<_i1073.FetchUserCredentialRepositAbst>()));
     gh.lazySingleton<_i282.UserMakeTheLoginRepositAbst>(() =>
         _i403.UserMakeTheLoginRepositImpl(
           userMakeHisLoginAbst: gh<_i269.UserMakeHisLoginAbst>(),
@@ -389,14 +369,20 @@ extension GetItInjectableX on _i174.GetIt {
           cacheTheUserCredentialAfterLoginAbst:
               gh<_i11.CacheTheUserCredentialAfterLoginAbst>(),
         ));
+    gh.lazySingleton<_i87.FetchAllBucketsAndFilesRepositAbst>(() =>
+        _i198.FetchAllBucketsAndFilesRepositImpl(
+          fetchTheUserCredentialAbst: gh<_i760.FetchTheUserCredentialAbst>(),
+          fetchAllBucketsAbst: gh<_i744.FetchAllBucketsAbst>(),
+          fetchFilesFromBucketAbst: gh<_i600.FetchFilesFromBucketAbst>(),
+        ));
+    gh.factory<_i826.FetchUserCredentialBloc>(() =>
+        _i826.FetchUserCredentialBloc(
+            fetchUserCredentialUsecase:
+                gh<_i605.FetchUserCredentialUsecase>()));
     gh.factory<_i73.FetchOneHostDataAndShowItBloc>(() =>
         _i73.FetchOneHostDataAndShowItBloc(
             fetchOneHostInfoDataUsecase:
                 gh<_i145.FetchOneHostInfoDataUsecase>()));
-    gh.factory<_i1057.FetchUserCredentialBloc>(() =>
-        _i1057.FetchUserCredentialBloc(
-            fetchUserCredentialUsecase:
-                gh<_i392.FetchUserCredentialUsecase>()));
     gh.lazySingleton<_i921.FetchAllTheHostUsecase>(() =>
         _i921.FetchAllTheHostUsecase(
             fetchTheListForAllHostDataRepositAbst:
@@ -424,8 +410,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i655.FetchMyHosterBloc>(() => _i655.FetchMyHosterBloc(
         fetchMyHostFromRenterUsecase:
             gh<_i345.FetchMyHostFromRenterUsecase>()));
-    gh.factory<_i385.FetchAllFilesBloc>(() => _i385.FetchAllFilesBloc(
-        fetchFilesFromBucketUsecase: gh<_i529.FetchFilesFromBucketUsecase>()));
     gh.lazySingleton<_i834.UserRenameTheFileUsecase>(() =>
         _i834.UserRenameTheFileUsecase(
             renameTheFileRepositAbst: gh<_i286.RenameTheFileRepositAbst>()));
@@ -445,8 +429,14 @@ extension GetItInjectableX on _i174.GetIt {
           copyAndPasteUsecase: gh<_i167.CopyAndPasteUsecase>(),
           userRenameTheFileUsecase: gh<_i834.UserRenameTheFileUsecase>(),
         ));
-    gh.factory<_i891.FetchAllBucketBloc>(() => _i891.FetchAllBucketBloc(
-        fetchAllBucketsUsecase: gh<_i413.FetchAllBucketsUsecase>()));
+    gh.lazySingleton<_i413.FetchAllBucketsUsecase>(() =>
+        _i413.FetchAllBucketsUsecase(
+            fetchAllBucketsAndFilesRepositAbst:
+                gh<_i87.FetchAllBucketsAndFilesRepositAbst>()));
+    gh.lazySingleton<_i529.FetchFilesFromBucketUsecase>(() =>
+        _i529.FetchFilesFromBucketUsecase(
+            fetchAllBucketsAndFilesRepositAbst:
+                gh<_i87.FetchAllBucketsAndFilesRepositAbst>()));
     gh.factory<_i318.NetworkDataFetchingBloc>(() =>
         _i318.NetworkDataFetchingBloc(
             userFetchTheNetworkDataUsecase:
@@ -463,6 +453,10 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i301.LoginAccountBloc>(() => _i301.LoginAccountBloc(
         userMakeTheLoginUsecase: gh<_i473.UserMakeTheLoginUsecase>()));
+    gh.factory<_i385.FetchAllFilesBloc>(() => _i385.FetchAllFilesBloc(
+        fetchFilesFromBucketUsecase: gh<_i529.FetchFilesFromBucketUsecase>()));
+    gh.factory<_i891.FetchAllBucketBloc>(() => _i891.FetchAllBucketBloc(
+        fetchAllBucketsUsecase: gh<_i413.FetchAllBucketsUsecase>()));
     return this;
   }
 }

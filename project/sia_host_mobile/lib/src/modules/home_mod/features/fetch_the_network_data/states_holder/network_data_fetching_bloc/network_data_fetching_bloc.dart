@@ -16,6 +16,7 @@ class NetworkDataFetchingBloc
   NetworkDataFetchingBloc({required this.userFetchTheNetworkDataUsecase})
       : super(NetworkDataFetchingInitial()) {
     on<FetchNetworkDataEvent>((event, emit) async {
+      emit(NetworkDataFetchedLoading());
       var _result = await userFetchTheNetworkDataUsecase.call();
       _result.when(
         (success) =>

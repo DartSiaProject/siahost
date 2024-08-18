@@ -2,8 +2,9 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
-import 'package:sia_host_mobile/src/modules/files_mod/features/view_a_file_details/domain/entities/file_details_entity.dart';
-import 'package:sia_host_mobile/src/modules/files_mod/features/view_a_file_details/domain/usecases/view_the_file_details_usecase.dart';
+
+import '../../domain/entities/file_details_entity.dart';
+import '../../domain/usecases/view_the_file_details_usecase.dart';
 
 part 'view_the_file_details_event.dart';
 part 'view_the_file_details_state.dart';

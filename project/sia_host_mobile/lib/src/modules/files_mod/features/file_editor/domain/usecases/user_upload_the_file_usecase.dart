@@ -1,6 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
-import 'package:sia_host_mobile/src/modules/files_mod/features/file_editor/domain/reposit_absts/upload_a_file_reposit_abst.dart';
+
+import '../reposit_absts/upload_a_file_reposit_abst.dart';
 
 @lazySingleton
 class UserUploadTheFileUsecase {

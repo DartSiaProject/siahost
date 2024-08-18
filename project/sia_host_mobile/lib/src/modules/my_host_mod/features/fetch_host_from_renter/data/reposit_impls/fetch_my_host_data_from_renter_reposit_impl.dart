@@ -5,12 +5,12 @@ import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
 
 import '../../../../../../shared/constants/lang_const.dart';
+import '../../../../../../shared/features/fetch_user_credentials/data/local_source/absts/fetch_the_user_credential_abst.dart';
 import '../../../../../../shared/global/map_variable.dart' as global;
 import '../../../../../../shared/services/connection/requests/connection_request.dart';
 import '../../../../../../shared/services/security/requests/encrypter_request.dart';
 import '../../domain/entities/my_host_data_entity.dart';
 import '../../domain/reposit_absts/fetch_my_host_data_from_renter_reposit_abst.dart';
-import '../local_source/absts/fetch_the_user_credential_abst.dart';
 import '../remote_source/absts/fetch_consensus_from_renter_abst.dart';
 import '../remote_source/absts/fetch_hoster_from_renter_abst.dart';
 import '../remote_source/models/my_host_data_model.dart';

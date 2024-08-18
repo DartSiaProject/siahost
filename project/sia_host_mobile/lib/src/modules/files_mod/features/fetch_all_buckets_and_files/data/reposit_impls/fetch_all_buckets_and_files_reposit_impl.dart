@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
 
 import '../../../../../../shared/constants/lang_const.dart';
+import '../../../../../../shared/features/fetch_user_credentials/data/local_source/absts/fetch_the_user_credential_abst.dart';
 import '../../../../../../shared/global/map_variable.dart' as global;
 import '../../../../../../shared/services/connection/requests/connection_request.dart';
 import '../../../../../../shared/services/security/requests/encrypter_request.dart';
@@ -19,13 +20,16 @@ import '../remote_source/models/file_model.dart';
 @LazySingleton(as: FetchAllBucketsAndFilesRepositAbst)
 class FetchAllBucketsAndFilesRepositImpl
     implements FetchAllBucketsAndFilesRepositAbst {
+  final FetchTheUserCredentialAbst _fetchTheUserCredentialAbst;
   final FetchAllBucketsAbst _fetchAllBucketsAbst;
   final FetchFilesFromBucketAbst _fetchFilesFromBucketAbst;
 
   FetchAllBucketsAndFilesRepositImpl({
+    required FetchTheUserCredentialAbst fetchTheUserCredentialAbst,
     required FetchAllBucketsAbst fetchAllBucketsAbst,
     required FetchFilesFromBucketAbst fetchFilesFromBucketAbst,
-  })  : _fetchAllBucketsAbst = fetchAllBucketsAbst,
+  })  : _fetchTheUserCredentialAbst = fetchTheUserCredentialAbst,
+        _fetchAllBucketsAbst = fetchAllBucketsAbst,
         _fetchFilesFromBucketAbst = fetchFilesFromBucketAbst;
 
   var _allBucketList = <BucketEntity>[];
@@ -34,49 +38,62 @@ class FetchAllBucketsAndFilesRepositImpl
   @override
   Future<Result<List<BucketEntity>, String>> fetchAllBuckets() async {
     if ((await ConnectionRequest.checkConnectivity())) {
-      return await _fetchAllBucketsAbst
-          .fetchListOfBucket(
-        serverAddress: EncrypterRequest.decrypt(
-            dataEncrypted: global.userInfo["userServerAdress"]),
-        password: EncrypterRequest.decrypt(
-            dataEncrypted: global.userInfo["userPassWord"]),
-      )
-          .then((_bucketResponse) async {
-        if (_bucketResponse.statusCode == HttpStatus.ok) {
-          _allBucketList.clear();
-          List<dynamic> _allBucketFound = json.decode(_bucketResponse.body);
-
-          for (var index = 0; index < _allBucketFound.length; index++) {
-            Map<String, dynamic> _bucketMap = _allBucketFound[index];
-            var _bucketModel = BucketModel.fromMap(_bucketMap);
-            var _bucketFilesTotal = 0;
-            var _fetchAllFileOfBucketResponse =
-                await _fetchFilesFromBucketAbst.fetchAllFilesOfBucket(
-                    serverAddress: EncrypterRequest.decrypt(
-                        dataEncrypted: global.userInfo["userServerAdress"]),
-                    password: EncrypterRequest.decrypt(
-                        dataEncrypted: global.userInfo["userPassWord"]),
-                    bucketName: _bucketModel.nameBucket);
-
-            if (_fetchAllFileOfBucketResponse.statusCode == HttpStatus.ok) {
-              Map<String, dynamic> _dataFiles =
-                  json.decode(_fetchAllFileOfBucketResponse.body);
-
-              _bucketFilesTotal = _dataFiles["objects"] == null
-                  ? 0
-                  : (_dataFiles["objects"] as List<dynamic>).length;
-            }
-
-            _allBucketList.add(
-              BucketEntity(
-                nameBucket: _bucketModel.nameBucket,
-                totalFiles: _bucketFilesTotal,
-              ),
-            );
-          }
-          return Result.success(_allBucketList.reversed.toList());
+      return _fetchTheUserCredentialAbst
+          .fetchUserCredential()
+          .then((_resultCredential) async {
+        if (_resultCredential["status"] == false) {
+          return const Result.error(Lang.makeLoginDemandText);
         } else {
-          return const Result.error(Lang.internalServerErrorText);
+          global.userInfo = json.decode(_resultCredential["data"]);
+
+          return await _fetchAllBucketsAbst
+              .fetchListOfBucket(
+            serverAddress: EncrypterRequest.decrypt(
+                dataEncrypted: global.userInfo["userServerAdress"]),
+            password: EncrypterRequest.decrypt(
+                dataEncrypted: global.userInfo["userPassWord"]),
+          )
+              .then((_bucketResponse) async {
+            if (_bucketResponse.statusCode == HttpStatus.ok) {
+              _allBucketList.clear();
+              List<dynamic> _allBucketFound = json.decode(_bucketResponse.body);
+
+              for (var index = 0; index < _allBucketFound.length; index++) {
+                Map<String, dynamic> _bucketMap = _allBucketFound[index];
+                var _bucketModel = BucketModel.fromMap(_bucketMap);
+                var _bucketFilesTotal = 0;
+                var _fetchAllFileOfBucketResponse =
+                    await _fetchFilesFromBucketAbst.fetchAllFilesOfBucket(
+                        serverAddress: EncrypterRequest.decrypt(
+                            dataEncrypted: global.userInfo["userServerAdress"]),
+                        password: EncrypterRequest.decrypt(
+                            dataEncrypted: global.userInfo["userPassWord"]),
+                        bucketName: _bucketModel.nameBucket);
+
+                if (_fetchAllFileOfBucketResponse.statusCode == HttpStatus.ok) {
+                  Map<String, dynamic> _dataFiles =
+                      json.decode(_fetchAllFileOfBucketResponse.body);
+
+                  _bucketFilesTotal = _dataFiles["objects"] == null
+                      ? 0
+                      : ((_dataFiles["objects"] as List<dynamic>).where(
+                              (element) =>
+                                  !(element["name"] as String).endsWith("/")))
+                          .length;
+                }
+
+                _allBucketList.add(
+                  BucketEntity(
+                    nameBucket: _bucketModel.nameBucket,
+                    totalFiles: _bucketFilesTotal,
+                  ),
+                );
+              }
+              return Result.success(_allBucketList.reversed.toList());
+            } else {
+              return const Result.error(Lang.internalServerErrorText);
+            }
+          });
         }
       });
     } else {
