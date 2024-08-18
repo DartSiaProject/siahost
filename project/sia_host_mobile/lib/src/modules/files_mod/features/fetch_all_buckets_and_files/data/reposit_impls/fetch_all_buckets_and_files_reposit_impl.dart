@@ -76,7 +76,10 @@ class FetchAllBucketsAndFilesRepositImpl
 
                   _bucketFilesTotal = _dataFiles["objects"] == null
                       ? 0
-                      : (_dataFiles["objects"] as List<dynamic>).length;
+                      : ((_dataFiles["objects"] as List<dynamic>).where(
+                              (element) =>
+                                  !(element["name"] as String).endsWith("/")))
+                          .length;
                 }
 
                 _allBucketList.add(
