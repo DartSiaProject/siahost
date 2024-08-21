@@ -11,12 +11,15 @@ xmlns:tools="http://schemas.android.com/tools">
     io.flutter.plugins.pathprovider, 
     dev.fluttercommunity.plus.connectivity, 
     com.mr.flutter.plugin.filepicker, 
-    io.flutter.plugins.flutter_plugin_android_lifecycles"/>
+    io.flutter.plugins.flutter_plugin_android_lifecycles, 
+    dev.fluttercommunity.plus.device_info"/>
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+    tools:ignore="ScopedStorage" />
 
     <application
         android:label="@string/app_name"

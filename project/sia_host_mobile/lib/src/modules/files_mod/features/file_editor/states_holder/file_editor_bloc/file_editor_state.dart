@@ -14,6 +14,24 @@ class FileEditedSuccess extends FileEditorState {
   const FileEditedSuccess({required this.message});
 }
 
+class FileDownloadedSuccess extends FileEditorState {
+  final String fileName;
+  final String message;
+
+  FileDownloadedSuccess({
+    required this.fileName,
+    required this.message,
+  });
+}
+
+class FileAlreadyDownloadedSuccess extends FileEditorState {
+  final String fileName;
+
+  FileAlreadyDownloadedSuccess({
+    required this.fileName,
+  });
+}
+
 class FileEditedFailed extends FileEditorState {
   final String message;
 

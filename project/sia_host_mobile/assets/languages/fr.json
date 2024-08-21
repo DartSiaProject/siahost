@@ -107,9 +107,17 @@
   "view_detail_file_text":"Détails du Fichier",
   "file_uploaded_text":"Fichier Uploadé",
   "no_file_picked_text":"Aucun Fichier Choisi",
-  "download_file_text":"Télécharger le Fichier",
+  "open_file_text":"Ouvrir le Fichier",
   "file_download_success_text":"Fichier Téléchargé",
-  "file_download_failed_text":"Echec durant le téléchargement"
+  "file_download_failed_text":"Echec durant le téléchargement",
+  "permision_error_text":"Permission non accès",
+  "label_name_text":"Nom",
+"label_size_text":"Taille",
+"label_date_created_text":"Date de Création",
+"label_total_files_text":"Nombre de fichiers",
+"view_detail_folder_text":"Détails du dossier",
+"want_open_file_text":"Ouvrir le Fichier Téléchargé ?",
+"file_already_download_text":"Fichier déjà téléchargé"
 
   
   

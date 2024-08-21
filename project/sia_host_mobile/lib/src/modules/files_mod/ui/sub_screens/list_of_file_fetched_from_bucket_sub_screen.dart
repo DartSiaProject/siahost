@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:open_filex/open_filex.dart';
+import 'package:sia_host_mobile/src/shared/ui/widgets/card_suggestion_widget.dart';
+import 'package:sia_host_mobile/src/shared/ui/widgets/question_dialog_box_widget.dart';
 
 import '../../../../core/configs/language_config/translator.dart';
 import '../../../../shared/constants/colors_const.dart';
@@ -35,6 +38,44 @@ class _ListOfFileFetchedFromBucketScreenState
         .read<FetchAllFilesBloc>()
         .add(FetchTheFilesFromBucketEvent(bucketName: widget.bucketName));
     super.initState();
+  }
+
+  void _showOpenFileQuestionDialogBox({
+    required BuildContext context,
+    required String fileName,
+  }) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      useSafeArea: false,
+      builder: (BuildContext context) {
+        return QuestionDialogBoxWidget(
+            title: Lang.wantOpenFileText,
+            builderItems: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: Flex(
+                direction: Axis.horizontal,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  CardSuggestionWidget(
+                    title: Translator.of(context)!.translate(Lang.yesText),
+                    onTap: () {
+                      context.router.maybePop().whenComplete(() {
+                        OpenFilex.open("$storageDownload/$fileName");
+                      });
+                    },
+                  ),
+                  CardSuggestionWidget(
+                    title: Translator.of(context)!.translate(Lang.noText),
+                    onTap: () {
+                      context.router.maybePop();
+                    },
+                  )
+                ],
+              ),
+            ));
+      },
+    );
   }
 
   @override
@@ -115,6 +156,25 @@ class _ListOfFileFetchedFromBucketScreenState
                 fontSize: 16.0,
               ).whenComplete(() => context.read<FetchAllFilesBloc>().add(
                   FetchTheFilesFromBucketEvent(bucketName: widget.bucketName)));
+            }
+            if (fileEditorListenerState is FileDownloadedSuccess) {
+              Fluttertoast.showToast(
+                msg: Translator.of(context)!
+                    .translate(fileEditorListenerState.message),
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.TOP,
+                backgroundColor: ColorsApp.tunaColor,
+                textColor: Colors.white,
+                fontSize: 16.0,
+              ).whenComplete(() => _showOpenFileQuestionDialogBox(
+                    context: context,
+                    fileName: fileEditorListenerState.fileName,
+                  ));
+            }
+
+            if (fileEditorListenerState is FileAlreadyDownloadedSuccess) {
+              OpenFilex.open(
+                  "$storageDownload/${fileEditorListenerState.fileName}");
             }
 
             if (fileEditorListenerState is FileEditedFailed) {
@@ -204,6 +264,8 @@ class _ListOfFileFetchedFromBucketScreenState
                       }
                       if (fetchAllFilesBuilderState is FilesFoundWithSuccess) {
                         return RefreshIndicator.adaptive(
+                          color: ColorsApp.spearmintColor,
+                          backgroundColor: ColorsApp.bleachedCedarColor,
                           onRefresh: () async {
                             context.read<FetchAllFilesBloc>().add(
                                 FetchTheFilesFromBucketEvent(

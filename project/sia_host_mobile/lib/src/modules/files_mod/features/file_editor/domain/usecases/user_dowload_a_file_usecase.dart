@@ -11,7 +11,7 @@ class UserDowloadAFileUsecase {
     required UserDownloadTheFileRepositAbst userDownloadTheFileRepositAbst,
   }) : _userDownloadTheFileRepositAbst = userDownloadTheFileRepositAbst;
 
-  Future<Result<String, String>> call({
+  Future<Result<Map<String, dynamic>, String>> call({
     required String fileName,
     required String bucketName,
   }) async =>

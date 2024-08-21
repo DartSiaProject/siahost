@@ -5,16 +5,16 @@ import 'package:sia_host_mobile/src/shared/constants/lang_const.dart';
 
 import '../../../../shared/constants/colors_const.dart';
 
-class FieldsOfFileDetailsWidget extends StatelessWidget {
-  final String fileName;
-  final String fileSize;
-  final String createdAt;
+class FieldsOfFolderDetailsWidget extends StatelessWidget {
+  final String folderName;
+  final String folderSize;
+  final String totalsFile;
 
-  const FieldsOfFileDetailsWidget({
+  const FieldsOfFolderDetailsWidget({
     super.key,
-    required this.fileName,
-    required this.fileSize,
-    required this.createdAt,
+    required this.folderName,
+    required this.folderSize,
+    required this.totalsFile,
   });
 
   @override
@@ -27,7 +27,7 @@ class FieldsOfFileDetailsWidget extends StatelessWidget {
           height: 16.0.h,
         ),
         Text(
-          "${Translator.of(context)!.translate(Lang.labelNameText)} : $fileName",
+          "${Translator.of(context)!.translate(Lang.labelNameText)} : $folderName",
           style: TextStyle(
             color: ColorsApp.whiteColor,
             fontSize: 14.0.sp,
@@ -38,7 +38,7 @@ class FieldsOfFileDetailsWidget extends StatelessWidget {
           height: 16.0.h,
         ),
         Text(
-          "${Translator.of(context)!.translate(Lang.labelSizeText)} : $fileSize",
+          "${Translator.of(context)!.translate(Lang.labelSizeText)} : $folderSize",
           style: TextStyle(
             color: ColorsApp.whiteColor,
             fontSize: 14.0.sp,
@@ -49,7 +49,7 @@ class FieldsOfFileDetailsWidget extends StatelessWidget {
           height: 16.0.h,
         ),
         Text(
-          "${Translator.of(context)!.translate(Lang.labelDateCreatedText)} : $createdAt",
+          "${Translator.of(context)!.translate(Lang.labelTotalFilesText)} : $totalsFile",
           style: TextStyle(
             color: ColorsApp.whiteColor,
             fontSize: 14.0.sp,

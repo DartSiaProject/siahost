@@ -1,13 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/services.dart';
+import 'package:sia_host_mobile/src/shared/constants/string_const.dart';
 
 class SaveFileRequest {
   static Future<Map<String, dynamic>> saveTheFileDownloaded({
     required String fileNameWithExtension,
     required Uint8List fileBytes,
   }) async {
-    Directory? downloadsDirectory = Directory('/storage/emulated/0/Download');
+    Directory? downloadsDirectory = Directory(storageDownload);
 
     var filePath = '${downloadsDirectory.path}/$fileNameWithExtension';
     var file = File(filePath);

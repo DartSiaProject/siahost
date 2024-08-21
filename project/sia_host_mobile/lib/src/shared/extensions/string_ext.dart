@@ -41,7 +41,7 @@ extension StringExtensions on String {
   }
 
   String timeConverter() {
-    var _time = DateFormat('dd:MM:yyyy').format(DateTime.parse(this));
+    var _time = DateFormat('dd/MM/yyyy').format(DateTime.parse(this));
     return _time;
   }
 }

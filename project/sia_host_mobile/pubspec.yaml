@@ -65,7 +65,8 @@ dependencies:
   file_picker: ^8.0.7
   path_provider: ^2.1.4
   permission_handler: ^10.2.0
-  popover: ^0.3.0+1
+  device_info_plus: ^10.1.2
+  open_filex: ^4.5.0
   renterd:
     # git:
     #   url: https://github.com/DartSiaProject/dartsia.git
