@@ -113,7 +113,15 @@ class Lang {
   static const viewDetailFileText = "view_detail_file_text";
   static const fileUploadedText = "file_uploaded_text";
   static const noFilePickedText = "no_file_picked_text";
-  static const downloadFileText = "download_file_text";
+  static const openFileText = "open_file_text";
   static const fileDownloadSuccessText = "file_download_success_text";
   static const fileDownloadFailedText = "file_download_failed_text";
+  static const permisionErrorText = "permision_error_text";
+  static const labelNameText = "label_name_text";
+  static const labelSizeText = "label_size_text";
+  static const labelDateCreatedText = "label_date_created_text";
+  static const labelTotalFilesText = "label_total_files_text";
+  static const viewDetailFolderText = "view_detail_folder_text";
+  static const wantOpenFileText = "want_open_file_text";
+  static const fileAlreadyDownloadText = "file_already_download_text";
 }

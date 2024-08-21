@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
+import 'package:sia_host_mobile/src/shared/global/list_variable.dart';
 
 import '../../../../../../shared/constants/lang_const.dart';
 import '../../../../../../shared/features/fetch_user_credentials/data/local_source/absts/fetch_the_user_credential_abst.dart';
@@ -88,6 +89,7 @@ class FetchAllBucketsAndFilesRepositImpl
                     totalFiles: _bucketFilesTotal,
                   ),
                 );
+                bucketNameList.add(_bucketModel.nameBucket);
               }
               return Result.success(_allBucketList.reversed.toList());
             } else {

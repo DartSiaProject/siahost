@@ -69,12 +69,22 @@ const menuVerticalForFilesList = <String>[
   Lang.addFileText,
 ];
 
-var mimeTypeText = "text/plain";
+const menuFilesList = <String>[
+  Lang.openFileText,
+  Lang.viewDetailFileText,
+  Lang.renameFileText,
+  Lang.copyAndPasteFileText,
+  Lang.deleteFileText,
+];
 
-var errorDstBucket =
+// var mimeTypeText = "text/plain";
+
+const errorDstBucket =
     "couldn't copy object: failed to fetch dst bucket: record not found";
 
-var errorSrcObject =
+const errorSrcObject =
     "couldn't copy object: failed to fetch src object: record not found";
 
-var errorRenameObject = "can't rename dirs with mode single";
+const errorRenameObject = "can't rename dirs with mode single";
+
+const storageDownload = "/storage/emulated/0/Download";

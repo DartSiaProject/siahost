@@ -105,9 +105,17 @@
   "view_detail_file_text":"File Details",
   "file_uploaded_text":"File Uploaded",
   "no_file_picked_text":"No File Selected",
-  "download_file_text":"Download File",
+  "open_file_text":"Open File",
   "file_download_success_text":"File Downloaded",
-  "file_download_failed_text":"File Download Failed"
+  "file_download_failed_text":"File Download Failed",
+  "permision_error_text":"Permission Error",
+  "label_name_text":"Name",
+"label_size_text":"Size",
+"label_date_created_text":"Date Created",
+"label_total_files_text":"Total Files",
+"view_detail_folder_text":"Folder Details",
+"want_open_file_text":"Open File Downloaded?",
+"file_already_download_text":"File Already Downloaded"
 
 
   

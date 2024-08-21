@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sia_host_mobile/src/shared/constants/colors_const.dart';
 
 import '../../../core/configs/language_config/translator.dart';
 
@@ -28,12 +29,14 @@ class FormDialogBoxWidget extends StatelessWidget {
     return AlertDialog(
       contentPadding: const EdgeInsets.symmetric(horizontal: 10.0),
       insetPadding: const EdgeInsets.symmetric(horizontal: 10.0),
+      backgroundColor: ColorsApp.bleachedCedarColor,
       title: Text(
         Translator.of(context)!.translate(title),
         style: TextStyle(
           fontFamily: "ReadexPro",
           fontSize: 18.0.sp,
           fontWeight: FontWeight.w600,
+          color: ColorsApp.whiteColor,
         ),
       ),
       content: StatefulBuilder(
