@@ -406,7 +406,7 @@ class _CardFileWidgetState extends State<CardFileWidget> {
                               fileName: widget.fileName.replaceAll('/', ''),
                               bucketName: widget.bucketName));
                     } else {
-                      print("Ouvrir le dossier pour voir l'intérieur");
+                      print("Ouvrir le dossier pour voir l'intérieure");
                     }
 
                     break;
