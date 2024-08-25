@@ -1,7 +1,5 @@
-import 'package:http/http.dart';
-
 abstract class FetchAllBucketsAbst {
-  Future<Response> fetchListOfBucket({
+  Future<Map<String, dynamic>> fetchListOfBucket({
     required String serverAddress,
     required String password,
   });

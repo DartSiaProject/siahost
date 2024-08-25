@@ -1,8 +1,9 @@
-import 'package:http/http.dart';
+import 'dart:io';
+
 import 'package:injectable/injectable.dart';
 import 'package:sia_host_mobile/src/shared/services/http/apis/host_api.dart'
     as host;
-import 'package:sia_host_mobile/src/shared/services/http/requests/http_requests.dart';
+import 'package:sia_host_mobile/src/shared/services/http/requests/http_get_request.dart';
 
 import '../absts/fetch_all_host_data_abst.dart';
 
@@ -18,9 +19,12 @@ class FetchAllHostDataImpl implements FetchAllHostDataAbst {
   /// Note :  cette fonction permet de récupérer tous les host qui sont actif
 
   @override
-  Future<Response> fetchAllHostData() async {
-    return await HttpRequests.get(
-      apiUri: host.getAllHostApi,
+  Future<Map<String, dynamic>> fetchAllHostData() async {
+    return await HttpGetRequest.get<String>(
+      api: host.getAllHostApi,
+      headers: {
+        HttpHeaders.contentTypeHeader: "application/json",
+      },
     );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:renterd/renterd.dart';
 
@@ -15,7 +14,7 @@ class DownloadTheFileImpl implements DownloadTheFileAbst {
   /// Note : This function allow to download the file from server
 
   @override
-  Future<Response> downloadTheFile({
+  Future<Map<String, dynamic>> downloadTheFile({
     required String serverAddress,
     required String password,
     required String fileName,

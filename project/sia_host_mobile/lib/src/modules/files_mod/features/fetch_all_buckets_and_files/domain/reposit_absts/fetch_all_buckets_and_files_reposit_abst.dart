@@ -7,5 +7,10 @@ abstract class FetchAllBucketsAndFilesRepositAbst {
   Future<Result<List<BucketEntity>, String>> fetchAllBuckets();
   Future<Result<List<FileEntity>, String>> fetchAllFilesFromBucket({
     required String bucketName,
+    required String prefix,
+  });
+  Future<Result<List<FileEntity>, String>> fetchAllFilesFromFolder({
+    required String bucketName,
+    required String prefix,
   });
 }

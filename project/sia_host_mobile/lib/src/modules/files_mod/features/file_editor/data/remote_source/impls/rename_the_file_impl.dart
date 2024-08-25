@@ -1,4 +1,3 @@
-import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:renterd/renterd.dart';
 
@@ -14,7 +13,7 @@ import '../absts/rename_the_file_abst.dart';
 class RenameTheFileImpl implements RenameTheFileAbst {
   /// Note :  This function allow to rename a file
   @override
-  Future<Response> renameTheFile({
+  Future<Map<String, dynamic>> renameTheFile({
     required String serverAddress,
     required String password,
     required String bucketName,

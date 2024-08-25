@@ -24,7 +24,9 @@ class LoginAccountScreen extends StatefulWidget {
 
 class _LoginAccountScreenState extends State<LoginAccountScreen> {
   late TextEditingController _adressController;
-  late TextEditingController _passwordController;
+  late TextEditingController _userMailController;
+  late TextEditingController _userPasswordController;
+
   late ScrollController _scrollController;
   late bool _passwordHidden;
   late bool _isLoading;
@@ -33,9 +35,11 @@ class _LoginAccountScreenState extends State<LoginAccountScreen> {
   void initState() {
     super.initState();
     _adressController = TextEditingController();
-    _passwordController = TextEditingController();
+    _userMailController = TextEditingController();
+    _userPasswordController = TextEditingController();
     _scrollController = ScrollController();
     _passwordHidden = true;
+
     _isLoading = false;
   }
 
@@ -74,11 +78,13 @@ class _LoginAccountScreenState extends State<LoginAccountScreen> {
           if (loginAccountBuilderState is PasswordHidded) {
             _passwordHidden = loginAccountBuilderState.passWordIsHided;
           }
+
           if (loginAccountBuilderState is LoginLoading) {
             _isLoading = true;
           } else {
             _isLoading = false;
           }
+
           return SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -155,7 +161,41 @@ class _LoginAccountScreenState extends State<LoginAccountScreen> {
                               padding: const EdgeInsets.all(5.0),
                               child: Text(
                                 Translator.of(context)!
-                                    .translate(Lang.renterdPasswordText),
+                                    .translate(Lang.yourEmailText),
+                                style: TextStyle(
+                                  fontFamily: "Inter",
+                                  fontSize: 16.0.sp,
+                                  color: ColorsApp.whiteColor,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                            TextField(
+                              keyboardType: TextInputType.text,
+                              textInputAction: TextInputAction.next,
+                              controller: _userMailController,
+                              decoration: InputDecoration(
+                                hintText: Translator.of(context)!
+                                    .translate(Lang.mailAdressText),
+                              ),
+                              style: TextStyle(
+                                fontFamily: "Inter",
+                                fontWeight: FontWeight.w400,
+                                color: ColorsApp.ironsideGreyColor,
+                                fontSize: 16.0.sp,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Flex(
+                          direction: Axis.vertical,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Text(
+                                Translator.of(context)!
+                                    .translate(Lang.yourPassrwordText),
                                 style: TextStyle(
                                   fontFamily: "Inter",
                                   fontSize: 16.0.sp,
@@ -168,7 +208,7 @@ class _LoginAccountScreenState extends State<LoginAccountScreen> {
                               keyboardType: TextInputType.text,
                               textInputAction: TextInputAction.done,
                               obscureText: _passwordHidden,
-                              controller: _passwordController,
+                              controller: _userPasswordController,
                               decoration: InputDecoration(
                                 hintText: Translator.of(context)!
                                     .translate(Lang.passwordText),
@@ -209,7 +249,8 @@ class _LoginAccountScreenState extends State<LoginAccountScreen> {
                               borderRadius: BorderRadius.circular(12.0.r),
                               onTap: () {
                                 if (_adressController.text.isEmpty ||
-                                    _passwordController.text.isEmpty) {
+                                    _userMailController.text.isEmpty ||
+                                    _userPasswordController.text.isEmpty) {
                                   Fluttertoast.showToast(
                                     msg: Translator.of(context)!
                                         .translate(Lang.fillFieldsText),
@@ -224,7 +265,8 @@ class _LoginAccountScreenState extends State<LoginAccountScreen> {
                                       .add(MakeLoginEvent(
                                     userLoginEntity: UserLoginEntity(
                                       serverAddress: _adressController.text,
-                                      passWord: _passwordController.text,
+                                      mailAdress: _userMailController.text,
+                                      passWord: _userPasswordController.text,
                                     ),
                                   ));
                                 }
@@ -285,6 +327,7 @@ class _LoginAccountScreenState extends State<LoginAccountScreen> {
   void dispose() {
     super.dispose();
     _adressController.dispose();
-    _passwordController.dispose();
+    _userMailController.dispose();
+    _userPasswordController.dispose();
   }
 }

@@ -117,7 +117,15 @@
 "label_total_files_text":"Nombre de fichiers",
 "view_detail_folder_text":"Détails du dossier",
 "want_open_file_text":"Ouvrir le Fichier Téléchargé ?",
-"file_already_download_text":"Fichier déjà téléchargé"
+"file_already_download_text":"Fichier déjà téléchargé",
+"your_email_text":"Votre Email",
+"your_passrword_text":"Votre Mot de Passe",
+"mail_adress_text":"Adresse Email",
+"data_are_correct_text":"identifiants correctes",
+"data_are_not_correct_text":"identifiants incorrects"
+
+
+
 
   
   

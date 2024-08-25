@@ -1,4 +1,3 @@
-import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:renterd/renterd.dart';
 
@@ -16,7 +15,7 @@ class FetchConsensusFromRenterImpl implements FetchConsensusFromRenterAbst {
   /// Note : cette fonction permet de récupérer un consensus depuis Renter
 
   @override
-  Future<Response> fetchTheConsensus({
+  Future<Map<String, dynamic>> fetchTheConsensus({
     required String serverAddress,
     required String password,
   }) async {

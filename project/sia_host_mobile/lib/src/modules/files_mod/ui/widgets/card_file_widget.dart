@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:sia_host_mobile/src/modules/files_mod/ui/widgets/fields_of_folder_details_widget.dart';
-import 'package:sia_host_mobile/src/shared/constants/string_const.dart';
-import 'package:sia_host_mobile/src/shared/global/list_variable.dart';
 
 import '../../../../core/configs/language_config/translator.dart';
 import '../../../../shared/constants/colors_const.dart';
 import '../../../../shared/constants/lang_const.dart';
+import '../../../../shared/constants/string_const.dart';
 import '../../../../shared/extensions/string_ext.dart';
+import '../../../../shared/global/list_variable.dart';
 import '../../../../shared/helpers/calculator_helper.dart';
 import '../../../../shared/ui/widgets/card_suggestion_widget.dart';
 import '../../../../shared/ui/widgets/form_dialog_box_widget.dart';
@@ -22,6 +21,7 @@ import '../../features/view_a_file_details/states_holder/view_the_file_content_b
 import 'fields_of_file_copy_widget.dart';
 import 'fields_of_file_details_widget.dart';
 import 'fields_of_file_rename_widget.dart';
+import 'fields_of_folder_details_widget.dart';
 
 class CardFileWidget extends StatefulWidget {
   final String bucketName;
@@ -360,102 +360,177 @@ class _CardFileWidgetState extends State<CardFileWidget> {
     return Flex(
       direction: Axis.horizontal,
       children: <Widget>[
-        Stack(
-          alignment: widget.fileType == "folder"
-              ? Alignment.topRight
-              : Alignment.topLeft,
-          children: <Widget>[
-            Image.asset(
-              widget.fileName.hasFileOrFolderTypeByExtension(),
-              width: 65.w,
-              height: 65.h,
-            ),
-            PopupMenuButton(
-              splashRadius: 22.0.r,
-              padding: widget.fileType == "folder"
-                  ? const EdgeInsets.only(left: 4, bottom: 6)
-                  : const EdgeInsets.only(left: 8, bottom: 18),
-              position: PopupMenuPosition.under,
-              icon: const Icon(
-                Icons.menu,
-                size: 20.0,
-                color: ColorsApp.bleachedCedarColor,
-              ),
-              itemBuilder: (context) {
-                return List.generate(
-                  menuFilesList.length,
-                  (indexMenu) => PopupMenuItem(
-                    value: indexMenu,
-                    child: Text(
-                      Translator.of(context)!.translate(
-                        menuFilesList[indexMenu],
-                      ),
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-                );
-              },
-              onSelected: (actionMenuIndex) {
-                switch (actionMenuIndex) {
-                  case 0:
-                    if (widget.fileType != "folder") {
-                      context.read<FileEditorBloc>().add(
-                          UserDownloadTheFileEvent(
-                              fileName: widget.fileName.replaceAll('/', ''),
-                              bucketName: widget.bucketName));
-                    } else {
-                      print("Ouvrir le dossier pour voir l'intérieure");
-                    }
+        // Stack(
+        //   alignment: widget.fileType == "folder"
+        //       ? Alignment.topRight
+        //       : Alignment.topLeft,
+        //   children: <Widget>[
+        //     Image.asset(
+        //       widget.fileName.hasFileOrFolderTypeByExtension(),
+        //       width: 65.w,
+        //       height: 65.h,
+        //     ),
+        //     PopupMenuButton(
+        //       splashRadius: 22.0.r,
+        //       padding: widget.fileType == "folder"
+        //           ? const EdgeInsets.only(left: 4, bottom: 6)
+        //           : const EdgeInsets.only(left: 8, bottom: 18),
+        //       position: PopupMenuPosition.under,
+        //       icon: const Icon(
+        //         Icons.menu,
+        //         size: 20.0,
+        //         color: ColorsApp.bleachedCedarColor,
+        //       ),
+        //       itemBuilder: (context) {
+        //         return List.generate(
+        //           menuFilesList.length,
+        //           (indexMenu) => PopupMenuItem(
+        //             value: indexMenu,
+        //             child: Text(
+        //               Translator.of(context)!.translate(
+        //                 menuFilesList[indexMenu],
+        //               ),
+        //               style: const TextStyle(
+        //                 fontWeight: FontWeight.w400,
+        //               ),
+        //             ),
+        //           ),
+        //         );
+        //       },
+        //       onSelected: (actionMenuIndex) {
+        //         switch (actionMenuIndex) {
+        //           case 0:
+        //             if (widget.fileType != "folder") {
+        //               context.read<FileEditorBloc>().add(
+        //                   UserDownloadTheFileEvent(
+        //                       fileName: widget.fileName.replaceAll('/', ''),
+        //                       bucketName: widget.bucketName));
+        //             } else {
+        //               context.read<FetchAllFilesBloc>().add(
+        //                   FetchTheFilesFromBucketEvent(
+        //                       bucketName: widget.bucketName,
+        //                       prefix: widget.fileName));
+        //             }
 
-                    break;
-                  case 1:
-                    if (widget.fileType != "folder") {
-                      _showFileDetailsDialogBox(context: context);
-                    } else {
-                      _showFolderDetailsDialogBox(
-                        context: context,
-                        folderName: widget.fileName
-                            .replaceAll('/', '')
-                            .capitalizeLetter(),
-                        folderSize:
-                            CalculatorHelper.getFileSize(widget.fileSize, 2),
-                        totalFiles: widget.totalFiles.toString(),
-                      );
-                    }
-                    break;
-                  case 2:
-                    _showRenameFileDialogBox(context: context);
-                    break;
-                  case 3:
-                    _showFileCopyDialogBox(context: context);
-                    break;
-                  case 4:
-                    _showDeleteQuestionDialogBox(context: context);
-                    break;
+        //             break;
+        //           case 1:
+        //             if (widget.fileType != "folder") {
+        //               _showFileDetailsDialogBox(context: context);
+        //             } else {
+        //               _showFolderDetailsDialogBox(
+        //                 context: context,
+        //                 folderName: widget.fileName
+        //                     .replaceAll('/', '')
+        //                     .capitalizeLetter(),
+        //                 folderSize:
+        //                     CalculatorHelper.getFileSize(widget.fileSize, 2),
+        //                 totalFiles: widget.totalFiles.toString(),
+        //               );
+        //             }
+        //             break;
+        //           case 2:
+        //             _showRenameFileDialogBox(context: context);
+        //             break;
+        //           case 3:
+        //             _showFileCopyDialogBox(context: context);
+        //             break;
+        //           case 4:
+        //             _showDeleteQuestionDialogBox(context: context);
+        //             break;
+        //         }
+        //       },
+        //     ),
+        //   ],
+        // ),
+        PopupMenuButton(
+          splashRadius: 22.0.r,
+          padding: widget.fileType == "folder"
+              ? const EdgeInsets.only(left: 4, bottom: 6)
+              : const EdgeInsets.only(left: 8, bottom: 18),
+          position: PopupMenuPosition.under,
+          icon: Image.asset(
+            widget.fileName.hasFileOrFolderTypeByExtension(),
+            width: 50.w,
+            height: 50.h,
+          ),
+          itemBuilder: (context) {
+            return List.generate(
+              menuFilesList.length,
+              (indexMenu) => PopupMenuItem(
+                value: indexMenu,
+                child: Text(
+                  Translator.of(context)!.translate(
+                    menuFilesList[indexMenu],
+                  ),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            );
+          },
+          onSelected: (actionMenuIndex) {
+            switch (actionMenuIndex) {
+              case 0:
+                if (widget.fileType != "folder") {
+                  context.read<FileEditorBloc>().add(UserDownloadTheFileEvent(
+                      fileName: widget.fileName.replaceAll('/', ''),
+                      bucketName: widget.bucketName));
+                } else {
+                  // context.read<FetchAllFilesBloc>().add(
+                  //     FetchTheFilesFromFolderEvent(
+                  //         bucketName: widget.bucketName,
+                  //         prefix: widget.fileName));
+                  // todo : je reviendrai
                 }
-              },
-            ),
-          ],
+
+                break;
+              case 1:
+                if (widget.fileType != "folder") {
+                  _showFileDetailsDialogBox(context: context);
+                } else {
+                  _showFolderDetailsDialogBox(
+                    context: context,
+                    folderName:
+                        widget.fileName.replaceAll('/', '').capitalizeLetter(),
+                    folderSize:
+                        CalculatorHelper.getFileSize(widget.fileSize, 2),
+                    totalFiles: widget.totalFiles.toString(),
+                  );
+                }
+                break;
+              case 2:
+                _showRenameFileDialogBox(context: context);
+                break;
+              case 3:
+                _showFileCopyDialogBox(context: context);
+                break;
+              case 4:
+                _showDeleteQuestionDialogBox(context: context);
+                break;
+            }
+          },
         ),
         Flex(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           direction: Axis.vertical,
           children: <Widget>[
-            Text(
-              widget.fileType == "folder"
-                  ? "${widget.totalFiles.toString()} ${Translator.of(context)!.translate(Lang.filesText)} | ${CalculatorHelper.getFileSize(widget.fileSize, 2)}"
-                  : CalculatorHelper.getFileSize(widget.fileSize, 2),
-              style: TextStyle(
-                fontFamily: "Manrope",
-                fontSize: 12.0.sp,
-                fontWeight: FontWeight.w500,
-                color: ColorsApp.cottonSeedColor,
+            SizedBox(
+              width: 95,
+              child: Text(
+                widget.fileType == "folder"
+                    ? "${widget.totalFiles.toString()} ${Translator.of(context)!.translate(Lang.filesText)} | ${CalculatorHelper.getFileSize(widget.fileSize, 2)}"
+                    : CalculatorHelper.getFileSize(widget.fileSize, 2),
+                style: TextStyle(
+                  fontFamily: "Manrope",
+                  fontSize: 12.0.sp,
+                  fontWeight: FontWeight.w500,
+                  color: ColorsApp.cottonSeedColor,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
             ),
             SizedBox(
               width: 95,

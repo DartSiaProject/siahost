@@ -1,4 +1,3 @@
-import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:renterd/renterd.dart';
 
@@ -14,7 +13,7 @@ import '../absts/copy_the_file_abst.dart';
 class CopyTheFileImpl implements CopyTheFileAbst {
   /// Note :  This function allow to copy and paste a file
   @override
-  Future<Response> copyAndPasteTheFile({
+  Future<Map<String, dynamic>> copyAndPasteTheFile({
     required String serverAddress,
     required String password,
     required String sourceBucketName,

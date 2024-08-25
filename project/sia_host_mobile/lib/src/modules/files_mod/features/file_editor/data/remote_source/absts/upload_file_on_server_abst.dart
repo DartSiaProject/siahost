@@ -1,9 +1,7 @@
 import 'dart:io';
 
-import 'package:http/http.dart';
-
 abstract class UploadFileOnServerAbst {
-  Future<Response> uploadTheFile({
+  Future<Map<String, dynamic>> uploadTheFile({
     required String serverAddress,
     required String password,
     required String bucketName,

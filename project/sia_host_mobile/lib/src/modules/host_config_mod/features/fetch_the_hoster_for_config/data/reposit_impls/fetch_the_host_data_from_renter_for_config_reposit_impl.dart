@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
 
@@ -62,8 +63,11 @@ class FetchTheHostDataFromRenterForConfigRepositImpl
     return _fetchHosterFromRenterAbst
         .fetchTheHoster(serverAddress: serverAddress, password: password)
         .then((_resultHoster) {
-      if (_resultHoster.statusCode == HttpStatus.ok) {
-        Map<String, dynamic> _hosterBody = json.decode(_resultHoster.body);
+      if (_resultHoster["status"] &&
+          (_resultHoster["response"] as Response<String>).statusCode ==
+              HttpStatus.ok) {
+        Map<String, dynamic> _hosterBody =
+            json.decode((_resultHoster["response"] as Response<String>).data!);
 
         if (_hosterBody.isEmpty) {
           return const Result.error(Lang.myHostNoFoundText);
@@ -85,6 +89,12 @@ class FetchTheHostDataFromRenterForConfigRepositImpl
 
           return Result.success(_theHostDataEntity);
         }
+      } else if (_resultHoster["status"] == false &&
+              (_resultHoster["error"] as DioException).type ==
+                  DioExceptionType.connectionTimeout ||
+          (_resultHoster["error"] as DioException).type ==
+              DioExceptionType.receiveTimeout) {
+        return const Result.error(Lang.timeErrorText);
       } else {
         return const Result.error(Lang.internalServerErrorText);
       }

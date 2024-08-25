@@ -124,4 +124,9 @@ class Lang {
   static const viewDetailFolderText = "view_detail_folder_text";
   static const wantOpenFileText = "want_open_file_text";
   static const fileAlreadyDownloadText = "file_already_download_text";
+  static const yourEmailText = "your_email_text";
+  static const yourPassrwordText = "your_passrword_text";
+  static const mailAdressText = "mail_adress_text";
+  static const dataAreCorrectText = "data_are_correct_text";
+  static const dataAreNotCorrectText = "data_are_not_correct_text";
 }

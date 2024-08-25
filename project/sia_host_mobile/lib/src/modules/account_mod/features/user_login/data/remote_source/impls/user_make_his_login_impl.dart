@@ -1,4 +1,3 @@
-import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:renterd/renterd.dart';
 
@@ -17,7 +16,7 @@ class UserMakeHisLoginImpl implements UserMakeHisLoginAbst {
   /// Note: cette fonction permet à l'utilisateur de faire son login
 
   @override
-  Future<Response> makeTheLogin({
+  Future<Map<String, dynamic>> makeTheLogin({
     required UserLoginModel userLoginModel,
   }) async {
     return await Accounts.getAllAccounts(

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
 
@@ -36,12 +37,26 @@ class CopyAndPasteRepositImpl implements CopyAndPasteRepositAbst {
         destfileName: copyFileInfoEntity.destfileName,
       )
           .then((_response) {
-        if (_response.statusCode == HttpStatus.ok) {
+        if (_response["status"] &&
+            (_response["response"] as Response<String>).statusCode ==
+                HttpStatus.ok) {
           return const Result.success(Lang.copyIsDoneText);
-        } else if (_response.body.contains(errorDstBucket)) {
+        } else if (_response["status"] &&
+            (_response["response"] as Response<String>)
+                .data!
+                .contains(errorDstBucket)) {
           return const Result.error(Lang.theBucketDestinationNotExistText);
-        } else if (_response.body.contains(errorSrcObject)) {
+        } else if (_response["status"] &&
+            (_response["response"] as Response<String>)
+                .data!
+                .contains(errorSrcObject)) {
           return const Result.error(Lang.theSrcObjectNotExistText);
+        } else if (_response["status"] == false &&
+                (_response["error"] as DioException).type ==
+                    DioExceptionType.connectionTimeout ||
+            (_response["error"] as DioException).type ==
+                DioExceptionType.receiveTimeout) {
+          return const Result.error(Lang.timeErrorText);
         } else {
           return const Result.error(Lang.internalServerErrorText);
         }

@@ -1,8 +1,9 @@
-import 'package:http/http.dart';
+import 'dart:io';
+
 import 'package:injectable/injectable.dart';
 
 import '../../../../../../../shared/services/http/apis/host_api.dart';
-import '../../../../../../../shared/services/http/requests/http_requests.dart';
+import '../../../../../../../shared/services/http/requests/http_get_request.dart';
 import '../absts/fetch_the_host_address_country_abst.dart';
 
 /// Project: [SiaHostsMobile],
@@ -17,10 +18,13 @@ class FetchTheHostAddressCountryImpl implements FetchTheHostAddressCountryAbst {
   // Note: cette fonction permet de récupérer le pays d'une adress
 
   @override
-  Future<Response> fetchTheAddressCountry({
+  Future<Map<String, dynamic>> fetchTheAddressCountry({
     required String ipAddressConverted,
   }) async {
-    return await HttpRequests.get(
-        apiUri: getAddressCountryHostApi(hostIp: ipAddressConverted));
+    return await HttpGetRequest.get<String>(
+        api: getAddressCountryHostApi(hostIp: ipAddressConverted),
+        headers: {
+          HttpHeaders.contentTypeHeader: "application/json",
+        });
   }
 }

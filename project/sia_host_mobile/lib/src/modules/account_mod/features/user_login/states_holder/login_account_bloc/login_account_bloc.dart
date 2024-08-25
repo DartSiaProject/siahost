@@ -13,8 +13,9 @@ part 'login_account_state.dart';
 class LoginAccountBloc extends Bloc<LoginAccountEvent, LoginAccountState> {
   final UserMakeTheLoginUsecase userMakeTheLoginUsecase;
 
-  LoginAccountBloc({required this.userMakeTheLoginUsecase})
-      : super(LoginAccountInitial()) {
+  LoginAccountBloc({
+    required this.userMakeTheLoginUsecase,
+  }) : super(LoginAccountInitial()) {
     on<HideThePassWordEvent>((event, emit) {
       emit(PasswordHidded(passWordIsHided: event.hideThePassWord));
     });

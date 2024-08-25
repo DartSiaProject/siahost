@@ -1,4 +1,3 @@
-import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:renterd/renterd.dart';
 
@@ -13,7 +12,7 @@ import '../absts/fetch_all_buckets_abst.dart';
 @LazySingleton(as: FetchAllBucketsAbst)
 class FetchAllBucketsImpl implements FetchAllBucketsAbst {
   @override
-  Future<Response> fetchListOfBucket({
+  Future<Map<String, dynamic>> fetchListOfBucket({
     required String serverAddress,
     required String password,
   }) async {

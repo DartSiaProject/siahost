@@ -1,4 +1,3 @@
-import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:renterd/renterd.dart';
 
@@ -13,16 +12,18 @@ import '../absts/fetch_files_from_bucket_abst.dart';
 @LazySingleton(as: FetchFilesFromBucketAbst)
 class FetchFilesFromBucketImpl implements FetchFilesFromBucketAbst {
   @override
-  Future<Response> fetchAllFilesOfBucket({
+  Future<Map<String, dynamic>> fetchAllFilesOfBucket({
     required String serverAddress,
     required String password,
     required String bucketName,
+    required String prefixPath,
   }) async {
     return await Object.getListOfObjectLimited(
-        password: password,
-        serverAddress: serverAddress,
-        bucketName: bucketName,
-        limit: double.maxFinite.toInt(),
-        prefix: "");
+      password: password,
+      serverAddress: serverAddress,
+      bucketName: bucketName,
+      limit: double.maxFinite.toInt(),
+      prefix: prefixPath,
+    );
   }
 }

@@ -25,14 +25,16 @@ class ListOfBucketScreen extends StatefulWidget {
 
 class _ListOfBucketScreenState extends State<ListOfBucketScreen> {
   late TextEditingController _adressController;
-  late TextEditingController _passwordController;
+  late TextEditingController _userMailController;
+  late TextEditingController _userPasswordController;
   late bool _passwordHidden;
   late bool _isLoginLoading;
   @override
   void initState() {
     super.initState();
     _adressController = TextEditingController();
-    _passwordController = TextEditingController();
+    _userMailController = TextEditingController();
+    _userPasswordController = TextEditingController();
     _passwordHidden = true;
     _isLoginLoading = false;
   }
@@ -160,8 +162,42 @@ class _ListOfBucketScreenState extends State<ListOfBucketScreen> {
                                     Padding(
                                       padding: const EdgeInsets.all(5.0),
                                       child: Text(
-                                        Translator.of(context)!.translate(
-                                            Lang.renterdPasswordText),
+                                        Translator.of(context)!
+                                            .translate(Lang.yourEmailText),
+                                        style: TextStyle(
+                                          fontFamily: "Inter",
+                                          fontSize: 16.0.sp,
+                                          color: ColorsApp.whiteColor,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                    TextField(
+                                      keyboardType: TextInputType.text,
+                                      textInputAction: TextInputAction.next,
+                                      controller: _userMailController,
+                                      decoration: InputDecoration(
+                                        hintText: Translator.of(context)!
+                                            .translate(Lang.mailAdressText),
+                                      ),
+                                      style: TextStyle(
+                                        fontFamily: "Inter",
+                                        fontWeight: FontWeight.w400,
+                                        color: ColorsApp.ironsideGreyColor,
+                                        fontSize: 16.0.sp,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Flex(
+                                  direction: Axis.vertical,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: Text(
+                                        Translator.of(context)!
+                                            .translate(Lang.yourPassrwordText),
                                         style: TextStyle(
                                           fontFamily: "Inter",
                                           fontSize: 16.0.sp,
@@ -174,20 +210,18 @@ class _ListOfBucketScreenState extends State<ListOfBucketScreen> {
                                       keyboardType: TextInputType.text,
                                       textInputAction: TextInputAction.done,
                                       obscureText: _passwordHidden,
-                                      controller: _passwordController,
+                                      controller: _userPasswordController,
                                       decoration: InputDecoration(
                                         hintText: Translator.of(context)!
                                             .translate(Lang.passwordText),
                                         suffixIcon: IconButton(
                                           splashRadius: 23.0.r,
                                           onPressed: () {
-                                            context
-                                                .read<LoginAccountBloc>()
+                                            BlocProvider.of<LoginAccountBloc>(
+                                                    context)
                                                 .add(HideThePassWordEvent(
                                                     hideThePassWord:
                                                         !_passwordHidden));
-                                            BlocProvider.of<LoginAccountBloc>(
-                                                context);
                                           },
                                           color: ColorsApp.whiteColor,
                                           icon: SvgPicture.asset(
@@ -220,7 +254,9 @@ class _ListOfBucketScreenState extends State<ListOfBucketScreen> {
                                           BorderRadius.circular(12.0.r),
                                       onTap: () {
                                         if (_adressController.text.isEmpty ||
-                                            _passwordController.text.isEmpty) {
+                                            _userMailController.text.isEmpty ||
+                                            _userPasswordController
+                                                .text.isEmpty) {
                                           Fluttertoast.showToast(
                                             msg: Translator.of(context)!
                                                 .translate(Lang.fillFieldsText),
@@ -238,8 +274,10 @@ class _ListOfBucketScreenState extends State<ListOfBucketScreen> {
                                             userLoginEntity: UserLoginEntity(
                                               serverAddress:
                                                   _adressController.text,
+                                              mailAdress:
+                                                  _userMailController.text,
                                               passWord:
-                                                  _passwordController.text,
+                                                  _userPasswordController.text,
                                             ),
                                           ));
                                         }
@@ -388,6 +426,7 @@ class _ListOfBucketScreenState extends State<ListOfBucketScreen> {
   void dispose() {
     super.dispose();
     _adressController.dispose();
-    _passwordController.dispose();
+    _userMailController.dispose();
+    _userPasswordController.dispose();
   }
 }

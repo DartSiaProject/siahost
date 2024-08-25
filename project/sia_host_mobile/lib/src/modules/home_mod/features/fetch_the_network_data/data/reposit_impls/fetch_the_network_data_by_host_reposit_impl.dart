@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
 
@@ -32,9 +33,12 @@ class FetchTheNetworkDataByHostRepositImpl
       return await _fetchAllCurrentsHostPresentAbst
           .fetchAllHostCurrents()
           .then((_resultHost) async {
-        if (_resultHost.statusCode == HttpStatus.ok) {
+        if (_resultHost["status"] &&
+            (_resultHost["response"] as Response<String>).statusCode ==
+                HttpStatus.ok) {
           _allCurrentHost.clear();
-          Map<String, dynamic> _hostData = json.decode(_resultHost.body);
+          Map<String, dynamic> _hostData =
+              json.decode((_resultHost["response"] as Response<String>).data!);
           _allCurrentHost = _hostData["hosts"];
 
           //? (1)-- total hosts currents --
@@ -110,6 +114,13 @@ class FetchTheNetworkDataByHostRepositImpl
           );
 
           return Result.success(_networkDataEntity);
+        } else if (_resultHost["status"] == false &&
+                (_resultHost["error"] as DioException).type ==
+                    DioExceptionType.connectionTimeout ||
+            (_resultHost["error"] as DioException).type ==
+                DioExceptionType.receiveTimeout) {
+          _allCurrentHost.clear();
+          return const Result.error(Lang.timeErrorText);
         } else {
           _allCurrentHost.clear();
           return const Result.error(Lang.internalServerErrorText);

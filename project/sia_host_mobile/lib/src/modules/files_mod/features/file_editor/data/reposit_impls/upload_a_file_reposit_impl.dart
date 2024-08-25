@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
 
@@ -45,10 +46,17 @@ class UploadAFileRepositImpl implements UploadAFileRepositAbst {
             file: _filePicked,
           )
               .then((_response) {
-            if (_response.statusCode == HttpStatus.ok) {
+            if (_response["status"] &&
+                (_response["response"] as Response<String>).statusCode ==
+                    HttpStatus.ok) {
               return const Result.success(Lang.fileUploadedText);
+            } else if (_response["status"] == false &&
+                    (_response["error"] as DioException).type ==
+                        DioExceptionType.connectionTimeout ||
+                (_response["error"] as DioException).type ==
+                    DioExceptionType.receiveTimeout) {
+              return const Result.error(Lang.timeErrorText);
             } else {
-              print(_response.body);
               return const Result.error(Lang.internalServerErrorText);
             }
           });

@@ -16,7 +16,7 @@ class DarkTheme {
       hintStyle: TextStyle(
         fontFamily: "Inter",
         fontWeight: FontWeight.w400,
-        color: ColorsApp.ironsideGreyColor,
+        color: ColorsApp.blackColor,
         fontSize: 16.0.sp,
       ),
       enabledBorder: OutlineInputBorder(

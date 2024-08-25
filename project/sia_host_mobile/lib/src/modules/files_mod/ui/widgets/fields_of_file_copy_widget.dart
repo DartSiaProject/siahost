@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sia_host_mobile/src/shared/extensions/string_ext.dart';
-import 'package:sia_host_mobile/src/shared/global/list_variable.dart';
+import '../../../../shared/extensions/string_ext.dart';
+import '../../../../shared/global/list_variable.dart';
 
 import '../../../../core/configs/language_config/translator.dart';
 import '../../../../shared/constants/colors_const.dart';
@@ -47,14 +47,9 @@ class FieldsOfFileCopyWidget extends StatelessWidget {
           onChanged: (String? value) {
             bucketNameSelected.call(value!);
           },
-          // decoration: const InputDecoration(
-          //   labelText: 'Select an option',
-          //   border: OutlineInputBorder(),
-          // ),
           decoration: InputDecoration(
             hintText: Translator.of(context)!.translate(Lang.addBucketNameText),
           ),
-
           items: bucketNameList.map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
               value: value,

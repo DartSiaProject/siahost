@@ -1,5 +1,5 @@
 import 'package:permission_handler/permission_handler.dart';
-import 'package:sia_host_mobile/src/shared/services/deviceInfos/requests/android_request.dart';
+import '../../deviceInfos/requests/android_request.dart';
 
 class PermissionRequest {
   static Future<bool> requestPermissionAndResult({

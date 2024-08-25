@@ -1,7 +1,5 @@
-import 'package:http/http.dart';
-
 abstract class FetchHosterFromRenterForConfigAbst {
-  Future<Response> fetchTheHosterForConfiguration({
+  Future<Map<String, dynamic>> fetchTheHosterForConfiguration({
     required String serverAddress,
     required String password,
   });

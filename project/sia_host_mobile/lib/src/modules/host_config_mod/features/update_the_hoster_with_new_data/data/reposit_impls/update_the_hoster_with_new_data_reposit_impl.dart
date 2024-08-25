@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
 
@@ -52,8 +53,16 @@ class UpdateTheHosterWithNewDataRepositImpl
         password: _passwordDecrypted,
       )
           .then((_resultUpdate) {
-        if (_resultUpdate.statusCode == HttpStatus.ok) {
+        if (_resultUpdate["status"] &&
+            (_resultUpdate["response"] as Response<String>).statusCode ==
+                HttpStatus.ok) {
           return const Result.success(Lang.configHostSuccessText);
+        } else if (_resultUpdate["status"] == false &&
+                (_resultUpdate["error"] as DioException).type ==
+                    DioExceptionType.connectionTimeout ||
+            (_resultUpdate["error"] as DioException).type ==
+                DioExceptionType.receiveTimeout) {
+          return const Result.error(Lang.timeErrorText);
         } else {
           return const Result.error(Lang.updateErrorText);
         }

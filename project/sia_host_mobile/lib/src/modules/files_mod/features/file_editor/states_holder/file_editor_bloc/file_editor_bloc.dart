@@ -2,8 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
-import 'package:sia_host_mobile/src/shared/constants/lang_const.dart';
 
+import '../../../../../../shared/constants/lang_const.dart';
 import '../../domain/entities/copy_file_info_entity.dart';
 import '../../domain/entities/rename_file_info_entity.dart';
 import '../../domain/usecases/copy_and_paste_usecase.dart';

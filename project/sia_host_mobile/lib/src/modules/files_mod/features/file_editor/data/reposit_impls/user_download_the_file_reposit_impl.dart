@@ -1,11 +1,13 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
+import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:sia_host_mobile/src/shared/constants/string_const.dart';
 
 import '../../../../../../shared/constants/lang_const.dart';
+import '../../../../../../shared/constants/string_const.dart';
 import '../../../../../../shared/global/map_variable.dart';
 import '../../../../../../shared/services/connection/requests/connection_request.dart';
 import '../../../../../../shared/services/permissions/requests/permission_request.dart';
@@ -48,11 +50,13 @@ class UserDownloadTheFileRepositImpl implements UserDownloadTheFileRepositAbst {
                   fileName: fileName,
                   bucketName: bucketName)
               .then((_response) {
-            if (_response.statusCode == HttpStatus.ok) {
+            if (_response["status"] &&
+                (_response["response"] as Response<Uint8List>).statusCode ==
+                    HttpStatus.ok) {
               return _saveTheFileDownloadedAbst
                   .saveTheFileDownload(
                 fileNameWithExtension: fileName,
-                fileBytes: _response.bodyBytes,
+                fileBytes: (_response["response"] as Response<Uint8List>).data!,
               )
                   .then((_responseSave) {
                 if (_responseSave["status"]) {
@@ -64,6 +68,12 @@ class UserDownloadTheFileRepositImpl implements UserDownloadTheFileRepositAbst {
                   return const Result.error(Lang.fileDownloadFailedText);
                 }
               });
+            } else if (_response["status"] == false &&
+                    (_response["error"] as DioException).type ==
+                        DioExceptionType.connectionTimeout ||
+                (_response["error"] as DioException).type ==
+                    DioExceptionType.receiveTimeout) {
+              return const Result.error(Lang.timeErrorText);
             } else {
               return const Result.error(Lang.internalServerErrorText);
             }
