@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sia_host_mobile/src/shared/constants/colors_const.dart';
+import '../../constants/colors_const.dart';
 
 import '../../../core/configs/language_config/translator.dart';
 

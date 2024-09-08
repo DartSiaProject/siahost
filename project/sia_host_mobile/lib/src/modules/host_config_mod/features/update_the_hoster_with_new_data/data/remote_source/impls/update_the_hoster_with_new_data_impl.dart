@@ -1,4 +1,3 @@
-import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:renterd/renterd.dart';
 
@@ -17,15 +16,19 @@ class UpdateTheHosterWithNewDataImpl implements UpdateTheHosterWithNewDataAbst {
   /// Note :  cette fonction permet de mettre à jour le hoster qui a été déjà récupérer
 
   @override
-  Future<Response> updateTheHosterWithNewData({
+  Future<Map<String, dynamic>> updateTheHosterWithNewData({
     required TheNewDataHostModel theNewDataHostModel,
     required String serverAddress,
-    required String password,
+    // required String password,
+    required String key,
+    required String iv,
   }) async {
     return await Hoster.updateSomeHost(
       hostConfig: theNewDataHostModel.toMap(),
       serverAddress: serverAddress,
-      password: password,
+      // password: password,
+      key: key,
+      iv: iv,
     );
   }
 }

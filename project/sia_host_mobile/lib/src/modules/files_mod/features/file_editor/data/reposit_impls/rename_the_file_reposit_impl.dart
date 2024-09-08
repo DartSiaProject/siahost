@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
 
@@ -29,17 +30,31 @@ class RenameTheFileRepositImpl implements RenameTheFileRepositAbst {
           .renameTheFile(
         serverAddress: EncrypterRequest.decrypt(
             dataEncrypted: global.userInfo["userServerAdress"]),
-        password: EncrypterRequest.decrypt(
-            dataEncrypted: global.userInfo["userPassWord"]),
+        // password: EncrypterRequest.decrypt(
+        //     dataEncrypted: global.userInfo["userPassWord"]),
+        key:
+            EncrypterRequest.decrypt(dataEncrypted: global.userInfo["userKey"]),
+        iv: EncrypterRequest.decrypt(dataEncrypted: global.userInfo["userIv"]),
         bucketName: renameFileInfoEntity.bucketName,
         oldFileName: renameFileInfoEntity.oldFileName,
         newFileName: renameFileInfoEntity.newFileName,
       )
           .then((_response) {
-        if (_response.statusCode == HttpStatus.ok) {
+        if (_response["status"] &&
+            (_response["response"] as Response<String>).statusCode ==
+                HttpStatus.ok) {
           return const Result.success(Lang.fileRenamedText);
-        } else if (_response.body.contains(errorRenameObject)) {
+        } else if (_response["status"] &&
+            (_response["response"] as Response<String>)
+                .data!
+                .contains(errorRenameObject)) {
           return const Result.error(Lang.notRenameFolderText);
+        } else if (_response["status"] == false &&
+                (_response["error"] as DioException).type ==
+                    DioExceptionType.connectionTimeout ||
+            (_response["error"] as DioException).type ==
+                DioExceptionType.receiveTimeout) {
+          return const Result.error(Lang.timeErrorText);
         } else {
           return const Result.error(Lang.internalServerErrorText);
         }

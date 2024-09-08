@@ -9,8 +9,20 @@ sealed class FetchAllFilesEvent extends Equatable {
 
 class FetchTheFilesFromBucketEvent extends FetchAllFilesEvent {
   final String bucketName;
+  final String prefix;
 
   const FetchTheFilesFromBucketEvent({
     required this.bucketName,
+    required this.prefix,
+  });
+}
+
+class FetchTheFilesFromFolderEvent extends FetchAllFilesEvent {
+  final String bucketName;
+  final String prefix;
+
+  const FetchTheFilesFromFolderEvent({
+    required this.bucketName,
+    required this.prefix,
   });
 }

@@ -1,10 +1,10 @@
-import 'package:http/http.dart';
-
 abstract class DeleteTheFileAbst {
-  Future<Response> deleteTheFile({
+  Future<Map<String, dynamic>> deleteTheFile({
     required String serverAddress,
-    required String password,
+    // required String password,
     required String fileName,
     required String bucketName,
+    required String key,
+    required String iv,
   });
 }

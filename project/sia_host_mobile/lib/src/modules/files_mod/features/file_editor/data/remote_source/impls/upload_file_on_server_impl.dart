@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:renterd/renterd.dart';
 
@@ -18,18 +17,23 @@ class UploadFileOnServerImpl implements UploadFileOnServerAbst {
   /// Note : This function allow to upload the file to server
 
   @override
-  Future<Response> uploadTheFile({
+  Future<Map<String, dynamic>> uploadTheFile({
     required String serverAddress,
-    required String password,
+    // required String password,
     required String bucketName,
     required String fileName,
     required File file,
+    required String key,
+    required String iv,
   }) async {
     return await Object.uploadAnObject(
-        password: password,
-        bucketName: bucketName,
-        fileName: fileName,
-        file: file,
-        serverAddress: serverAddress);
+      // password: password,
+      bucketName: bucketName,
+      fileName: fileName,
+      file: file,
+      serverAddress: serverAddress,
+      key: key,
+      iv: iv,
+    );
   }
 }

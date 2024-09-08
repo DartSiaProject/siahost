@@ -54,7 +54,7 @@ dependencies:
   bloc: ^8.1.4
   fluttertoast: ^8.2.6
   multiple_result: ^5.1.0
-  http: ^1.2.2
+  dio: ^5.6.0
   smooth_page_indicator: ^1.2.0
   bottom_navy_bar: ^6.1.0
   chart_sparkline: ^1.0.15

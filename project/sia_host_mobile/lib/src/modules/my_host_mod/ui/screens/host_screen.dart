@@ -4,13 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../../../account_mod/features/user_login/domain/entities/user_login_entity.dart';
-import '../../../account_mod/features/user_login/states_holder/login_account_bloc/login_account_bloc.dart';
-import '../../../../shared/constants/svgs_const.dart';
 
 import '../../../../core/configs/language_config/translator.dart';
 import '../../../../shared/constants/colors_const.dart';
 import '../../../../shared/constants/lang_const.dart';
+import '../../../../shared/constants/svgs_const.dart';
+import '../../../account_mod/features/user_login/domain/entities/user_login_entity.dart';
+import '../../../account_mod/features/user_login/states_holder/login_account_bloc/login_account_bloc.dart';
 import '../../features/fetch_host_from_renter/states_holder/fetch_my_hoster_bloc/fetch_my_hoster_bloc.dart';
 import '../widgets/card_my_host_info_widget.dart';
 import '../widgets/card_speed_widget.dart';
@@ -25,7 +25,8 @@ class HostScreen extends StatefulWidget {
 
 class _HostScreenState extends State<HostScreen> {
   late TextEditingController _adressController;
-  late TextEditingController _passwordController;
+  late TextEditingController _userMailController;
+  late TextEditingController _userPasswordController;
   late bool _passwordHidden;
   late bool _isLoading;
 
@@ -33,7 +34,9 @@ class _HostScreenState extends State<HostScreen> {
   void initState() {
     super.initState();
     _adressController = TextEditingController();
-    _passwordController = TextEditingController();
+    _adressController = TextEditingController();
+    _userMailController = TextEditingController();
+    _userPasswordController = TextEditingController();
     _passwordHidden = true;
     _isLoading = false;
   }
@@ -164,7 +167,41 @@ class _HostScreenState extends State<HostScreen> {
                                     padding: const EdgeInsets.all(5.0),
                                     child: Text(
                                       Translator.of(context)!
-                                          .translate(Lang.renterdPasswordText),
+                                          .translate(Lang.yourEmailText),
+                                      style: TextStyle(
+                                        fontFamily: "Inter",
+                                        fontSize: 16.0.sp,
+                                        color: ColorsApp.whiteColor,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+                                  TextField(
+                                    keyboardType: TextInputType.text,
+                                    textInputAction: TextInputAction.next,
+                                    controller: _userMailController,
+                                    decoration: InputDecoration(
+                                      hintText: Translator.of(context)!
+                                          .translate(Lang.mailAdressText),
+                                    ),
+                                    style: TextStyle(
+                                      fontFamily: "Inter",
+                                      fontWeight: FontWeight.w400,
+                                      color: ColorsApp.ironsideGreyColor,
+                                      fontSize: 16.0.sp,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Flex(
+                                direction: Axis.vertical,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Text(
+                                      Translator.of(context)!
+                                          .translate(Lang.yourPassrwordText),
                                       style: TextStyle(
                                         fontFamily: "Inter",
                                         fontSize: 16.0.sp,
@@ -177,19 +214,18 @@ class _HostScreenState extends State<HostScreen> {
                                     keyboardType: TextInputType.text,
                                     textInputAction: TextInputAction.done,
                                     obscureText: _passwordHidden,
-                                    controller: _passwordController,
+                                    controller: _userPasswordController,
                                     decoration: InputDecoration(
                                       hintText: Translator.of(context)!
                                           .translate(Lang.passwordText),
                                       suffixIcon: IconButton(
                                         splashRadius: 23.0.r,
                                         onPressed: () {
-                                          context.read<LoginAccountBloc>().add(
-                                              HideThePassWordEvent(
+                                          BlocProvider.of<LoginAccountBloc>(
+                                                  context)
+                                              .add(HideThePassWordEvent(
                                                   hideThePassWord:
                                                       !_passwordHidden));
-                                          BlocProvider.of<LoginAccountBloc>(
-                                              context);
                                         },
                                         color: ColorsApp.whiteColor,
                                         icon: SvgPicture.asset(
@@ -221,7 +257,9 @@ class _HostScreenState extends State<HostScreen> {
                                     borderRadius: BorderRadius.circular(12.0.r),
                                     onTap: () {
                                       if (_adressController.text.isEmpty ||
-                                          _passwordController.text.isEmpty) {
+                                          _userMailController.text.isEmpty ||
+                                          _userPasswordController
+                                              .text.isEmpty) {
                                         Fluttertoast.showToast(
                                           msg: Translator.of(context)!
                                               .translate(Lang.fillFieldsText),
@@ -238,7 +276,10 @@ class _HostScreenState extends State<HostScreen> {
                                           userLoginEntity: UserLoginEntity(
                                             serverAddress:
                                                 _adressController.text,
-                                            passWord: _passwordController.text,
+                                            mailAdress:
+                                                _userMailController.text,
+                                            passWord:
+                                                _userPasswordController.text,
                                           ),
                                         ));
                                       }
@@ -403,7 +444,7 @@ class _HostScreenState extends State<HostScreen> {
                                     padding: const EdgeInsets.only(left: 10.0),
                                   ),
                                   SizedBox(
-                                    height: 20.0.h,
+                                    height: 18.0.h,
                                   ),
                                   CardMyHostInfoWidget(
                                     title: Lang.maxUploadText,
@@ -491,6 +532,7 @@ class _HostScreenState extends State<HostScreen> {
   void dispose() {
     super.dispose();
     _adressController.dispose();
-    _passwordController.dispose();
+    _userMailController.dispose();
+    _userPasswordController.dispose();
   }
 }

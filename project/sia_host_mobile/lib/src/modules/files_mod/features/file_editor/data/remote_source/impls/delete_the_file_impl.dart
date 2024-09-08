@@ -1,4 +1,3 @@
-import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:renterd/renterd.dart';
 
@@ -14,16 +13,21 @@ import '../absts/delete_the_file_abst.dart';
 class DeleteTheFileImpl implements DeleteTheFileAbst {
   /// Note : This function allow to delete a file
   @override
-  Future<Response> deleteTheFile({
+  Future<Map<String, dynamic>> deleteTheFile({
     required String serverAddress,
-    required String password,
+    // required String password,
     required String fileName,
     required String bucketName,
+    required String key,
+    required String iv,
   }) async {
     return await Object.deleteTheObject(
-        password: password,
-        serverAddress: serverAddress,
-        fileName: fileName,
-        bucketName: bucketName);
+      // password: password,
+      serverAddress: serverAddress,
+      fileName: fileName,
+      bucketName: bucketName,
+      key: key,
+      iv: iv,
+    );
   }
 }

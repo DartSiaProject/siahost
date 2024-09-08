@@ -1,8 +1,8 @@
-import 'package:http/http.dart';
-
 abstract class FetchConsensusFromRenterAbst {
-  Future<Response> fetchTheConsensus({
+  Future<Map<String, dynamic>> fetchTheConsensus({
     required String serverAddress,
-    required String password,
+    // required String password,
+    required String key,
+    required String iv,
   });
 }

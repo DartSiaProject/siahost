@@ -1,12 +1,11 @@
 import 'dart:io';
 
-import 'package:flutter/services.dart';
-import 'package:sia_host_mobile/src/shared/constants/string_const.dart';
+import '../../../constants/string_const.dart';
 
 class SaveFileRequest {
   static Future<Map<String, dynamic>> saveTheFileDownloaded({
     required String fileNameWithExtension,
-    required Uint8List fileBytes,
+    required List<int> fileBytes,
   }) async {
     Directory? downloadsDirectory = Directory(storageDownload);
 

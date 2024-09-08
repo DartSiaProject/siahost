@@ -5,10 +5,10 @@ import '../entities/file_entity.dart';
 import '../reposit_absts/fetch_all_buckets_and_files_reposit_abst.dart';
 
 @lazySingleton
-class FetchFilesFromBucketUsecase {
+class FetchFilesFromFolderUsecase {
   final FetchAllBucketsAndFilesRepositAbst _fetchAllBucketsAndFilesRepositAbst;
 
-  FetchFilesFromBucketUsecase({
+  FetchFilesFromFolderUsecase({
     required FetchAllBucketsAndFilesRepositAbst
         fetchAllBucketsAndFilesRepositAbst,
   }) : _fetchAllBucketsAndFilesRepositAbst = fetchAllBucketsAndFilesRepositAbst;
@@ -17,7 +17,7 @@ class FetchFilesFromBucketUsecase {
     required String bucketName,
     required String prefix,
   }) async =>
-      await _fetchAllBucketsAndFilesRepositAbst.fetchAllFilesFromBucket(
+      await _fetchAllBucketsAndFilesRepositAbst.fetchAllFilesFromFolder(
         bucketName: bucketName,
         prefix: prefix,
       );

@@ -1,13 +1,16 @@
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:sia_host_mobile/src/shared/constants/string_const.dart';
 
 import '../../../../../../shared/constants/lang_const.dart';
-import '../../../../../../shared/global/map_variable.dart';
+import '../../../../../../shared/constants/string_const.dart';
+import '../../../../../../shared/global/map_variable.dart' as global;
 import '../../../../../../shared/services/connection/requests/connection_request.dart';
+import '../../../../../../shared/services/cryptography/requests/decrypt_request.dart';
 import '../../../../../../shared/services/permissions/requests/permission_request.dart';
 import '../../../../../../shared/services/security/requests/encrypter_request.dart';
 import '../../domain/reposit_absts/user_download_the_file_reposit_abst.dart';
@@ -42,17 +45,31 @@ class UserDownloadTheFileRepositImpl implements UserDownloadTheFileRepositAbst {
           return await _downloadTheFileAbst
               .downloadTheFile(
                   serverAddress: EncrypterRequest.decrypt(
-                      dataEncrypted: userInfo["userServerAdress"]),
-                  password: EncrypterRequest.decrypt(
-                      dataEncrypted: userInfo["userPassWord"]),
+                      dataEncrypted: global.userInfo["userServerAdress"]),
+                  // password: EncrypterRequest.decrypt(
+                  //     dataEncrypted: userInfo["userPassWord"]),
+                  key: EncrypterRequest.decrypt(
+                      dataEncrypted: global.userInfo["userKey"]),
+                  iv: EncrypterRequest.decrypt(
+                      dataEncrypted: global.userInfo["userIv"]),
                   fileName: fileName,
                   bucketName: bucketName)
               .then((_response) {
-            if (_response.statusCode == HttpStatus.ok) {
+            if (_response["status"] &&
+                (_response["response"] as Response<String>).statusCode ==
+                    HttpStatus.ok) {
               return _saveTheFileDownloadedAbst
                   .saveTheFileDownload(
                 fileNameWithExtension: fileName,
-                fileBytes: _response.bodyBytes,
+                fileBytes: DecryptRequest.decryptBytesWithAES256CBC(
+                  chipherText: json.decode(
+                      (_response["response"] as Response<String>)
+                          .data!)["data"],
+                  key: EncrypterRequest.decrypt(
+                      dataEncrypted: global.userInfo["userKey"]),
+                  iv: EncrypterRequest.decrypt(
+                      dataEncrypted: global.userInfo["userIv"]),
+                ),
               )
                   .then((_responseSave) {
                 if (_responseSave["status"]) {
@@ -64,6 +81,12 @@ class UserDownloadTheFileRepositImpl implements UserDownloadTheFileRepositAbst {
                   return const Result.error(Lang.fileDownloadFailedText);
                 }
               });
+            } else if (_response["status"] == false &&
+                    (_response["error"] as DioException).type ==
+                        DioExceptionType.connectionTimeout ||
+                (_response["error"] as DioException).type ==
+                    DioExceptionType.receiveTimeout) {
+              return const Result.error(Lang.timeErrorText);
             } else {
               return const Result.error(Lang.internalServerErrorText);
             }

@@ -1,25 +1,36 @@
-import 'dart:convert';
-
+import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:encrypt/encrypt.dart';
 
-import '../configs/crypto_instance.dart';
-
 class DecryptRequest {
-  static dynamic decryptWithAES256CBC(
-    String chipherText,
-  ) {
+  static String decryptStringWithAES256CBC({
+    required String chipherText,
+    required String key,
+    required String iv,
+  }) {
     var _decrypter = Encrypter(AES(
-      keyAesCbc,
+      encrypt.Key.fromUtf8(key),
       mode: AESMode.cbc,
       padding: 'PKCS7',
     ));
-    var _decrypted =
-        _decrypter.decryptBytes(Encrypted.from64(chipherText), iv: ivAesCbc);
-    var _decryptedString = utf8.decode(_decrypted);
+    var _decrypted = _decrypter.decrypt(encrypt.Encrypted.from64(chipherText),
+        iv: encrypt.IV.fromUtf8(iv));
+    return _decrypted;
+  }
 
-    return _decryptedString.runtimeType is String
-        ? _decryptedString.toString()
-        : _decryptedString;
+  static List<int> decryptBytesWithAES256CBC({
+    required String chipherText,
+    required String key,
+    required String iv,
+  }) {
+    var _decrypter = Encrypter(AES(
+      encrypt.Key.fromUtf8(key),
+      mode: AESMode.cbc,
+      padding: 'PKCS7',
+    ));
+    var _decrypted = _decrypter.decryptBytes(
+        encrypt.Encrypted.from64(chipherText),
+        iv: encrypt.IV.fromUtf8(iv));
+    return _decrypted;
   }
 
   // static String decryptWithSHA256(String encryptedData) {

@@ -1,5 +1,3 @@
-import 'package:http/http.dart';
-
 abstract class FetchAllCurrentsHostPresentAbst {
-  Future<Response> fetchAllHostCurrents();
+  Future<Map<String, dynamic>> fetchAllHostCurrents();
 }

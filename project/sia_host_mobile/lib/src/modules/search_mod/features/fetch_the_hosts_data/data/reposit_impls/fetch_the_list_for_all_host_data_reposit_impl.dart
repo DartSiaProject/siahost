@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
 
@@ -27,9 +28,12 @@ class FetchTheListForAllHostDataRepositImpl
   Future<Result<List<CardOfHostEntity>, String>> fetchAllTheHostsList() async {
     if ((await ConnectionRequest.checkConnectivity())) {
       return await _fetchAllHostDataAbst.fetchAllHostData().then((_resultHost) {
-        if (_resultHost.statusCode == HttpStatus.ok) {
+        if (_resultHost["status"] &&
+            (_resultHost["response"] as Response<String>).statusCode ==
+                HttpStatus.ok) {
           _allHostList.clear();
-          Map<String, dynamic> _hostDataGet = json.decode(_resultHost.body);
+          Map<String, dynamic> _hostDataGet =
+              json.decode((_resultHost["response"] as Response<String>).data!);
           List<dynamic> _allHostData = _hostDataGet["hosts"];
 
           for (var _hostData in _allHostData) {
@@ -49,6 +53,13 @@ class FetchTheListForAllHostDataRepositImpl
           }
 
           return Result.success(_allHostList);
+        } else if (_resultHost["status"] == false &&
+                (_resultHost["error"] as DioException).type ==
+                    DioExceptionType.connectionTimeout ||
+            (_resultHost["error"] as DioException).type ==
+                DioExceptionType.receiveTimeout) {
+          _allHostList.clear();
+          return const Result.error(Lang.timeErrorText);
         } else {
           _allHostList.clear();
           return const Result.error(Lang.internalServerErrorText);

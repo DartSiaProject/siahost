@@ -1,12 +1,12 @@
-import 'package:http/http.dart';
-
 abstract class CopyTheFileAbst {
-  Future<Response> copyAndPasteTheFile({
+  Future<Map<String, dynamic>> copyAndPasteTheFile({
     required String serverAddress,
-    required String password,
+    // required String password,
     required String sourceBucketName,
     required String sourcefileName,
     required String destBucketName,
     required String destfileName,
+    required String key,
+    required String iv,
   });
 }

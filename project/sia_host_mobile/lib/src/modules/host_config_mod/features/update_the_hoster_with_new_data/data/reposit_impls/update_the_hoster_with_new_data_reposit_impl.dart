@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
 
@@ -26,11 +27,11 @@ class UpdateTheHosterWithNewDataRepositImpl
     required TheNewDataHostEntity theNewDataHostEntity,
   }) async {
     if ((await ConnectionRequest.checkConnectivity())) {
-      var _serverAddressDecrypted = EncrypterRequest.decrypt(
-          dataEncrypted: global.userInfo["userServerAdress"]);
+      // var _serverAddressDecrypted = EncrypterRequest.decrypt(
+      //     dataEncrypted: global.userInfo["userServerAdress"]);
 
-      var _passwordDecrypted = EncrypterRequest.decrypt(
-          dataEncrypted: global.userInfo["userPassWord"]);
+      // var _passwordDecrypted = EncrypterRequest.decrypt(
+      //     dataEncrypted: global.userInfo["userPassWord"]);
 
       var _theNewHostDataForUpdate = TheNewDataHostModel(
         maxDownloadPrice: theNewDataHostEntity.maxDownloadPrice,
@@ -48,12 +49,24 @@ class UpdateTheHosterWithNewDataRepositImpl
       return _updateTheHosterWithNewDataAbst
           .updateTheHosterWithNewData(
         theNewDataHostModel: _theNewHostDataForUpdate,
-        serverAddress: _serverAddressDecrypted,
-        password: _passwordDecrypted,
+        serverAddress: EncrypterRequest.decrypt(
+            dataEncrypted: global.userInfo["userServerAdress"]),
+        // password: _passwordDecrypte,
+        key:
+            EncrypterRequest.decrypt(dataEncrypted: global.userInfo["userKey"]),
+        iv: EncrypterRequest.decrypt(dataEncrypted: global.userInfo["userIv"]),
       )
           .then((_resultUpdate) {
-        if (_resultUpdate.statusCode == HttpStatus.ok) {
+        if (_resultUpdate["status"] &&
+            (_resultUpdate["response"] as Response<String>).statusCode ==
+                HttpStatus.ok) {
           return const Result.success(Lang.configHostSuccessText);
+        } else if (_resultUpdate["status"] == false &&
+                (_resultUpdate["error"] as DioException).type ==
+                    DioExceptionType.connectionTimeout ||
+            (_resultUpdate["error"] as DioException).type ==
+                DioExceptionType.receiveTimeout) {
+          return const Result.error(Lang.timeErrorText);
         } else {
           return const Result.error(Lang.updateErrorText);
         }

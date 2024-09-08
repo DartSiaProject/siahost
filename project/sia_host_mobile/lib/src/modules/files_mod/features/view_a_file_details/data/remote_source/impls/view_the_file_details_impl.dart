@@ -1,4 +1,3 @@
-import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:renterd/renterd.dart';
 
@@ -15,17 +14,21 @@ import '../absts/view_the_file_details_abst.dart';
 class ViewTheFileDetailsImpl implements ViewTheFileDetailsAbst {
   /// Note : This function allow to visualize the File
   @override
-  Future<Response> viewTheDetailsFile({
+  Future<Map<String, dynamic>> viewTheDetailsFile({
     required String serverAddress,
-    required String password,
+    // required String password,
     required String fileName,
     required String bucketName,
+    required String key,
+    required String iv,
   }) async {
     return await Object.getTheDetailsObject(
-      password: password,
+      // password: password,
       serverAddress: serverAddress,
       bucketName: bucketName,
       fileName: fileName,
+      key: key,
+      iv: iv,
     );
   }
 }

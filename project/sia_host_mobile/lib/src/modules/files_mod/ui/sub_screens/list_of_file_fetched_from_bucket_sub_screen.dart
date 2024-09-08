@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:open_filex/open_filex.dart';
-import 'package:sia_host_mobile/src/shared/ui/widgets/card_suggestion_widget.dart';
-import 'package:sia_host_mobile/src/shared/ui/widgets/question_dialog_box_widget.dart';
+import '../../../../shared/ui/widgets/card_suggestion_widget.dart';
+import '../../../../shared/ui/widgets/question_dialog_box_widget.dart';
 
 import '../../../../core/configs/language_config/translator.dart';
 import '../../../../shared/constants/colors_const.dart';
@@ -34,9 +34,8 @@ class _ListOfFileFetchedFromBucketScreenState
     extends State<ListOfFileFetchedFromBucketScreen> {
   @override
   void initState() {
-    context
-        .read<FetchAllFilesBloc>()
-        .add(FetchTheFilesFromBucketEvent(bucketName: widget.bucketName));
+    context.read<FetchAllFilesBloc>().add(FetchTheFilesFromBucketEvent(
+        bucketName: widget.bucketName, prefix: ""));
     super.initState();
   }
 
@@ -155,7 +154,8 @@ class _ListOfFileFetchedFromBucketScreenState
                 textColor: Colors.white,
                 fontSize: 16.0,
               ).whenComplete(() => context.read<FetchAllFilesBloc>().add(
-                  FetchTheFilesFromBucketEvent(bucketName: widget.bucketName)));
+                  FetchTheFilesFromBucketEvent(
+                      bucketName: widget.bucketName, prefix: "")));
             }
             if (fileEditorListenerState is FileDownloadedSuccess) {
               Fluttertoast.showToast(
@@ -240,7 +240,8 @@ class _ListOfFileFetchedFromBucketScreenState
                                   onTap: () {
                                     context.read<FetchAllFilesBloc>().add(
                                         FetchTheFilesFromBucketEvent(
-                                            bucketName: widget.bucketName));
+                                            bucketName: widget.bucketName,
+                                            prefix: ""));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
@@ -269,7 +270,7 @@ class _ListOfFileFetchedFromBucketScreenState
                           onRefresh: () async {
                             context.read<FetchAllFilesBloc>().add(
                                 FetchTheFilesFromBucketEvent(
-                                    bucketName: widget.bucketName));
+                                    bucketName: widget.bucketName, prefix: ""));
                           },
                           child: GridView.builder(
                             gridDelegate:

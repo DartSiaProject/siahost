@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
 
@@ -32,8 +33,11 @@ class FetchOneHostDataRepositImpl implements FetchOneHostDataRepositAbst {
       return _fetchAllExistantHostsAbst
           .fetchAllHosts()
           .then((_resultHost) async {
-        if (_resultHost.statusCode == HttpStatus.ok) {
-          Map<String, dynamic> _hostDataGet = json.decode(_resultHost.body);
+        if (_resultHost["status"] &&
+            (_resultHost["response"] as Response<String>).statusCode ==
+                HttpStatus.ok) {
+          Map<String, dynamic> _hostDataGet =
+              json.decode((_resultHost["response"] as Response<String>).data!);
           List<dynamic> _allHostData = _hostDataGet["hosts"];
 
           Map<String, dynamic> _hostData = _allHostData.singleWhere(
@@ -46,9 +50,11 @@ class FetchOneHostDataRepositImpl implements FetchOneHostDataRepositAbst {
           await _fetchTheHostAddressCountryAbst
               .fetchTheAddressCountry(ipAddressConverted: _ipAddressConverted)
               .then((_resultCountry) {
-            if (_resultCountry.statusCode == HttpStatus.ok) {
-              Map<String, dynamic> _countryData =
-                  json.decode(_resultCountry.body);
+            if (_resultCountry["status"] &&
+                (_resultCountry["response"] as Response<String>).statusCode ==
+                    HttpStatus.ok) {
+              Map<String, dynamic> _countryData = json.decode(
+                  (_resultCountry["response"] as Response<String>).data!);
               _townAndCountry =
                   "${_countryData["city"]}, ${_countryData["country"]}";
             } else {
@@ -94,6 +100,12 @@ class FetchOneHostDataRepositImpl implements FetchOneHostDataRepositAbst {
           );
 
           return Result.success(_hostInfoEntity);
+        } else if (_resultHost["status"] == false &&
+                (_resultHost["error"] as DioException).type ==
+                    DioExceptionType.connectionTimeout ||
+            (_resultHost["error"] as DioException).type ==
+                DioExceptionType.receiveTimeout) {
+          return const Result.error(Lang.timeErrorText);
         } else {
           return const Result.error(Lang.internalServerErrorText);
         }

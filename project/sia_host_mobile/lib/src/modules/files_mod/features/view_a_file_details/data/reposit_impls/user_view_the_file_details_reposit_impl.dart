@@ -1,12 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
 
 import '../../../../../../shared/constants/lang_const.dart';
 import '../../../../../../shared/global/map_variable.dart' as global;
 import '../../../../../../shared/services/connection/requests/connection_request.dart';
+import '../../../../../../shared/services/cryptography/requests/decrypt_request.dart';
 import '../../../../../../shared/services/security/requests/encrypter_request.dart';
 import '../../domain/entities/file_details_entity.dart';
 import '../../domain/reposit_absts/user_view_the_file_details_reposit_abst.dart';
@@ -28,19 +30,31 @@ class UserViewTheFileDetailsRepositImpl
     required String bucketName,
   }) async {
     if ((await ConnectionRequest.checkConnectivity())) {
-      print(fileName);
       return await _viewTheFileDetailsAbst
           .viewTheDetailsFile(
         serverAddress: EncrypterRequest.decrypt(
             dataEncrypted: global.userInfo["userServerAdress"]),
-        password: EncrypterRequest.decrypt(
-            dataEncrypted: global.userInfo["userPassWord"]),
+        // password: EncrypterRequest.decrypt(
+        //     dataEncrypted: global.userInfo["userPassWord"]),
+        key:
+            EncrypterRequest.decrypt(dataEncrypted: global.userInfo["userKey"]),
+        iv: EncrypterRequest.decrypt(dataEncrypted: global.userInfo["userIv"]),
         fileName: fileName,
         bucketName: bucketName,
       )
           .then((_response) {
-        if (_response.statusCode == HttpStatus.ok) {
-          Map<String, dynamic> _data = json.decode(_response.body)["object"];
+        if (_response["status"] &&
+            (_response["response"] as Response<String>).statusCode ==
+                HttpStatus.ok) {
+          Map<String, dynamic> _data =
+              json.decode(DecryptRequest.decryptStringWithAES256CBC(
+            chipherText: json.decode(
+                (_response["response"] as Response<String>).data!)["data"],
+            key: EncrypterRequest.decrypt(
+                dataEncrypted: global.userInfo["userKey"]),
+            iv: EncrypterRequest.decrypt(
+                dataEncrypted: global.userInfo["userIv"]),
+          ))["object"];
 
           FileDetailsModel _fileData = FileDetailsModel.fromMap(_data);
           return Result.success(
@@ -50,6 +64,12 @@ class UserViewTheFileDetailsRepositImpl
               modTime: _fileData.modTime,
             ),
           );
+        } else if (_response["status"] == false &&
+                (_response["error"] as DioException).type ==
+                    DioExceptionType.connectionTimeout ||
+            (_response["error"] as DioException).type ==
+                DioExceptionType.receiveTimeout) {
+          return const Result.error(Lang.timeErrorText);
         } else {
           return const Result.error(Lang.internalServerErrorText);
         }

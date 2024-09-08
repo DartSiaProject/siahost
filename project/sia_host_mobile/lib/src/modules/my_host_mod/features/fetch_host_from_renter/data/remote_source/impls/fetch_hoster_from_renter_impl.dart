@@ -1,4 +1,3 @@
-import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:renterd/renterd.dart';
 
@@ -16,11 +15,17 @@ class FetchHosterFromRenterImpl implements FetchHosterFromRenterAbst {
   /// Note : cette fonctio permet de recupérer un hoster depuis le renter
 
   @override
-  Future<Response> fetchTheHoster({
+  Future<Map<String, dynamic>> fetchTheHoster({
     required String serverAddress,
-    required String password,
+    // required String password,
+    required String key,
+    required String iv,
   }) async {
     return await Hoster.fetchSomeHost(
-        password: password, serverAddress: serverAddress);
+      // password: password,
+      serverAddress: serverAddress,
+      key: key,
+      iv: iv,
+    );
   }
 }

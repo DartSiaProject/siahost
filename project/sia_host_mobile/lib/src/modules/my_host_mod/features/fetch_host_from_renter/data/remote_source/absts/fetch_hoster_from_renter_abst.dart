@@ -1,8 +1,8 @@
-import 'package:http/http.dart';
-
 abstract class FetchHosterFromRenterAbst {
-  Future<Response> fetchTheHoster({
+  Future<Map<String, dynamic>> fetchTheHoster({
     required String serverAddress,
-    required String password,
+    // required String password,
+    required String key,
+    required String iv,
   });
 }

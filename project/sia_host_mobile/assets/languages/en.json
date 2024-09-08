@@ -115,7 +115,14 @@
 "label_total_files_text":"Total Files",
 "view_detail_folder_text":"Folder Details",
 "want_open_file_text":"Open File Downloaded?",
-"file_already_download_text":"File Already Downloaded"
+"file_already_download_text":"File Already Downloaded",
+"your_email_text":"Your Email",
+"your_passrword_text":"Your Password",
+"mail_adress_text":"Mail Adress",
+"data_are_correct_text":"Correct identifiers",
+"data_are_not_correct_text":"Incorrect identifiers"
+
+
 
 
   
