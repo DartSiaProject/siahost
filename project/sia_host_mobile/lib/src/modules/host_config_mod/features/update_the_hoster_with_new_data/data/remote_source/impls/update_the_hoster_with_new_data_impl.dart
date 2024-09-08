@@ -19,12 +19,16 @@ class UpdateTheHosterWithNewDataImpl implements UpdateTheHosterWithNewDataAbst {
   Future<Map<String, dynamic>> updateTheHosterWithNewData({
     required TheNewDataHostModel theNewDataHostModel,
     required String serverAddress,
-    required String password,
+    // required String password,
+    required String key,
+    required String iv,
   }) async {
     return await Hoster.updateSomeHost(
       hostConfig: theNewDataHostModel.toMap(),
       serverAddress: serverAddress,
-      password: password,
+      // password: password,
+      key: key,
+      iv: iv,
     );
   }
 }

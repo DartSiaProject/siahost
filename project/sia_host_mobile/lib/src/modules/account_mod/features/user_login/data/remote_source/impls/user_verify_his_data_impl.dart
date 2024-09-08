@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:injectable/injectable.dart';
 
@@ -25,7 +24,7 @@ class UserVerifyHisDataImpl implements UserVerifyHisDataAbst {
     return HttpPostRequest.post<String>(
       api: userLoginModel.toMap()["serverAddress"],
       headers: {
-        HttpHeaders.contentTypeHeader: "application/json",
+        "content-type": "application/json",
       },
       content: json.encode({
         "email": userLoginModel.toMap()["mail"],

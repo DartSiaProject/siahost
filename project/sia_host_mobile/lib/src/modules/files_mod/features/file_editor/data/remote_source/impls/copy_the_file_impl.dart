@@ -15,19 +15,23 @@ class CopyTheFileImpl implements CopyTheFileAbst {
   @override
   Future<Map<String, dynamic>> copyAndPasteTheFile({
     required String serverAddress,
-    required String password,
+    // required String password,
     required String sourceBucketName,
     required String sourcefileName,
     required String destBucketName,
     required String destfileName,
+    required String key,
+    required String iv,
   }) async {
     return await Object.copyTheObject(
-      password: password,
+      // password: password,
       serverAddress: serverAddress,
       sourceBucketName: sourceBucketName,
       sourcefileName: sourcefileName,
       destBucketName: destBucketName,
       destfileName: destfileName,
+      key: key,
+      iv: iv,
     );
   }
 }

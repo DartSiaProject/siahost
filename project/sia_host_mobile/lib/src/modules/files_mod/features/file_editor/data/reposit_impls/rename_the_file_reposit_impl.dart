@@ -30,8 +30,11 @@ class RenameTheFileRepositImpl implements RenameTheFileRepositAbst {
           .renameTheFile(
         serverAddress: EncrypterRequest.decrypt(
             dataEncrypted: global.userInfo["userServerAdress"]),
-        password: EncrypterRequest.decrypt(
-            dataEncrypted: global.userInfo["userPassWord"]),
+        // password: EncrypterRequest.decrypt(
+        //     dataEncrypted: global.userInfo["userPassWord"]),
+        key:
+            EncrypterRequest.decrypt(dataEncrypted: global.userInfo["userKey"]),
+        iv: EncrypterRequest.decrypt(dataEncrypted: global.userInfo["userIv"]),
         bucketName: renameFileInfoEntity.bucketName,
         oldFileName: renameFileInfoEntity.oldFileName,
         newFileName: renameFileInfoEntity.newFileName,

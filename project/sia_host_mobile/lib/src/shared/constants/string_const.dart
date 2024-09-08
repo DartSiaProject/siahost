@@ -87,4 +87,6 @@ const errorSrcObject =
 
 const errorRenameObject = "can't rename dirs with mode single";
 
+const errorCredentials = "Invalid credentials";
+
 const storageDownload = "/storage/emulated/0/Download";

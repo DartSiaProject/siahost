@@ -10,6 +10,7 @@ import '../../../../../../shared/features/fetch_user_credentials/data/local_sour
 import '../../../../../../shared/global/list_variable.dart';
 import '../../../../../../shared/global/map_variable.dart' as global;
 import '../../../../../../shared/services/connection/requests/connection_request.dart';
+import '../../../../../../shared/services/cryptography/requests/decrypt_request.dart';
 import '../../../../../../shared/services/security/requests/encrypter_request.dart';
 import '../../domain/entities/bucket_entity.dart';
 import '../../domain/entities/file_entity.dart';
@@ -52,16 +53,28 @@ class FetchAllBucketsAndFilesRepositImpl
               .fetchListOfBucket(
             serverAddress: EncrypterRequest.decrypt(
                 dataEncrypted: global.userInfo["userServerAdress"]),
-            password: EncrypterRequest.decrypt(
-                dataEncrypted: global.userInfo["userPassWord"]),
+            // password: EncrypterRequest.decrypt(
+            //     dataEncrypted: global.userInfo["userPassWord"]),
+            key: EncrypterRequest.decrypt(
+                dataEncrypted: global.userInfo["userKey"]),
+            iv: EncrypterRequest.decrypt(
+                dataEncrypted: global.userInfo["userIv"]),
           )
               .then((_bucketResponse) async {
-            if (_bucketResponse["status"] &&
+            if (_bucketResponse["status"] == true &&
                 (_bucketResponse["response"] as Response<String>).statusCode ==
                     HttpStatus.ok) {
               _allBucketList.clear();
-              List<dynamic> _allBucketFound = json.decode(
-                  (_bucketResponse["response"] as Response<String>).data!);
+              List<dynamic> _allBucketFound =
+                  json.decode(DecryptRequest.decryptStringWithAES256CBC(
+                chipherText: json.decode(
+                    (_bucketResponse["response"] as Response<String>)
+                        .data!)["data"],
+                key: EncrypterRequest.decrypt(
+                    dataEncrypted: global.userInfo["userKey"]),
+                iv: EncrypterRequest.decrypt(
+                    dataEncrypted: global.userInfo["userIv"]),
+              ));
 
               for (var index = 0; index < _allBucketFound.length; index++) {
                 Map<String, dynamic> _bucketMap = _allBucketFound[index];
@@ -69,22 +82,34 @@ class FetchAllBucketsAndFilesRepositImpl
                 var _bucketFilesTotal = 0;
                 var _fetchAllFileOfBucketResponse =
                     await _fetchFilesFromBucketAbst.fetchAllFilesOfBucket(
-                        serverAddress: EncrypterRequest.decrypt(
-                            dataEncrypted: global.userInfo["userServerAdress"]),
-                        password: EncrypterRequest.decrypt(
-                            dataEncrypted: global.userInfo["userPassWord"]),
-                        bucketName: _bucketModel.nameBucket,
-                        prefixPath: "");
+                  serverAddress: EncrypterRequest.decrypt(
+                      dataEncrypted: global.userInfo["userServerAdress"]),
+                  // password: EncrypterRequest.decrypt(
+                  //     dataEncrypted: global.userInfo["userPassWord"]),
+                  bucketName: _bucketModel.nameBucket,
+                  prefixPath: "",
+                  key: EncrypterRequest.decrypt(
+                      dataEncrypted: global.userInfo["userKey"]),
+                  iv: EncrypterRequest.decrypt(
+                      dataEncrypted: global.userInfo["userIv"]),
+                );
 
-                if (_fetchAllFileOfBucketResponse["status"] &&
+                if (_fetchAllFileOfBucketResponse["status"] == true &&
                     (_fetchAllFileOfBucketResponse["response"]
                                 as Response<String>)
                             .statusCode ==
                         HttpStatus.ok) {
-                  Map<String, dynamic> _dataFiles = json.decode(
-                      (_fetchAllFileOfBucketResponse["response"]
-                              as Response<String>)
-                          .data!);
+                  Map<String, dynamic> _dataFiles =
+                      json.decode(DecryptRequest.decryptStringWithAES256CBC(
+                    chipherText: json.decode(
+                        (_fetchAllFileOfBucketResponse["response"]
+                                as Response<String>)
+                            .data!)["data"],
+                    key: EncrypterRequest.decrypt(
+                        dataEncrypted: global.userInfo["userKey"]),
+                    iv: EncrypterRequest.decrypt(
+                        dataEncrypted: global.userInfo["userIv"]),
+                  ));
 
                   _bucketFilesTotal = _dataFiles["objects"] == null
                       ? 0
@@ -102,7 +127,13 @@ class FetchAllBucketsAndFilesRepositImpl
                 );
                 bucketNameList.add(_bucketModel.nameBucket);
               }
+
               return Result.success(_allBucketList.reversed.toList());
+            } else if (_bucketResponse["status"] == true &&
+                (_bucketResponse["response"] as Response<String>).statusCode !=
+                    HttpStatus.ok) {
+              _allBucketList.clear();
+              return const Result.error(Lang.internalServerErrorText);
             } else if (_bucketResponse["status"] == false &&
                     (_bucketResponse["error"] as DioException).type ==
                         DioExceptionType.connectionTimeout ||
@@ -128,23 +159,32 @@ class FetchAllBucketsAndFilesRepositImpl
     required String bucketName,
     required String prefix,
   }) async {
-    print(prefix);
     if ((await ConnectionRequest.checkConnectivity())) {
       return await _fetchFilesFromBucketAbst
           .fetchAllFilesOfBucket(
         serverAddress: EncrypterRequest.decrypt(
             dataEncrypted: global.userInfo["userServerAdress"]),
-        password: EncrypterRequest.decrypt(
-            dataEncrypted: global.userInfo["userPassWord"]),
+        // password: EncrypterRequest.decrypt(
+        //     dataEncrypted: global.userInfo["userPassWord"]),
         bucketName: bucketName,
         prefixPath: prefix,
+        key:
+            EncrypterRequest.decrypt(dataEncrypted: global.userInfo["userKey"]),
+        iv: EncrypterRequest.decrypt(dataEncrypted: global.userInfo["userIv"]),
       )
           .then((_response) {
-        if (_response["status"] &&
+        if (_response["status"] == true &&
             (_response["response"] as Response<String>).statusCode ==
                 HttpStatus.ok) {
           Map<String, dynamic> _data =
-              json.decode((_response["response"] as Response<String>).data!);
+              json.decode(DecryptRequest.decryptStringWithAES256CBC(
+            chipherText: json.decode(
+                (_response["response"] as Response<String>).data!)["data"],
+            key: EncrypterRequest.decrypt(
+                dataEncrypted: global.userInfo["userKey"]),
+            iv: EncrypterRequest.decrypt(
+                dataEncrypted: global.userInfo["userIv"]),
+          ));
           if (_data["objects"] == null) {
             _allFilesList.clear();
             return const Result.error(Lang.noFileText);
@@ -218,24 +258,32 @@ class FetchAllBucketsAndFilesRepositImpl
     required String bucketName,
     required String prefix,
   }) async {
-    print(bucketName);
-    print(prefix);
     if ((await ConnectionRequest.checkConnectivity())) {
       return await _fetchFilesFromBucketAbst
           .fetchAllFilesOfBucket(
         serverAddress: EncrypterRequest.decrypt(
             dataEncrypted: global.userInfo["userServerAdress"]),
-        password: EncrypterRequest.decrypt(
-            dataEncrypted: global.userInfo["userPassWord"]),
+        // password: EncrypterRequest.decrypt(
+        //     dataEncrypted: global.userInfo["userPassWord"]),
         bucketName: bucketName,
         prefixPath: prefix,
+        key:
+            EncrypterRequest.decrypt(dataEncrypted: global.userInfo["userKey"]),
+        iv: EncrypterRequest.decrypt(dataEncrypted: global.userInfo["userIv"]),
       )
           .then((_response) {
         if (_response["status"] &&
             (_response["response"] as Response<String>).statusCode ==
                 HttpStatus.ok) {
           Map<String, dynamic> _data =
-              json.decode((_response["response"] as Response<String>).data!);
+              json.decode(DecryptRequest.decryptStringWithAES256CBC(
+            chipherText: json.decode(
+                (_response["response"] as Response<String>).data!)["data"],
+            key: EncrypterRequest.decrypt(
+                dataEncrypted: global.userInfo["userKey"]),
+            iv: EncrypterRequest.decrypt(
+                dataEncrypted: global.userInfo["userIv"]),
+          ));
           if (_data["objects"] == null) {
             _allFilesList.clear();
             return const Result.error(Lang.noFileText);

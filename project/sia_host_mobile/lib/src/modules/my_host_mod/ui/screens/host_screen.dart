@@ -444,7 +444,7 @@ class _HostScreenState extends State<HostScreen> {
                                     padding: const EdgeInsets.only(left: 10.0),
                                   ),
                                   SizedBox(
-                                    height: 20.0.h,
+                                    height: 18.0.h,
                                   ),
                                   CardMyHostInfoWidget(
                                     title: Lang.maxUploadText,

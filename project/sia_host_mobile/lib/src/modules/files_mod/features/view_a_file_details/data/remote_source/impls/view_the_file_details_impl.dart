@@ -16,15 +16,19 @@ class ViewTheFileDetailsImpl implements ViewTheFileDetailsAbst {
   @override
   Future<Map<String, dynamic>> viewTheDetailsFile({
     required String serverAddress,
-    required String password,
+    // required String password,
     required String fileName,
     required String bucketName,
+    required String key,
+    required String iv,
   }) async {
     return await Object.getTheDetailsObject(
-      password: password,
+      // password: password,
       serverAddress: serverAddress,
       bucketName: bucketName,
       fileName: fileName,
+      key: key,
+      iv: iv,
     );
   }
 }

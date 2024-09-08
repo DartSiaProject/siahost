@@ -19,16 +19,21 @@ class UploadFileOnServerImpl implements UploadFileOnServerAbst {
   @override
   Future<Map<String, dynamic>> uploadTheFile({
     required String serverAddress,
-    required String password,
+    // required String password,
     required String bucketName,
     required String fileName,
     required File file,
+    required String key,
+    required String iv,
   }) async {
     return await Object.uploadAnObject(
-        password: password,
-        bucketName: bucketName,
-        fileName: fileName,
-        file: file,
-        serverAddress: serverAddress);
+      // password: password,
+      bucketName: bucketName,
+      fileName: fileName,
+      file: file,
+      serverAddress: serverAddress,
+      key: key,
+      iv: iv,
+    );
   }
 }

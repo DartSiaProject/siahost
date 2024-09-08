@@ -2,11 +2,9 @@ import 'encrypt_request.dart';
 
 class GeneratorRequest {
   static Map<String, String> generateKeyAndIv(String data) {
-    print(data);
     var _hashedData = EncryptRequest.hashWithSHA256(data);
 
     var _splitHashedData = _hashedData.split("");
-    print(_splitHashedData);
 
     var _firstKeySixteenCaratersInUpercase = [];
     var _secondKeySixteenCaratersInLowerCase = [];
@@ -32,16 +30,6 @@ class GeneratorRequest {
           .add(_splitHashedData[_secondIvIndex].toLowerCase());
     }
 
-    print(
-        "First Key Characters : $_firstKeySixteenCaratersInUpercase, His Length : ${_firstKeySixteenCaratersInUpercase.length}");
-    print(
-        "Second Key Characters : $_secondKeySixteenCaratersInLowerCase, His Length : ${_secondKeySixteenCaratersInLowerCase.length}");
-
-    print(
-        "First Iv Characters : $_firstIvHeightCaratersInUpercase, His Length : ${_firstIvHeightCaratersInUpercase.length}");
-    print(
-        "Second Iv Characters : $_secondIvHeightCaratersInLowerCase, His Length : ${_secondIvHeightCaratersInLowerCase.length}");
-
     var _finalKey =
         "${_firstKeySixteenCaratersInUpercase.join('')}${_secondKeySixteenCaratersInLowerCase.join('')}";
 
@@ -50,7 +38,7 @@ class GeneratorRequest {
 
     return {
       "key": _finalKey,
-      "Iv": _finalIV,
+      "iv": _finalIV,
     };
   }
 }

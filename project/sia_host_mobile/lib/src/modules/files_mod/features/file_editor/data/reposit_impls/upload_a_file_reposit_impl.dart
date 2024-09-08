@@ -6,7 +6,7 @@ import 'package:multiple_result/multiple_result.dart';
 
 import '../../../../../../shared/constants/lang_const.dart';
 import '../../../../../../shared/extensions/file_ext.dart';
-import '../../../../../../shared/global/map_variable.dart';
+import '../../../../../../shared/global/map_variable.dart' as global;
 import '../../../../../../shared/services/connection/requests/connection_request.dart';
 import '../../../../../../shared/services/security/requests/encrypter_request.dart';
 import '../../domain/reposit_absts/upload_a_file_reposit_abst.dart';
@@ -38,9 +38,13 @@ class UploadAFileRepositImpl implements UploadAFileRepositAbst {
           return await _uploadFileOnServerAbst
               .uploadTheFile(
             serverAddress: EncrypterRequest.decrypt(
-                dataEncrypted: userInfo["userServerAdress"]),
-            password: EncrypterRequest.decrypt(
-                dataEncrypted: userInfo["userPassWord"]),
+                dataEncrypted: global.userInfo["userServerAdress"]),
+            // password: EncrypterRequest.decrypt(
+            //     dataEncrypted: userInfo["userPassWord"]),
+            key: EncrypterRequest.decrypt(
+                dataEncrypted: global.userInfo["userKey"]),
+            iv: EncrypterRequest.decrypt(
+                dataEncrypted: global.userInfo["userIv"]),
             bucketName: bucketName,
             fileName: _filePicked.name,
             file: _filePicked,

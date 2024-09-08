@@ -15,17 +15,21 @@ class RenameTheFileImpl implements RenameTheFileAbst {
   @override
   Future<Map<String, dynamic>> renameTheFile({
     required String serverAddress,
-    required String password,
+    // required String password,
     required String bucketName,
     required String oldFileName,
     required String newFileName,
+    required String key,
+    required String iv,
   }) async {
     return await Object.renameSingleObject(
-      password: password,
+      // password: password,
       serverAddress: serverAddress,
       bucketName: bucketName,
       oldFileName: oldFileName,
       newFileName: newFileName,
+      key: key,
+      iv: iv,
     );
   }
 }

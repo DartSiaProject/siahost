@@ -9,6 +9,7 @@ import '../../../../../../shared/constants/lang_const.dart';
 import '../../../../../../shared/features/fetch_user_credentials/data/local_source/absts/fetch_the_user_credential_abst.dart';
 import '../../../../../../shared/global/map_variable.dart' as global;
 import '../../../../../../shared/services/connection/requests/connection_request.dart';
+import '../../../../../../shared/services/cryptography/requests/decrypt_request.dart';
 import '../../../../../../shared/services/security/requests/encrypter_request.dart';
 import '../../domain/entities/my_host_data_entity.dart';
 import '../../domain/reposit_absts/fetch_my_host_data_from_renter_reposit_abst.dart';
@@ -40,17 +41,23 @@ class FetchMyHostDataFromRenterRepositImpl
         if (_resultCredential["status"] == false) {
           return const Result.error(Lang.makeLoginDemandText);
         } else {
-          global.userInfo = json.decode(_resultCredential["data"]);
+          // global.userInfo = json.decode(_resultCredential["data"]);
 
-          var _serverAddressDecrypted = EncrypterRequest.decrypt(
-              dataEncrypted: global.userInfo["userServerAdress"]);
+          // var _serverAddressDecrypted = EncrypterRequest.decrypt(
+          //     dataEncrypted: global.userInfo["userServerAdress"]);
 
-          var _passwordDecrypted = EncrypterRequest.decrypt(
-              dataEncrypted: global.userInfo["userPassWord"]);
+          // var _passwordDecrypted = EncrypterRequest.decrypt(
+          //     dataEncrypted: global.userInfo["userPassWord"]);
 
           return await fetchTheHoster(
-              serverAddress: _serverAddressDecrypted,
-              password: _passwordDecrypted);
+            serverAddress: EncrypterRequest.decrypt(
+                dataEncrypted: global.userInfo["userServerAdress"]),
+            // password: _passwordDecrypte,
+            key: EncrypterRequest.decrypt(
+                dataEncrypted: global.userInfo["userKey"]),
+            iv: EncrypterRequest.decrypt(
+                dataEncrypted: global.userInfo["userIv"]),
+          );
         }
       });
     } else {
@@ -60,25 +67,52 @@ class FetchMyHostDataFromRenterRepositImpl
 
   Future<Result<MyHostDataEntity, String>> fetchTheHoster({
     required String serverAddress,
-    required String password,
+    // required String password,
+    required String key,
+    required String iv,
   }) async {
     return _fetchHosterFromRenterAbst
-        .fetchTheHoster(serverAddress: serverAddress, password: password)
+        .fetchTheHoster(
+      serverAddress: serverAddress,
+      // password: password,
+      key: key,
+      iv: iv,
+    )
         .then((_resultHoster) {
       if (_resultHoster["status"] &&
           (_resultHoster["response"] as Response<String>).statusCode ==
               HttpStatus.ok) {
         Map<String, dynamic> _hosterBody =
-            json.decode((_resultHoster["response"] as Response<String>).data!);
+            json.decode(DecryptRequest.decryptStringWithAES256CBC(
+          chipherText: json.decode(
+              (_resultHoster["response"] as Response<String>).data!)["data"],
+          key: EncrypterRequest.decrypt(
+              dataEncrypted: global.userInfo["userKey"]),
+          iv: EncrypterRequest.decrypt(
+              dataEncrypted: global.userInfo["userIv"]),
+        ));
 
         return _fetchConsensusFromRenterAbst
-            .fetchTheConsensus(serverAddress: serverAddress, password: password)
+            .fetchTheConsensus(
+          serverAddress: serverAddress,
+          // password: password,
+          key: key,
+          iv: iv,
+        )
             .then((_resultConsensus) {
           if (_resultConsensus["status"] &&
               (_resultConsensus["response"] as Response<String>).statusCode ==
                   HttpStatus.ok) {
-            Map<String, dynamic> _consensusBody = json.decode(
-                (_resultConsensus["response"] as Response<String>).data!);
+            Map<String, dynamic> _consensusBody =
+                json.decode(DecryptRequest.decryptStringWithAES256CBC(
+              chipherText: json.decode(
+                  (_resultConsensus["response"] as Response<String>)
+                      .data!)["data"],
+              key: EncrypterRequest.decrypt(
+                  dataEncrypted: global.userInfo["userKey"]),
+              iv: EncrypterRequest.decrypt(
+                  dataEncrypted: global.userInfo["userIv"]),
+            ));
 
             if (_hosterBody.isEmpty || _consensusBody.isEmpty) {
               return const Result.error(Lang.myHostNoFoundText);

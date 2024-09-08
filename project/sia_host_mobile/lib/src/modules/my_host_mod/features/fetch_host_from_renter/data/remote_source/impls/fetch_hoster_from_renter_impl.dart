@@ -17,9 +17,15 @@ class FetchHosterFromRenterImpl implements FetchHosterFromRenterAbst {
   @override
   Future<Map<String, dynamic>> fetchTheHoster({
     required String serverAddress,
-    required String password,
+    // required String password,
+    required String key,
+    required String iv,
   }) async {
     return await Hoster.fetchSomeHost(
-        password: password, serverAddress: serverAddress);
+      // password: password,
+      serverAddress: serverAddress,
+      key: key,
+      iv: iv,
+    );
   }
 }

@@ -18,10 +18,14 @@ class UserMakeHisLoginImpl implements UserMakeHisLoginAbst {
   @override
   Future<Map<String, dynamic>> makeTheLogin({
     required UserLoginModel userLoginModel,
+    required String key,
+    required String iv,
   }) async {
     return await Accounts.getAllAccounts(
       serverAddress: userLoginModel.toMap()["serverAddress"],
-      password: userLoginModel.toMap()["passWord"],
+      // password: userLoginModel.toMap()["passWord"],
+      key: key,
+      iv: iv,
     );
   }
 }

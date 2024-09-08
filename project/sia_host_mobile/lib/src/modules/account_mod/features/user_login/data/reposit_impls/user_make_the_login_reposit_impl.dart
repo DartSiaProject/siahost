@@ -4,12 +4,13 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
+import 'package:renterd/renterd.dart';
 
 import '../../../../../../shared/constants/lang_const.dart';
+import '../../../../../../shared/constants/string_const.dart';
 import '../../../../../../shared/extensions/string_ext.dart';
 import '../../../../../../shared/global/map_variable.dart' as global;
 import '../../../../../../shared/services/connection/requests/connection_request.dart';
-import '../../../../../../shared/services/cryptography/requests/generator_request.dart';
 import '../../../../../../shared/services/security/requests/encrypter_request.dart';
 import '../../domain/entities/user_login_entity.dart';
 import '../../domain/reposit_absts/user_make_the_login_reposit_abst.dart';
@@ -49,7 +50,7 @@ class UserMakeTheLoginRepositImpl implements UserMakeTheLoginRepositAbst {
         return const Result.error(Lang.sendGoodAddressErrorText);
       } else {
         var _userLoginModel = UserLoginModel(
-          serverAddress: userLoginEntity.serverAddress,
+          serverAddress: "${userLoginEntity.serverAddress}/auth/login",
           mailAdress: userLoginEntity.mailAdress,
           passWord: userLoginEntity.passWord,
         );
@@ -58,26 +59,33 @@ class UserMakeTheLoginRepositImpl implements UserMakeTheLoginRepositAbst {
           userLoginModel: _userLoginModel,
         );
 
-        if (_checkVerification["status"] &&
+        // print(userLoginEntity.serverAddress);
+
+        // print((_checkVerification["response"] as Response<String>).statusCode);
+
+        if (_checkVerification["status"] == true &&
             (_checkVerification["response"] as Response<String>).statusCode ==
                 HttpStatus.ok) {
-          var _personalkey = GeneratorRequest.generateKeyAndIv(
-            "${userLoginEntity.mailAdress}${userLoginEntity.passWord}",
-          );
+          var _personalkey = Crypto.generateTheKey(
+              mailAndPassword:
+                  "${userLoginEntity.mailAdress}${userLoginEntity.passWord}");
+
           var _serverAdressEncrypt =
-              EncrypterRequest.encrypt(data: _userLoginModel.serverAddress);
+              EncrypterRequest.encrypt(data: userLoginEntity.serverAddress);
           var _mailAdressEncrypt =
-              EncrypterRequest.encrypt(data: _userLoginModel.mailAdress);
+              EncrypterRequest.encrypt(data: userLoginEntity.mailAdress);
           var _passWordEncrypt =
-              EncrypterRequest.encrypt(data: _userLoginModel.passWord);
+              EncrypterRequest.encrypt(data: userLoginEntity.passWord);
           var _keyEncrypt =
               EncrypterRequest.encrypt(data: _personalkey["key"]!);
+          var _ivEncrypt = EncrypterRequest.encrypt(data: _personalkey["iv"]!);
 
           global.userInfo = {
             "userServerAdress": _serverAdressEncrypt,
             "userMailAdress": _mailAdressEncrypt,
             "userPassWord": _passWordEncrypt,
             "userKey": _keyEncrypt,
+            "userIv": _ivEncrypt,
           };
           var _userInfoJsoned = json.encode(global.userInfo);
           await _secureTheUserCredentialAbst.secureUserCredentials(
@@ -87,6 +95,11 @@ class UserMakeTheLoginRepositImpl implements UserMakeTheLoginRepositAbst {
               .cacheUserCredentialAfterLogin(userPresence: _userInfoJsoned);
 
           return const Result.success(Lang.credentialSuccessText);
+        } else if (_checkVerification["status"] == true &&
+            json.decode((_checkVerification["response"] as Response<String>)
+                    .data!)["message"] ==
+                errorCredentials) {
+          return const Result.success(Lang.credentialErrorText);
         } else if (_checkVerification["status"] == false &&
                 (_checkVerification["error"] as DioException).type ==
                     DioExceptionType.connectionTimeout ||

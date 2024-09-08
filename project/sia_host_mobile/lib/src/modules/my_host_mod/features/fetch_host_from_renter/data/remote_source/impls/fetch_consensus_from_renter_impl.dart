@@ -17,11 +17,15 @@ class FetchConsensusFromRenterImpl implements FetchConsensusFromRenterAbst {
   @override
   Future<Map<String, dynamic>> fetchTheConsensus({
     required String serverAddress,
-    required String password,
+    // required String password,
+    required String key,
+    required String iv,
   }) async {
     return await Consensus.getState(
-      password: password,
+      // password: password,
       serverAddress: serverAddress,
+      key: key,
+      iv: iv,
     );
   }
 }

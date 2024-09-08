@@ -29,8 +29,11 @@ class CopyAndPasteRepositImpl implements CopyAndPasteRepositAbst {
           .copyAndPasteTheFile(
         serverAddress: EncrypterRequest.decrypt(
             dataEncrypted: global.userInfo["userServerAdress"]),
-        password: EncrypterRequest.decrypt(
-            dataEncrypted: global.userInfo["userPassWord"]),
+        // password: EncrypterRequest.decrypt(
+        //     dataEncrypted: global.userInfo["userPassWord"]),
+        key:
+            EncrypterRequest.decrypt(dataEncrypted: global.userInfo["userKey"]),
+        iv: EncrypterRequest.decrypt(dataEncrypted: global.userInfo["userIv"]),
         sourceBucketName: copyFileInfoEntity.sourceBucketName,
         sourcefileName: copyFileInfoEntity.sourcefileName,
         destBucketName: copyFileInfoEntity.destBucketName,

@@ -1,4 +1,3 @@
-import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../../../shared/services/files/requests/save_file_request.dart';
@@ -17,7 +16,7 @@ class SaveTheFileDownloadedImpl implements SaveTheFileDownloadedAbst {
   @override
   Future<Map<String, dynamic>> saveTheFileDownload({
     required String fileNameWithExtension,
-    required Uint8List fileBytes,
+    required List<int> fileBytes,
   }) async {
     return await SaveFileRequest.saveTheFileDownloaded(
       fileNameWithExtension: fileNameWithExtension,

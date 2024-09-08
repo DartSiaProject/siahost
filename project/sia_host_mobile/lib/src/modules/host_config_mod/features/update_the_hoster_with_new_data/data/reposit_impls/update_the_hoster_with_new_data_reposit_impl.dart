@@ -27,11 +27,11 @@ class UpdateTheHosterWithNewDataRepositImpl
     required TheNewDataHostEntity theNewDataHostEntity,
   }) async {
     if ((await ConnectionRequest.checkConnectivity())) {
-      var _serverAddressDecrypted = EncrypterRequest.decrypt(
-          dataEncrypted: global.userInfo["userServerAdress"]);
+      // var _serverAddressDecrypted = EncrypterRequest.decrypt(
+      //     dataEncrypted: global.userInfo["userServerAdress"]);
 
-      var _passwordDecrypted = EncrypterRequest.decrypt(
-          dataEncrypted: global.userInfo["userPassWord"]);
+      // var _passwordDecrypted = EncrypterRequest.decrypt(
+      //     dataEncrypted: global.userInfo["userPassWord"]);
 
       var _theNewHostDataForUpdate = TheNewDataHostModel(
         maxDownloadPrice: theNewDataHostEntity.maxDownloadPrice,
@@ -49,8 +49,12 @@ class UpdateTheHosterWithNewDataRepositImpl
       return _updateTheHosterWithNewDataAbst
           .updateTheHosterWithNewData(
         theNewDataHostModel: _theNewHostDataForUpdate,
-        serverAddress: _serverAddressDecrypted,
-        password: _passwordDecrypted,
+        serverAddress: EncrypterRequest.decrypt(
+            dataEncrypted: global.userInfo["userServerAdress"]),
+        // password: _passwordDecrypte,
+        key:
+            EncrypterRequest.decrypt(dataEncrypted: global.userInfo["userKey"]),
+        iv: EncrypterRequest.decrypt(dataEncrypted: global.userInfo["userIv"]),
       )
           .then((_resultUpdate) {
         if (_resultUpdate["status"] &&

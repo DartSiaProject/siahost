@@ -16,15 +16,19 @@ class DownloadTheFileImpl implements DownloadTheFileAbst {
   @override
   Future<Map<String, dynamic>> downloadTheFile({
     required String serverAddress,
-    required String password,
+    // required String password,
     required String fileName,
     required String bucketName,
+    required String key,
+    required String iv,
   }) async {
     return await Object.downloadTheObject(
-      password: password,
+      // password: password,
       serverAddress: serverAddress,
       bucketName: bucketName,
       fileName: fileName,
+      key: key,
+      iv: iv,
     );
   }
 }
