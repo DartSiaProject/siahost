@@ -74,9 +74,10 @@ dependencies:
       # path: packages/renterd
     path: ../../../../packages/renterd/
   video_player: ^2.9.2
-  audioplayers: ^6.1.2
   photo_view: ^0.15.0
   pdfx: ^2.8.0
+  just_audio: ^0.9.46
+  chewie: ^1.10.0
 
 dev_dependencies:
   flutter_test:

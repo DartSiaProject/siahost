@@ -60,14 +60,13 @@ class _ListOfFileFetchedFromBucketScreenState
                   CardSuggestionWidget(
                     title: Translator.of(context)!.translate(Lang.yesText),
                     onTap: () {
-                      // context.router.maybePop().whenComplete(() {
-                      //   OpenFilex.open("$storageDownload/$fileName");
-                      // });
-                      context.pushRoute(
-                        FilePreviewRoute(
-                          file: FileEntity(name: fileName),
-                        ),
-                      );
+                      context.router.maybePop().whenComplete(() {
+                        context.pushRoute(
+                          FilePreviewRoute(
+                            file: FileEntity(name: fileName),
+                          ),
+                        );
+                      });
                     },
                   ),
                   CardSuggestionWidget(

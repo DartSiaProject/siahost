@@ -21,7 +21,11 @@ class TextPreviewWidget extends StatelessWidget {
           return const Center(child: Text('Error loading file'));
         }
         return SingleChildScrollView(
-          child: Text(snapshot.data ?? ''),
+          padding: const EdgeInsets.all(16.0),
+          child: Text(
+            snapshot.data ?? '',
+            style: const TextStyle(color: Colors.white),
+          ),
         );
       },
     );

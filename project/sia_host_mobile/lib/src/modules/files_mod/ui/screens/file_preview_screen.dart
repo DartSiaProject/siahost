@@ -30,12 +30,15 @@ class FilePreviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: true,
-      ),
-      body: _filePreviewer(file.typeEnum),
-    );
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     leading: const BackButton(
+    //       color: Colors.white,
+    //     ),
+    //   ),
+    //   body: _filePreviewer(file.typeEnum),
+    // );
+    return _filePreviewer(file.typeEnum);
   }
 
   Widget _filePreviewer(FileTypeEnum type) {

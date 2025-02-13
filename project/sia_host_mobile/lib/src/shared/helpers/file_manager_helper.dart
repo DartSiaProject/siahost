@@ -33,6 +33,8 @@ class FileManagerHelper {
     final fileExt = file.name.getExtFile();
 
     switch (fileExt) {
+      case '.pdf':
+        return FileTypeEnum.pdf;
       case '.apng':
       case '.avif':
       case '.gif':
