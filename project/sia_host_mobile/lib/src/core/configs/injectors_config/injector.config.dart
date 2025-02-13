@@ -438,16 +438,16 @@ extension GetItInjectableX on _i174.GetIt {
           copyAndPasteUsecase: gh<_i167.CopyAndPasteUsecase>(),
           userRenameTheFileUsecase: gh<_i834.UserRenameTheFileUsecase>(),
         ));
-    gh.lazySingleton<_i413.FetchAllBucketsUsecase>(() =>
-        _i413.FetchAllBucketsUsecase(
+    gh.lazySingleton<_i830.FetchFilesFromFolderUsecase>(() =>
+        _i830.FetchFilesFromFolderUsecase(
             fetchAllBucketsAndFilesRepositAbst:
                 gh<_i87.FetchAllBucketsAndFilesRepositAbst>()));
     gh.lazySingleton<_i529.FetchFilesFromBucketUsecase>(() =>
         _i529.FetchFilesFromBucketUsecase(
             fetchAllBucketsAndFilesRepositAbst:
                 gh<_i87.FetchAllBucketsAndFilesRepositAbst>()));
-    gh.lazySingleton<_i830.FetchFilesFromFolderUsecase>(() =>
-        _i830.FetchFilesFromFolderUsecase(
+    gh.lazySingleton<_i413.FetchAllBucketsUsecase>(() =>
+        _i413.FetchAllBucketsUsecase(
             fetchAllBucketsAndFilesRepositAbst:
                 gh<_i87.FetchAllBucketsAndFilesRepositAbst>()));
     gh.factory<_i318.NetworkDataFetchingBloc>(() =>

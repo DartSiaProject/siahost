@@ -41,7 +41,7 @@ dependencies:
   intl: ^0.19.0
   flutter_native_splash: ^2.4.1
   flutter_screenutil: ^5.9.3
-  auto_route: ^8.3.0
+  auto_route: ^9.3.0+1
   flutter_svg: ^2.0.10
   equatable: ^2.0.5
   get_it: ^7.7.0
@@ -52,7 +52,7 @@ dependencies:
   internet_connection_checker_plus: ^2.5.0
   flutter_bloc: ^8.1.6
   bloc: ^8.1.4
-  fluttertoast: ^8.2.6
+  fluttertoast: ^8.2.12
   multiple_result: ^5.1.0
   dio: ^5.6.0
   smooth_page_indicator: ^1.2.0
@@ -69,17 +69,20 @@ dependencies:
   open_filex: ^4.5.0
   renterd:
     # git:
-    #   url: https://github.com/DartSiaProject/dartsia.git
-    #   ref: main
-    #   path: packages/renterd
-    path: ../../../../../Dart Packages/Renterd/dart_renterd/packages/renterd/
+      # url: https://github.com/DartSiaProject/dartsia.git
+      # ref: main
+      # path: packages/renterd
+    path: ../../../../packages/renterd/
+  video_player: ^2.9.2
+  audioplayers: ^6.1.2
+  photo_view: ^0.15.0
+  pdfx: ^2.8.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  auto_route_generator: ^8.1.0
+  auto_route_generator: ^9.0.0
   injectable_generator: ^2.6.2
-  build_runner: ^2.4.11
   bloc_test: ^9.1.7
   mocktail: ^1.0.4
   integration_test:
@@ -91,6 +94,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
+  build_runner: ^2.4.13
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -107,6 +111,7 @@ flutter:
   assets:
     - assets/languages/
     - assets/images/png/
+    - assets/images/png/file_exts/
     - assets/images/svg/
     - assets/fonts/
 

@@ -35,7 +35,7 @@ class _SiaMainScreenState extends State<SiaMainScreen> {
         var _tabsRouter = AutoTabsRouter.of(context);
         return PopScope(
           canPop: false,
-          onPopInvoked: (value) async {
+          onPopInvokedWithResult: (value, _) async {
             if (TabRouterHelper.siaBackSubScreen(_tabsRouter, context)) {
               await SystemNavigator.pop();
             }

@@ -45,10 +45,20 @@ class Init {
         Pngs.serverStatusPng,
         Pngs.secureServerPng,
         Pngs.folderPng,
-        Pngs.pngFilePng,
-        Pngs.jpgFilePng,
-        Pngs.jpegFilePng,
+        // Pngs.pngFilePng,
+        // Pngs.jpgFilePng,
+        // Pngs.jpegFilePng,
+        // Pngs.pdfFilePng,
+        Pngs.archiveFilePng,
+        Pngs.audioFilePng,
+        Pngs.documentFilePng,
+        Pngs.fontFilePng,
+        Pngs.imageFilePng,
         Pngs.pdfFilePng,
+        Pngs.textFilePng,
+        Pngs.unknownFilePng,
+        Pngs.vectorFilePng,
+        Pngs.videoFilePng,
       ];
       for (var pngImage in pngs) {
         await precacheImage(Image.asset(pngImage).image, context!);

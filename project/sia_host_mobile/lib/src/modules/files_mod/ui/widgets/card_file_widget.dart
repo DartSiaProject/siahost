@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:sia_host_mobile/src/core/router/auto_routes.dart';
+import 'package:sia_host_mobile/src/modules/files_mod/features/fetch_all_buckets_and_files/domain/entities/file_entity.dart';
+import 'package:sia_host_mobile/src/shared/constants/pngs_const.dart';
+import 'package:sia_host_mobile/src/shared/extensions/file_ext.dart';
+import 'package:sia_host_mobile/src/shared/helpers/file_manager_helper.dart';
 
 import '../../../../core/configs/language_config/translator.dart';
 import '../../../../shared/constants/colors_const.dart';
@@ -25,17 +30,20 @@ import 'fields_of_folder_details_widget.dart';
 
 class CardFileWidget extends StatefulWidget {
   final String bucketName;
-  final String fileName;
-  final int fileSize;
-  final String fileType;
-  final int totalFiles;
+  // final String fileName;
+  // final int fileSize;
+  // final String fileType;
+  // final int totalFiles;
+  final FileEntity file;
+
   const CardFileWidget({
     super.key,
     required this.bucketName,
-    required this.fileName,
-    required this.fileSize,
-    required this.fileType,
-    required this.totalFiles,
+    // required this.fileName,
+    // required this.fileSize,
+    // required this.fileType,
+    // required this.totalFiles,
+    required this.file,
   });
 
   @override
@@ -46,14 +54,16 @@ class _CardFileWidgetState extends State<CardFileWidget> {
   late TextEditingController _newFileNameController;
   late TextEditingController _fileRenameController;
   late String _selectedBucketName;
+  late FileEntity _file;
 
   @override
   void initState() {
     super.initState();
+    _file = widget.file;
 
     _newFileNameController = TextEditingController();
     _fileRenameController = TextEditingController(
-        text: widget.fileName.replaceAll("/", "").capitalizeLetter());
+        text: _file.name.replaceAll("/", "").capitalizeLetter());
     _selectedBucketName = bucketNameList.first;
   }
 
@@ -80,9 +90,9 @@ class _CardFileWidgetState extends State<CardFileWidget> {
                           () => context.read<FileEditorBloc>().add(
                                 UserDeleteTheFileEvent(
                                     bucketName: widget.bucketName,
-                                    fileName: widget.fileType == "folder"
-                                        ? widget.fileName.replaceFirst('/', '')
-                                        : widget.fileName.replaceAll('/', '')),
+                                    fileName: _file.fileType == "folder"
+                                        ? _file.name.replaceFirst('/', '')
+                                        : _file.name.replaceAll('/', '')),
                               ));
                     },
                   ),
@@ -146,13 +156,13 @@ class _CardFileWidgetState extends State<CardFileWidget> {
                                 UserCopyAndPasteTheFileEvent(
                                   copyFileInfoEntity: CopyFileInfoEntity(
                                     sourceBucketName: widget.bucketName,
-                                    sourcefileName: widget.fileType == "folder"
-                                        ? widget.fileName.replaceFirst('/', '')
-                                        : widget.fileName.replaceAll('/', ''),
+                                    sourcefileName: _file.fileType == "folder"
+                                        ? _file.name.replaceFirst('/', '')
+                                        : _file.name.replaceAll('/', ''),
                                     destBucketName: _selectedBucketName,
-                                    destfileName: widget.fileType == "folder"
+                                    destfileName: _file.fileType == "folder"
                                         ? '${_newFileNameController.text}/'
-                                        : "${_newFileNameController.text}${widget.fileName.getExtFile()}",
+                                        : "${_newFileNameController.text}${_file.name.getExtFile()}",
                                   ),
                                 ),
                               );
@@ -223,19 +233,17 @@ class _CardFileWidgetState extends State<CardFileWidget> {
                       );
                     } else {
                       if (_fileRenameController.text !=
-                          widget.fileName.replaceAll('/', '')) {
+                          _file.name.replaceAll('/', '')) {
                         context.router.maybePop().whenComplete(
                           () {
                             context.read<FileEditorBloc>().add(
                                   UserRenameAFileEvent(
                                     renameFileInfoEntity: RenameFileInfoEntity(
                                         bucketName: widget.bucketName,
-                                        oldFileName: widget.fileType == "folder"
-                                            ? widget.fileName
-                                                .replaceFirst('/', '')
-                                            : widget.fileName
-                                                .replaceAll('/', ''),
-                                        newFileName: widget.fileType == "folder"
+                                        oldFileName: _file.fileType == "folder"
+                                            ? _file.name.replaceFirst('/', '')
+                                            : _file.name.replaceAll('/', ''),
+                                        newFileName: _file.fileType == "folder"
                                             ? '${_fileRenameController.text}/'
                                             : _fileRenameController.text
                                         // "${_fileRenameController.text}${widget.fileName.getExtFile()}",
@@ -289,7 +297,7 @@ class _CardFileWidgetState extends State<CardFileWidget> {
                 ..add(
                   UserViewTheFileDetailsEvent(
                     bucketName: widget.bucketName,
-                    fileName: widget.fileName.replaceAll('/', ''),
+                    fileName: _file.name.replaceAll('/', ''),
                   ),
                 ),
               builder: (context, viewTheFileContentBuilderState) {
@@ -357,198 +365,105 @@ class _CardFileWidgetState extends State<CardFileWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Flex(
-      direction: Axis.horizontal,
-      children: <Widget>[
-        // Stack(
-        //   alignment: widget.fileType == "folder"
-        //       ? Alignment.topRight
-        //       : Alignment.topLeft,
-        //   children: <Widget>[
-        //     Image.asset(
-        //       widget.fileName.hasFileOrFolderTypeByExtension(),
-        //       width: 65.w,
-        //       height: 65.h,
-        //     ),
-        //     PopupMenuButton(
-        //       splashRadius: 22.0.r,
-        //       padding: widget.fileType == "folder"
-        //           ? const EdgeInsets.only(left: 4, bottom: 6)
-        //           : const EdgeInsets.only(left: 8, bottom: 18),
-        //       position: PopupMenuPosition.under,
-        //       icon: const Icon(
-        //         Icons.menu,
-        //         size: 20.0,
-        //         color: ColorsApp.bleachedCedarColor,
-        //       ),
-        //       itemBuilder: (context) {
-        //         return List.generate(
-        //           menuFilesList.length,
-        //           (indexMenu) => PopupMenuItem(
-        //             value: indexMenu,
-        //             child: Text(
-        //               Translator.of(context)!.translate(
-        //                 menuFilesList[indexMenu],
-        //               ),
-        //               style: const TextStyle(
-        //                 fontWeight: FontWeight.w400,
-        //               ),
-        //             ),
-        //           ),
-        //         );
-        //       },
-        //       onSelected: (actionMenuIndex) {
-        //         switch (actionMenuIndex) {
-        //           case 0:
-        //             if (widget.fileType != "folder") {
-        //               context.read<FileEditorBloc>().add(
-        //                   UserDownloadTheFileEvent(
-        //                       fileName: widget.fileName.replaceAll('/', ''),
-        //                       bucketName: widget.bucketName));
-        //             } else {
-        //               context.read<FetchAllFilesBloc>().add(
-        //                   FetchTheFilesFromBucketEvent(
-        //                       bucketName: widget.bucketName,
-        //                       prefix: widget.fileName));
-        //             }
-
-        //             break;
-        //           case 1:
-        //             if (widget.fileType != "folder") {
-        //               _showFileDetailsDialogBox(context: context);
-        //             } else {
-        //               _showFolderDetailsDialogBox(
-        //                 context: context,
-        //                 folderName: widget.fileName
-        //                     .replaceAll('/', '')
-        //                     .capitalizeLetter(),
-        //                 folderSize:
-        //                     CalculatorHelper.getFileSize(widget.fileSize, 2),
-        //                 totalFiles: widget.totalFiles.toString(),
-        //               );
-        //             }
-        //             break;
-        //           case 2:
-        //             _showRenameFileDialogBox(context: context);
-        //             break;
-        //           case 3:
-        //             _showFileCopyDialogBox(context: context);
-        //             break;
-        //           case 4:
-        //             _showDeleteQuestionDialogBox(context: context);
-        //             break;
-        //         }
-        //       },
-        //     ),
-        //   ],
-        // ),
-        PopupMenuButton(
-          splashRadius: 22.0.r,
-          padding: widget.fileType == "folder"
-              ? const EdgeInsets.only(left: 4, bottom: 6)
-              : const EdgeInsets.only(left: 8, bottom: 18),
-          position: PopupMenuPosition.under,
-          icon: Image.asset(
-            widget.fileName.hasFileOrFolderTypeByExtension(),
-            width: 50.w,
-            height: 50.h,
-          ),
-          itemBuilder: (context) {
-            return List.generate(
-              menuFilesList.length,
-              (indexMenu) => PopupMenuItem(
-                value: indexMenu,
-                child: Text(
-                  Translator.of(context)!.translate(
-                    menuFilesList[indexMenu],
-                  ),
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ),
-            );
-          },
-          onSelected: (actionMenuIndex) {
-            switch (actionMenuIndex) {
-              case 0:
-                if (widget.fileType != "folder") {
-                  context.read<FileEditorBloc>().add(UserDownloadTheFileEvent(
-                      fileName: widget.fileName.replaceAll('/', ''),
-                      bucketName: widget.bucketName));
-                } else {
-                  // context.read<FetchAllFilesBloc>().add(
-                  //     FetchTheFilesFromFolderEvent(
-                  //         bucketName: widget.bucketName,
-                  //         prefix: widget.fileName));
-                  // todo : je reviendrai
-                }
-
-                break;
-              case 1:
-                if (widget.fileType != "folder") {
-                  _showFileDetailsDialogBox(context: context);
-                } else {
-                  _showFolderDetailsDialogBox(
-                    context: context,
-                    folderName:
-                        widget.fileName.replaceAll('/', '').capitalizeLetter(),
-                    folderSize:
-                        CalculatorHelper.getFileSize(widget.fileSize, 2),
-                    totalFiles: widget.totalFiles.toString(),
-                  );
-                }
-                break;
-              case 2:
-                _showRenameFileDialogBox(context: context);
-                break;
-              case 3:
-                _showFileCopyDialogBox(context: context);
-                break;
-              case 4:
-                _showDeleteQuestionDialogBox(context: context);
-                break;
-            }
-          },
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      leading: PopupMenuButton(
+        splashRadius: 22.0.r,
+        padding: _file.fileType == "folder"
+            ? const EdgeInsets.only(left: 4, bottom: 6)
+            : const EdgeInsets.only(left: 8, bottom: 18),
+        position: PopupMenuPosition.under,
+        icon: Image.asset(
+          _file.fileType == "folder"
+              ? Pngs.folderPng
+              : FileManagerHelper.thumbnail(_file.typeEnum),
+          width: 50.w,
+          height: 50.h,
         ),
-        Flex(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          direction: Axis.vertical,
-          children: <Widget>[
-            SizedBox(
-              width: 95,
+        itemBuilder: (context) {
+          return List.generate(
+            menuFilesList.length,
+            (indexMenu) => PopupMenuItem(
+              value: indexMenu,
               child: Text(
-                widget.fileType == "folder"
-                    ? "${widget.totalFiles.toString()} ${Translator.of(context)!.translate(Lang.filesText)} | ${CalculatorHelper.getFileSize(widget.fileSize, 2)}"
-                    : CalculatorHelper.getFileSize(widget.fileSize, 2),
-                style: TextStyle(
-                  fontFamily: "Manrope",
-                  fontSize: 12.0.sp,
-                  fontWeight: FontWeight.w500,
-                  color: ColorsApp.cottonSeedColor,
+                Translator.of(context)!.translate(
+                  menuFilesList[indexMenu],
                 ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             ),
-            SizedBox(
-              width: 95,
-              child: Text(
-                widget.fileName.replaceAll('/', '').capitalizeLetter(),
-                style: TextStyle(
-                  fontFamily: "Manrope",
-                  fontSize: 16.0.sp,
-                  fontWeight: FontWeight.bold,
-                  color: ColorsApp.whiteColor,
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ],
+          );
+        },
+        onSelected: (actionMenuIndex) {
+          switch (actionMenuIndex) {
+            case 0:
+              if (_file.fileType != "folder") {
+                context.read<FileEditorBloc>().add(
+                      UserDownloadTheFileEvent(
+                        fileName: _file.name.replaceAll('/', ''),
+                        bucketName: widget.bucketName,
+                      ),
+                    );
+                print(_file);
+              } else {
+                context.pushRoute(
+                  ListOfFileFetchedFromBucketRoute(
+                    bucketName: widget.bucketName + _file.name,
+                  ),
+                );
+              }
+
+              break;
+            case 1:
+              if (_file.fileType != "folder") {
+                _showFileDetailsDialogBox(context: context);
+              } else {
+                _showFolderDetailsDialogBox(
+                  context: context,
+                  folderName: _file.name.replaceAll('/', '').capitalizeLetter(),
+                  folderSize: CalculatorHelper.getFileSize(_file.size, 2),
+                  totalFiles: _file.totalFiles.toString(),
+                );
+              }
+              break;
+            case 2:
+              _showRenameFileDialogBox(context: context);
+              break;
+            case 3:
+              _showFileCopyDialogBox(context: context);
+              break;
+            case 4:
+              _showDeleteQuestionDialogBox(context: context);
+              break;
+          }
+        },
+      ),
+      title: Text(
+        _file.name.replaceAll('/', '').capitalizeLetter(),
+        style: TextStyle(
+          fontFamily: "Manrope",
+          fontSize: 16.0.sp,
+          fontWeight: FontWeight.bold,
+          color: ColorsApp.whiteColor,
         ),
-      ],
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
+      subtitle: Text(
+        _file.fileType == "folder"
+            ? "${_file.totalFiles.toString()} ${Translator.of(context)!.translate(Lang.filesText)} | ${CalculatorHelper.getFileSize(_file.size, 2)}"
+            : CalculatorHelper.getFileSize(_file.size, 2),
+        style: TextStyle(
+          fontFamily: "Manrope",
+          fontSize: 12.0.sp,
+          fontWeight: FontWeight.w500,
+          color: ColorsApp.cottonSeedColor,
+        ),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
     );
   }
 

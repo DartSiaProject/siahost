@@ -1,6 +1,5 @@
 import 'package:intl/intl.dart';
 
-import '../constants/pngs_const.dart';
 import '../constants/string_const.dart';
 
 extension StringExtensions on String {
@@ -16,23 +15,36 @@ extension StringExtensions on String {
     return RegExp(urlPattern, caseSensitive: false).hasMatch(this);
   }
 
-  String hasFileOrFolderTypeByExtension() {
-    var _fileName = this;
-    var _extFile = ".${_fileName.split('.').last}";
+  // String hasFileOrFolderTypeByExtension() {
+  //   var _fileName = this;
+  //   var _extFile = ".${_fileName.split('.').last}";
 
-    switch (_extFile) {
-      case ".png":
-        return Pngs.pngFilePng;
-      case ".jpg":
-        return Pngs.jpgFilePng;
-      case ".jpeg":
-        return Pngs.jpegFilePng;
-      case ".pdf":
-        return Pngs.pdfFilePng;
-      default:
-        return Pngs.folderPng;
-    }
-  }
+  //   switch (_extFile) {
+  //     case ".png":
+  //       return Pngs.pngFilePng;
+  //     case ".jpg":
+  //       return Pngs.jpgFilePng;
+  //     case ".jpeg":
+  //       return Pngs.jpegFilePng;
+  //     case ".pdf":
+  //       return Pngs.pdfFilePng;
+  //     default:
+  //       return Pngs.folderPng;
+  //   }
+  // }
+
+  // String thumbnailByFileMimeType() {
+  //   toLowerCase();
+
+  //   if (startsWith('image')) return Pngs.imageFilePng;
+  //   if (startsWith('video')) return Pngs.videoFilePng;
+  //   if (startsWith('audio')) return Pngs.audioFilePng;
+  //   if (startsWith('font')) return Pngs.fontFilePng;
+  //   if (startsWith('model')) return Pngs.vectorFilePng;
+  //   if (startsWith('text')) return Pngs.textFilePng;
+
+  //   return Pngs.unknownFilePng;
+  // }
 
   String getExtFile() {
     var _fileName = this;

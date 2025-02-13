@@ -9,105 +9,50 @@
 
 part of 'auto_routes.dart';
 
-abstract class _$AutoRoutes extends RootStackRouter {
-  // ignore: unused_element
-  _$AutoRoutes({super.navigatorKey});
+/// generated route for
+/// [FilePreviewScreen]
+class FilePreviewRoute extends PageRouteInfo<FilePreviewRouteArgs> {
+  FilePreviewRoute({
+    Key? key,
+    required FileEntity file,
+    List<PageRouteInfo>? children,
+  }) : super(
+          FilePreviewRoute.name,
+          args: FilePreviewRouteArgs(
+            key: key,
+            file: file,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'FilePreviewRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<FilePreviewRouteArgs>();
+      return FilePreviewScreen(
+        key: args.key,
+        file: args.file,
+      );
+    },
+  );
+}
+
+class FilePreviewRouteArgs {
+  const FilePreviewRouteArgs({
+    this.key,
+    required this.file,
+  });
+
+  final Key? key;
+
+  final FileEntity file;
 
   @override
-  final Map<String, PageFactory> pagesMap = {
-    FilesRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const FilesScreen(),
-      );
-    },
-    HomeRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const HomeScreen(),
-      );
-    },
-    HostConfigRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const HostConfigScreen(),
-      );
-    },
-    HostInfoRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<HostInfoRouteArgs>(
-          orElse: () =>
-              HostInfoRouteArgs(pubKey: pathParams.getString('hostPubKey')));
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: HostInfoScreen(
-          key: args.key,
-          pubKey: args.pubKey,
-        ),
-      );
-    },
-    HostRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const HostScreen(),
-      );
-    },
-    ListOfBucketRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const ListOfBucketScreen(),
-      );
-    },
-    ListOfFileFetchedFromBucketRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<ListOfFileFetchedFromBucketRouteArgs>(
-          orElse: () => ListOfFileFetchedFromBucketRouteArgs(
-              bucketName: pathParams.getString('bucketName')));
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: ListOfFileFetchedFromBucketScreen(
-          key: args.key,
-          bucketName: args.bucketName,
-        ),
-      );
-    },
-    ListOfHostRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const ListOfHostScreen(),
-      );
-    },
-    LoginAccountRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const LoginAccountScreen(),
-      );
-    },
-    MainRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const MainScreen(),
-      );
-    },
-    OnboardingRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const OnboardingScreen(),
-      );
-    },
-    SearchRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SearchScreen(),
-      );
-    },
-    SiaMainRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SiaMainScreen(),
-      );
-    },
-  };
+  String toString() {
+    return 'FilePreviewRouteArgs{key: $key, file: $file}';
+  }
 }
 
 /// generated route for
@@ -121,7 +66,12 @@ class FilesRoute extends PageRouteInfo<void> {
 
   static const String name = 'FilesRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const FilesScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -135,7 +85,12 @@ class HomeRoute extends PageRouteInfo<void> {
 
   static const String name = 'HomeRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const HomeScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -149,7 +104,12 @@ class HostConfigRoute extends PageRouteInfo<void> {
 
   static const String name = 'HostConfigRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const HostConfigScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -171,8 +131,19 @@ class HostInfoRoute extends PageRouteInfo<HostInfoRouteArgs> {
 
   static const String name = 'HostInfoRoute';
 
-  static const PageInfo<HostInfoRouteArgs> page =
-      PageInfo<HostInfoRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<HostInfoRouteArgs>(
+          orElse: () =>
+              HostInfoRouteArgs(pubKey: pathParams.getString('hostPubKey')));
+      return HostInfoScreen(
+        key: args.key,
+        pubKey: args.pubKey,
+      );
+    },
+  );
 }
 
 class HostInfoRouteArgs {
@@ -202,7 +173,12 @@ class HostRoute extends PageRouteInfo<void> {
 
   static const String name = 'HostRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const HostScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -216,7 +192,12 @@ class ListOfBucketRoute extends PageRouteInfo<void> {
 
   static const String name = 'ListOfBucketRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ListOfBucketScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -239,8 +220,19 @@ class ListOfFileFetchedFromBucketRoute
 
   static const String name = 'ListOfFileFetchedFromBucketRoute';
 
-  static const PageInfo<ListOfFileFetchedFromBucketRouteArgs> page =
-      PageInfo<ListOfFileFetchedFromBucketRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<ListOfFileFetchedFromBucketRouteArgs>(
+          orElse: () => ListOfFileFetchedFromBucketRouteArgs(
+              bucketName: pathParams.getString('bucketName')));
+      return ListOfFileFetchedFromBucketScreen(
+        key: args.key,
+        bucketName: args.bucketName,
+      );
+    },
+  );
 }
 
 class ListOfFileFetchedFromBucketRouteArgs {
@@ -270,7 +262,12 @@ class ListOfHostRoute extends PageRouteInfo<void> {
 
   static const String name = 'ListOfHostRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ListOfHostScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -284,7 +281,12 @@ class LoginAccountRoute extends PageRouteInfo<void> {
 
   static const String name = 'LoginAccountRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const LoginAccountScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -298,7 +300,12 @@ class MainRoute extends PageRouteInfo<void> {
 
   static const String name = 'MainRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const MainScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -312,7 +319,12 @@ class OnboardingRoute extends PageRouteInfo<void> {
 
   static const String name = 'OnboardingRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const OnboardingScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -326,7 +338,12 @@ class SearchRoute extends PageRouteInfo<void> {
 
   static const String name = 'SearchRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SearchScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -340,5 +357,10 @@ class SiaMainRoute extends PageRouteInfo<void> {
 
   static const String name = 'SiaMainRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SiaMainScreen();
+    },
+  );
 }
