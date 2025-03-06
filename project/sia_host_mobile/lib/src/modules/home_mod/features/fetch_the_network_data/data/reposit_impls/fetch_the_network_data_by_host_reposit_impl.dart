@@ -60,12 +60,13 @@ class FetchTheNetworkDataByHostRepositImpl
           var _totalUsedStorage = _totalNetworkStorage - _totalRemainingStorage;
 
           //? (4)-- price per tb --
-          var _totalStoragePrice = 0;
+          var _totalStoragePrice = BigInt.from(0);
           for (var _hostElement in _allCurrentHost) {
             String _storagePrice = _hostElement["settings"]["storage_price"];
-            _totalStoragePrice += int.parse(_storagePrice);
+            _totalStoragePrice += BigInt.parse(_storagePrice);
           }
-          var _pricePerTp = _totalStoragePrice / _totalCurrentHosts;
+          var _pricePerTp =
+              _totalStoragePrice / BigInt.from(_totalNetworkStorage);
 
           //? (5)-- active contract count List --
           // await _fetchActiveContractCountAbst

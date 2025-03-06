@@ -64,9 +64,10 @@ dependencies:
   crypto: ^3.0.3
   file_picker: ^8.0.7
   path_provider: ^2.1.4
-  permission_handler: ^10.2.0
+  # permission_handler: ^10.2.0
+  permission_handler: ^11.4.0
   device_info_plus: ^10.1.2
-  open_filex: ^4.5.0
+  # open_filex: ^4.5.0
   renterd:
     # git:
       # url: https://github.com/DartSiaProject/dartsia.git
