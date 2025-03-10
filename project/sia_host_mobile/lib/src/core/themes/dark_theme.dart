@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../shared/constants/colors_const.dart';
 
 class DarkTheme {
-  static ThemeData dark = ThemeData(
+  static ThemeData dark = ThemeData.dark().copyWith(
     scaffoldBackgroundColor: ColorsApp.bleachedCedarColor,
     appBarTheme: const AppBarTheme(
       elevation: 0.0,

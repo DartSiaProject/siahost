@@ -12,4 +12,5 @@ class IconSvgs {
   static const locationSvg = "assets/images/svg/location.svg";
   static const settingsSvg = "assets/images/svg/settings.svg";
   static const filesSvg = "assets/images/svg/files.svg";
+  static const emptySvg = "assets/images/svg/empty.svg";
 }

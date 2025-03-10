@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sia_host_mobile/src/modules/notifications/notifications.dart';
 
 import 'src/core/configs/device_config/device_size.dart';
 import 'src/core/configs/injectors_config/injector.dart';
@@ -93,6 +94,12 @@ void main() async {
         ),
         BlocProvider(
           create: (context) => sl<ViewTheFileDetailsBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => sl<NotificationBloc>()
+            ..add(
+              const NotificationFetchedEvent(),
+            ),
         ),
       ],
       child: SiaHostMobile(),

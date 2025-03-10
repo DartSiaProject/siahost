@@ -129,4 +129,5 @@ class Lang {
   static const mailAdressText = "mail_adress_text";
   static const dataAreCorrectText = "data_are_correct_text";
   static const dataAreNotCorrectText = "data_are_not_correct_text";
+  static const noNotificationsText = "no_notifications_text";
 }

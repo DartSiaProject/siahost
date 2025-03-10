@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:sia_host_mobile/src/modules/files_mod/features/fetch_all_buckets_and_files/domain/entities/file_entity.dart';
 import 'package:sia_host_mobile/src/modules/files_mod/ui/screens/file_preview_screen.dart';
+import 'package:sia_host_mobile/src/modules/notifications/notifications.dart';
 
 import '../../modules/account_mod/ui/screens/login_account_screen.dart';
 import '../../modules/account_mod/ui/screens/main_screen.dart';
@@ -38,54 +39,68 @@ class AutoRoutes extends RootStackRouter {
           page: LoginAccountRoute.page,
         ),
         AutoRoute(
-            path: RoutePath.siaMainPath,
-            page: SiaMainRoute.page,
-            children: <AutoRoute>[
-              AutoRoute(
-                page: HomeRoute.page,
-                initial: true,
-              ),
-              AutoRoute(
-                page: SearchRoute.page,
-                children: <AutoRoute>[
-                  AutoRoute(
-                    page: ListOfHostRoute.page,
-                    initial: true,
-                  ),
-                  AutoRoute(
-                    path: "${RoutePath.hostInfoSubPath}/:hostPubKey",
-                    page: HostInfoRoute.page,
-                  ),
-                ],
-              ),
-              AutoRoute(
-                page: HostRoute.page,
-              ),
-              AutoRoute(
-                page: HostConfigRoute.page,
-              ),
-              AutoRoute(
-                page: FilesRoute.page,
-                children: <AutoRoute>[
-                  AutoRoute(
-                    page: ListOfBucketRoute.page,
-                    initial: true,
-                  ),
-                  AutoRoute(
-                    path:
-                        "${RoutePath.listOfFileFetchedFromBucketSubPath}/:bucketName",
-                    page: ListOfFileFetchedFromBucketRoute.page,
-                  ),
-                  AutoRoute(
-                    path: RoutePath.filePreviewPath,
-                    page: FilePreviewRoute.page,
-                  ),
-                  // AutoRoute(
-                  //   path: "${RoutePath.previewTheFileContentSubPath}/:fileName",
-                  //   page: PreviewTheFileContentRoute.page,
-                  // ),
-                ],
-              ),
-            ]),
+          path: RoutePath.siaMainPath,
+          page: SiaMainRoute.page,
+          children: <AutoRoute>[
+            AutoRoute(
+              page: HomeRoute.page,
+              initial: true,
+            ),
+            AutoRoute(
+              page: SearchRoute.page,
+              children: <AutoRoute>[
+                AutoRoute(
+                  page: ListOfHostRoute.page,
+                  initial: true,
+                ),
+                AutoRoute(
+                  path: "${RoutePath.hostInfoSubPath}/:hostPubKey",
+                  page: HostInfoRoute.page,
+                ),
+              ],
+            ),
+            AutoRoute(
+              page: HostRoute.page,
+            ),
+            AutoRoute(
+              page: HostConfigRoute.page,
+            ),
+            AutoRoute(
+              page: FilesRoute.page,
+              children: <AutoRoute>[
+                AutoRoute(
+                  page: ListOfBucketRoute.page,
+                  initial: true,
+                ),
+                AutoRoute(
+                  path:
+                      "${RoutePath.listOfFileFetchedFromBucketSubPath}/:bucketName",
+                  page: ListOfFileFetchedFromBucketRoute.page,
+                ),
+                AutoRoute(
+                  path: RoutePath.filePreviewPath,
+                  page: FilePreviewRoute.page,
+                ),
+                // AutoRoute(
+                //   path: "${RoutePath.previewTheFileContentSubPath}/:fileName",
+                //   page: PreviewTheFileContentRoute.page,
+                // ),
+              ],
+            ),
+          ],
+        ),
+
+        // Notifications
+        AutoRoute(
+          page: const EmptyShellRoute(RoutePath.notificationsPath),
+          path: RoutePath.notificationsPath,
+          children: [
+            AutoRoute(page: NotificationRoute.page, initial: true),
+            AutoRoute(
+              path: ':id',
+              page: NotificationDetailsRoute.page,
+            ),
+          ],
+        ),
       ];
 }

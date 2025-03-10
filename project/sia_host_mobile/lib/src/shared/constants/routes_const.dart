@@ -11,4 +11,6 @@ class RoutePath {
       "listOfFileFetchedFromBucketRoute";
 
   static const filePreviewPath = "filePreviewRoute";
+
+  static const notificationsPath = "/notificationsRoute";
 }

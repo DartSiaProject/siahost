@@ -32,6 +32,8 @@ class Init {
         IconSvgs.moreVerticalSvg,
         IconSvgs.locationSvg,
         IconSvgs.settingsSvg,
+        IconSvgs.settingsSvg,
+        IconSvgs.emptySvg,
       ];
       for (var svgImage in svgs) {
         await svg.cache.putIfAbsent(SvgAssetLoader(svgImage).cacheKey(null),
