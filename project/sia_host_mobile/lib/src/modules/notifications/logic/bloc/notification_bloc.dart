@@ -86,8 +86,8 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
       (success) {
         emit(state.copyWith(
           status: NotificationStatus.dismissed,
-          notifications: state.notifications
-              ?.where((notification) => !event.ids.contains(notification.id))
+          notifications: isAll ? [] : state.notifications
+              ?.where((notification) => !ids.contains(notification.id))
               .toList(),
         ));
       },
