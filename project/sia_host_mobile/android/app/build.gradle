@@ -38,13 +38,9 @@ android {
     }
 
     namespace = "com.sia.sia_host_mobile"
-    compileSdk = 35
+    compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
-    // compileOptions {
-    //     sourceCompatibility = JavaVersion.VERSION_17
-    //     targetCompatibility = JavaVersion.VERSION_17
-    // }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -57,7 +53,7 @@ android {
     defaultConfig {
         applicationId = "com.sia.sia_host_mobile"
         minSdk = 21
-        targetSdk = 35
+        targetSdk = flutter.targetSdkVersion
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
         ndk  {

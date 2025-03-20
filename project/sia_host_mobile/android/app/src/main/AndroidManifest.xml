@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-sdk
+    <!-- <uses-sdk
     android:minSdkVersion="16"
     android:maxSdkVersion="34"
     tools:overrideLibrary="dev.flutter.integration_test, 
@@ -12,7 +12,7 @@ xmlns:tools="http://schemas.android.com/tools">
     dev.fluttercommunity.plus.connectivity, 
     com.mr.flutter.plugin.filepicker, 
     io.flutter.plugins.flutter_plugin_android_lifecycles, 
-    dev.fluttercommunity.plus.device_info"/>
+    dev.fluttercommunity.plus.device_info"/> -->
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>

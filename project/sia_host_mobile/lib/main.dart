@@ -26,25 +26,6 @@ import 'src/modules/search_mod/features/fetch_the_hosts_data/states_holder/fetch
 import 'src/shared/constants/string_const.dart';
 
 void main() async {
-  // //* --- encrypt & decrypt SHA-256
-  // print(
-  //     "Data Hashed with SHA-256: ${EncryptRequest.hashWithSHA256("Hello World")}");
-
-  // // print(
-  // //     "Data Decrypted: ${DecryptRequest.decryptWithSHA256('a591a6d40bf420404a011733cfb7b190d62c65bf0bcda32b57b277d9ad9f146e')}");
-
-  // // //* --- encrypt & decrypt AES 256 CBC
-  // print(
-  //     "Data Encrypted with AES 256 CBC : ${EncryptRequest.encryptStringWithAES256CBC("Hello World")}");
-  // print(
-  //     "Data Decrypted with AES 256 CBC : ${DecryptRequest.decryptWithAES256CBC("0Ykrl/qf2Zjj45G072rpaw==")}");
-
-  // print(
-  //     "The Key and Iv Generated : ${GeneratorRequest.generateKeyAndIv("jamesbrel119@gmail.comjamesbrel")}");
-
-  // print(
-  //     "The Key and Iv Generated : ${GeneratorRequest.generateKeyAndIv("test@test.cm@Bcabc12")}");
-
   await Init.launch();
 
   runApp(
