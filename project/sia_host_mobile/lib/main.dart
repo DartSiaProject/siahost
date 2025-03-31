@@ -110,13 +110,12 @@ class SiaHostMobile extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
         ],
         supportedLocales: const [
-          Locale("fr", 'FR'),
           Locale("en", "US"),
+          Locale("fr", 'FR'),
         ],
         localeResolutionCallback: (locale, supportedLocales) {
           for (var supportedLocale in supportedLocales) {
-            if (supportedLocale.languageCode == locale!.languageCode &&
-                supportedLocale.countryCode == locale.countryCode) {
+            if (supportedLocale.languageCode == locale!.languageCode) {
               return supportedLocale;
             }
           }
