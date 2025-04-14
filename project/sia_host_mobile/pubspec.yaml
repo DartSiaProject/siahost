@@ -79,6 +79,8 @@ dependencies:
   pdfx: ^2.8.0
   just_audio: ^0.9.46
   chewie: ^1.10.0
+  flutter_cache_manager: ^3.4.1
+  open_filex: ^4.7.0
 
 dev_dependencies:
   flutter_test:

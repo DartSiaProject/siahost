@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:open_filex/open_filex.dart';
 import 'package:sia_host_mobile/src/core/router/auto_routes.dart';
 import 'package:sia_host_mobile/src/modules/files_mod/features/fetch_all_buckets_and_files/domain/entities/file_entity.dart';
 
@@ -178,13 +179,14 @@ class _ListOfFileFetchedFromBucketScreenState
             }
 
             if (fileEditorListenerState is FileAlreadyDownloadedSuccess) {
-              // OpenFilex.open(
-              //     "$storageDownload/${fileEditorListenerState.fileName}");
-              context.pushRoute(
-                FilePreviewRoute(
-                  file: FileEntity(name: fileEditorListenerState.fileName),
-                ),
+              OpenFilex.open(
+                "$storageDownload/${fileEditorListenerState.fileName}",
               );
+              // context.pushRoute(
+              //   FilePreviewRoute(
+              //     file: FileEntity(name: fileEditorListenerState.fileName),
+              //   ),
+              // );
             }
 
             if (fileEditorListenerState is FileEditedFailed) {
