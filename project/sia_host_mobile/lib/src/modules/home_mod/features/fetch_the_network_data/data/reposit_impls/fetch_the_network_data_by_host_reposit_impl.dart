@@ -39,33 +39,33 @@ class FetchTheNetworkDataByHostRepositImpl
           _allCurrentHost.clear();
           Map<String, dynamic> _hostData =
               json.decode((_resultHost["response"] as Response<String>).data!);
-          _allCurrentHost = _hostData["hosts"];
+          _allCurrentHost = _hostData["hosts"] ?? [];
 
           //? (1)-- total hosts currents --
           var _totalCurrentHosts = _allCurrentHost.length;
 
           //? (2)-- total network storage --
-          var _totalNetworkStorage = 0;
+          var _totalNetworkStorage = BigInt.from(0);
           for (var _hostElement in _allCurrentHost) {
             int _totalStorage = _hostElement["settings"]["total_storage"];
-            _totalNetworkStorage += _totalStorage;
+            _totalNetworkStorage += BigInt.from(_totalStorage);
           }
           //? (3)-- total used storage --
-          var _totalRemainingStorage = 0;
+          var _totalRemainingStorage = BigInt.from(0);
           for (var _hostElement in _allCurrentHost) {
             int _remainingStorage =
                 _hostElement["settings"]["remaining_storage"];
-            _totalRemainingStorage += _remainingStorage;
+            _totalRemainingStorage += BigInt.from(_remainingStorage);
           }
           var _totalUsedStorage = _totalNetworkStorage - _totalRemainingStorage;
 
           //? (4)-- price per tb --
-          var _totalStoragePrice = 0;
+          var _totalStoragePrice = BigInt.from(0);
           for (var _hostElement in _allCurrentHost) {
             String _storagePrice = _hostElement["settings"]["storage_price"];
-            _totalStoragePrice += int.parse(_storagePrice);
+            _totalStoragePrice += BigInt.parse(_storagePrice);
           }
-          var _pricePerTp = _totalStoragePrice / _totalCurrentHosts;
+          var _pricePerTp = _totalStoragePrice / _totalNetworkStorage;
 
           //? (5)-- active contract count List --
           // await _fetchActiveContractCountAbst
@@ -102,7 +102,7 @@ class FetchTheNetworkDataByHostRepositImpl
             "totalCurrentHosts": _totalCurrentHosts.toDouble(),
             "totalNetworkStorage": _totalNetworkStorage.toDouble(),
             "totalUsedStorage": _totalUsedStorage.toDouble(),
-            "pricePerTb": _pricePerTp,
+            "pricePerTb": _pricePerTp.toDouble(),
             "activeContractCount": _activeContractCountList,
           });
           var _networkDataEntity = NetworkDataEntity(

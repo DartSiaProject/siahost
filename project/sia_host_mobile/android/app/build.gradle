@@ -22,23 +22,28 @@ def flutterVersionName = localProperties.getProperty("flutter.versionName")
 if (flutterVersionName == null) {
     flutterVersionName = "1.0"
 }
-def keystoreProperties = new Properties()
-def keystorePropertiesFile = rootProject.file('key.properties')
-if (keystorePropertiesFile.exists()) {
-    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-}
+
+
 android {
     signingConfigs {
         release {
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
-            storePassword keystoreProperties['storePassword']
+            Properties properties = new Properties()
+            try {
+                properties.load(project.rootProject.file('key.properties').newDataInputStream())
+                storeFile file(properties.getProperty('storeFile'))
+                storePassword properties.getProperty('storePassword')
+                keyAlias properties.getProperty('keyAlias')
+                keyPassword properties.getProperty('keyPassword')
+            } catch (FileNotFoundException e) {
+                println "key.properties file not found. Building unsigned APK."
+            } catch (Exception e) {
+                println "Error reading key.properties: ${e.message}"
+            }
        }
     }
 
     namespace = "com.sia.sia_host_mobile"
-    compileSdk = 34
+    compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -46,10 +51,14 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
     defaultConfig {
         applicationId = "com.sia.sia_host_mobile"
-        minSdk = 16
-        targetSdk = 34
+        minSdk = 21
+        targetSdk = flutter.targetSdkVersion
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
         ndk  {
@@ -82,7 +91,7 @@ android {
             }
         }
     }
-    flavorDimensions 'sia_host_mobile_env'
+    flavorDimensions "sia_host_mobile_env"
     productFlavors {
         dev {
             dimension = 'sia_host_mobile_env'

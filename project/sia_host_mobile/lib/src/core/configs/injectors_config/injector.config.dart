@@ -1,3 +1,4 @@
+// dart format width=80
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
@@ -199,6 +200,11 @@ import '../../../modules/my_host_mod/features/fetch_host_from_renter/domain/usec
     as _i345;
 import '../../../modules/my_host_mod/features/fetch_host_from_renter/states_holder/fetch_my_hoster_bloc/fetch_my_hoster_bloc.dart'
     as _i655;
+import '../../../modules/notifications/data/repositories/notification_repository.dart'
+    as _i406;
+import '../../../modules/notifications/logic/bloc/notification_bloc.dart'
+    as _i269;
+import '../../../modules/notifications/notifications.dart' as _i785;
 import '../../../modules/search_mod/features/fetch_and_show_one_host/data/remote_source/absts/fetch_all_existant_hosts_abst.dart'
     as _i639;
 import '../../../modules/search_mod/features/fetch_and_show_one_host/data/remote_source/absts/fetch_the_host_address_country_abst.dart'
@@ -289,6 +295,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i41.CacheTheUserCredentialsAfterLoginImpl());
     gh.lazySingleton<_i600.FetchFilesFromBucketAbst>(
         () => _i652.FetchFilesFromBucketImpl());
+    gh.lazySingleton<_i406.NotificationRepository>(() =>
+        _i406.NotificationRepository(
+            fetchTheUserCredentialAbst:
+                gh<_i760.FetchTheUserCredentialAbst>()));
     gh.lazySingleton<_i269.UserMakeHisLoginAbst>(
         () => _i624.UserMakeHisLoginImpl());
     gh.lazySingleton<_i866.UploadFileOnServerAbst>(
@@ -334,6 +344,8 @@ extension GetItInjectableX on _i174.GetIt {
         _i383.FetchTheHosterForConfigUsecase(
             fetchTheHostDataFromRenterForConfigRepositAbst:
                 gh<_i582.FetchTheHostDataFromRenterForConfigRepositAbst>()));
+    gh.factory<_i269.NotificationBloc>(() =>
+        _i269.NotificationBloc(repository: gh<_i785.NotificationRepository>()));
     gh.lazySingleton<_i286.RenameTheFileRepositAbst>(() =>
         _i728.RenameTheFileRepositImpl(
             renameTheFileAbst: gh<_i814.RenameTheFileAbst>()));
@@ -438,16 +450,16 @@ extension GetItInjectableX on _i174.GetIt {
           copyAndPasteUsecase: gh<_i167.CopyAndPasteUsecase>(),
           userRenameTheFileUsecase: gh<_i834.UserRenameTheFileUsecase>(),
         ));
-    gh.lazySingleton<_i413.FetchAllBucketsUsecase>(() =>
-        _i413.FetchAllBucketsUsecase(
+    gh.lazySingleton<_i830.FetchFilesFromFolderUsecase>(() =>
+        _i830.FetchFilesFromFolderUsecase(
             fetchAllBucketsAndFilesRepositAbst:
                 gh<_i87.FetchAllBucketsAndFilesRepositAbst>()));
     gh.lazySingleton<_i529.FetchFilesFromBucketUsecase>(() =>
         _i529.FetchFilesFromBucketUsecase(
             fetchAllBucketsAndFilesRepositAbst:
                 gh<_i87.FetchAllBucketsAndFilesRepositAbst>()));
-    gh.lazySingleton<_i830.FetchFilesFromFolderUsecase>(() =>
-        _i830.FetchFilesFromFolderUsecase(
+    gh.lazySingleton<_i413.FetchAllBucketsUsecase>(() =>
+        _i413.FetchAllBucketsUsecase(
             fetchAllBucketsAndFilesRepositAbst:
                 gh<_i87.FetchAllBucketsAndFilesRepositAbst>()));
     gh.factory<_i318.NetworkDataFetchingBloc>(() =>

@@ -35,7 +35,7 @@ class _SiaMainScreenState extends State<SiaMainScreen> {
         var _tabsRouter = AutoTabsRouter.of(context);
         return PopScope(
           canPop: false,
-          onPopInvoked: (value) async {
+          onPopInvokedWithResult: (value, _) async {
             if (TabRouterHelper.siaBackSubScreen(_tabsRouter, context)) {
               await SystemNavigator.pop();
             }
@@ -53,7 +53,7 @@ class _SiaMainScreenState extends State<SiaMainScreen> {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(5.0.r),
                       onTap: () {
-                        print("NOTIFICATION");
+                        context.router.push(const NotificationRoute());
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(3.0),

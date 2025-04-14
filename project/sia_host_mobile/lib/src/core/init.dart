@@ -32,6 +32,8 @@ class Init {
         IconSvgs.moreVerticalSvg,
         IconSvgs.locationSvg,
         IconSvgs.settingsSvg,
+        IconSvgs.settingsSvg,
+        IconSvgs.emptySvg,
       ];
       for (var svgImage in svgs) {
         await svg.cache.putIfAbsent(SvgAssetLoader(svgImage).cacheKey(null),
@@ -45,10 +47,20 @@ class Init {
         Pngs.serverStatusPng,
         Pngs.secureServerPng,
         Pngs.folderPng,
-        Pngs.pngFilePng,
-        Pngs.jpgFilePng,
-        Pngs.jpegFilePng,
+        // Pngs.pngFilePng,
+        // Pngs.jpgFilePng,
+        // Pngs.jpegFilePng,
+        // Pngs.pdfFilePng,
+        Pngs.archiveFilePng,
+        Pngs.audioFilePng,
+        Pngs.documentFilePng,
+        Pngs.fontFilePng,
+        Pngs.imageFilePng,
         Pngs.pdfFilePng,
+        Pngs.textFilePng,
+        Pngs.unknownFilePng,
+        Pngs.vectorFilePng,
+        Pngs.videoFilePng,
       ];
       for (var pngImage in pngs) {
         await precacheImage(Image.asset(pngImage).image, context!);

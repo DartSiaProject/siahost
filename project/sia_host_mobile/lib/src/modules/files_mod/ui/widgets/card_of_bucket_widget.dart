@@ -29,33 +29,41 @@ class CardOfBucketWidget extends StatelessWidget {
             Pngs.folderPng,
             width: 160.w,
             height: 140.h,
+            fit: BoxFit.cover,
           ),
-          Padding(
-            padding: EdgeInsets.only(left: 30.0, bottom: 35.0.h),
-            child: Flex(
-              direction: Axis.vertical,
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  "$totalFiles ${Translator.of(context)!.translate(Lang.filesText)}",
-                  style: TextStyle(
-                    color: ColorsApp.whiteColor.withOpacity(0.7),
-                    fontSize: 12.0.sp,
-                    fontFamily: "Poppins",
-                    fontWeight: FontWeight.w500,
+          SizedBox(
+            width: 160.w,
+            child: Padding(
+              padding: EdgeInsets.only(left: 16.0, right: 20.w, bottom: 35.0.h),
+              child: Flex(
+                direction: Axis.vertical,
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "$totalFiles ${Translator.of(context)!.translate(Lang.filesText)}",
+                    style: TextStyle(
+                      color: ColorsApp.whiteColor.withValues(alpha: .7),
+                      fontSize: 12.0.sp,
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
-                Text(
-                  label,
-                  style: TextStyle(
-                    color: ColorsApp.whiteColor,
-                    fontSize: 20.0.sp,
-                    fontFamily: "Manrope",
-                    fontWeight: FontWeight.bold,
+                  FittedBox(
+                    child: Text(
+                      label,
+                      style: TextStyle(
+                        color: ColorsApp.whiteColor,
+                        fontSize: 20.0.sp,
+                        fontFamily: "Manrope",
+                        fontWeight: FontWeight.bold,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],

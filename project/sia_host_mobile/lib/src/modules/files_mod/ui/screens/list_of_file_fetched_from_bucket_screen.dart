@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:open_filex/open_filex.dart';
-import '../../../../shared/ui/widgets/card_suggestion_widget.dart';
-import '../../../../shared/ui/widgets/question_dialog_box_widget.dart';
+import 'package:sia_host_mobile/src/core/router/auto_routes.dart';
+import 'package:sia_host_mobile/src/modules/files_mod/features/fetch_all_buckets_and_files/domain/entities/file_entity.dart';
 
 import '../../../../core/configs/language_config/translator.dart';
 import '../../../../shared/constants/colors_const.dart';
 import '../../../../shared/constants/lang_const.dart';
 import '../../../../shared/constants/string_const.dart';
 import '../../../../shared/extensions/string_ext.dart';
+import '../../../../shared/ui/widgets/card_suggestion_widget.dart';
+import '../../../../shared/ui/widgets/question_dialog_box_widget.dart';
 import '../../features/fetch_all_buckets_and_files/states_holder/fetch_all_file_bloc/fetch_all_files_bloc.dart';
 import '../../features/file_editor/states_holder/file_editor_bloc/file_editor_bloc.dart';
 import '../widgets/card_file_widget.dart';
@@ -60,7 +61,11 @@ class _ListOfFileFetchedFromBucketScreenState
                     title: Translator.of(context)!.translate(Lang.yesText),
                     onTap: () {
                       context.router.maybePop().whenComplete(() {
-                        OpenFilex.open("$storageDownload/$fileName");
+                        context.pushRoute(
+                          FilePreviewRoute(
+                            file: FileEntity(name: fileName),
+                          ),
+                        );
                       });
                     },
                   ),
@@ -173,8 +178,13 @@ class _ListOfFileFetchedFromBucketScreenState
             }
 
             if (fileEditorListenerState is FileAlreadyDownloadedSuccess) {
-              OpenFilex.open(
-                  "$storageDownload/${fileEditorListenerState.fileName}");
+              // OpenFilex.open(
+              //     "$storageDownload/${fileEditorListenerState.fileName}");
+              context.pushRoute(
+                FilePreviewRoute(
+                  file: FileEntity(name: fileEditorListenerState.fileName),
+                ),
+              );
             }
 
             if (fileEditorListenerState is FileEditedFailed) {
@@ -272,27 +282,47 @@ class _ListOfFileFetchedFromBucketScreenState
                                 FetchTheFilesFromBucketEvent(
                                     bucketName: widget.bucketName, prefix: ""));
                           },
-                          child: GridView.builder(
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              childAspectRatio: 2,
-                            ),
-                            itemCount:
-                                fetchAllFilesBuilderState.allFiles.length,
+                          child: ListView.separated(
                             itemBuilder: (BuildContext context, int fileIndex) {
                               var _fileData =
                                   fetchAllFilesBuilderState.allFiles[fileIndex];
 
                               return CardFileWidget(
-                                fileName: _fileData.name,
-                                fileSize: _fileData.size,
-                                fileType: _fileData.fileType,
-                                totalFiles: _fileData.totalFiles,
+                                // fileName: _fileData.name,
+                                // fileSize: _fileData.size,
+                                // fileType: _fileData.fileType,
+                                // totalFiles: _fileData.totalFiles,
+                                file: _fileData,
                                 bucketName: widget.bucketName,
                               );
                             },
+                            separatorBuilder: (_, i) => const Divider(),
+                            itemCount:
+                                fetchAllFilesBuilderState.allFiles.length,
                           ),
+
+                          // GridView.builder(
+                          //   gridDelegate:
+                          //       const SliverGridDelegateWithFixedCrossAxisCount(
+                          //     crossAxisCount: 2,
+                          //     childAspectRatio: 2,
+                          //   ),
+                          //   itemCount:
+                          //       fetchAllFilesBuilderState.allFiles.length,
+                          //   itemBuilder: (BuildContext context, int fileIndex) {
+                          //     var _fileData =
+                          //         fetchAllFilesBuilderState.allFiles[fileIndex];
+
+                          //     return CardFileWidget(
+                          //       // fileName: _fileData.name,
+                          //       // fileSize: _fileData.size,
+                          //       // fileType: _fileData.fileType,
+                          //       // totalFiles: _fileData.totalFiles,
+                          //       file: _fileData,
+                          //       bucketName: widget.bucketName,
+                          //     );
+                          //   },
+                          // ),
                         );
                       }
                       return fetchAllFilesBuilderState is FetchAllFilesLoading
