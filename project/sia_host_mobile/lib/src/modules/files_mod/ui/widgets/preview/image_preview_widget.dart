@@ -13,6 +13,7 @@ class ImagePreviewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PhotoView(
+      backgroundDecoration: const BoxDecoration(color: Colors.transparent),
       imageProvider: FileImage(File(file.downloadedPath)),
       minScale: PhotoViewComputedScale.contained,
       maxScale: PhotoViewComputedScale.covered * 2,
