@@ -27,138 +27,144 @@ class _ListOfBucketScreenState extends State<ListOfBucketScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          Translator.of(context)!.translate(Lang.bucketsFileText),
-          style: TextStyle(
-            fontFamily: "Manrope",
-            fontSize: 28.0.sp,
-            color: ColorsApp.whiteColor,
-            fontWeight: FontWeight.w700,
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            Translator.of(context)!.translate(Lang.bucketsFileText),
+            style: TextStyle(
+              fontFamily: "Manrope",
+              fontSize: 28.0.sp,
+              color: ColorsApp.whiteColor,
+              fontWeight: FontWeight.w700,
+            ),
           ),
-        ),
-        SizedBox(
-          height: 20.0.h,
-        ),
-        Expanded(
-          child: BlocBuilder<FetchAllBucketBloc, FetchAllBucketState>(
-            builder: (context, fetchAllBucketBuilderState) {
-              if (fetchAllBucketBuilderState is MakLoginToSeeTheBucket) {
-                return CustomLoginWidget(onLoginSuccess: () {
-                  context.read<FetchAllBucketBloc>().add(FetchBucketsEvent());
-                });
-              }
-              if (fetchAllBucketBuilderState is AllBucketFetchedSuccess) {
-                return RefreshIndicator.adaptive(
-                  color: ColorsApp.spearmintColor,
-                  backgroundColor: ColorsApp.bleachedCedarColor,
-                  onRefresh: () async {
+          SizedBox(
+            height: 20.0.h,
+          ),
+          Expanded(
+            child: BlocBuilder<FetchAllBucketBloc, FetchAllBucketState>(
+              builder: (context, fetchAllBucketBuilderState) {
+                if (fetchAllBucketBuilderState is MakLoginToSeeTheBucket) {
+                  return CustomLoginWidget(onLoginSuccess: () {
                     context.read<FetchAllBucketBloc>().add(FetchBucketsEvent());
-                  },
-                  child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 1.3,
-                    ),
-                    itemCount: fetchAllBucketBuilderState.allBuckets.length,
-                    itemBuilder: (BuildContext context, int bucketIndex) {
-                      var _bucketData =
-                          fetchAllBucketBuilderState.allBuckets[bucketIndex];
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 23.0),
-                        child: CardOfBucketWidget(
-                          totalFiles: _bucketData.totalFiles,
-                          label: _bucketData.nameBucket,
-                          onPressed: () {
-                            context.router.pushNamed(
-                                "${RoutePath.listOfFileFetchedFromBucketSubPath}/${_bucketData.nameBucket}");
-                          },
-                        ),
-                      );
+                  });
+                }
+                if (fetchAllBucketBuilderState is AllBucketFetchedSuccess) {
+                  return RefreshIndicator.adaptive(
+                    color: ColorsApp.spearmintColor,
+                    backgroundColor: ColorsApp.bleachedCedarColor,
+                    onRefresh: () async {
+                      context
+                          .read<FetchAllBucketBloc>()
+                          .add(FetchBucketsEvent());
                     },
-                  ),
-                );
-              }
-
-              if (fetchAllBucketBuilderState is AllBucketFetchedEmpty) {
-                return Center(
-                  child: Text(
-                    Translator.of(context)!
-                        .translate(fetchAllBucketBuilderState.message),
-                    style: TextStyle(
-                      fontFamily: "Roboto",
-                      fontSize: 20.0.sp,
-                      color: ColorsApp.whiteColor,
-                      fontWeight: FontWeight.w600,
+                    child: GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 1.3,
+                      ),
+                      itemCount: fetchAllBucketBuilderState.allBuckets.length,
+                      itemBuilder: (BuildContext context, int bucketIndex) {
+                        var _bucketData =
+                            fetchAllBucketBuilderState.allBuckets[bucketIndex];
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 23.0),
+                          child: CardOfBucketWidget(
+                            totalFiles: _bucketData.totalFiles,
+                            label: _bucketData.nameBucket,
+                            onPressed: () {
+                              context.router.pushNamed(
+                                  "${RoutePath.listOfFileFetchedFromBucketSubPath}/${_bucketData.nameBucket}");
+                            },
+                          ),
+                        );
+                      },
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                );
-              }
+                  );
+                }
 
-              if (fetchAllBucketBuilderState is AllBucketFetchedFailed) {
-                return Center(
-                  child: Flex(
-                    mainAxisSize: MainAxisSize.min,
-                    direction: Axis.vertical,
-                    children: <Widget>[
-                      Text(
-                        Translator.of(context)!
-                            .translate(fetchAllBucketBuilderState.message),
-                        style: TextStyle(
-                          fontFamily: "Roboto",
-                          fontSize: 20.0.sp,
-                          color: ColorsApp.whiteColor,
-                          fontWeight: FontWeight.w600,
+                if (fetchAllBucketBuilderState is AllBucketFetchedEmpty) {
+                  return Center(
+                    child: Text(
+                      Translator.of(context)!
+                          .translate(fetchAllBucketBuilderState.message),
+                      style: TextStyle(
+                        fontFamily: "Roboto",
+                        fontSize: 20.0.sp,
+                        color: ColorsApp.whiteColor,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  );
+                }
+
+                if (fetchAllBucketBuilderState is AllBucketFetchedFailed) {
+                  return Center(
+                    child: Flex(
+                      mainAxisSize: MainAxisSize.min,
+                      direction: Axis.vertical,
+                      children: <Widget>[
+                        Text(
+                          Translator.of(context)!
+                              .translate(fetchAllBucketBuilderState.message),
+                          style: TextStyle(
+                            fontFamily: "Roboto",
+                            fontSize: 20.0.sp,
+                            color: ColorsApp.whiteColor,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(
-                        height: 10.0.h,
-                      ),
-                      Material(
-                        color: ColorsApp.spearmintColor,
-                        borderRadius: BorderRadius.circular(12.0.r),
-                        child: InkWell(
+                        SizedBox(
+                          height: 10.0.h,
+                        ),
+                        Material(
+                          color: ColorsApp.spearmintColor,
                           borderRadius: BorderRadius.circular(12.0.r),
-                          onTap: () {
-                            context
-                                .read<FetchAllBucketBloc>()
-                                .add(FetchBucketsEvent());
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              Translator.of(context)!.translate(Lang.retryText),
-                              style: TextStyle(
-                                fontFamily: "Roboto",
-                                fontSize: 20.0.sp,
-                                color: ColorsApp.whiteColor,
-                                fontWeight: FontWeight.w600,
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(12.0.r),
+                            onTap: () {
+                              context
+                                  .read<FetchAllBucketBloc>()
+                                  .add(FetchBucketsEvent());
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                Translator.of(context)!
+                                    .translate(Lang.retryText),
+                                style: TextStyle(
+                                  fontFamily: "Roboto",
+                                  fontSize: 20.0.sp,
+                                  color: ColorsApp.whiteColor,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                );
-              }
+                      ],
+                    ),
+                  );
+                }
 
-              return fetchAllBucketBuilderState is AllBucketFetchedLoading
-                  ? const Center(
-                      child: CircularProgressIndicator(
-                          color: ColorsApp.spearmintColor),
-                    )
-                  : Container();
-            },
-          ),
-        )
-      ],
+                return fetchAllBucketBuilderState is AllBucketFetchedLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                            color: ColorsApp.spearmintColor),
+                      )
+                    : Container();
+              },
+            ),
+          )
+        ],
+      ),
     );
   }
 

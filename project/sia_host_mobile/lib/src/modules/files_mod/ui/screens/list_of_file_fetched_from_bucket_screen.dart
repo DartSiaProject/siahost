@@ -85,259 +85,265 @@ class _ListOfFileFetchedFromBucketScreenState
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Flex(
-          direction: Axis.horizontal,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text(
-              widget.bucketName.capitalizeLetter(),
-              style: TextStyle(
-                fontFamily: "Manrope",
-                fontSize: 28.0.sp,
-                color: ColorsApp.whiteColor,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            PopupMenuButton(
-              splashRadius: 22.0.r,
-              padding: EdgeInsets.zero,
-              position: PopupMenuPosition.under,
-              color: ColorsApp.bleachedCedarColor,
-              icon: SizedBox(
-                width: 24.0.w,
-                height: 24.0.h,
-                child: Icon(
-                  Icons.more_vert_rounded,
-                  color: ColorsApp.greyColor,
-                  size: 30.0.r,
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Flex(
+            direction: Axis.horizontal,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(
+                widget.bucketName.capitalizeLetter(),
+                style: TextStyle(
+                  fontFamily: "Manrope",
+                  fontSize: 28.0.sp,
+                  color: ColorsApp.whiteColor,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
-              iconSize: 50.0.r,
-              itemBuilder: (context) {
-                return List.generate(
-                  menuVerticalForFilesList.length,
-                  (indexMenu) => PopupMenuItem(
-                    value: indexMenu,
-                    child: Text(
-                      Translator.of(context)!.translate(
-                        menuVerticalForFilesList[indexMenu],
-                      ),
-                      style: const TextStyle(
-                        color: ColorsApp.whiteColor,
-                        fontWeight: FontWeight.w400,
+              PopupMenuButton(
+                splashRadius: 22.0.r,
+                padding: EdgeInsets.zero,
+                position: PopupMenuPosition.under,
+                color: ColorsApp.bleachedCedarColor,
+                icon: SizedBox(
+                  width: 24.0.w,
+                  height: 24.0.h,
+                  child: Icon(
+                    Icons.more_vert_rounded,
+                    color: ColorsApp.greyColor,
+                    size: 30.0.r,
+                  ),
+                ),
+                iconSize: 50.0.r,
+                itemBuilder: (context) {
+                  return List.generate(
+                    menuVerticalForFilesList.length,
+                    (indexMenu) => PopupMenuItem(
+                      value: indexMenu,
+                      child: Text(
+                        Translator.of(context)!.translate(
+                          menuVerticalForFilesList[indexMenu],
+                        ),
+                        style: const TextStyle(
+                          color: ColorsApp.whiteColor,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
-                  ),
+                  );
+                },
+                onSelected: (actionMenuIndex) {
+                  switch (actionMenuIndex) {
+                    case 0:
+                      context.read<FileEditorBloc>().add(UserUploadTheFileEvent(
+                          bucketName: widget.bucketName));
+                      break;
+                  }
+                },
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 20.0.h,
+          ),
+          Expanded(
+              child: BlocConsumer<FileEditorBloc, FileEditorState>(
+            listener: (context, fileEditorListenerState) {
+              if (fileEditorListenerState is FileEditedSuccess) {
+                Fluttertoast.showToast(
+                  msg: Translator.of(context)!
+                      .translate(fileEditorListenerState.message),
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.TOP,
+                  backgroundColor: ColorsApp.tunaColor,
+                  textColor: Colors.white,
+                  fontSize: 16.0,
+                ).whenComplete(() => context.read<FetchAllFilesBloc>().add(
+                    FetchTheFilesFromBucketEvent(
+                        bucketName: widget.bucketName, prefix: "")));
+              }
+              if (fileEditorListenerState is FileDownloadedSuccess) {
+                Fluttertoast.showToast(
+                  msg: Translator.of(context)!
+                      .translate(fileEditorListenerState.message),
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.TOP,
+                  backgroundColor: ColorsApp.tunaColor,
+                  textColor: Colors.white,
+                  fontSize: 16.0,
+                ).whenComplete(() => _showOpenFileQuestionDialogBox(
+                      context: context,
+                      fileName: fileEditorListenerState.fileName,
+                    ));
+              }
+
+              if (fileEditorListenerState is FileAlreadyDownloadedSuccess) {
+                OpenFilex.open(
+                  "$storageDownload/${fileEditorListenerState.fileName}",
                 );
-              },
-              onSelected: (actionMenuIndex) {
-                switch (actionMenuIndex) {
-                  case 0:
-                    context.read<FileEditorBloc>().add(
-                        UserUploadTheFileEvent(bucketName: widget.bucketName));
-                    break;
-                }
-              },
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 20.0.h,
-        ),
-        Expanded(
-            child: BlocConsumer<FileEditorBloc, FileEditorState>(
-          listener: (context, fileEditorListenerState) {
-            if (fileEditorListenerState is FileEditedSuccess) {
-              Fluttertoast.showToast(
-                msg: Translator.of(context)!
-                    .translate(fileEditorListenerState.message),
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.TOP,
-                backgroundColor: ColorsApp.tunaColor,
-                textColor: Colors.white,
-                fontSize: 16.0,
-              ).whenComplete(() => context.read<FetchAllFilesBloc>().add(
-                  FetchTheFilesFromBucketEvent(
-                      bucketName: widget.bucketName, prefix: "")));
-            }
-            if (fileEditorListenerState is FileDownloadedSuccess) {
-              Fluttertoast.showToast(
-                msg: Translator.of(context)!
-                    .translate(fileEditorListenerState.message),
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.TOP,
-                backgroundColor: ColorsApp.tunaColor,
-                textColor: Colors.white,
-                fontSize: 16.0,
-              ).whenComplete(() => _showOpenFileQuestionDialogBox(
-                    context: context,
-                    fileName: fileEditorListenerState.fileName,
-                  ));
-            }
+                // context.pushRoute(
+                //   FilePreviewRoute(
+                //     file: FileEntity(name: fileEditorListenerState.fileName),
+                //   ),
+                // );
+              }
 
-            if (fileEditorListenerState is FileAlreadyDownloadedSuccess) {
-              OpenFilex.open(
-                "$storageDownload/${fileEditorListenerState.fileName}",
-              );
-              // context.pushRoute(
-              //   FilePreviewRoute(
-              //     file: FileEntity(name: fileEditorListenerState.fileName),
-              //   ),
-              // );
-            }
-
-            if (fileEditorListenerState is FileEditedFailed) {
-              Fluttertoast.showToast(
-                msg: Translator.of(context)!
-                    .translate(fileEditorListenerState.message),
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.TOP,
-                backgroundColor: ColorsApp.tunaColor,
-                textColor: Colors.white,
-                fontSize: 16.0,
-              );
-            }
-          },
-          builder: (context, fileEditorBuilderState) {
-            return fileEditorBuilderState is FileEditedLoading
-                ? const Center(
-                    child: CircularProgressIndicator(
-                        color: ColorsApp.spearmintColor),
-                  )
-                : BlocBuilder<FetchAllFilesBloc, FetchAllFilesState>(
-                    builder: (context, fetchAllFilesBuilderState) {
-                      if (fetchAllFilesBuilderState is FilesFoundWithEmpty) {
-                        return Center(
-                          child: Text(
-                            Translator.of(context)!
-                                .translate(fetchAllFilesBuilderState.message),
-                            style: TextStyle(
-                              fontFamily: "Roboto",
-                              fontSize: 20.0.sp,
-                              color: ColorsApp.whiteColor,
-                              fontWeight: FontWeight.w600,
+              if (fileEditorListenerState is FileEditedFailed) {
+                Fluttertoast.showToast(
+                  msg: Translator.of(context)!
+                      .translate(fileEditorListenerState.message),
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.TOP,
+                  backgroundColor: ColorsApp.tunaColor,
+                  textColor: Colors.white,
+                  fontSize: 16.0,
+                );
+              }
+            },
+            builder: (context, fileEditorBuilderState) {
+              return fileEditorBuilderState is FileEditedLoading
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                          color: ColorsApp.spearmintColor),
+                    )
+                  : BlocBuilder<FetchAllFilesBloc, FetchAllFilesState>(
+                      builder: (context, fetchAllFilesBuilderState) {
+                        if (fetchAllFilesBuilderState is FilesFoundWithEmpty) {
+                          return Center(
+                            child: Text(
+                              Translator.of(context)!
+                                  .translate(fetchAllFilesBuilderState.message),
+                              style: TextStyle(
+                                fontFamily: "Roboto",
+                                fontSize: 20.0.sp,
+                                color: ColorsApp.whiteColor,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              textAlign: TextAlign.center,
                             ),
-                            textAlign: TextAlign.center,
-                          ),
-                        );
-                      }
-                      if (fetchAllFilesBuilderState is FilesFoundWithFailed) {
-                        return Center(
-                          child: Flex(
-                            mainAxisSize: MainAxisSize.min,
-                            direction: Axis.vertical,
-                            children: <Widget>[
-                              Text(
-                                Translator.of(context)!.translate(
-                                    fetchAllFilesBuilderState.message),
-                                style: TextStyle(
-                                  fontFamily: "Roboto",
-                                  fontSize: 20.0.sp,
-                                  color: ColorsApp.whiteColor,
-                                  fontWeight: FontWeight.w600,
+                          );
+                        }
+                        if (fetchAllFilesBuilderState is FilesFoundWithFailed) {
+                          return Center(
+                            child: Flex(
+                              mainAxisSize: MainAxisSize.min,
+                              direction: Axis.vertical,
+                              children: <Widget>[
+                                Text(
+                                  Translator.of(context)!.translate(
+                                      fetchAllFilesBuilderState.message),
+                                  style: TextStyle(
+                                    fontFamily: "Roboto",
+                                    fontSize: 20.0.sp,
+                                    color: ColorsApp.whiteColor,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  textAlign: TextAlign.center,
                                 ),
-                                textAlign: TextAlign.center,
-                              ),
-                              SizedBox(
-                                height: 10.0.h,
-                              ),
-                              Material(
-                                color: ColorsApp.spearmintColor,
-                                borderRadius: BorderRadius.circular(12.0.r),
-                                child: InkWell(
+                                SizedBox(
+                                  height: 10.0.h,
+                                ),
+                                Material(
+                                  color: ColorsApp.spearmintColor,
                                   borderRadius: BorderRadius.circular(12.0.r),
-                                  onTap: () {
-                                    context.read<FetchAllFilesBloc>().add(
-                                        FetchTheFilesFromBucketEvent(
-                                            bucketName: widget.bucketName,
-                                            prefix: ""));
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      Translator.of(context)!
-                                          .translate(Lang.retryText),
-                                      style: TextStyle(
-                                        fontFamily: "Roboto",
-                                        fontSize: 20.0.sp,
-                                        color: ColorsApp.whiteColor,
-                                        fontWeight: FontWeight.w600,
+                                  child: InkWell(
+                                    borderRadius: BorderRadius.circular(12.0.r),
+                                    onTap: () {
+                                      context.read<FetchAllFilesBloc>().add(
+                                          FetchTheFilesFromBucketEvent(
+                                              bucketName: widget.bucketName,
+                                              prefix: ""));
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        Translator.of(context)!
+                                            .translate(Lang.retryText),
+                                        style: TextStyle(
+                                          fontFamily: "Roboto",
+                                          fontSize: 20.0.sp,
+                                          color: ColorsApp.whiteColor,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                        textAlign: TextAlign.center,
                                       ),
-                                      textAlign: TextAlign.center,
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        );
-                      }
-                      if (fetchAllFilesBuilderState is FilesFoundWithSuccess) {
-                        return RefreshIndicator.adaptive(
-                          color: ColorsApp.spearmintColor,
-                          backgroundColor: ColorsApp.bleachedCedarColor,
-                          onRefresh: () async {
-                            context.read<FetchAllFilesBloc>().add(
-                                FetchTheFilesFromBucketEvent(
-                                    bucketName: widget.bucketName, prefix: ""));
-                          },
-                          child: ListView.separated(
-                            itemBuilder: (BuildContext context, int fileIndex) {
-                              var _fileData =
-                                  fetchAllFilesBuilderState.allFiles[fileIndex];
-
-                              return CardFileWidget(
-                                // fileName: _fileData.name,
-                                // fileSize: _fileData.size,
-                                // fileType: _fileData.fileType,
-                                // totalFiles: _fileData.totalFiles,
-                                file: _fileData,
-                                bucketName: widget.bucketName,
-                              );
+                              ],
+                            ),
+                          );
+                        }
+                        if (fetchAllFilesBuilderState
+                            is FilesFoundWithSuccess) {
+                          return RefreshIndicator.adaptive(
+                            color: ColorsApp.spearmintColor,
+                            backgroundColor: ColorsApp.bleachedCedarColor,
+                            onRefresh: () async {
+                              context.read<FetchAllFilesBloc>().add(
+                                  FetchTheFilesFromBucketEvent(
+                                      bucketName: widget.bucketName,
+                                      prefix: ""));
                             },
-                            separatorBuilder: (_, i) => const Divider(),
-                            itemCount:
-                                fetchAllFilesBuilderState.allFiles.length,
-                          ),
+                            child: ListView.separated(
+                              itemBuilder:
+                                  (BuildContext context, int fileIndex) {
+                                var _fileData = fetchAllFilesBuilderState
+                                    .allFiles[fileIndex];
 
-                          // GridView.builder(
-                          //   gridDelegate:
-                          //       const SliverGridDelegateWithFixedCrossAxisCount(
-                          //     crossAxisCount: 2,
-                          //     childAspectRatio: 2,
-                          //   ),
-                          //   itemCount:
-                          //       fetchAllFilesBuilderState.allFiles.length,
-                          //   itemBuilder: (BuildContext context, int fileIndex) {
-                          //     var _fileData =
-                          //         fetchAllFilesBuilderState.allFiles[fileIndex];
+                                return CardFileWidget(
+                                  // fileName: _fileData.name,
+                                  // fileSize: _fileData.size,
+                                  // fileType: _fileData.fileType,
+                                  // totalFiles: _fileData.totalFiles,
+                                  file: _fileData,
+                                  bucketName: widget.bucketName,
+                                );
+                              },
+                              separatorBuilder: (_, i) => const Divider(),
+                              itemCount:
+                                  fetchAllFilesBuilderState.allFiles.length,
+                            ),
 
-                          //     return CardFileWidget(
-                          //       // fileName: _fileData.name,
-                          //       // fileSize: _fileData.size,
-                          //       // fileType: _fileData.fileType,
-                          //       // totalFiles: _fileData.totalFiles,
-                          //       file: _fileData,
-                          //       bucketName: widget.bucketName,
-                          //     );
-                          //   },
-                          // ),
-                        );
-                      }
-                      return fetchAllFilesBuilderState is FetchAllFilesLoading
-                          ? const Center(
-                              child: CircularProgressIndicator(
-                                  color: ColorsApp.spearmintColor),
-                            )
-                          : Container();
-                    },
-                  );
-          },
-        ))
-      ],
+                            // GridView.builder(
+                            //   gridDelegate:
+                            //       const SliverGridDelegateWithFixedCrossAxisCount(
+                            //     crossAxisCount: 2,
+                            //     childAspectRatio: 2,
+                            //   ),
+                            //   itemCount:
+                            //       fetchAllFilesBuilderState.allFiles.length,
+                            //   itemBuilder: (BuildContext context, int fileIndex) {
+                            //     var _fileData =
+                            //         fetchAllFilesBuilderState.allFiles[fileIndex];
+
+                            //     return CardFileWidget(
+                            //       // fileName: _fileData.name,
+                            //       // fileSize: _fileData.size,
+                            //       // fileType: _fileData.fileType,
+                            //       // totalFiles: _fileData.totalFiles,
+                            //       file: _fileData,
+                            //       bucketName: widget.bucketName,
+                            //     );
+                            //   },
+                            // ),
+                          );
+                        }
+                        return fetchAllFilesBuilderState is FetchAllFilesLoading
+                            ? const Center(
+                                child: CircularProgressIndicator(
+                                    color: ColorsApp.spearmintColor),
+                              )
+                            : Container();
+                      },
+                    );
+            },
+          ))
+        ],
+      ),
     );
   }
 }

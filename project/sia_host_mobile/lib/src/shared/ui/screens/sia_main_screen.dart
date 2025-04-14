@@ -69,10 +69,11 @@ class _SiaMainScreenState extends State<SiaMainScreen> {
               ],
             ),
             body: Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                child: child,
-              ),
+              // child: Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              //   child: child,
+              // ),
+              child: child,
             ),
             bottomNavigationBar: BottomNavyBar(
               backgroundColor: ColorsApp.darkJungleGreenColor,
