@@ -91,25 +91,31 @@ android {
             }
         }
     }
-    flavorDimensions "environment"
+    flavorDimensions "sia_host_mobile_env"
     productFlavors {
-        production {
-            dimension "environment"
-            applicationIdSuffix ".production"
-            versionNameSuffix "-production"
-            resValue 'string', 'app_name', 'Sia Host Mobile'
-        }
-        development {
-            dimension "environment"
-            applicationIdSuffix ".development"
-            versionNameSuffix "-development"
+        dev {
+            dimension = 'sia_host_mobile_env'
+            applicationId = 'com.sia.sia_host_mobile'
+            applicationIdSuffix = '.dev'
+            versionNameSuffix = '-dev'
             resValue 'string', 'app_name', 'Sia Host Mobile Dev'
+            signingConfig = signingConfigs.debug
         }
-        staging{
-            dimension "environment"
-            applicationIdSuffix ".staging"
-            versionNameSuffix "-staging"
+        staging {
+            dimension = 'sia_host_mobile_env'
+            applicationId = 'com.sia.sia_host_mobile'
+            applicationIdSuffix = '.staging'
+            versionNameSuffix = '-staging'
             resValue 'string', 'app_name', 'Sia Host Mobile Staging'
+            signingConfig = signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        prod {
+            dimension = 'sia_host_mobile_env'
+            applicationId = 'com.sia.sia_host_mobile'
+            resValue 'string', 'app_name', 'Sia Host Mobile'
+            signingConfig = signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }

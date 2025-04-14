@@ -12,7 +12,7 @@
             "flutterMode": "debug",
             "toolArgs": [
                 "--flavor",
-                "development",
+                "dev",
                 "--dart-define",
                 "USE_FIREBASE_EMU=true",
                 "--dart-define-from-file=.env/dev.json",
@@ -38,7 +38,7 @@
             "flutterMode": "release",
             "toolArgs": [
                 "--flavor",
-                "production",
+                "prod",
                 "--dart-define-from-file=.env/prod.json",
             ],
         }

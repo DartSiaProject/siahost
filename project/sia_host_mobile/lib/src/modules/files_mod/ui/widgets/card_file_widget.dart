@@ -367,18 +367,21 @@ class _CardFileWidgetState extends State<CardFileWidget> {
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
+      minVerticalPadding: 0,
       leading: PopupMenuButton(
         splashRadius: 22.0.r,
-        padding: _file.fileType == "folder"
-            ? const EdgeInsets.only(left: 4, bottom: 6)
-            : const EdgeInsets.only(left: 8, bottom: 18),
+        // padding: _file.fileType == "folder"
+        //     ? const EdgeInsets.only(left: 4, bottom: 6)
+        //     : const EdgeInsets.only(left: 8, bottom: 18),
+        padding: EdgeInsets.zero,
         position: PopupMenuPosition.under,
         icon: Image.asset(
           _file.fileType == "folder"
               ? Pngs.folderPng
               : FileManagerHelper.thumbnail(_file.typeEnum),
-          width: 50.w,
-          height: 50.h,
+          // width: 50.w,
+          height: 48,
+          // fit: BoxFit.cover,
         ),
         itemBuilder: (context) {
           return List.generate(
@@ -442,9 +445,9 @@ class _CardFileWidgetState extends State<CardFileWidget> {
       ),
       title: Text(
         _file.name.replaceAll('/', '').capitalizeLetter(),
-        style: TextStyle(
+        style: const TextStyle(
           fontFamily: "Manrope",
-          fontSize: 16.0.sp,
+          // fontSize: 16.0.sp,
           fontWeight: FontWeight.bold,
           color: ColorsApp.whiteColor,
         ),
@@ -455,9 +458,9 @@ class _CardFileWidgetState extends State<CardFileWidget> {
         _file.fileType == "folder"
             ? "${_file.totalFiles.toString()} ${Translator.of(context)!.translate(Lang.filesText)} | ${CalculatorHelper.getFileSize(_file.size, 2)}"
             : CalculatorHelper.getFileSize(_file.size, 2),
-        style: TextStyle(
+        style: const TextStyle(
           fontFamily: "Manrope",
-          fontSize: 12.0.sp,
+          fontSize: 12.0,
           fontWeight: FontWeight.w500,
           color: ColorsApp.cottonSeedColor,
         ),

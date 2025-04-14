@@ -29,6 +29,7 @@ class CardOfBucketWidget extends StatelessWidget {
             Pngs.folderPng,
             width: 160.w,
             height: 140.h,
+            fit: BoxFit.cover,
           ),
           SizedBox(
             width: 160.w,
@@ -42,7 +43,7 @@ class CardOfBucketWidget extends StatelessWidget {
                   Text(
                     "$totalFiles ${Translator.of(context)!.translate(Lang.filesText)}",
                     style: TextStyle(
-                      color: ColorsApp.whiteColor.withOpacity(0.7),
+                      color: ColorsApp.whiteColor.withValues(alpha: .7),
                       fontSize: 12.0.sp,
                       fontFamily: "Poppins",
                       fontWeight: FontWeight.w500,
