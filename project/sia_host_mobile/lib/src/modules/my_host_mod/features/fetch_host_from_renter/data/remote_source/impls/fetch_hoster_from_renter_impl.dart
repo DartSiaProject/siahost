@@ -27,5 +27,10 @@ class FetchHosterFromRenterImpl implements FetchHosterFromRenterAbst {
       key: key,
       iv: iv,
     );
+    // return Hoster.getHosts(
+    //   serverAddress: serverAddress,
+    //   key: key,
+    //   iv: iv,
+    // );
   }
 }

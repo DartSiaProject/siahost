@@ -82,8 +82,7 @@ class FetchMyHostDataFromRenterRepositImpl
       if (_resultHoster["status"] &&
           (_resultHoster["response"] as Response<String>).statusCode ==
               HttpStatus.ok) {
-        Map<String, dynamic> _hosterBody =
-            json.decode(DecryptRequest.decryptStringWithAES256CBC(
+        var _hosterBody = json.decode(DecryptRequest.decryptStringWithAES256CBC(
           chipherText: json.decode(
               (_resultHoster["response"] as Response<String>).data!)["data"],
           key: EncrypterRequest.decrypt(

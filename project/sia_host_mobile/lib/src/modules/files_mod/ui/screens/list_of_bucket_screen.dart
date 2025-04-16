@@ -12,27 +12,16 @@ import '../../features/fetch_all_buckets_and_files/states_holder/fetch_all_bucke
 import '../widgets/card_of_bucket_widget.dart';
 
 @RoutePage()
-class ListOfBucketScreen extends StatefulWidget {
+class ListOfBucketScreen extends StatelessWidget {
   const ListOfBucketScreen({super.key});
 
   @override
-  State<ListOfBucketScreen> createState() => _ListOfBucketScreenState();
-}
-
-class _ListOfBucketScreenState extends State<ListOfBucketScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar.medium(
+          backgroundColor: ColorsApp.bleachedCedarColor,
+          title: Text(
             Translator.of(context)!.translate(Lang.bucketsFileText),
             style: TextStyle(
               fontFamily: "Manrope",
@@ -41,10 +30,10 @@ class _ListOfBucketScreenState extends State<ListOfBucketScreen> {
               fontWeight: FontWeight.w700,
             ),
           ),
-          SizedBox(
-            height: 20.0.h,
-          ),
-          Expanded(
+        ),
+        SliverPadding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          sliver: SliverFillRemaining(
             child: BlocBuilder<FetchAllBucketBloc, FetchAllBucketState>(
               builder: (context, fetchAllBucketBuilderState) {
                 if (fetchAllBucketBuilderState is MakLoginToSeeTheBucket) {
@@ -65,14 +54,15 @@ class _ListOfBucketScreenState extends State<ListOfBucketScreen> {
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        childAspectRatio: 1.3,
+                        childAspectRatio: 1.2,
                       ),
                       itemCount: fetchAllBucketBuilderState.allBuckets.length,
                       itemBuilder: (BuildContext context, int bucketIndex) {
                         var _bucketData =
                             fetchAllBucketBuilderState.allBuckets[bucketIndex];
                         return Padding(
-                          padding: const EdgeInsets.only(left: 23.0),
+                          // padding: const EdgeInsets.only(left: 23.0),
+                          padding: EdgeInsets.zero,
                           child: CardOfBucketWidget(
                             totalFiles: _bucketData.totalFiles,
                             label: _bucketData.nameBucket,
@@ -162,17 +152,9 @@ class _ListOfBucketScreenState extends State<ListOfBucketScreen> {
                     : Container();
               },
             ),
-          )
-        ],
-      ),
+          ),
+        )
+      ],
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    // _adressController.dispose();
-    // _userMailController.dispose();
-    // _userPasswordController.dispose();
   }
 }

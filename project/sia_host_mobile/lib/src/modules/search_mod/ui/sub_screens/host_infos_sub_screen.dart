@@ -61,7 +61,7 @@ class _HostInfoScreenState extends State<HostInfoScreen> {
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: ColorsApp.paleTealColor.withOpacity(0.46),
+                  color: ColorsApp.paleTealColor.withValues(alpha: 0.46),
                   shape: BoxShape.circle,
                 ),
                 child: Padding(
@@ -71,10 +71,11 @@ class _HostInfoScreenState extends State<HostInfoScreen> {
                     lineWidth: 8.0,
                     animation: true,
                     reverse: true,
-                    backgroundColor: ColorsApp.spearmintColor.withOpacity(0.4),
+                    backgroundColor:
+                        ColorsApp.spearmintColor.withValues(alpha: 0.4),
                     percent: _hostInfoEntity.finalScore / 10,
                     center: Text(
-                      _hostInfoEntity.finalScore.toString(),
+                      _hostInfoEntity.finalScore.toStringAsFixed(1),
                       style: TextStyle(
                         fontFamily: "Manrope",
                         fontWeight: FontWeight.w400,

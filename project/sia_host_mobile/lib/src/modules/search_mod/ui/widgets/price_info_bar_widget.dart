@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -36,7 +38,8 @@ class PriceInfoBarWidget extends StatelessWidget {
                 fontFamily: "Manrope",
               ),
               text: TextSpan(
-                text: hostModel.uploadPrice.toString().substring(0, 2),
+                text:
+                    (hostModel.uploadPrice / (pow(10, 12))).toStringAsFixed(0),
                 style: TextStyle(
                   fontFamily: "Manrope",
                   fontSize: 24.0.sp,
@@ -75,7 +78,8 @@ class PriceInfoBarWidget extends StatelessWidget {
                 fontFamily: "Manrope",
               ),
               text: TextSpan(
-                text: hostModel.downloadPrice.toString().substring(0, 2),
+                text: (hostModel.downloadPrice / (pow(10, 12)))
+                    .toStringAsFixed(0),
                 style: TextStyle(
                   fontFamily: "Manrope",
                   fontSize: 24.0.sp,
@@ -114,7 +118,8 @@ class PriceInfoBarWidget extends StatelessWidget {
                 fontFamily: "Manrope",
               ),
               text: TextSpan(
-                text: hostModel.storagePrice.toString().substring(0, 2),
+                text:
+                    (hostModel.storagePrice / (pow(10, 12))).toStringAsFixed(2),
                 style: TextStyle(
                   fontFamily: "Manrope",
                   fontSize: 24.0.sp,

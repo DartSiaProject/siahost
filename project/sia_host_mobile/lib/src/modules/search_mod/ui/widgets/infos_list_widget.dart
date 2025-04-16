@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -51,22 +53,22 @@ class InfoListWidget extends StatelessWidget {
         CardInfoWidget(
           title: Lang.contractPriceText,
           value:
-              "${hostModel.contractPrice.toStringAsPrecision(5).substring(0, 4)} Sc",
+              "${(hostModel.contractPrice / (pow(10, 12))).toStringAsFixed(2)} Sc",
         ),
         CardInfoWidget(
           title: Lang.totalStorageText,
           value:
-              "${hostModel.totalStorage.toStringAsPrecision(5).substring(0, 4)} Tb",
+              "${(hostModel.totalStorage / (pow(10, 12))).toStringAsFixed(2)} Tb",
         ),
         CardInfoWidget(
           title: Lang.usedStorageText,
           value:
-              "${hostModel.usedStorage.toStringAsPrecision(5).substring(0, 4)} Tb",
+              "${(hostModel.usedStorage / (pow(10, 12))).toStringAsFixed(2)} Tb",
         ),
         CardInfoWidget(
           title: Lang.availableStorageText,
           value:
-              "${hostModel.remainingStorage.toStringAsPrecision(5).substring(0, 4)} Tb",
+              "${(hostModel.remainingStorage / (pow(10, 12))).toStringAsFixed(2)} Tb",
         ),
       ],
     );

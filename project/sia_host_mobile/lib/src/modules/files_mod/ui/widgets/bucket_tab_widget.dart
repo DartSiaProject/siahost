@@ -43,7 +43,7 @@ class BucketTabWidget extends StatelessWidget {
                 Text(
                   "$totalFiles ${Translator.of(context)!.translate(Lang.filesText)}",
                   style: TextStyle(
-                    color: ColorsApp.whiteColor.withOpacity(0.7),
+                    color: ColorsApp.whiteColor.withValues(alpha: 0.7),
                     fontSize: pageIsSelected ? 12.0.sp : 9.0.sp,
                     fontFamily: "Poppins",
                     fontWeight: FontWeight.w500,

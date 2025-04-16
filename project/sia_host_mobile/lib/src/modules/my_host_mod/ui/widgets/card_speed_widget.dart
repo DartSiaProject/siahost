@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import '../../../../shared/constants/colors_const.dart';
 
 import '../../../../core/configs/language_config/translator.dart';
+import '../../../../shared/constants/colors_const.dart';
 
 class CardSpeedWidget extends StatelessWidget {
   final String title;
@@ -49,7 +49,7 @@ class CardSpeedWidget extends StatelessWidget {
             lineWidth: 8.0,
             animation: true,
             reverse: true,
-            backgroundColor: ColorsApp.spearmintColor.withOpacity(0.4),
+            backgroundColor: ColorsApp.spearmintColor.withValues(alpha: 0.4),
             percent: value / 10,
             center: Flex(
               direction: Axis.vertical,

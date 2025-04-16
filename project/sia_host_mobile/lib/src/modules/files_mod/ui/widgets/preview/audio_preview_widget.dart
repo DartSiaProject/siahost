@@ -114,7 +114,7 @@
 //             activeTrackColor: Colors.white,
 //             inactiveTrackColor: Colors.grey[700],
 //             thumbColor: Colors.white,
-//             overlayColor: Colors.white.withOpacity(0.2),
+//             overlayColor: Colors.white.withValues(alpha:0.2),
 //             valueIndicatorColor: Colors.white,
 //           ),
 //           child: Slider(
@@ -158,7 +158,7 @@
 //                 activeTrackColor: Colors.white,
 //                 inactiveTrackColor: Colors.grey[700],
 //                 thumbColor: Colors.white,
-//                 overlayColor: Colors.white.withOpacity(0.2),
+//                 overlayColor: Colors.white.withValues(alpha:0.2),
 //               ),
 //               child: SizedBox(
 //                 width: 150,

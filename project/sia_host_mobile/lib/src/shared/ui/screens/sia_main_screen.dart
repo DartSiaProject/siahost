@@ -42,32 +42,34 @@ class _SiaMainScreenState extends State<SiaMainScreen> {
           },
           child: Scaffold(
             resizeToAvoidBottomInset: true,
-            appBar: AppBar(
-              automaticallyImplyLeading: false,
-              actions: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Material(
-                    borderRadius: BorderRadius.circular(5.0.r),
-                    color: ColorsApp.tunaColor,
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(5.0.r),
-                      onTap: () {
-                        context.router.push(const NotificationRoute());
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(3.0),
-                        child: SvgPicture.asset(
-                          IconSvgs.smsNotifsSvg,
-                          width: 24.0.w,
-                          height: 24.0.h,
+            appBar: _tabsRouter.activeIndex == 4
+                ? null
+                : AppBar(
+                    automaticallyImplyLeading: false,
+                    actions: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(5.0.r),
+                          color: ColorsApp.tunaColor,
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(5.0.r),
+                            onTap: () {
+                              context.router.push(const NotificationRoute());
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: SvgPicture.asset(
+                                IconSvgs.smsNotifsSvg,
+                                width: 24.0.w,
+                                height: 24.0.h,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                ),
-              ],
-            ),
             body: Center(
               // child: Padding(
               //   padding: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -105,7 +107,7 @@ class _SiaMainScreenState extends State<SiaMainScreen> {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  activeColor: ColorsApp.paleTealColor.withOpacity(0.46),
+                  activeColor: ColorsApp.paleTealColor.withValues(alpha: 0.46),
                 ),
               ),
             ),

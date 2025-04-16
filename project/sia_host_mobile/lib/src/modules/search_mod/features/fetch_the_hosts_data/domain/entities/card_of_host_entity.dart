@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class CardOfHostEntity extends Equatable {
   final String pubKey;
-  final int finalScore;
+  final num finalScore;
   final double totalStorage;
 
   const CardOfHostEntity({

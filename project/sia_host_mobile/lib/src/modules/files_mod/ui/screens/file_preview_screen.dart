@@ -14,31 +14,22 @@ import 'package:sia_host_mobile/src/shared/helpers/file_manager_helper.dart';
 class FilePreviewScreen extends StatelessWidget {
   final FileEntity file;
 
-  // todo: fileList and index are to make the previewing more
-  // responsive by providing other ressources to user and make sure
-  // he can navigate to them without living the screen
-  // This feature will only be implemented if necessary
-  // final List<FileEntity>? fileList;
-  // final int? indexInList;
-
   const FilePreviewScreen({
     super.key,
     required this.file,
-    // this.fileList,
-    // this.indexInList,
   });
 
   @override
   Widget build(BuildContext context) {
-    // return Scaffold(
-    //   appBar: AppBar(
-    //     leading: const BackButton(
-    //       color: Colors.white,
-    //     ),
-    //   ),
-    //   body: _filePreviewer(file.typeEnum),
-    // );
-    return _filePreviewer(file.typeEnum);
+    return Scaffold(
+      appBar: AppBar(
+        leading: const BackButton(
+          color: Colors.white,
+        ),
+      ),
+      body: _filePreviewer(file.typeEnum),
+    );
+    // return _filePreviewer(file.typeEnum);
   }
 
   Widget _filePreviewer(FileTypeEnum type) {

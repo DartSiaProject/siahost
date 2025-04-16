@@ -64,7 +64,7 @@ class FetchOneHostDataRepositImpl implements FetchOneHostDataRepositAbst {
 
           var _data = <String, dynamic>{
             "pubkey": _hostData["public_key"],
-            "finalScore": 8,
+            "finalScore": HostHelper.getFinalScore(_hostData),
             "currentIp": _ipAddressConverted,
             "addressLocationIp": _townAndCountry,
             "uploadPrice": int.parse(_hostData["settings"]["upload_price"]),

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
+import 'package:sia_host_mobile/src/shared/helpers/host_helper.dart';
 
 import '../../../../../../shared/constants/lang_const.dart';
 import '../../../../../../shared/services/connection/requests/connection_request.dart';
@@ -37,11 +38,15 @@ class FetchTheListForAllHostDataRepositImpl
           List<dynamic> _allHostData = _hostDataGet["hosts"];
 
           for (var _hostData in _allHostData) {
+            // Get the host final score
+            final hostScore = HostHelper.getFinalScore(_hostData);
+
             var _dataMap = {
               "public_key": _hostData["public_key"],
-              "finalScore": 8, //todo:  il faudra dynamisé ça
+              "finalScore": hostScore,
               "total_storage": _hostData["settings"]["total_storage"].toDouble()
             };
+
             var _cardHostInfoModel = CardOfHostModel.fromMap(_dataMap);
 
             var _cardOfEntityData = CardOfHostEntity(

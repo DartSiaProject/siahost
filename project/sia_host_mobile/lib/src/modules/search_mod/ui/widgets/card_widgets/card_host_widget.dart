@@ -35,7 +35,7 @@ class CardHostWidget extends StatelessWidget {
             leading: Container(
               margin: EdgeInsets.only(left: 15.0.w),
               decoration: BoxDecoration(
-                color: ColorsApp.paleTealColor.withOpacity(0.46),
+                color: ColorsApp.paleTealColor.withValues(alpha: 0.46),
                 borderRadius: BorderRadius.circular(12.0.r),
                 border: const Border.fromBorderSide(BorderSide.none),
               ),
@@ -46,10 +46,11 @@ class CardHostWidget extends StatelessWidget {
                   lineWidth: 4.0,
                   animation: true,
                   reverse: true,
-                  backgroundColor: ColorsApp.spearmintColor.withOpacity(0.4),
+                  backgroundColor:
+                      ColorsApp.spearmintColor.withValues(alpha: 0.4),
                   percent: host.finalScore / 10,
                   center: Text(
-                    host.finalScore.toString(),
+                    host.finalScore.toStringAsFixed(1),
                     style: TextStyle(
                       fontFamily: "Manrope",
                       fontWeight: FontWeight.w400,

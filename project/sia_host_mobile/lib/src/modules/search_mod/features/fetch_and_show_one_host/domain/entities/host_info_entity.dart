@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class HostInfoEntity extends Equatable {
   final String pubKey;
-  final int finalScore;
+  final double finalScore;
   final String currentIp;
   final String addressLocationIp;
   final int uploadPrice;
@@ -17,7 +17,7 @@ class HostInfoEntity extends Equatable {
 
   const HostInfoEntity({
     this.pubKey = "",
-    this.finalScore = 0,
+    this.finalScore = .0,
     this.currentIp = "",
     this.addressLocationIp = "",
     this.uploadPrice = 0,

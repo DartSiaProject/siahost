@@ -81,6 +81,7 @@ dependencies:
   chewie: ^1.10.0
   flutter_cache_manager: ^3.4.1
   open_filex: ^4.7.0
+  decimal: ^3.0.2
 
 dev_dependencies:
   flutter_test:
