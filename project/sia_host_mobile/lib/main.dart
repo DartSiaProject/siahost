@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sia_host_mobile/src/modules/home_mod/logic/bloc/network_overview_bloc.dart';
 import 'package:sia_host_mobile/src/modules/notifications/notifications.dart';
 
 import 'src/core/configs/device_config/device_size.dart';
@@ -17,7 +18,6 @@ import 'src/modules/files_mod/features/fetch_all_buckets_and_files/states_holder
 import 'src/modules/files_mod/features/fetch_all_buckets_and_files/states_holder/files_bloc/files_bloc.dart';
 import 'src/modules/files_mod/features/file_editor/states_holder/file_editor_bloc/file_editor_bloc.dart';
 import 'src/modules/files_mod/features/view_a_file_details/states_holder/view_the_file_content_bloc/view_the_file_details_bloc.dart';
-import 'src/modules/home_mod/features/fetch_the_network_data/states_holder/network_data_fetching_bloc/network_data_fetching_bloc.dart';
 import 'src/modules/host_config_mod/features/fetch_the_hoster_for_config/states_holder/fetch_the_hoster_for_config_bloc/fetch_the_hoster_for_config_bloc.dart';
 import 'src/modules/host_config_mod/features/update_the_hoster_with_new_data/states_holder/reconfig_the_host_data_bloc/reconfig_the_host_data_bloc.dart';
 import 'src/modules/my_host_mod/features/fetch_host_from_renter/states_holder/fetch_my_hoster_bloc/fetch_my_hoster_bloc.dart';
@@ -38,9 +38,13 @@ void main() async {
           create: (context) => sl<FetchUserCredentialBloc>()
             ..add(FetchUserCredentialFromCacheEvent()),
         ),
+        // BlocProvider(
+        //   create: (context) =>
+        //       sl<NetworkDataFetchingBloc>()..add(FetchNetworkDataEvent()),
+        // ),,
         BlocProvider(
           create: (context) =>
-              sl<NetworkDataFetchingBloc>()..add(FetchNetworkDataEvent()),
+              sl<NetworkOverviewBloc>()..add(NetworkOverviewFetchedEvent()),
         ),
         BlocProvider(
           create: (context) =>
@@ -110,8 +114,8 @@ class SiaHostMobile extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
         ],
         supportedLocales: const [
-          Locale("en", "US"),
-          Locale("fr", 'FR'),
+          Locale("en"),
+          Locale("fr"),
         ],
         localeResolutionCallback: (locale, supportedLocales) {
           for (var supportedLocale in supportedLocales) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import '../../../../../shared/constants/colors_const.dart';
 import '../../../../../shared/constants/svgs_const.dart';
 
@@ -30,13 +31,15 @@ class CardNetworkWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              value,
-              style: TextStyle(
-                fontFamily: "Poppins",
-                fontSize: 32.0.sp,
-                color: ColorsApp.whiteColor,
-                fontWeight: FontWeight.w700,
+            FittedBox(
+              child: Text(
+                value,
+                style: TextStyle(
+                  fontFamily: "Poppins",
+                  fontSize: 32.0.sp,
+                  color: ColorsApp.whiteColor,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
             Text(

@@ -290,27 +290,27 @@ class _LoginAccountScreenState extends State<LoginAccountScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 10.0.h,
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: TextButton(
-                            onPressed: () => context.router
-                                .replaceNamed(RoutePath.siaMainPath),
-                            child: Text(
-                              Translator.of(context)!
-                                  .translate(Lang.connectLaterText),
-                              style: TextStyle(
-                                fontFamily: "Inter",
-                                fontSize: 16.0.sp,
-                                color: ColorsApp.whiteColor,
-                                fontWeight: FontWeight.w400,
-                                decoration: TextDecoration.underline,
-                              ),
-                            ),
-                          ),
-                        )
+                        // SizedBox(
+                        //   height: 10.0.h,
+                        // ),
+                        // Align(
+                        //   alignment: Alignment.centerLeft,
+                        //   child: TextButton(
+                        //     onPressed: () => context.router
+                        //         .replaceNamed(RoutePath.siaMainPath),
+                        //     child: Text(
+                        //       Translator.of(context)!
+                        //           .translate(Lang.connectLaterText),
+                        //       style: TextStyle(
+                        //         fontFamily: "Inter",
+                        //         fontSize: 16.0.sp,
+                        //         color: ColorsApp.whiteColor,
+                        //         fontWeight: FontWeight.w400,
+                        //         decoration: TextDecoration.underline,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // )
                       ],
                     ),
                   ],

@@ -1,0 +1,11 @@
+{
+  "/etc/issue.net": "Ubuntu 24.04.2 LTS",
+  "commandLine": [
+    "/home/flashelperz/dev/python-venvs/fdroid/bin/fdroid build",
+    "-v",
+    "-l",
+    "com.sia.sia"
+  ],
+  "startTimestamp": 1743215413000,
+  "subcommand": "build"
+}

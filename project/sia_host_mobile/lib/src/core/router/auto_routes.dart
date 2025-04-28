@@ -9,7 +9,7 @@ import '../../modules/account_mod/ui/screens/main_screen.dart';
 import '../../modules/files_mod/ui/screens/files_screen.dart';
 import '../../modules/files_mod/ui/screens/list_of_bucket_screen.dart';
 import '../../modules/files_mod/ui/screens/list_of_file_fetched_from_bucket_screen.dart';
-import '../../modules/home_mod/ui/screens/home_screen.dart';
+import '../../modules/home_mod/views/screens/home_screen.dart';
 import '../../modules/host_config_mod/ui/screens/host_config_screen.dart';
 import '../../modules/my_host_mod/ui/screens/host_screen.dart';
 import '../../modules/search_mod/ui/screens/search_screen.dart';

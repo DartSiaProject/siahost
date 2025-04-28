@@ -1,0 +1,19 @@
+Categories:
+  - Productivity
+License: GPL-3.0-only  # Must match your LICENSE file
+RepoType: git
+Repo: https://github.com/DartSiaProject/siahost
+Description: "A privacy-friendly app for XYZ."
+IssueTracker: https://github.com/DartSiaProject/siahost/issues
+Builds:
+  - versionName: "1.0.0"
+    versionCode: 1
+    commit: v1.0.0  # Git tag or branch
+    subdir: "project/sia_host_mobile"    # "." if project is in root, else "subfolder/"
+    gradle:
+      - yes        # Required for Flutter
+AutoUpdateMode: Version
+UpdateCheckMode: Tags
+flavor: fdroid          # Your F-Droid flavor
+buildtype: fdroidRelease  # Unsigned build type
+output: app-fdroid-fdroidRelease.apk

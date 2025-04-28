@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
+import 'package:sia_host_mobile/src/modules/home_mod/logic/bloc/network_overview_bloc.dart';
 
 import '../../../../core/configs/language_config/translator.dart';
 import '../../../../shared/constants/colors_const.dart';
@@ -47,19 +49,16 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 15.0.h,
           ),
           Expanded(
-            child:
-                BlocBuilder<NetworkDataFetchingBloc, NetworkDataFetchingState>(
-              builder: (context, networkDataFetchingBuilderState) {
-                if (networkDataFetchingBuilderState
-                    is NetworkDataFetchedFailed) {
+            child: BlocBuilder<NetworkOverviewBloc, NetworkOverviewState>(
+              builder: (context, state) {
+                if (state is NetworkOverviewFailure) {
                   return Center(
                     child: Flex(
                       mainAxisSize: MainAxisSize.min,
                       direction: Axis.vertical,
                       children: <Widget>[
                         Text(
-                          Translator.of(context)!.translate(
-                              networkDataFetchingBuilderState.message),
+                          Translator.of(context)!.translate(state.error),
                           style: TextStyle(
                             fontFamily: "Roboto",
                             fontSize: 20.0.sp,
@@ -100,18 +99,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 }
 
-                if (networkDataFetchingBuilderState
-                    is NetworkDataFetchedSuccess) {
-                  var _networkDataEntity =
-                      networkDataFetchingBuilderState.networkDataEntity;
+                if (state is NetworkOverviewSuccess) {
+                  var _networkDataEntity = state.networkData;
 
                   return RefreshIndicator(
                     color: ColorsApp.spearmintColor,
                     backgroundColor: ColorsApp.bleachedCedarColor,
                     onRefresh: () async {
                       context
-                          .read<NetworkDataFetchingBloc>()
-                          .add(FetchNetworkDataEvent());
+                          .read<NetworkOverviewBloc>()
+                          .add(NetworkOverviewFetchedEvent());
                     },
                     child: SingleChildScrollView(
                       child: Flex(
@@ -133,21 +130,24 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               CardNetworkWidget(
                                 value:
-                                    "${_networkDataEntity.totalNetworkStorage.toStringAsPrecision(5).substring(0, 4)} Pb",
+                                    "${(_networkDataEntity.totalNetworkStorage).toStringAsFixed(2)} TB",
                                 descriptifText: Translator.of(context)!
                                     .translate(Lang.totalNetworkText),
                                 valuePercent: 2,
                               ),
                               CardNetworkWidget(
                                 value:
-                                    "${_networkDataEntity.totalUsedStorage.toStringAsPrecision(5).substring(0, 4)} Pb",
+                                    "${(_networkDataEntity.totalUsedStorage).toStringAsFixed(2)} TB",
                                 descriptifText: Translator.of(context)!
                                     .translate(Lang.totalUsedText),
                                 valuePercent: 2,
                               ),
                               CardNetworkWidget(
-                                value:
-                                    "\$${_networkDataEntity.pricePerTb.toStringAsPrecision(5).substring(0, 4)}",
+                                // value: _networkDataEntity.pricePerTb
+                                //     .toStringAsExponential(2),
+                                value: NumberFormat.simpleCurrency(
+                                        name: '\$', decimalDigits: 3)
+                                    .format(_networkDataEntity.pricePerTb),
                                 descriptifText: Translator.of(context)!
                                     .translate(Lang.pricePerText),
                                 valuePercent: 2,
@@ -166,14 +166,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   );
                 }
-                return networkDataFetchingBuilderState
-                        is NetworkDataFetchedLoading
+                return state is NetworkOverviewLoading
                     ? const Center(
                         child: CircularProgressIndicator(
                           color: ColorsApp.spearmintColor,
                         ),
                       )
-                    : Container();
+                    : const SizedBox.shrink();
               },
             ),
           )
