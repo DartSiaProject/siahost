@@ -1,0 +1,2 @@
+/home/flashelperz/Documents/Code/Mobile/Flutter/dartsia/android/app/.cxx/RelWithDebInfo/h6w392cu/armeabi-v7a/CMakeFiles/edit_cache.dir
+/home/flashelperz/Documents/Code/Mobile/Flutter/dartsia/android/app/.cxx/RelWithDebInfo/h6w392cu/armeabi-v7a/CMakeFiles/rebuild_cache.dir
