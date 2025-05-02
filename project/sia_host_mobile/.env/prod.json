@@ -1,8 +1,0 @@
-{
-    "LABEL": "prod",
-    "USER_CREDENTIALS": "credentials",
-    "USER_PRESENCE": "presence",
-    "ROOT_OLD_API": "https://siastats.info",
-    "ROOT_API": "https://api.siacentral.com",
-    "ROOT_IP": "https://ipinfo.io"
-}
