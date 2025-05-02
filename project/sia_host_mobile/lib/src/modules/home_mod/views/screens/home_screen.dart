@@ -8,7 +8,6 @@ import 'package:sia_host_mobile/src/modules/home_mod/logic/bloc/network_overview
 import '../../../../core/configs/language_config/translator.dart';
 import '../../../../shared/constants/colors_const.dart';
 import '../../../../shared/constants/lang_const.dart';
-import '../../features/fetch_the_network_data/states_holder/network_data_fetching_bloc/network_data_fetching_bloc.dart';
 import '../widgets/network_widgets/card_network_widget.dart';
 import '../widgets/network_widgets/chart_bar_widget.dart';
 
@@ -76,8 +75,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: InkWell(
                             borderRadius: BorderRadius.circular(12.0.r),
                             onTap: () => context
-                                .read<NetworkDataFetchingBloc>()
-                                .add(FetchNetworkDataEvent()),
+                                .read<NetworkOverviewBloc>()
+                                .add(NetworkOverviewFetchedEvent()),
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
