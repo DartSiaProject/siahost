@@ -49,8 +49,8 @@ dependencies:
     # url: https://github.com/DartSiaProject/dartsia.git
     # ref: main
     # path: packages/renterd
-#    path: ../../../../packages/dartsia/packages/renterd/
-    path: ../../packages/dartsia/packages/renterd
+    #    path: ../../../../packages/dartsia/packages/renterd/
+    path: ../../../../packages/dartsia/packages/renterd
   smooth_page_indicator: ^1.2.1
   video_player: ^2.9.5
 
@@ -72,4 +72,22 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
-    - assets/fonts/Manrope/
+    # - assets/fonts/Manrope/
+    # - assets/fonts/Mulish/
+
+  fonts:
+    - family: Manrope
+      fonts:
+        - asset: assets/fonts/Manrope/Manrope-Regular.ttf
+        - asset: assets/fonts/Manrope/Manrope-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Manrope/Manrope-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Manrope/Manrope-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Manrope/Manrope-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Manrope/Manrope-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Manrope/Manrope-SemiBold.ttf
+          weight: 600

@@ -16,6 +16,9 @@ import '../../core/routes/app_router.dart' as _i798;
 import '../../modules/app/logic/cubit/onboarding_cubit.dart' as _i725;
 import '../../modules/auth/data/repositories/auth_repository.dart' as _i135;
 import '../../modules/auth/logic/cubit/auth_cubit.dart' as _i653;
+import '../../modules/home/data/repositories/network_overview_repository.dart'
+    as _i251;
+import '../../modules/home/logic/cubit/network_overview_cubit.dart' as _i731;
 import '../services/api_client.dart' as _i933;
 import '../services/storage_service.dart' as _i306;
 
@@ -35,6 +38,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i798.AppRouter>(() => _i798.AppRouter());
     gh.lazySingleton<_i725.OnboardingCubit>(
         () => _i725.OnboardingCubit(gh<_i306.StorageService>()));
+    gh.lazySingleton<_i251.NetworkOverviewRepository>(
+        () => _i251.NetworkOverviewRepository(gh<_i306.StorageService>()));
+    gh.lazySingleton<_i731.NetworkOverviewCubit>(() =>
+        _i731.NetworkOverviewCubit(gh<_i251.NetworkOverviewRepository>()));
     gh.lazySingleton<_i135.AuthRepository>(() => _i135.AuthRepository(
           gh<_i933.ApiClient>(),
           gh<_i306.StorageService>(),

@@ -6,6 +6,7 @@ import 'package:sia_host_mobile/src/core/routes/app_router.dart';
 import 'package:sia_host_mobile/src/core/theme/app_theme.dart';
 import 'package:sia_host_mobile/src/modules/app/logic/cubit/onboarding_cubit.dart';
 import 'package:sia_host_mobile/src/modules/auth/logic/cubit/auth_cubit.dart';
+import 'package:sia_host_mobile/src/modules/home/logic/cubit/network_overview_cubit.dart';
 import 'package:sia_host_mobile/src/shared/utils/constants.dart';
 
 class App extends StatelessWidget {
@@ -20,6 +21,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<AuthCubit>(
           create: (context) => sl.get(),
+        ),
+        BlocProvider<NetworkOverviewCubit>(
+          create: (context) => sl.get()..getData(),
         ),
       ],
       child: ScreenUtilInit(

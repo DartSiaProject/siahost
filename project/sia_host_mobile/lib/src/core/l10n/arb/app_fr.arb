@@ -15,7 +15,7 @@
     "storagePrice": "Prix de stockage",
     "currentStatus": "Statut actuel",
     "hostPublicAddress": "Adresse publique de l'hôte",
-    "scPerTB": "SC/TTo",
+    "scPerTB": "SC/To",
     "siaCoin": "SC",
     "teraByte": "To",
     "petaByte": "Po",
@@ -36,6 +36,7 @@
     "copyFile": "Copier le fichier",
     "moveFile": "Déplacer le fichier",
     "notice": "Avis",
+    "retry": "Réessayer",
   
     "navHome": "Accueil",
     "navSearch": "Recherche",
@@ -45,11 +46,11 @@
     "navNotifications": "Notifications",
   
     "homeTitle": "Aperçu du réseau",
-    "currentActiveHosts": "Hôtes actifs actuels",
-    "totalNetworkStorage": "Stockage total du réseau",
-    "totalUsedStorage": "Stockage utilisé total",
+    "currentActiveHosts": "Hôtes actifs \nactuels",
+    "totalNetworkStorage": "Stockage total \ndu réseau",
+    "totalUsedStorage": "Stockage total \nutilisé",
     "pricePerTB": "Prix par To",
-    "pricePerTBPerMonth": "Prix par To/Mois",
+    "pricePerTBPerMonth": "Prix par \nTo/Mois",
     "dailyActiveContracts": "Contrats actifs quotidiens",
   
     "searchTitle": "Rechercher un hôte",

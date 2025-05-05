@@ -36,6 +36,7 @@
   "copyFile": "Copy File",
   "moveFile": "Move File",
   "notice": "Notice",
+  "retry": "Retry",
 
   "navHome": "Home",
   "navSearch": "Search",
@@ -45,11 +46,11 @@
   "navNotifications": "Notifications",
 
   "homeTitle": "Network Overview",
-  "currentActiveHosts": "Current Active Hosts",
-  "totalNetworkStorage": "Total Network Storage",
-  "totalUsedStorage": "Total Used Storage",
+  "currentActiveHosts": "Current Active \nHosts",
+  "totalNetworkStorage": "Total Network \nStorage",
+  "totalUsedStorage": "Total Used \nStorage",
   "pricePerTB": "Price per TB",
-  "pricePerTBPerMonth": "Price per TB/Month",
+  "pricePerTBPerMonth": "Price per \nTB/Month",
   "dailyActiveContracts": "Daily Active Contracts",
 
 
@@ -104,7 +105,7 @@
 
   "serverAddressField": "Renterd Public Address",
   "serverAddressFieldHint": "IPV4 address",
-  "passwordField": "Renterd Password",
+  "passwordField": "Password",
   "emailField": "Email Address",
   "loginButton": "Connect",
   "getStartedButton": "Get Started",

@@ -293,6 +293,12 @@ abstract class AppLocalizations {
   /// **'Notice'**
   String get notice;
 
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
   /// No description provided for @navHome.
   ///
   /// In en, this message translates to:
@@ -338,19 +344,19 @@ abstract class AppLocalizations {
   /// No description provided for @currentActiveHosts.
   ///
   /// In en, this message translates to:
-  /// **'Current Active Hosts'**
+  /// **'Current Active \nHosts'**
   String get currentActiveHosts;
 
   /// No description provided for @totalNetworkStorage.
   ///
   /// In en, this message translates to:
-  /// **'Total Network Storage'**
+  /// **'Total Network \nStorage'**
   String get totalNetworkStorage;
 
   /// No description provided for @totalUsedStorage.
   ///
   /// In en, this message translates to:
-  /// **'Total Used Storage'**
+  /// **'Total Used \nStorage'**
   String get totalUsedStorage;
 
   /// No description provided for @pricePerTB.
@@ -362,7 +368,7 @@ abstract class AppLocalizations {
   /// No description provided for @pricePerTBPerMonth.
   ///
   /// In en, this message translates to:
-  /// **'Price per TB/Month'**
+  /// **'Price per \nTB/Month'**
   String get pricePerTBPerMonth;
 
   /// No description provided for @dailyActiveContracts.
@@ -638,7 +644,7 @@ abstract class AppLocalizations {
   /// No description provided for @passwordField.
   ///
   /// In en, this message translates to:
-  /// **'Renterd Password'**
+  /// **'Password'**
   String get passwordField;
 
   /// No description provided for @emailField.

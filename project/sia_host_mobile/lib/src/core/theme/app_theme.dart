@@ -8,11 +8,13 @@ import 'package:google_fonts/google_fonts.dart';
 abstract final class AppTheme {
   static const primaryColor = Color(0xFF20EE82);
   static const backgoundColor = Color(0xFF242132);
-  static const boxBgColor = Color(0xFF37364B);
+  static const boxBgColor = Color(0xFF39314b);
   static const bodyTextColor = Color(0xFFBDBDBD);
+  static const inactiveNavIconColor = Color(0xFF676D75);
 
   // The FlexColorScheme defined dark mode ThemeData.
   static final ThemeData _theme = FlexThemeData.dark(
+    fontFamily: 'Manrope',
     scheme: FlexScheme.custom,
     scaffoldBackground: backgoundColor,
     surface: boxBgColor,
@@ -56,14 +58,45 @@ abstract final class AppTheme {
     // Direct ThemeData properties.
     visualDensity: FlexColorScheme.comfortablePlatformDensity,
     cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true),
-    textTheme: GoogleFonts.manropeTextTheme().apply(
+    textTheme: const TextTheme(
+      displayLarge: TextStyle(fontWeight: FontWeight.bold),
+      displayMedium: TextStyle(fontWeight: FontWeight.w800),
+      displaySmall: TextStyle(fontWeight: FontWeight.w600),
+      headlineLarge: TextStyle(fontWeight: FontWeight.w700),
+      headlineMedium: TextStyle(fontWeight: FontWeight.w600),
+      headlineSmall: TextStyle(fontWeight: FontWeight.w500),
+      titleLarge: TextStyle(fontWeight: FontWeight.w700),
+      titleMedium: TextStyle(fontWeight: FontWeight.w600),
+      titleSmall: TextStyle(fontWeight: FontWeight.w500),
+      bodyLarge: TextStyle(fontWeight: FontWeight.normal),
+      bodyMedium: TextStyle(fontWeight: FontWeight.w300),
+      bodySmall: TextStyle(fontWeight: FontWeight.w200),
+      labelLarge: TextStyle(fontWeight: FontWeight.w600),
+      labelMedium: TextStyle(fontWeight: FontWeight.w500),
+      labelSmall: TextStyle(fontWeight: FontWeight.w400),
+    ).apply(
       displayColor: Colors.white,
       bodyColor: bodyTextColor,
     ),
   );
 
   static ThemeData theme = _theme.copyWith(
-    cardColor: const Color(0xFF37364B),
+    // cardColor: const Color(0xFF37364B),
+    cardTheme: _theme.cardTheme.copyWith(
+      color: const Color(0xFF37364B),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      margin: EdgeInsets.zero,
+    ),
+    appBarTheme: _theme.appBarTheme.copyWith(
+      backgroundColor: backgoundColor,
+      titleTextStyle: GoogleFonts.manrope(
+        color: Colors.white,
+        fontSize: 28,
+        fontWeight: FontWeight.w600,
+      ),
+    ),
     bottomSheetTheme: _theme.bottomSheetTheme.copyWith(
       backgroundColor: boxBgColor,
     ),
@@ -71,27 +104,52 @@ abstract final class AppTheme {
       hintStyle: const TextStyle(color: Color(0xFF666666)),
       floatingLabelBehavior: FloatingLabelBehavior.never,
     ),
-    textTheme: GoogleFonts.manropeTextTheme().copyWith(
-      displayLarge: GoogleFonts.manrope(color: Colors.white),
-      displayMedium: GoogleFonts.manrope(color: Colors.white),
-      displaySmall: GoogleFonts.manrope(color: Colors.white),
-      headlineLarge: GoogleFonts.manrope(color: Colors.white),
-      headlineMedium: GoogleFonts.manrope(
-        color: Colors.white,
-        fontWeight: FontWeight.bold,
-      ),
-      headlineSmall: GoogleFonts.manrope(color: Colors.white),
-      titleLarge: GoogleFonts.manrope(color: const Color(0xFFBDBDBD)),
-      titleMedium: GoogleFonts.manrope(color: const Color(0xFFBDBDBD)),
-      titleSmall: GoogleFonts.manrope(color: const Color(0xFFBDBDBD)),
-      // bodyLarge: GoogleFonts.manrope(color: Color(0xFFBDBDBD)),
-      // bodyMedium: GoogleFonts.manrope(color: Color(0xFFBDBDBD)),
-      bodySmall: GoogleFonts.manrope(color: const Color(0xFFBDBDBD)),
-      labelLarge: GoogleFonts.manrope(color: const Color(0xFFBDBDBD)),
-      labelMedium: GoogleFonts.manrope(color: const Color(0xFFBDBDBD)),
-      labelSmall: GoogleFonts.manrope(color: const Color(0xFFBDBDBD)),
-      bodyLarge: GoogleFonts.manrope(color: const Color(0xFF666666)),
-      bodyMedium: GoogleFonts.manrope(color: const Color(0xFF666666)),
-    ),
+    // textTheme: _theme.textTheme.copyWith(
+    //   headlineLarge: GoogleFonts.manrope(fontWeight: FontWeight.bold),
+    //   headlineMedium: GoogleFonts.manrope(fontWeight: FontWeight.bold),
+    // ),
+    // textTheme: GoogleFonts.manropeTextTheme().copyWith(
+    // displayLarge: GoogleFonts.manrope(
+    //   color: Colors.white,
+    //   fontSize: 28,
+    //   fontWeight: FontWeight.w800,
+    // ),
+    // displayMedium: GoogleFonts.manrope(color: Colors.white,
+    //   fontSize: 24,
+    //   fontWeight: FontWeight.w800,
+    // ),
+    // displaySmall: GoogleFonts.manrope(color: Colors.white,
+    //   fontSize: 20,
+    //   fontWeight: FontWeight.w800,
+    // ),
+
+    // // headline
+    // headlineLarge: GoogleFonts.manrope(color: Colors.white,
+    //   fontSize: 20,
+    //   fontWeight: FontWeight.w800,
+    // ),
+    // headlineMedium: GoogleFonts.manrope(
+    //   color: Colors.white,
+    //   fontWeight: FontWeight.bold,
+    // ),
+    // headlineSmall: GoogleFonts.manrope(color: Colors.white),
+    // titleLarge: GoogleFonts.manrope(color: const Color(0xFFBDBDBD)),
+    // titleMedium: GoogleFonts.manrope(
+    //   color: const Color(0xFFBDBDBD),
+    //   fontSize: 17,
+    // ),
+    // titleSmall: GoogleFonts.manrope(color: const Color(0xFFBDBDBD)),
+    // // bodyLarge: GoogleFonts.manrope(color: Color(0xFFBDBDBD)),
+    // // bodyMedium: GoogleFonts.manrope(color: Color(0xFFBDBDBD)),
+    // bodySmall: GoogleFonts.manrope(color: const Color(0xFFBDBDBD)),
+    // labelLarge: GoogleFonts.manrope(
+    //   color: const Color(0xFFBDBDBD),
+    //   fontSize: 17,
+    // ),
+    // labelMedium: GoogleFonts.manrope(color: const Color(0xFFBDBDBD)),
+    // labelSmall: GoogleFonts.manrope(color: const Color(0xFFBDBDBD)),
+    // bodyLarge: GoogleFonts.manrope(color: const Color(0xFF666666)),
+    // bodyMedium: GoogleFonts.manrope(color: const Color(0xFF666666)),
+    //     ),
   );
 }

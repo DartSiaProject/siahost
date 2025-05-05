@@ -45,7 +45,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get hostPublicAddress => 'Adresse publique de l\'hôte';
 
   @override
-  String get scPerTB => 'SC/TTo';
+  String get scPerTB => 'SC/To';
 
   @override
   String get siaCoin => 'SC';
@@ -108,6 +108,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get notice => 'Avis';
 
   @override
+  String get retry => 'Réessayer';
+
+  @override
   String get navHome => 'Accueil';
 
   @override
@@ -129,19 +132,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get homeTitle => 'Aperçu du réseau';
 
   @override
-  String get currentActiveHosts => 'Hôtes actifs actuels';
+  String get currentActiveHosts => 'Hôtes actifs \nactuels';
 
   @override
-  String get totalNetworkStorage => 'Stockage total du réseau';
+  String get totalNetworkStorage => 'Stockage total \ndu réseau';
 
   @override
-  String get totalUsedStorage => 'Stockage utilisé total';
+  String get totalUsedStorage => 'Stockage total \nutilisé';
 
   @override
   String get pricePerTB => 'Prix par To';
 
   @override
-  String get pricePerTBPerMonth => 'Prix par To/Mois';
+  String get pricePerTBPerMonth => 'Prix par \nTo/Mois';
 
   @override
   String get dailyActiveContracts => 'Contrats actifs quotidiens';

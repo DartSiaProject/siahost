@@ -36,23 +36,15 @@ class AppButton extends StatelessWidget {
   }
 
   Widget _buildButton(BuildContext context) {
-    return FilledButton(
+    return FilledButton.tonalIcon(
       onPressed: isLoading ? null : onPressed,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: isFullSized ? MainAxisSize.max : MainAxisSize.min,
-        spacing: 8,
-        children: [
-          if (icon != null) Icon(icon),
-          if (icon != null) const SizedBox(width: 8),
-          Text(
-            label,
-            style: context.textTheme.bodyLarge?.copyWith(
+      icon: icon != null
+          ? Icon(
+              icon,
               color: Colors.white,
-            ),
-          ),
-        ],
-      ),
+            )
+          : null,
+      label: Text(label),
     );
   }
 }

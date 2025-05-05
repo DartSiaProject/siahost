@@ -6,7 +6,6 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:renterd/renterd.dart' as renterd;
 import 'package:sia_host_mobile/src/shared/functions/service_locator.dart';
 import 'package:sia_host_mobile/src/shared/helpers/helpers.dart';
@@ -62,9 +61,6 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
       statusBarIconBrightness: Brightness.light,
     ),
   );
-
-  //! google fonts disable http requests
-  GoogleFonts.config.allowRuntimeFetching = false;
 
   //! Http overrides
   HttpOverrides.global = CustomHttpOverrides();

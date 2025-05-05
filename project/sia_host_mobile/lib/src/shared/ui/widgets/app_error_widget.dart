@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sia_host_mobile/src/core/l10n/l10n.dart';
 import 'package:sia_host_mobile/src/shared/extensions/theme_ext.dart';
 
 class AppErrorWidget extends StatelessWidget {
@@ -14,38 +15,32 @@ class AppErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator.adaptive(
-      onRefresh: () async {
-        onRefresh();
-        return;
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Center(
-          child: Column(
-            spacing: 8,
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                CupertinoIcons.exclamationmark_triangle,
-                color: Colors.red,
-                size: 80.h,
-              ),
-              Text(
-                message,
-                style: context.textTheme.bodyLarge
-                    ?.copyWith(color: Colors.orange.shade800),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 16),
-              TextButton.icon(
-                onPressed: onRefresh,
-                icon: const Icon(CupertinoIcons.arrow_clockwise),
-                label: const Text('Raffraichir'),
-              ),
-            ],
-          ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Center(
+        child: Column(
+          spacing: 8,
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              CupertinoIcons.exclamationmark_triangle,
+              color: Colors.red,
+              size: 80.h,
+            ),
+            Text(
+              message,
+              style: context.textTheme.bodyLarge
+                  ?.copyWith(color: Colors.orange.shade800),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 16),
+            FilledButton.tonalIcon(
+              onPressed: onRefresh,
+              icon: const Icon(CupertinoIcons.arrow_clockwise),
+              label: Text(context.l10n.retry),
+            ),
+          ],
         ),
       ),
     );

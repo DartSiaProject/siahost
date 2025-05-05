@@ -108,6 +108,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get notice => 'Notice';
 
   @override
+  String get retry => 'Retry';
+
+  @override
   String get navHome => 'Home';
 
   @override
@@ -129,19 +132,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeTitle => 'Network Overview';
 
   @override
-  String get currentActiveHosts => 'Current Active Hosts';
+  String get currentActiveHosts => 'Current Active \nHosts';
 
   @override
-  String get totalNetworkStorage => 'Total Network Storage';
+  String get totalNetworkStorage => 'Total Network \nStorage';
 
   @override
-  String get totalUsedStorage => 'Total Used Storage';
+  String get totalUsedStorage => 'Total Used \nStorage';
 
   @override
   String get pricePerTB => 'Price per TB';
 
   @override
-  String get pricePerTBPerMonth => 'Price per TB/Month';
+  String get pricePerTBPerMonth => 'Price per \nTB/Month';
 
   @override
   String get dailyActiveContracts => 'Daily Active Contracts';
@@ -279,7 +282,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get serverAddressFieldHint => 'IPV4 address';
 
   @override
-  String get passwordField => 'Renterd Password';
+  String get passwordField => 'Password';
 
   @override
   String get emailField => 'Email Address';

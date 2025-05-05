@@ -1117,7 +1117,7 @@ packages:
   renterd:
     dependency: "direct main"
     description:
-      path: "../../packages/dartsia/packages/renterd"
+      path: "../../../../packages/dartsia/packages/renterd"
       relative: true
     source: path
     version: "0.4.1"

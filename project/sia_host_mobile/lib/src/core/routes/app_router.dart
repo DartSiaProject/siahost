@@ -13,7 +13,12 @@ class AppRouter extends RootStackRouter {
           page: DashboardRoute.page,
           path: '/',
           initial: true,
-          children: const [],
+          children: [
+            AutoRoute(
+              page: HomeRoute.page,
+              path: '',
+            ),
+          ],
           guards: [OnboardingGuard(), AuthGuard()],
         ),
         AutoRoute(
