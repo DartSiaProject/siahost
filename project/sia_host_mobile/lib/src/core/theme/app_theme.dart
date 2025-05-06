@@ -11,6 +11,7 @@ abstract final class AppTheme {
   static const boxBgColor = Color(0xFF39314b);
   static const bodyTextColor = Color(0xFFBDBDBD);
   static const inactiveNavIconColor = Color(0xFF676D75);
+  static const inputColor = Color(0xFF666666);
 
   // The FlexColorScheme defined dark mode ThemeData.
   static final ThemeData _theme = FlexThemeData.dark(
@@ -101,7 +102,7 @@ abstract final class AppTheme {
       backgroundColor: boxBgColor,
     ),
     inputDecorationTheme: _theme.inputDecorationTheme.copyWith(
-      hintStyle: const TextStyle(color: Color(0xFF666666)),
+      hintStyle: const TextStyle(color: inputColor),
       floatingLabelBehavior: FloatingLabelBehavior.never,
     ),
     // textTheme: _theme.textTheme.copyWith(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sia_host_mobile/src/core/theme/app_theme.dart';
 import 'package:sia_host_mobile/src/shared/extensions/theme_ext.dart';
 
 /// Password input widget
@@ -77,6 +78,9 @@ class _PasswordInputState extends State<PasswordInput> {
           focusNode: widget.focusNode,
           obscureText: _isObscured,
           obscuringCharacter: '●',
+          style: context.textTheme.bodyLarge?.copyWith(
+            color: AppTheme.inputColor,
+          ),
           decoration: InputDecoration(
             hintText: widget.hintText ?? widget.labelText,
             suffixIcon: IconButton(

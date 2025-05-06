@@ -14,7 +14,9 @@
   "downloadPrice": "Download Price",
   "storagePrice": "Storage Price",
   "currentStatus": "Current Status",
+  "acceptingContracts": "Accepting Contract",
   "hostPublicAddress": "Host Public Address",
+  "addressCopiedSuccessfully": "Address Copied successfully",
   "scPerTB": "SC/TB",
   "siaCoin": "SC",
   "teraByte": "TB",
@@ -125,5 +127,7 @@
   "invalidAddress": "Invalid server address.",
   "invalidCredentials": "Invalid credentials.",
   "invalidAddressFormat": "Invalid address format.",
-  "invalidForm": "Please fill in all fields."
+  "invalidForm": "Please fill in all fields.",
+
+  "cannotFindHostByKey": "Cannot find the host with this public key."
 }

@@ -17,7 +17,11 @@ class ApiClient {
     String url, {
     Map<String, dynamic>? queryParameters,
   }) {
-    return _dio.get(url, queryParameters: queryParameters);
+    return _dio.get(
+      url,
+      queryParameters: queryParameters,
+      options: Options(headers: {'accept': 'application/json'}),
+    );
   }
 
   Future<Response<dynamic>> post(String url, {dynamic data}) {

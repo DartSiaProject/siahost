@@ -25,7 +25,7 @@ class DashboardView extends StatelessWidget {
 
   final List<PageRouteInfo<void>> routes = [
     const HomeRoute(),
-    const HomeRoute(),
+    const HostListRoute(),
   ];
 
   @override
@@ -51,29 +51,38 @@ class DashboardView extends StatelessWidget {
       },
       bottomNavigationBuilder: (_, tabsRouter) {
         return BottomNavyBar(
+          selectedIndex: tabsRouter.activeIndex,
           backgroundColor: const Color(0xFF1D1F24),
           itemPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
           items: [
-            BottomNavyBarItem(
-              icon: const Padding(
-                padding: EdgeInsets.only(left: 8),
-                child: Icon(CupertinoIcons.home),
-              ),
-              title: Text(l10n.navHome),
-              activeColor: AppTheme.primaryColor,
-              inactiveColor: AppTheme.inactiveNavIconColor,
-              textAlign: TextAlign.center,
+            _buildNavItem(
+              CupertinoIcons.home,
+              l10n.navHome,
             ),
-            BottomNavyBarItem(
-              icon: const Icon(CupertinoIcons.home),
-              title: Text(l10n.navHome),
-              activeColor: AppTheme.primaryColor,
-              inactiveColor: AppTheme.inactiveNavIconColor,
+            _buildNavItem(
+              CupertinoIcons.search,
+              l10n.navSearch,
             ),
           ],
           onItemSelected: tabsRouter.setActiveIndex,
         );
       },
+    );
+  }
+
+  BottomNavyBarItem _buildNavItem(
+    IconData icon,
+    String title,
+  ) {
+    return BottomNavyBarItem(
+      icon: Padding(
+        padding: const EdgeInsets.only(left: 8),
+        child: Icon(icon),
+      ),
+      title: Text(title),
+      activeColor: AppTheme.primaryColor,
+      inactiveColor: AppTheme.inactiveNavIconColor,
+      textAlign: TextAlign.center,
     );
   }
 }

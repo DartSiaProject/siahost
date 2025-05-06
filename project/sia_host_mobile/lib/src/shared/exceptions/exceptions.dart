@@ -20,6 +20,7 @@ class DartSiaException extends Equatable implements Exception {
     dynamic error,
   ) {
     Logger().e(error);
+    if (error is DartSiaException) return error;
 
     var code = 0;
     String? msg;

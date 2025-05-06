@@ -42,7 +42,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get currentStatus => 'Statut actuel';
 
   @override
+  String get acceptingContracts => 'Accepte des contrats';
+
+  @override
   String get hostPublicAddress => 'Adresse publique de l\'hôte';
+
+  @override
+  String get addressCopiedSuccessfully => 'Adresse copiée avec succès.';
 
   @override
   String get scPerTB => 'SC/To';
@@ -331,4 +337,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get invalidForm => 'Veuillez remplir tous les champs requis.';
+
+  @override
+  String get cannotFindHostByKey => 'Aucun server n\'a été trouvé avec cette clé publique.';
 }

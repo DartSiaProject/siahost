@@ -24,3 +24,14 @@ enum ResponseStatus {
   other,
   badMethod;
 }
+
+enum StateStatus {
+  initial,
+  loading,
+  success,
+  failure,
+  paginating,
+  searching,
+  paginatingFailure,
+  searchingFailure,
+}

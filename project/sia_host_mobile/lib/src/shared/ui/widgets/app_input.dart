@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sia_host_mobile/src/core/theme/app_theme.dart';
 import 'package:sia_host_mobile/src/shared/extensions/theme_ext.dart';
 
 /// custom app input widget
@@ -18,7 +19,11 @@ class AppInput extends StatelessWidget {
     this.labelText,
     this.hintText,
     this.keyboardType,
+    this.textInputAction,
     this.autofillHints,
+    this.prefix,
+    this.suffix,
+    this.isEnabled = true,
   });
 
   /// The controller for the text field
@@ -48,8 +53,20 @@ class AppInput extends StatelessWidget {
   /// Keyboard type for the text field
   final TextInputType? keyboardType;
 
+  /// Action for the text field
+  final TextInputAction? textInputAction;
+
   /// Autofill for the text field
   final Iterable<String>? autofillHints;
+
+  /// Prefix widget
+  final Widget? prefix;
+
+  /// Suffix widget
+  final Widget? suffix;
+
+  // is input enabled
+  final bool isEnabled;
 
   @override
   Widget build(BuildContext context) {
@@ -72,12 +89,18 @@ class AppInput extends StatelessWidget {
           focusNode: focusNode,
           keyboardType: keyboardType,
           autofillHints: autofillHints,
+          style: context.textTheme.bodyLarge?.copyWith(
+            color: AppTheme.inputColor,
+          ),
           decoration: InputDecoration(
             hintText: hintText ?? labelText,
+            prefixIcon: prefix,
+            suffixIcon: suffix,
           ),
+          textInputAction: textInputAction,
+          enabled: isEnabled,
         ),
       ],
     );
   }
 }
-/// The AppInput widget is a custom input field that provides a consistent

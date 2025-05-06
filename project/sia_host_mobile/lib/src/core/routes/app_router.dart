@@ -18,6 +18,19 @@ class AppRouter extends RootStackRouter {
               page: HomeRoute.page,
               path: '',
             ),
+            AutoRoute(
+              page: const EmptyShellRoute('host_list'),
+              path: 'hosts',
+              children: [
+                AutoRoute(
+                  page: HostListRoute.page,
+                  path: '',
+                ),
+                AutoRoute(
+                  page: HostDetailsRoute.page,
+                ),
+              ],
+            ),
           ],
           guards: [OnboardingGuard(), AuthGuard()],
         ),

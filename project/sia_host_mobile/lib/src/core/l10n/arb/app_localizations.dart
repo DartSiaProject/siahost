@@ -161,11 +161,23 @@ abstract class AppLocalizations {
   /// **'Current Status'**
   String get currentStatus;
 
+  /// No description provided for @acceptingContracts.
+  ///
+  /// In en, this message translates to:
+  /// **'Accepting Contract'**
+  String get acceptingContracts;
+
   /// No description provided for @hostPublicAddress.
   ///
   /// In en, this message translates to:
   /// **'Host Public Address'**
   String get hostPublicAddress;
+
+  /// No description provided for @addressCopiedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Address Copied successfully'**
+  String get addressCopiedSuccessfully;
 
   /// No description provided for @scPerTB.
   ///
@@ -742,6 +754,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please fill in all fields.'**
   String get invalidForm;
+
+  /// No description provided for @cannotFindHostByKey.
+  ///
+  /// In en, this message translates to:
+  /// **'Cannot find the host with this public key.'**
+  String get cannotFindHostByKey;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

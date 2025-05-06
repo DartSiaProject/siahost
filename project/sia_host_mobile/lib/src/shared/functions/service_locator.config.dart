@@ -19,6 +19,11 @@ import '../../modules/auth/logic/cubit/auth_cubit.dart' as _i653;
 import '../../modules/home/data/repositories/network_overview_repository.dart'
     as _i251;
 import '../../modules/home/logic/cubit/network_overview_cubit.dart' as _i731;
+import '../../modules/host_list/data/repositories/host_list_repository.dart'
+    as _i686;
+import '../../modules/host_list/data/repositories/location_repository.dart'
+    as _i198;
+import '../../modules/host_list/logic/bloc/host_list_bloc.dart' as _i134;
 import '../services/api_client.dart' as _i933;
 import '../services/storage_service.dart' as _i306;
 
@@ -40,12 +45,18 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i725.OnboardingCubit(gh<_i306.StorageService>()));
     gh.lazySingleton<_i251.NetworkOverviewRepository>(
         () => _i251.NetworkOverviewRepository(gh<_i306.StorageService>()));
+    gh.lazySingleton<_i686.HostListRepository>(
+        () => _i686.HostListRepository(gh<_i306.StorageService>()));
     gh.lazySingleton<_i731.NetworkOverviewCubit>(() =>
         _i731.NetworkOverviewCubit(gh<_i251.NetworkOverviewRepository>()));
+    gh.lazySingleton<_i134.HostListBloc>(
+        () => _i134.HostListBloc(gh<_i686.HostListRepository>()));
     gh.lazySingleton<_i135.AuthRepository>(() => _i135.AuthRepository(
           gh<_i933.ApiClient>(),
           gh<_i306.StorageService>(),
         ));
+    gh.lazySingleton<_i198.LocationRepository>(
+        () => _i198.LocationRepository(gh<_i933.ApiClient>()));
     gh.lazySingleton<_i653.AuthCubit>(
         () => _i653.AuthCubit(gh<_i135.AuthRepository>()));
     return this;

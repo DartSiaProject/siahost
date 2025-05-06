@@ -14,7 +14,9 @@
     "downloadPrice": "Prix de téléchargement",
     "storagePrice": "Prix de stockage",
     "currentStatus": "Statut actuel",
+    "acceptingContracts": "Accepte des contrats",
     "hostPublicAddress": "Adresse publique de l'hôte",
+    "addressCopiedSuccessfully": "Adresse copiée avec succès.",
     "scPerTB": "SC/To",
     "siaCoin": "SC",
     "teraByte": "To",
@@ -122,5 +124,7 @@
     "invalidAddress": "L'adresse de l'hôte est invalide.",
     "invalidCredentials": "Données d'identification invalides.",
     "invalidAddressFormat": "Le format de l'adresse est invalide.",
-    "invalidForm": "Veuillez remplir tous les champs requis."
+    "invalidForm": "Veuillez remplir tous les champs requis.",
+
+    "cannotFindHostByKey": "Aucun server n'a été trouvé avec cette clé publique."
   }
