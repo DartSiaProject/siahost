@@ -26,6 +26,7 @@ class DashboardView extends StatelessWidget {
   final List<PageRouteInfo<void>> routes = [
     const HomeRoute(),
     const HostListRoute(),
+    const CurrentHostRoute(),
   ];
 
   @override
@@ -62,6 +63,10 @@ class DashboardView extends StatelessWidget {
             _buildNavItem(
               CupertinoIcons.search,
               l10n.navSearch,
+            ),
+            _buildNavItem(
+              CupertinoIcons.chart_pie,
+              l10n.navMyHost,
             ),
           ],
           onItemSelected: tabsRouter.setActiveIndex,

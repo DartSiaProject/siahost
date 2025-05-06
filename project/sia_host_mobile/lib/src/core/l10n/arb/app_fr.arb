@@ -68,7 +68,7 @@
     "uploadSpeed": "Vitesse d'envoi",
     "maxStoragePrice": "Prix max de stockage",
     "maxContractsPrice": "Prix max des contrats",
-    "maxAccountExpiry": "Expiration max du compte",
+    "minAccountExpiry": "Expiration min du compte",
     "maxRPCPrice": "Prix max RPC",
   
     "hostConfigTitle": "Configurations de l'hôte",

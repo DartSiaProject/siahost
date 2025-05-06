@@ -69,7 +69,7 @@
   "uploadSpeed": "Upload Speed",
   "maxStoragePrice": "Max Storage Price",
   "maxContractsPrice": "Max Contracts Price",
-  "maxAccountExpiry": "Max Account Expiry",
+  "minAccountExpiry": "Min Account Expiry",
   "maxRPCPrice": "Max RPC Price",
 
   "hostConfigTitle": "Host Configurations",

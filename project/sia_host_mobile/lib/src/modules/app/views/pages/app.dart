@@ -6,6 +6,7 @@ import 'package:sia_host_mobile/src/core/routes/app_router.dart';
 import 'package:sia_host_mobile/src/core/theme/app_theme.dart';
 import 'package:sia_host_mobile/src/modules/app/logic/cubit/onboarding_cubit.dart';
 import 'package:sia_host_mobile/src/modules/auth/logic/cubit/auth_cubit.dart';
+import 'package:sia_host_mobile/src/modules/current_host/logic/cubit/current_host_cubit.dart';
 import 'package:sia_host_mobile/src/modules/home/logic/cubit/network_overview_cubit.dart';
 import 'package:sia_host_mobile/src/modules/host_list/logic/bloc/host_list_bloc.dart';
 import 'package:sia_host_mobile/src/shared/utils/constants.dart';
@@ -28,6 +29,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<HostListBloc>(
           create: (context) => sl.get()..add(HostListFetchedEvent()),
+        ),
+        BlocProvider<CurrentHostCubit>(
+          create: (context) => sl.get()..getData(),
         ),
       ],
       child: ScreenUtilInit(

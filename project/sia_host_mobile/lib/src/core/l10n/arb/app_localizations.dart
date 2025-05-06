@@ -461,11 +461,11 @@ abstract class AppLocalizations {
   /// **'Max Contracts Price'**
   String get maxContractsPrice;
 
-  /// No description provided for @maxAccountExpiry.
+  /// No description provided for @minAccountExpiry.
   ///
   /// In en, this message translates to:
-  /// **'Max Account Expiry'**
-  String get maxAccountExpiry;
+  /// **'Min Account Expiry'**
+  String get minAccountExpiry;
 
   /// No description provided for @maxRPCPrice.
   ///

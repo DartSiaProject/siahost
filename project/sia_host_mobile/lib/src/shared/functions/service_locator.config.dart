@@ -16,6 +16,9 @@ import '../../core/routes/app_router.dart' as _i798;
 import '../../modules/app/logic/cubit/onboarding_cubit.dart' as _i725;
 import '../../modules/auth/data/repositories/auth_repository.dart' as _i135;
 import '../../modules/auth/logic/cubit/auth_cubit.dart' as _i653;
+import '../../modules/current_host/data/repositories/current_host_repository.dart'
+    as _i987;
+import '../../modules/current_host/logic/cubit/current_host_cubit.dart' as _i12;
 import '../../modules/home/data/repositories/network_overview_repository.dart'
     as _i251;
 import '../../modules/home/logic/cubit/network_overview_cubit.dart' as _i731;
@@ -47,6 +50,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i251.NetworkOverviewRepository(gh<_i306.StorageService>()));
     gh.lazySingleton<_i686.HostListRepository>(
         () => _i686.HostListRepository(gh<_i306.StorageService>()));
+    gh.lazySingleton<_i987.CurrentHostRepository>(
+        () => _i987.CurrentHostRepository(gh<_i306.StorageService>()));
     gh.lazySingleton<_i731.NetworkOverviewCubit>(() =>
         _i731.NetworkOverviewCubit(gh<_i251.NetworkOverviewRepository>()));
     gh.lazySingleton<_i134.HostListBloc>(
@@ -57,6 +62,8 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.lazySingleton<_i198.LocationRepository>(
         () => _i198.LocationRepository(gh<_i933.ApiClient>()));
+    gh.lazySingleton<_i12.CurrentHostCubit>(
+        () => _i12.CurrentHostCubit(gh<_i987.CurrentHostRepository>()));
     gh.lazySingleton<_i653.AuthCubit>(
         () => _i653.AuthCubit(gh<_i135.AuthRepository>()));
     return this;

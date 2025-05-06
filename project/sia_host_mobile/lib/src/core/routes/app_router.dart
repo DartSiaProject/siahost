@@ -31,6 +31,10 @@ class AppRouter extends RootStackRouter {
                 ),
               ],
             ),
+            AutoRoute(
+              page: CurrentHostRoute.page,
+              path: 'current',
+            ),
           ],
           guards: [OnboardingGuard(), AuthGuard()],
         ),

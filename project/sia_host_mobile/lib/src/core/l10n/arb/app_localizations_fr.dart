@@ -192,7 +192,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get maxContractsPrice => 'Prix max des contrats';
 
   @override
-  String get maxAccountExpiry => 'Expiration max du compte';
+  String get minAccountExpiry => 'Expiration min du compte';
 
   @override
   String get maxRPCPrice => 'Prix max RPC';
