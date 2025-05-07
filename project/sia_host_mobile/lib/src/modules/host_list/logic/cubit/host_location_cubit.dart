@@ -5,7 +5,6 @@ import 'package:sia_host_mobile/src/shared/exceptions/exceptions.dart';
 
 part 'host_location_state.dart';
 
-// @LazySingleton()
 class HostLocationCubit extends Cubit<HostLocationState> {
   HostLocationCubit(this._locationRepository) : super(HostLocationInitial());
 

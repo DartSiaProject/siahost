@@ -27,6 +27,7 @@ class DashboardView extends StatelessWidget {
     const HomeRoute(),
     const HostListRoute(),
     const CurrentHostRoute(),
+    const HostConfigRoute(),
   ];
 
   @override
@@ -67,6 +68,10 @@ class DashboardView extends StatelessWidget {
             _buildNavItem(
               CupertinoIcons.chart_pie,
               l10n.navMyHost,
+            ),
+            _buildNavItem(
+              Icons.settings,
+              l10n.navConfig,
             ),
           ],
           onItemSelected: tabsRouter.setActiveIndex,

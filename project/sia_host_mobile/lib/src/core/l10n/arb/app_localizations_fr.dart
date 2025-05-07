@@ -204,6 +204,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get configButton => 'Configurer';
 
   @override
+  String get hostConfigSuccess => 'Les données du server on été mises à jour.';
+
+  @override
   String get filesTitle => 'Mes Buckets';
 
   @override

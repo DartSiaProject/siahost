@@ -9,6 +9,9 @@ class CurrentHostInfoModel extends Equatable {
     required this.maxContractPrice,
     required this.minAccountExpiry,
     required this.maxRPCPrice,
+    required this.hostBlockHeightLeeway,
+    required this.minMaxEphemeralAccountBalance,
+    required this.minPriceTableValidity,
   });
 
   factory CurrentHostInfoModel.fromJson(Map<String, dynamic> json) {
@@ -20,8 +23,13 @@ class CurrentHostInfoModel extends Equatable {
       maxContractPrice: json['maxContractPrice'] as String,
       minAccountExpiry: (json['minAccountExpiry'] as num).toString(),
       maxRPCPrice: json['maxRPCPrice'] as String,
+      hostBlockHeightLeeway: (json['hostBlockHeightLeeway'] as num).toInt(),
+      minMaxEphemeralAccountBalance:
+          json['minMaxEphemeralAccountBalance'] as String,
+      minPriceTableValidity: (json['minPriceTableValidity'] as num).toInt(),
     );
   }
+
   final String blockHeight;
   final String maxDownloadPrice;
   final String maxUploadPrice;
@@ -29,6 +37,9 @@ class CurrentHostInfoModel extends Equatable {
   final String maxContractPrice;
   final String minAccountExpiry;
   final String maxRPCPrice;
+  final int hostBlockHeightLeeway;
+  final String minMaxEphemeralAccountBalance;
+  final int minPriceTableValidity;
 
   CurrentHostInfoModel copyWith({
     String? blockHeight,
@@ -38,6 +49,9 @@ class CurrentHostInfoModel extends Equatable {
     String? maxContractPrice,
     String? minAccountExpiry,
     String? maxRPCPrice,
+    int? hostBlockHeightLeeway,
+    String? minMaxEphemeralAccountBalance,
+    int? minPriceTableValidity,
   }) {
     return CurrentHostInfoModel(
       blockHeight: blockHeight ?? this.blockHeight,
@@ -47,6 +61,12 @@ class CurrentHostInfoModel extends Equatable {
       maxContractPrice: maxContractPrice ?? this.maxContractPrice,
       minAccountExpiry: minAccountExpiry ?? this.minAccountExpiry,
       maxRPCPrice: maxRPCPrice ?? this.maxRPCPrice,
+      hostBlockHeightLeeway:
+          hostBlockHeightLeeway ?? this.hostBlockHeightLeeway,
+      minMaxEphemeralAccountBalance:
+          minMaxEphemeralAccountBalance ?? this.minMaxEphemeralAccountBalance,
+      minPriceTableValidity:
+          minPriceTableValidity ?? this.minPriceTableValidity,
     );
   }
 

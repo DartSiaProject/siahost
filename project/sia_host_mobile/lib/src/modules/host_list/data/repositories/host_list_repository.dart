@@ -57,13 +57,13 @@ class HostListRepository {
             addressLocation: '',
             uploadPrice: HostHelper.convertPricing(
               settings['uploadbandwidthprice'] as String,
-            ),
+            ).toDouble(),
             downloadPrice: HostHelper.convertPricing(
               settings['downloadbandwidthprice'] as String,
-            ),
+            ).toDouble(),
             storagePrice: HostHelper.convertPricing(
               settings['storageprice'] as String,
-            ),
+            ).toDouble(),
             acceptingContracts: settings['acceptingcontracts'] as bool,
             totalStorage: HostHelper.convertStorage(
               settings['totalstorage'] as num,

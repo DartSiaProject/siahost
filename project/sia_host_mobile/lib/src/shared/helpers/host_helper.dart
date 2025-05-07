@@ -100,8 +100,20 @@ class HostHelper {
 
   /// 💰 Convert pricing Hastings To SC
   ///
-  static double convertPricing(String amount) {
-    return BigInt.parse(amount).toDouble() / 1e12;
+  static num convertPricing(
+    String amount, {
+    double divideBy = 1e12,
+  }) {
+    return BigInt.parse(amount).toDouble() / divideBy;
+  }
+
+  /// 💰 Revert pricing SC To Hastings
+  ///
+  static double revertPricingConvertion(
+    String amount, {
+    double multiplyBy = 1e12,
+  }) {
+    return num.parse(amount).toDouble() * multiplyBy;
   }
 
   /// Calculate used storage

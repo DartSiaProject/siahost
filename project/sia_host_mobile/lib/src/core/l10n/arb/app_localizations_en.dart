@@ -204,6 +204,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get configButton => 'Configure';
 
   @override
+  String get hostConfigSuccess => 'Host data updated successfully';
+
+  @override
   String get filesTitle => 'My Buckets';
 
   @override

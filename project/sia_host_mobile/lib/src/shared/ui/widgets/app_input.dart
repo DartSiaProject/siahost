@@ -24,6 +24,7 @@ class AppInput extends StatelessWidget {
     this.prefix,
     this.suffix,
     this.isEnabled = true,
+    this.initialValue,
   });
 
   /// The controller for the text field
@@ -68,6 +69,9 @@ class AppInput extends StatelessWidget {
   // is input enabled
   final bool isEnabled;
 
+  // Initial value
+  final String? initialValue;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -99,6 +103,7 @@ class AppInput extends StatelessWidget {
           ),
           textInputAction: textInputAction,
           enabled: isEnabled,
+          initialValue: initialValue,
         ),
       ],
     );

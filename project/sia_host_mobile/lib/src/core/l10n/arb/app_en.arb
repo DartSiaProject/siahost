@@ -74,6 +74,7 @@
 
   "hostConfigTitle": "Host Configurations",
   "configButton": "Configure",
+  "hostConfigSuccess": "Host data updated successfully",
 
   "filesTitle": "My Buckets",
 

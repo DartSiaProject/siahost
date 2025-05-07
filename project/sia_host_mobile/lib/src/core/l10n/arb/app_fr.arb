@@ -73,6 +73,7 @@
   
     "hostConfigTitle": "Configurations de l'hôte",
     "configButton": "Configurer",
+    "hostConfigSuccess": "Les données du server on été mises à jour.",
   
     "filesTitle": "Mes Buckets",
   

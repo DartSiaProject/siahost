@@ -485,6 +485,12 @@ abstract class AppLocalizations {
   /// **'Configure'**
   String get configButton;
 
+  /// No description provided for @hostConfigSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Host data updated successfully'**
+  String get hostConfigSuccess;
+
   /// No description provided for @filesTitle.
   ///
   /// In en, this message translates to:
