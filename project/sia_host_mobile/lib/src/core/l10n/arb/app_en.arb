@@ -39,6 +39,7 @@
   "moveFile": "Move File",
   "notice": "Notice",
   "retry": "Retry",
+  "delete": "Delete",
 
   "navHome": "Home",
   "navSearch": "Search",
@@ -84,6 +85,10 @@
   "message": "Message",
   "date": "Date",
   "source": "Source",
+  "failedDismissAlert": "Failed to dismiss the alert.",
+  "failedFetchedMoreAlert": "Failed to fetch more alerts.",
+  "noAlertFound": "No Alert found !",
+  "notifDetail": "Alert Details",
 
   "errorCancelled": "Request was cancelled.",
   "errorConnectionTimeout": "Connection timed out.",

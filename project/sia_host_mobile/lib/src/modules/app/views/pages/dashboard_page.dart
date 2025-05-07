@@ -45,7 +45,7 @@ class DashboardView extends StatelessWidget {
                 color: AppTheme.primaryColor,
               ),
               onPressed: () {
-                //
+                context.router.push(const NotificationListRoute());
               },
             ),
           ],

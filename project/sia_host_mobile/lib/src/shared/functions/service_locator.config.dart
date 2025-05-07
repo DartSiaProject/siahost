@@ -29,6 +29,10 @@ import '../../modules/host_list/data/repositories/host_list_repository.dart'
 import '../../modules/host_list/data/repositories/location_repository.dart'
     as _i198;
 import '../../modules/host_list/logic/bloc/host_list_bloc.dart' as _i134;
+import '../../modules/notifications/data/repositories/notification_repository.dart'
+    as _i350;
+import '../../modules/notifications/logic/bloc/notification_bloc.dart' as _i955;
+import '../../modules/notifications/notifications.dart' as _i859;
 import '../services/api_client.dart' as _i933;
 import '../services/storage_service.dart' as _i306;
 
@@ -54,8 +58,12 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i686.HostListRepository(gh<_i306.StorageService>()));
     gh.lazySingleton<_i987.CurrentHostRepository>(
         () => _i987.CurrentHostRepository(gh<_i306.StorageService>()));
+    gh.lazySingleton<_i350.NotificationRepository>(
+        () => _i350.NotificationRepository(gh<_i306.StorageService>()));
     gh.factory<_i362.HostConfigRepository>(
         () => _i362.HostConfigRepository(gh<_i306.StorageService>()));
+    gh.lazySingleton<_i955.NotificationBloc>(
+        () => _i955.NotificationBloc(gh<_i859.NotificationRepository>()));
     gh.lazySingleton<_i731.NetworkOverviewCubit>(() =>
         _i731.NetworkOverviewCubit(gh<_i251.NetworkOverviewRepository>()));
     gh.lazySingleton<_i134.HostListBloc>(

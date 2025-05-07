@@ -39,6 +39,7 @@
     "moveFile": "Déplacer le fichier",
     "notice": "Avis",
     "retry": "Réessayer",
+    "delete": "Supprimer",
   
     "navHome": "Accueil",
     "navSearch": "Recherche",
@@ -83,6 +84,10 @@
     "message": "Message",
     "date": "Date",
     "source": "Source",
+    "failedDismissAlert": "Échec de la suppression de l'alerte.",
+    "failedFetchedMoreAlert": "Échec de la récupération de plus d'alertes.",
+    "noAlertFound": "Aucune alerte trouvée!",
+    "notifDetail": "Détails de l'alerte",
   
     "errorCancelled": "La requête a été annulée.",
     "errorConnectionTimeout": "Délai de connexion dépassé.",

@@ -311,6 +311,12 @@ abstract class AppLocalizations {
   /// **'Retry'**
   String get retry;
 
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
   /// No description provided for @navHome.
   ///
   /// In en, this message translates to:
@@ -532,6 +538,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Source'**
   String get source;
+
+  /// No description provided for @failedDismissAlert.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to dismiss the alert.'**
+  String get failedDismissAlert;
+
+  /// No description provided for @failedFetchedMoreAlert.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to fetch more alerts.'**
+  String get failedFetchedMoreAlert;
+
+  /// No description provided for @noAlertFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No Alert found !'**
+  String get noAlertFound;
+
+  /// No description provided for @notifDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Alert Details'**
+  String get notifDetail;
 
   /// No description provided for @errorCancelled.
   ///

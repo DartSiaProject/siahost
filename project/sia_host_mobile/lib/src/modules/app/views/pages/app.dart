@@ -9,6 +9,7 @@ import 'package:sia_host_mobile/src/modules/auth/logic/cubit/auth_cubit.dart';
 import 'package:sia_host_mobile/src/modules/current_host/logic/cubit/current_host_cubit.dart';
 import 'package:sia_host_mobile/src/modules/home/logic/cubit/network_overview_cubit.dart';
 import 'package:sia_host_mobile/src/modules/host_list/logic/bloc/host_list_bloc.dart';
+import 'package:sia_host_mobile/src/modules/notifications/logic/bloc/notification_bloc.dart';
 import 'package:sia_host_mobile/src/shared/utils/constants.dart';
 
 class App extends StatelessWidget {
@@ -32,6 +33,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<CurrentHostCubit>(
           create: (context) => sl.get()..getData(),
+        ),
+        BlocProvider<NotificationBloc>(
+          create: (context) => sl.get()..add(const NotificationFetchedEvent()),
         ),
       ],
       child: ScreenUtilInit(

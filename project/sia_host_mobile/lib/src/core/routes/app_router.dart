@@ -43,6 +43,21 @@ class AppRouter extends RootStackRouter {
           guards: [OnboardingGuard(), AuthGuard()],
         ),
         AutoRoute(
+          page: const EmptyShellRoute(''),
+          path: '/notifications',
+          children: [
+            AutoRoute(
+              page: NotificationListRoute.page,
+              path: '',
+            ),
+            AutoRoute(
+              page: NotificationDetailsRoute.page,
+              path: 'details',
+            ),
+          ],
+          guards: [OnboardingGuard(), AuthGuard()],
+        ),
+        AutoRoute(
           page: LoginRoute.page,
           path: '/auth',
           guards: [OnboardingGuard()],

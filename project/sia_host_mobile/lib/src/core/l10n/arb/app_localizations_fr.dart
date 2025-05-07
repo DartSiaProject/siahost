@@ -117,6 +117,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get retry => 'Réessayer';
 
   @override
+  String get delete => 'Supprimer';
+
+  @override
   String get navHome => 'Accueil';
 
   @override
@@ -226,6 +229,18 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get source => 'Source';
+
+  @override
+  String get failedDismissAlert => 'Échec de la suppression de l\'alerte.';
+
+  @override
+  String get failedFetchedMoreAlert => 'Échec de la récupération de plus d\'alertes.';
+
+  @override
+  String get noAlertFound => 'Aucune alerte trouvée!';
+
+  @override
+  String get notifDetail => 'Détails de l\'alerte';
 
   @override
   String get errorCancelled => 'La requête a été annulée.';
