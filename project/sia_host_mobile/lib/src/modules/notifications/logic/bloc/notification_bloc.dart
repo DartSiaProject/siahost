@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sia_host_mobile/src/modules/notifications/notifications.dart';
 import 'package:sia_host_mobile/src/shared/exceptions/exceptions.dart';
+import 'package:sia_host_mobile/src/shared/utils/utils.dart';
 
 part 'notification_event.dart';
 part 'notification_state.dart';

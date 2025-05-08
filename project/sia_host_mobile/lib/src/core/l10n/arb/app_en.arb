@@ -19,6 +19,10 @@
   "addressCopiedSuccessfully": "Address Copied successfully",
   "scPerTB": "SC/TB",
   "siaCoin": "SC",
+  "byte": "B",
+  "kiloByte": "KB",
+  "megaByte": "MB",
+  "gigaByte": "GB",
   "teraByte": "TB",
   "petaByte": "PB",
   "host": "Host",
@@ -40,6 +44,11 @@
   "notice": "Notice",
   "retry": "Retry",
   "delete": "Delete",
+  "save": "Save",
+  "createAt": "Created at",
+  "downloadFile": "Download File",
+  "downloadFileNotice": "You need to download the file first beforre opening",
+  "download": "Download",
 
   "navHome": "Home",
   "navSearch": "Search",
@@ -135,5 +144,23 @@
   "invalidAddressFormat": "Invalid address format.",
   "invalidForm": "Please fill in all fields.",
 
-  "cannotFindHostByKey": "Cannot find the host with this public key."
+  "cannotFindHostByKey": "Cannot find the host with this public key.",
+
+  "fileManagerTitle": "File Manager",
+  "fileManagerDesc": "Manage your files and folders in the Sia network.",
+  "fileManagerEmpty": "No files or folders found.",
+  "fileManagerEmptyDesc": "You can create a new folder or upload files to the Sia network.",
+  "fileManagerUpload": "Upload",
+  "fileManagerCreateFolder": "Create Folder",
+
+  "fileManagerLocal": "Local Files",
+  "fileManagerRemote": "Remote Files",
+  "noStoragePermission": "Please accept storage permission first.",
+  "notEnoughSpace": "Not enough space to download the file.",
+  "bucketName": "Bucket Name",
+  "bucketNameHint": "Enter the bucket name",
+  "invalidBucketNamePattern": "The bucket name pattern is invalid",
+  "bucketCreated": "The bucket was successfully created.",
+  "bucketNameRules": "Bucket name must:\n- Be 3–63 characters\n- Use only letters, numbers, dots (.), and hyphens (-)\n- Start and end with a letter or number\n- Not be formatted as an IP address\n- Not contain consecutive periods"
+
 }

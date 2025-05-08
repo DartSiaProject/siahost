@@ -25,6 +25,7 @@ class AppInput extends StatelessWidget {
     this.suffix,
     this.isEnabled = true,
     this.initialValue,
+    this.helperText,
   });
 
   /// The controller for the text field
@@ -72,6 +73,9 @@ class AppInput extends StatelessWidget {
   // Initial value
   final String? initialValue;
 
+  // helper text
+  final String? helperText;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -100,6 +104,8 @@ class AppInput extends StatelessWidget {
             hintText: hintText ?? labelText,
             prefixIcon: prefix,
             suffixIcon: suffix,
+            helperText: helperText,
+            helperMaxLines: 5,
           ),
           textInputAction: textInputAction,
           enabled: isEnabled,

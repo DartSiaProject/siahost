@@ -1,17 +1,5 @@
 part of 'notification_bloc.dart';
 
-enum StateStatus {
-  initial,
-  loading,
-  success,
-  failure,
-  paginating,
-  paginatingFailure,
-  dismissing,
-  dismissingFailure,
-  dismissed,
-}
-
 final class NotificationState extends Equatable {
   const NotificationState({
     this.status = StateStatus.initial,

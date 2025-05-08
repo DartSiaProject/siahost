@@ -21,8 +21,11 @@ enum ResponseStatus {
   unprocessibleEntity,
   internalServerError,
   provider,
+  badMethod,
   other,
-  badMethod;
+
+  noStoragePermission,
+  notEnoughSpace;
 }
 
 enum StateStatus {
@@ -30,8 +33,31 @@ enum StateStatus {
   loading,
   success,
   failure,
-  paginating,
   searching,
-  paginatingFailure,
   searchingFailure,
+  paginating,
+  paginatingFailure,
+  sorting,
+  sortingFailure,
+  filtrering,
+  filtreringFailure,
+  dismissing,
+  dismissingFailure,
+  dismissed,
+  updating,
+}
+
+enum SupportedFileType {
+  image('Images'),
+  video('Videos'),
+  audio('Audios'),
+  document('Documents'),
+  pdf('Pdfs'),
+  txt('Texts'),
+  archive('Archives'),
+  other('Others');
+
+  final String dirName;
+
+  const SupportedFileType(this.dirName);
 }

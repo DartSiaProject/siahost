@@ -5,6 +5,8 @@ import 'package:sia_host_mobile/src/shared/utils/constants.dart';
 enum SnackBarType { error, success, warning, info, normal }
 
 class AppSnackBar {
+  AppSnackBar._();
+
   static Future<void> success({
     required String message,
     String? title,

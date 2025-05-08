@@ -9,15 +9,19 @@ import 'package:sia_host_mobile/src/core/routes/app_router.gr.dart';
 class AppRouter extends RootStackRouter {
   @override
   List<AutoRoute> get routes => [
+        // Main pages
         AutoRoute(
           page: DashboardRoute.page,
           path: '/',
           initial: true,
           children: [
+            // home
             AutoRoute(
               page: HomeRoute.page,
               path: '',
             ),
+
+            // hosts list
             AutoRoute(
               page: const EmptyShellRoute('host_list'),
               path: 'hosts',
@@ -31,17 +35,34 @@ class AppRouter extends RootStackRouter {
                 ),
               ],
             ),
+
+            // my_host | current_host
             AutoRoute(
               page: CurrentHostRoute.page,
               path: 'current',
             ),
+
+            // current_host_config
             AutoRoute(
               page: HostConfigRoute.page,
               path: 'config',
             ),
+
+            // file and bucket manager
+            AutoRoute(
+              page: const EmptyShellRoute('files'),
+              path: 'files',
+              children: [
+                AutoRoute(page: FileManagerRoute.page, path: ''),
+                AutoRoute(
+                    page: BucketDetailsRoute.page, path: 'details/:bucket'),
+              ],
+            ),
           ],
           guards: [OnboardingGuard(), AuthGuard()],
         ),
+
+        // Notifications
         AutoRoute(
           page: const EmptyShellRoute(''),
           path: '/notifications',
@@ -57,11 +78,15 @@ class AppRouter extends RootStackRouter {
           ],
           guards: [OnboardingGuard(), AuthGuard()],
         ),
+
+        // Login
         AutoRoute(
           page: LoginRoute.page,
           path: '/auth',
           guards: [OnboardingGuard()],
         ),
+
+        // Onboarding
         AutoRoute(
           page: OnboardingRoute.page,
           path: '/onboarding',

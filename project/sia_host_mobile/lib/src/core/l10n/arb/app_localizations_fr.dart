@@ -57,6 +57,18 @@ class AppLocalizationsFr extends AppLocalizations {
   String get siaCoin => 'SC';
 
   @override
+  String get byte => 'o';
+
+  @override
+  String get kiloByte => 'Ko';
+
+  @override
+  String get megaByte => 'Mo';
+
+  @override
+  String get gigaByte => 'Go';
+
+  @override
   String get teraByte => 'To';
 
   @override
@@ -118,6 +130,21 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get delete => 'Supprimer';
+
+  @override
+  String get save => 'Enregistrer';
+
+  @override
+  String get createAt => 'Créer le';
+
+  @override
+  String get downloadFile => 'Télécharger le fichier';
+
+  @override
+  String get downloadFileNotice => 'Vous devez télécharger ce fichier avant de pouvoir l\'ouvrir';
+
+  @override
+  String get download => 'Télécharger';
 
   @override
   String get navHome => 'Accueil';
@@ -358,4 +385,49 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get cannotFindHostByKey => 'Aucun server n\'a été trouvé avec cette clé publique.';
+
+  @override
+  String get fileManagerTitle => 'Gestionnaire de fichiers';
+
+  @override
+  String get fileManagerDesc => 'Gerer vos fichiers.';
+
+  @override
+  String get fileManagerEmpty => 'Aucun fichiers ou dossiers trouvés.';
+
+  @override
+  String get fileManagerEmptyDesc => 'Vous pouvez téléverser de nouveaux fichiers.';
+
+  @override
+  String get fileManagerUpload => 'Téléverser';
+
+  @override
+  String get fileManagerCreateFolder => 'Créer un dossier';
+
+  @override
+  String get fileManagerLocal => 'Fichier Locaux';
+
+  @override
+  String get fileManagerRemote => 'Fichiers Servers';
+
+  @override
+  String get noStoragePermission => 'Veuillez accepter les permissions d\'accès au stockage.';
+
+  @override
+  String get notEnoughSpace => 'Vous n\'avez pas assez d\'espace de stockage dans votre appareil.';
+
+  @override
+  String get bucketName => 'Nom du bucket';
+
+  @override
+  String get bucketNameHint => 'Saisir le nom du bucket';
+
+  @override
+  String get invalidBucketNamePattern => 'Le pattern utilisé n\'est pas correct';
+
+  @override
+  String get bucketCreated => 'Le bucket a été créé avec succès.';
+
+  @override
+  String get bucketNameRules => 'Le nom du bucket doit:\n- Contenir entre 3 et 63 caractères\n- Utiliser uniquement des lettres, des chiffres, des points (.) et des tirets (-)\n- Commencer et finir par une lettre ou un chiffre\n- Ne pas être au format d\'adresse IP\n- Ne pas contenir de points consécutifs';
 }

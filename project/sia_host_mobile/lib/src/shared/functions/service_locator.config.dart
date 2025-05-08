@@ -19,6 +19,12 @@ import '../../modules/auth/logic/cubit/auth_cubit.dart' as _i653;
 import '../../modules/current_host/data/repositories/current_host_repository.dart'
     as _i987;
 import '../../modules/current_host/logic/cubit/current_host_cubit.dart' as _i12;
+import '../../modules/file_manager/data/repositories/bucket_repository.dart'
+    as _i168;
+import '../../modules/file_manager/data/repositories/file_action_repository.dart'
+    as _i237;
+import '../../modules/file_manager/logic/buckets/bucket_list_cubit.dart'
+    as _i451;
 import '../../modules/home/data/repositories/network_overview_repository.dart'
     as _i251;
 import '../../modules/home/logic/cubit/network_overview_cubit.dart' as _i731;
@@ -34,6 +40,7 @@ import '../../modules/notifications/data/repositories/notification_repository.da
 import '../../modules/notifications/logic/bloc/notification_bloc.dart' as _i955;
 import '../../modules/notifications/notifications.dart' as _i859;
 import '../services/api_client.dart' as _i933;
+import '../services/file_storage_service.dart' as _i178;
 import '../services/storage_service.dart' as _i306;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -48,26 +55,37 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     gh.singleton<_i933.ApiClient>(() => _i933.ApiClient()..init());
+    gh.singleton<_i178.FileStorageService>(
+        () => _i178.FileStorageService()..init());
     gh.singleton<_i306.StorageService>(() => _i306.StorageService()..init());
     gh.lazySingleton<_i798.AppRouter>(() => _i798.AppRouter());
-    gh.lazySingleton<_i725.OnboardingCubit>(
-        () => _i725.OnboardingCubit(gh<_i306.StorageService>()));
-    gh.lazySingleton<_i251.NetworkOverviewRepository>(
-        () => _i251.NetworkOverviewRepository(gh<_i306.StorageService>()));
+    gh.lazySingleton<_i168.BucketRepository>(
+        () => _i168.BucketRepository(gh<_i306.StorageService>()));
     gh.lazySingleton<_i686.HostListRepository>(
         () => _i686.HostListRepository(gh<_i306.StorageService>()));
+    gh.lazySingleton<_i725.OnboardingCubit>(
+        () => _i725.OnboardingCubit(gh<_i306.StorageService>()));
     gh.lazySingleton<_i987.CurrentHostRepository>(
         () => _i987.CurrentHostRepository(gh<_i306.StorageService>()));
     gh.lazySingleton<_i350.NotificationRepository>(
         () => _i350.NotificationRepository(gh<_i306.StorageService>()));
+    gh.lazySingleton<_i251.NetworkOverviewRepository>(
+        () => _i251.NetworkOverviewRepository(gh<_i306.StorageService>()));
     gh.factory<_i362.HostConfigRepository>(
         () => _i362.HostConfigRepository(gh<_i306.StorageService>()));
     gh.lazySingleton<_i955.NotificationBloc>(
         () => _i955.NotificationBloc(gh<_i859.NotificationRepository>()));
+    gh.lazySingleton<_i451.BucketListCubit>(
+        () => _i451.BucketListCubit(gh<_i168.BucketRepository>()));
     gh.lazySingleton<_i731.NetworkOverviewCubit>(() =>
         _i731.NetworkOverviewCubit(gh<_i251.NetworkOverviewRepository>()));
     gh.lazySingleton<_i134.HostListBloc>(
         () => _i134.HostListBloc(gh<_i686.HostListRepository>()));
+    gh.lazySingleton<_i237.FileActionRepository>(
+        () => _i237.FileActionRepository(
+              gh<_i306.StorageService>(),
+              gh<_i178.FileStorageService>(),
+            ));
     gh.lazySingleton<_i135.AuthRepository>(() => _i135.AuthRepository(
           gh<_i933.ApiClient>(),
           gh<_i306.StorageService>(),

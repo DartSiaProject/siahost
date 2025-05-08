@@ -10,6 +10,7 @@ import 'package:sia_host_mobile/src/shared/ui/widgets/app_error_widget.dart';
 import 'package:sia_host_mobile/src/shared/ui/widgets/app_loader.dart';
 import 'package:sia_host_mobile/src/shared/ui/widgets/app_snackbar.dart';
 import 'package:sia_host_mobile/src/shared/ui/widgets/empty_list_widget.dart';
+import 'package:sia_host_mobile/src/shared/utils/utils.dart';
 
 @RoutePage()
 class NotificationListPage extends StatelessWidget {

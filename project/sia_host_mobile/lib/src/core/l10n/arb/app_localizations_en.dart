@@ -57,6 +57,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get siaCoin => 'SC';
 
   @override
+  String get byte => 'B';
+
+  @override
+  String get kiloByte => 'KB';
+
+  @override
+  String get megaByte => 'MB';
+
+  @override
+  String get gigaByte => 'GB';
+
+  @override
   String get teraByte => 'TB';
 
   @override
@@ -118,6 +130,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get delete => 'Delete';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get createAt => 'Created at';
+
+  @override
+  String get downloadFile => 'Download File';
+
+  @override
+  String get downloadFileNotice => 'You need to download the file first beforre opening';
+
+  @override
+  String get download => 'Download';
 
   @override
   String get navHome => 'Home';
@@ -358,4 +385,49 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cannotFindHostByKey => 'Cannot find the host with this public key.';
+
+  @override
+  String get fileManagerTitle => 'File Manager';
+
+  @override
+  String get fileManagerDesc => 'Manage your files and folders in the Sia network.';
+
+  @override
+  String get fileManagerEmpty => 'No files or folders found.';
+
+  @override
+  String get fileManagerEmptyDesc => 'You can create a new folder or upload files to the Sia network.';
+
+  @override
+  String get fileManagerUpload => 'Upload';
+
+  @override
+  String get fileManagerCreateFolder => 'Create Folder';
+
+  @override
+  String get fileManagerLocal => 'Local Files';
+
+  @override
+  String get fileManagerRemote => 'Remote Files';
+
+  @override
+  String get noStoragePermission => 'Please accept storage permission first.';
+
+  @override
+  String get notEnoughSpace => 'Not enough space to download the file.';
+
+  @override
+  String get bucketName => 'Bucket Name';
+
+  @override
+  String get bucketNameHint => 'Enter the bucket name';
+
+  @override
+  String get invalidBucketNamePattern => 'The bucket name pattern is invalid';
+
+  @override
+  String get bucketCreated => 'The bucket was successfully created.';
+
+  @override
+  String get bucketNameRules => 'Bucket name must:\n- Be 3–63 characters\n- Use only letters, numbers, dots (.), and hyphens (-)\n- Start and end with a letter or number\n- Not be formatted as an IP address\n- Not contain consecutive periods';
 }

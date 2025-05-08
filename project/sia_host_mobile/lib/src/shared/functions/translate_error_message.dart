@@ -47,5 +47,9 @@ String translateErrorMessage(BuildContext context, DartSiaException exception) {
       return l10n.errorBadMethod;
     case ResponseStatus.unknown:
       return l10n.errorUnknown;
+    case ResponseStatus.noStoragePermission:
+      return l10n.noStoragePermission;
+    case ResponseStatus.notEnoughSpace:
+      return l10n.notEnoughSpace;
   }
 }

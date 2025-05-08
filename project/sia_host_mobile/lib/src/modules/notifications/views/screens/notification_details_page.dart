@@ -7,6 +7,7 @@ import 'package:sia_host_mobile/src/core/theme/app_theme.dart';
 import 'package:sia_host_mobile/src/modules/notifications/notifications.dart';
 import 'package:sia_host_mobile/src/shared/ui/widgets/app_loader.dart';
 import 'package:sia_host_mobile/src/shared/ui/widgets/app_snackbar.dart';
+import 'package:sia_host_mobile/src/shared/utils/utils.dart';
 
 @RoutePage()
 class NotificationDetailsPage extends StatelessWidget {

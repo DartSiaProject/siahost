@@ -191,6 +191,30 @@ abstract class AppLocalizations {
   /// **'SC'**
   String get siaCoin;
 
+  /// No description provided for @byte.
+  ///
+  /// In en, this message translates to:
+  /// **'B'**
+  String get byte;
+
+  /// No description provided for @kiloByte.
+  ///
+  /// In en, this message translates to:
+  /// **'KB'**
+  String get kiloByte;
+
+  /// No description provided for @megaByte.
+  ///
+  /// In en, this message translates to:
+  /// **'MB'**
+  String get megaByte;
+
+  /// No description provided for @gigaByte.
+  ///
+  /// In en, this message translates to:
+  /// **'GB'**
+  String get gigaByte;
+
   /// No description provided for @teraByte.
   ///
   /// In en, this message translates to:
@@ -316,6 +340,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Delete'**
   String get delete;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @createAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Created at'**
+  String get createAt;
+
+  /// No description provided for @downloadFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Download File'**
+  String get downloadFile;
+
+  /// No description provided for @downloadFileNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'You need to download the file first beforre opening'**
+  String get downloadFileNotice;
+
+  /// No description provided for @download.
+  ///
+  /// In en, this message translates to:
+  /// **'Download'**
+  String get download;
 
   /// No description provided for @navHome.
   ///
@@ -796,6 +850,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cannot find the host with this public key.'**
   String get cannotFindHostByKey;
+
+  /// No description provided for @fileManagerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'File Manager'**
+  String get fileManagerTitle;
+
+  /// No description provided for @fileManagerDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage your files and folders in the Sia network.'**
+  String get fileManagerDesc;
+
+  /// No description provided for @fileManagerEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No files or folders found.'**
+  String get fileManagerEmpty;
+
+  /// No description provided for @fileManagerEmptyDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'You can create a new folder or upload files to the Sia network.'**
+  String get fileManagerEmptyDesc;
+
+  /// No description provided for @fileManagerUpload.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload'**
+  String get fileManagerUpload;
+
+  /// No description provided for @fileManagerCreateFolder.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Folder'**
+  String get fileManagerCreateFolder;
+
+  /// No description provided for @fileManagerLocal.
+  ///
+  /// In en, this message translates to:
+  /// **'Local Files'**
+  String get fileManagerLocal;
+
+  /// No description provided for @fileManagerRemote.
+  ///
+  /// In en, this message translates to:
+  /// **'Remote Files'**
+  String get fileManagerRemote;
+
+  /// No description provided for @noStoragePermission.
+  ///
+  /// In en, this message translates to:
+  /// **'Please accept storage permission first.'**
+  String get noStoragePermission;
+
+  /// No description provided for @notEnoughSpace.
+  ///
+  /// In en, this message translates to:
+  /// **'Not enough space to download the file.'**
+  String get notEnoughSpace;
+
+  /// No description provided for @bucketName.
+  ///
+  /// In en, this message translates to:
+  /// **'Bucket Name'**
+  String get bucketName;
+
+  /// No description provided for @bucketNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the bucket name'**
+  String get bucketNameHint;
+
+  /// No description provided for @invalidBucketNamePattern.
+  ///
+  /// In en, this message translates to:
+  /// **'The bucket name pattern is invalid'**
+  String get invalidBucketNamePattern;
+
+  /// No description provided for @bucketCreated.
+  ///
+  /// In en, this message translates to:
+  /// **'The bucket was successfully created.'**
+  String get bucketCreated;
+
+  /// No description provided for @bucketNameRules.
+  ///
+  /// In en, this message translates to:
+  /// **'Bucket name must:\n- Be 3–63 characters\n- Use only letters, numbers, dots (.), and hyphens (-)\n- Start and end with a letter or number\n- Not be formatted as an IP address\n- Not contain consecutive periods'**
+  String get bucketNameRules;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
