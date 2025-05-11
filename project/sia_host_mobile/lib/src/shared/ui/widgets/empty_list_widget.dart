@@ -7,7 +7,7 @@ class EmptyListWidget extends StatelessWidget {
   const EmptyListWidget({
     required this.message,
     super.key,
-    this.textBtn = 'Rafraichir',
+    this.textBtn,
     this.showBtn = true,
     this.onBtnTap,
     this.onRefresh,
@@ -25,37 +25,30 @@ class EmptyListWidget extends StatelessWidget {
         onRefresh?.call();
         return;
       },
-      child: Center(
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(
-            parent: AlwaysScrollableScrollPhysics(),
+      child: Column(
+        spacing: 16,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: SvgPicture.asset(
+              'assets/icons/empty.svg',
+              width: 185,
+              height: 185,
+            ),
           ),
-          child: Column(
-            spacing: 16,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Center(
-                child: SvgPicture.asset(
-                  'assets/icons/empty.svg',
-                  width: 185,
-                  height: 185,
-                ),
-              ),
-              Text(
-                message,
-                style: context.textTheme.bodyLarge,
-                textAlign: TextAlign.center,
-              ),
-              if (showBtn && textBtn != null)
-                Center(
-                  child: AppButton(
-                    label: textBtn!,
-                    onPressed: onBtnTap ?? onRefresh,
-                  ),
-                ),
-            ],
+          Text(
+            message,
+            style: context.textTheme.bodyLarge,
+            textAlign: TextAlign.center,
           ),
-        ),
+          if (showBtn && textBtn != null)
+            Center(
+              child: AppButton(
+                label: textBtn!,
+                onPressed: onBtnTap ?? onRefresh,
+              ),
+            ),
+        ],
       ),
     );
   }

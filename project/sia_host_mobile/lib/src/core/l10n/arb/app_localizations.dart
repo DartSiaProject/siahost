@@ -353,24 +353,6 @@ abstract class AppLocalizations {
   /// **'Created at'**
   String get createAt;
 
-  /// No description provided for @downloadFile.
-  ///
-  /// In en, this message translates to:
-  /// **'Download File'**
-  String get downloadFile;
-
-  /// No description provided for @downloadFileNotice.
-  ///
-  /// In en, this message translates to:
-  /// **'You need to download the file first beforre opening'**
-  String get downloadFileNotice;
-
-  /// No description provided for @download.
-  ///
-  /// In en, this message translates to:
-  /// **'Download'**
-  String get download;
-
   /// No description provided for @navHome.
   ///
   /// In en, this message translates to:
@@ -940,6 +922,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Bucket name must:\n- Be 3–63 characters\n- Use only letters, numbers, dots (.), and hyphens (-)\n- Start and end with a letter or number\n- Not be formatted as an IP address\n- Not contain consecutive periods'**
   String get bucketNameRules;
+
+  /// No description provided for @newFileNameField.
+  ///
+  /// In en, this message translates to:
+  /// **'New File name'**
+  String get newFileNameField;
+
+  /// No description provided for @newFileNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter new file name'**
+  String get newFileNameHint;
+
+  /// No description provided for @uploadFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload a File'**
+  String get uploadFile;
+
+  /// No description provided for @uploadFormNameField.
+  ///
+  /// In en, this message translates to:
+  /// **'Save File As'**
+  String get uploadFormNameField;
+
+  /// No description provided for @uploadAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload'**
+  String get uploadAction;
+
+  /// No description provided for @pickFileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a file'**
+  String get pickFileTitle;
+
+  /// No description provided for @pickFileDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select the file to upload'**
+  String get pickFileDesc;
+
+  /// No description provided for @pickedFileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'File picked'**
+  String get pickedFileTitle;
+
+  /// No description provided for @newFileOrDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter new file name or leave blank to save as default name'**
+  String get newFileOrDefault;
+
+  /// No description provided for @copyFormUseOldname.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep Old file name'**
+  String get copyFormUseOldname;
+
+  /// No description provided for @selectDestBucket.
+  ///
+  /// In en, this message translates to:
+  /// **'Select destination bucket'**
+  String get selectDestBucket;
+
+  /// fileCopied
+  ///
+  /// In en, this message translates to:
+  /// **'The file {name} has been copied successfully.'**
+  String fileCopied(String name);
+
+  /// fileRenamed
+  ///
+  /// In en, this message translates to:
+  /// **'The file {name} has been renamed successfully.'**
+  String fileRenamed(String name);
+
+  /// fileMoved
+  ///
+  /// In en, this message translates to:
+  /// **'The file {name} has been moved successfully.'**
+  String fileMoved(String name);
+
+  /// fileDeleted
+  ///
+  /// In en, this message translates to:
+  /// **'The file {name} has been deleted successfully.'**
+  String fileDeleted(String name);
+
+  /// fileUploaded
+  ///
+  /// In en, this message translates to:
+  /// **'The file {name} has been uploaded successfully.'**
+  String fileUploaded(String name);
+
+  /// fileDownload
+  ///
+  /// In en, this message translates to:
+  /// **'The file {name} has been downloaded successfully.'**
+  String fileDownload(String name);
+
+  /// No description provided for @deleteFileNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete a file'**
+  String get deleteFileNotice;
+
+  /// No description provided for @deleteFileDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'You are about to delete a file.\n Continue ?'**
+  String get deleteFileDesc;
+
+  /// No description provided for @downloadFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Download File'**
+  String get downloadFile;
+
+  /// No description provided for @downloadFileNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'You need to download the file first before opening it'**
+  String get downloadFileNotice;
+
+  /// No description provided for @downloadAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Download'**
+  String get downloadAction;
+
+  /// downloadedFile
+  ///
+  /// In en, this message translates to:
+  /// **'The file {name} has been downloaded successfully.'**
+  String downloadedFile(String name);
+
+  /// No description provided for @downloadStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Download started in background.'**
+  String get downloadStart;
+
+  /// No description provided for @downloadAlreadyInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Your file download is already in progress.'**
+  String get downloadAlreadyInProgress;
+
+  /// No description provided for @unsupportedFileNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Unsupported file'**
+  String get unsupportedFileNotice;
+
+  /// No description provided for @unsupportedFileDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'We cannot open this file because it\'s unsupported.'**
+  String get unsupportedFileDesc;
+
+  /// No description provided for @unsupportedOpenExternally.
+  ///
+  /// In en, this message translates to:
+  /// **'Try Externally'**
+  String get unsupportedOpenExternally;
+
+  /// No description provided for @chooseDifferentName.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a different name'**
+  String get chooseDifferentName;
+
+  /// No description provided for @wait.
+  ///
+  /// In en, this message translates to:
+  /// **'Please wait'**
+  String get wait;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

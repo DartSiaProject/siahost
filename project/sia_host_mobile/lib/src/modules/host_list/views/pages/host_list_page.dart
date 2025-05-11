@@ -96,6 +96,7 @@ class HostListView extends StatelessWidget {
         }
 
         return ListView.separated(
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           primary: false,
           itemCount: hosts.length,

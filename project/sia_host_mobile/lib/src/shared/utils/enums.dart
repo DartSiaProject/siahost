@@ -57,7 +57,29 @@ enum SupportedFileType {
   archive('Archives'),
   other('Others');
 
-  final String dirName;
-
   const SupportedFileType(this.dirName);
+
+  final String dirName;
+}
+
+enum FileActionEnum {
+  download,
+  upload,
+  delete,
+  rename,
+  copy,
+  move,
+  share,
+  open,
+  openWith,
+  openInNewTab,
+  openInNewWindow,
+  openInApp,
+  openInBrowser,
+  openInFileManager,
+}
+
+enum OpeningFileStatus {
+  canOpen,
+  canNotOpen,
 }

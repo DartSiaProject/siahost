@@ -72,9 +72,9 @@ class BucketRepository {
   ///
   Future<List<BucketObjectModel>> findAllObjects(
     String bucketName, {
+    required int limit,
     String? prefix,
     String delimiter = '/',
-    int limit = 50,
     String? marker,
     String? sortBy,
     String? sortDir,
@@ -101,17 +101,24 @@ class BucketRepository {
       final data = json.decode(response) as Map<String, dynamic>;
 
       // decode the network list
-      final dataList = json.decode(
+      final dataMapped = json.decode(
         DataDecrypter.decryptStringWithAES256CBC(
           chipherText: data['data'] as String,
           key: userInfo.key,
           iv: userInfo.iv,
         ),
-      ) as List;
+      ) as Map<String, dynamic>;
+
+      final dataList = dataMapped['objects'] as List? ?? [];
 
       // Map the data to BucketObjectModel
       return dataList.map((e) {
-        final object = BucketObjectModel.fromJson(e as Map<String, dynamic>);
+        final object = BucketObjectModel.fromJson(
+          (e as Map<String, dynamic>)
+            ..addAll({
+              'bucket': bucketName,
+            }),
+        );
         return object;
       }).toList();
     } else {

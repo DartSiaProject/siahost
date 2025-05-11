@@ -11,7 +11,7 @@ class OnboardingGuard extends AutoRouteGuard {
     NavigationResolver resolver,
     StackRouter router,
   ) async {
-    final storage = sl.get<StorageService>();
+    final storage = di.get<StorageService>();
 
     if (await storage.getOnboarding()) {
       resolver.next();

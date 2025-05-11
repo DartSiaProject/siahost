@@ -12,7 +12,7 @@ class BucketObjectListCubit extends Cubit<BucketObjectListState> {
   BucketObjectListCubit(
     this._bucketName, {
     BucketRepository? repository,
-  })  : _repository = repository ?? sl.get(),
+  })  : _repository = repository ?? di.get(),
         super(const BucketObjectListState());
 
   final String _bucketName;
@@ -21,39 +21,46 @@ class BucketObjectListCubit extends Cubit<BucketObjectListState> {
   /// Find all objects in the bucket
   ///
   Future<void> findAll({bool reset = false}) async {
-    if (_isInWork(state.status)) return;
+    if (reset) {
+      emit(
+        state.copyWith(
+          status: StateStatus.loading,
+        ),
+      );
+    }
 
-    emit(state.copyWith(status: StateStatus.loading, marker: state.marker));
-
-    const limit = 50;
+    const limit = 100;
     try {
+      final marker = reset
+          ? null
+          : (state.hasMore && state.objects.isNotEmpty)
+              ? state.objects.last.key
+              : null;
+
       final objects = await _repository.findAllObjects(
         _bucketName,
         prefix: state.prefix,
-        marker: reset ? null : state.marker,
-        sortBy: state.sortBy,
-        sortDir: state.sortDir,
-        substring: state.substring,
+        limit: limit,
+        marker: marker,
       );
 
       final allObjects = reset ? objects : [...state.objects, ...objects];
       final hasMore = objects.length == limit;
-      final marker = hasMore && objects.isNotEmpty ? objects.last.key : null;
       final visibleObjects =
           BucketObjectHelper.getObjectsAtPrefix(objects, state.prefix);
 
       emit(
         state.copyWith(
+          status: StateStatus.success,
           objects: allObjects,
           visibleObjects: visibleObjects,
           hasMore: hasMore,
-          marker: marker,
         ),
       );
     } catch (e) {
       emit(
         state.copyWith(
-          status: StateStatus.failure,
+          status: _failureStatus(state.status),
           error: DartSiaException.handleError(e),
         ),
       );
@@ -68,36 +75,7 @@ class BucketObjectListCubit extends Cubit<BucketObjectListState> {
         prefix: prefix,
         objects: [],
         visibleObjects: [],
-        hasMore: true,
-      ),
-    );
-    findAll(reset: true);
-  }
-
-  /// On sorting file
-  ///
-  void sort(String sortBy, String sortDir) {
-    emit(
-      state.copyWith(
-        sortBy: sortBy,
-        sortDir: sortDir,
-        objects: [],
-        visibleObjects: [],
-        hasMore: true,
-      ),
-    );
-    findAll(reset: true);
-  }
-
-  /// On searching file
-  ///
-  void search(String substring) {
-    emit(
-      state.copyWith(
-        substring: substring,
-        objects: [],
-        visibleObjects: [],
-        hasMore: true,
+        hasMore: false,
       ),
     );
     findAll(reset: true);
@@ -106,17 +84,76 @@ class BucketObjectListCubit extends Cubit<BucketObjectListState> {
   /// Load more objects while scrolling for pagination purpose
   ///
   void loadMore() {
-    if (state.hasMore && !_isInWork(state.status)) {
+    if (state.hasMore) {
       findAll();
     }
   }
 
   /// Check if an action is already in process
   ///
-  bool _isInWork(StateStatus status) {
-    return status == StateStatus.loading ||
-        status == StateStatus.paginating ||
-        status == StateStatus.filtrering ||
-        status == StateStatus.sorting;
+  StateStatus _failureStatus(StateStatus status) {
+    return status == StateStatus.searching
+        ? StateStatus.searchingFailure
+        : status == StateStatus.paginating
+            ? StateStatus.paginatingFailure
+            : status == StateStatus.sorting
+                ? StateStatus.sortingFailure
+                : StateStatus.failure;
+  }
+
+  /// Update file object by filtring the list with the key
+  ///
+  void updateFileObject(BucketObjectModel newFileObject, String objectKey) {
+    emit(state.copyWith(status: StateStatus.updating));
+
+    final index =
+        state.objects.indexWhere((element) => element.key == objectKey);
+    final indexInVisible =
+        state.visibleObjects.indexWhere((element) => element.key == objectKey);
+
+    final objects = state.objects;
+    final visibleObjects = state.visibleObjects;
+    if (index != -1) {
+      objects[index] = newFileObject;
+    }
+    if (indexInVisible != -1) {
+      visibleObjects[indexInVisible] = newFileObject;
+    }
+
+    emit(
+      state.copyWith(
+        status: StateStatus.success,
+        objects: objects,
+        visibleObjects: visibleObjects,
+      ),
+    );
+  }
+
+  /// Delete file object by filtering the list with the key
+  ///
+  void deleteFileObject(String objectKey) {
+    emit(state.copyWith(status: StateStatus.updating));
+
+    final index =
+        state.objects.indexWhere((element) => element.key == objectKey);
+    final indexInVisible =
+        state.visibleObjects.indexWhere((element) => element.key == objectKey);
+
+    final objects = state.objects;
+    final visibleObjects = state.visibleObjects;
+    if (index != -1) {
+      objects.removeAt(index);
+    }
+    if (indexInVisible != -1) {
+      visibleObjects.removeAt(indexInVisible);
+    }
+
+    emit(
+      state.copyWith(
+        status: StateStatus.success,
+        objects: objects,
+        visibleObjects: visibleObjects,
+      ),
+    );
   }
 }

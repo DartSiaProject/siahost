@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:disk_space_plus/disk_space_plus.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path/path.dart' as p;
@@ -10,23 +11,18 @@ import 'package:sia_host_mobile/src/shared/utils/utils.dart';
 @Singleton()
 class FileStorageService {
   FileStorageService();
-  late String _appName;
-
-  @PostConstruct()
-  void init() {
-    _appName = applicationName ?? 'DartSia';
-  }
 
   /// Get the app download directory
   ///
-  Future<Directory> getAppDownloadDir() async {
+  Future<Directory> _getAppDownloadDir(String appName) async {
     Directory baseDir;
     if (Platform.isAndroid) {
-      baseDir = Directory('/storage/emulated/0');
+      baseDir = await getExternalStorageDirectory() ??
+          (await getApplicationDocumentsDirectory());
     } else {
       baseDir = await getApplicationDocumentsDirectory();
     }
-    final appDir = Directory(p.join(baseDir.path, _appName));
+    final appDir = Directory(p.join(baseDir.path, appName));
 
     if (!appDir.existsSync()) {
       await appDir.create(recursive: true);
@@ -36,8 +32,8 @@ class FileStorageService {
 
   /// Get the directory for a specific file type
   ///
-  Future<Directory> getTypeDir(SupportedFileType fileType) async {
-    final appDir = await getAppDownloadDir();
+  Future<Directory> _getTypeDir(SupportedFileType fileType) async {
+    final appDir = await _getAppDownloadDir(applicationName);
     final typeDir = Directory(p.join(appDir.path, fileType.dirName));
 
     if (!typeDir.existsSync()) {
@@ -64,7 +60,7 @@ class FileStorageService {
     required String fileName,
     required SupportedFileType fileType,
   }) async {
-    final typeDir = await getTypeDir(fileType);
+    final typeDir = await _getTypeDir(fileType);
     final destFile = File(p.join(typeDir.path, fileName));
     return sourceFile.copy(destFile.path);
   }
@@ -76,7 +72,7 @@ class FileStorageService {
     required String fileName,
     required SupportedFileType fileType,
   }) async {
-    final typeDir = await getTypeDir(fileType);
+    final typeDir = await _getTypeDir(fileType);
     final destFile = File(p.join(typeDir.path, fileName));
     return destFile.writeAsBytes(fileBytes);
   }
@@ -85,27 +81,51 @@ class FileStorageService {
   ///
   Future<bool> requestStoragePermission() async {
     if (Platform.isAndroid) {
-      final status = await Permission.manageExternalStorage.request();
-      return status.isGranted;
+      final androidVersion = await DeviceInfoPlugin().androidInfo;
+      if (androidVersion.version.sdkInt >= 33) {
+        return true;
+      } else {
+        final status = await Permission.storage.request();
+        return status.isGranted;
+      }
     }
     return true;
   }
 
   /// rename a file
-  ///
   Future<File> renameFile({
     required String oldPath,
     required String newName,
     required SupportedFileType fileType,
   }) async {
-    final typeDir = await getTypeDir(fileType);
-    final oldFile = File(p.join(typeDir.path, oldPath));
-    final newFile = File(p.join(typeDir.path, newName));
+    final oldFile = await fileExists(fileName: oldPath, fileType: fileType);
 
-    if (oldFile.existsSync()) {
-      return oldFile.rename(newFile.path);
-    } else {
+    if (oldFile == null) {
       throw Exception('File not found');
+    }
+
+    final path = oldFile.path;
+    final lastSeparator = path.lastIndexOf(Platform.pathSeparator);
+    final newPath = path.substring(0, lastSeparator + 1) + newName;
+    return oldFile.rename(newPath);
+
+    // return oldFile.rename(newName);
+  }
+
+  /// Check if a file exists
+  ///
+  /// in local storage
+  Future<File?> fileExists({
+    required String fileName,
+    required SupportedFileType fileType,
+  }) async {
+    final typeDir = await _getTypeDir(fileType);
+    final file = File(p.join(typeDir.path, fileName));
+
+    if (file.existsSync()) {
+      return file;
+    } else {
+      return null;
     }
   }
 }

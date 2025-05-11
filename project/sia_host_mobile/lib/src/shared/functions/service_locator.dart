@@ -1,3 +1,4 @@
+import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sia_host_mobile/src/shared/functions/service_locator.config.dart';
 import 'package:sia_host_mobile/src/shared/utils/utils.dart';
@@ -8,4 +9,4 @@ import 'package:sia_host_mobile/src/shared/utils/utils.dart';
   preferRelativeImports: true,
   asExtension: true,
 )
-void serviceLocator() => sl.init();
+Future<GetIt> serviceLocator() => di.init();

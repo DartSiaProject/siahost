@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:audio_session/audio_session.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,9 @@ import 'package:flutter/services.dart';
 import 'package:renterd/renterd.dart' as renterd;
 import 'package:sia_host_mobile/src/shared/functions/service_locator.dart';
 import 'package:sia_host_mobile/src/shared/helpers/helpers.dart';
+import 'package:sia_host_mobile/src/shared/services/background_download_service.dart';
+import 'package:sia_host_mobile/src/shared/services/notification_service.dart';
+import 'package:workmanager/workmanager.dart';
 
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver();
@@ -44,8 +48,18 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   //! Widgets binding
   WidgetsFlutterBinding.ensureInitialized();
 
+  //! Notification service
+  await NotificationService().init();
+
   //! services locator
-  serviceLocator();
+  await serviceLocator();
+
+  //! worker manager
+  await Workmanager().initialize(
+    callbackDispatcher,
+    // isInDebugMode: true,
+    isInDebugMode: kDebugMode,
+  );
 
   //! Set preferred orientations
   await SystemChrome.setPreferredOrientations([
@@ -68,5 +82,28 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   //! Renterd deps injection initialization
   await renterd.renterdInit();
 
+  //! configure the audio session for music playback
+  final session = await AudioSession.instance;
+  await session.configure(const AudioSessionConfiguration.music());
+
   runApp(await builder());
+}
+
+@pragma('vm:entry-point')
+void callbackDispatcher() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  //! Http overrides
+  HttpOverrides.global = CustomHttpOverrides();
+
+  serviceLocator().then((_) {
+    renterd.renterdInit().then((_) {
+      Workmanager().executeTask((task, inputData) async {
+        if (task == 'background_download') {
+          await BackgroundDownloadService.handleBackgroundDownload(inputData!);
+        }
+        return true;
+      });
+    });
+  });
 }

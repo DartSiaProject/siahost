@@ -11,7 +11,7 @@ class AuthGuard extends AutoRouteGuard {
     NavigationResolver resolver,
     StackRouter router,
   ) async {
-    final authRepository = sl.get<AuthRepository>();
+    final authRepository = di.get<AuthRepository>();
 
     if (await authRepository.isAuthenticated()) {
       resolver.next();

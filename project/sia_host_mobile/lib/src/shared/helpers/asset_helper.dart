@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/widgets.dart';
 import 'package:sia_host_mobile/src/modules/file_manager/data/models/bucket_object_model.dart';
 import 'package:sia_host_mobile/src/shared/utils/utils.dart';
@@ -5,7 +7,7 @@ import 'package:sia_host_mobile/src/shared/utils/utils.dart';
 class AssetHelper {
   AssetHelper._();
 
-  static Widget getfileObjectWidget(
+  static Widget getfileObjectLeadingWidget(
     BucketObjectModel fileObject, {
     double height = 50,
   }) {
@@ -32,6 +34,24 @@ class AssetHelper {
 
     return Image.asset(
       asset,
+      height: height,
+    );
+  }
+
+  static Widget getfileImageWidget(
+    File file, {
+    double height = 50,
+  }) {
+    final fileObject = BucketObjectModel(
+      bucket: '',
+      key: file.path,
+      size: file.lengthSync(),
+      isFolder: false,
+      health: 1,
+    );
+
+    return getfileObjectLeadingWidget(
+      fileObject,
       height: height,
     );
   }

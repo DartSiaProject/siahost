@@ -36,8 +36,6 @@
   "buckets": "Buckets",
   "file": "Fichier",
   "addFile": "Ajouter un fichier",
-  "downloadFile": "Télécharger le fichier",
-  "downloadFileNotice": "Vous devez télécharger ce fichier avant de pouvoir l'ouvrir",
   "openFile": "Ouvrir le fichier",
   "deleteFile": "Supprimer le fichier",
   "renameFile": "Renommer le fichier",
@@ -158,5 +156,104 @@
   "bucketNameHint": "Saisir le nom du bucket",
   "invalidBucketNamePattern": "Le pattern utilisé n'est pas correct",
   "bucketCreated": "Le bucket a été créé avec succès.",
-  "bucketNameRules": "Le nom du bucket doit:\n- Contenir entre 3 et 63 caractères\n- Utiliser uniquement des lettres, des chiffres, des points (.) et des tirets (-)\n- Commencer et finir par une lettre ou un chiffre\n- Ne pas être au format d'adresse IP\n- Ne pas contenir de points consécutifs"
+  "bucketNameRules": "Le nom du bucket doit:\n- Contenir entre 3 et 63 caractères\n- Utiliser uniquement des lettres, des chiffres, des points (.) et des tirets (-)\n- Commencer et finir par une lettre ou un chiffre\n- Ne pas être au format d'adresse IP\n- Ne pas contenir de points consécutifs",
+  "newFileNameField": "Nouveau nom",
+  "newFileNameHint": "Saisir un nouveau nom",
+  
+  "uploadFile": "Uploader un fichier",
+  "uploadFormNameField": "Sauvegarder comme",
+  "uploadAction": "Uploader",
+  "pickFileTitle": "Choisir un fichier",
+  "pickFileDesc": "Veuillez choisir le fichier a uploader",
+  "pickedFileTitle": "Fichier choisi",
+  "newFileOrDefault": "Saisir le nom du fichier ou laisser le champ vide pour utiliser le nom par defaut.",
+
+  "copyFormUseOldname": "Conserver l'ancien nom",
+  "selectDestBucket": "Choisir la destination",
+
+  "fileCopied": "Le fichier {name} a été copié avec succès.",
+  "@fileCopied": {
+    "description": "fileCopied",
+    "placeholders": {
+      "name":{
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+  "fileRenamed": "Le fichier {name} a été renommé avec succès.",
+  "@fileRenamed": {
+    "description": "fileRenamed",
+    "placeholders": {
+      "name":{
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+  "fileMoved": "Le fichier {name} a été déplacé avec succès.",
+  "@fileMoved": {
+    "description": "fileMoved",
+    "placeholders": {
+      "name":{
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+  "fileDeleted": "Le fichier {name} a été supprimé avec succès.",
+  "@fileDeleted": {
+    "description": "fileDeleted",
+    "placeholders": {
+      "name":{
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+  "fileUploaded": "Le fichier {name} a été uploadé avec succès.",
+  "@fileUploaded": {
+    "description": "fileUploaded",
+    "placeholders": {
+      "name":{
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+  "fileDownload": "Le fichier {name} a été téléchargé avec succès.",
+  "@fileDownload": {
+    "description": "fileDownload",
+    "placeholders": {
+      "name":{
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+
+  "deleteFileNotice": "Supprimer un fichier",
+  "deleteFileDesc": "Votre fichier sera définitivement supprimé.\n Continuer ?",
+
+  "downloadFile": "Télécharger le fichier",
+  "downloadFileNotice": "Vous devez télécharger ce fichier avant de pouvoir l'ouvrir",
+  "downloadAction": "Télécharger",
+  "downloadedFile": "Le fichier {name} a été téléchargé avec succès.",
+  "@downloadedFile": {
+    "description": "downloadedFile",
+    "placeholders": {
+      "name":{
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+  "downloadStart": "Téléchargement en cours en arrière-plan.",
+  "downloadAlreadyInProgress": "Le téléchargement de votre fichier est déjà en cours. Veuillez patienter.",
+
+  "unsupportedFileNotice": "Fichier non supporté",
+  "unsupportedFileDesc": "Nous ne pouvons pas ouvrir ce fichier car son format est non supporté.",
+  "unsupportedOpenExternally": "Ouvrir avec une app externe",
+  "chooseDifferentName": "Choisir un nom différent",
+  "wait": "Veuillez patienter"
 }

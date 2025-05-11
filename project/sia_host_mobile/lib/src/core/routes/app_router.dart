@@ -55,7 +55,9 @@ class AppRouter extends RootStackRouter {
               children: [
                 AutoRoute(page: FileManagerRoute.page, path: ''),
                 AutoRoute(
-                    page: BucketDetailsRoute.page, path: 'details/:bucket'),
+                  page: BucketDetailsRoute.page,
+                  path: 'details/:bucket',
+                ),
               ],
             ),
           ],
@@ -90,6 +92,13 @@ class AppRouter extends RootStackRouter {
         AutoRoute(
           page: OnboardingRoute.page,
           path: '/onboarding',
+        ),
+
+        // file viewer
+        AutoRoute(
+          page: FileViewerRoute.page,
+          path: '/viewer',
+          guards: [OnboardingGuard(), AuthGuard()],
         ),
       ];
 }

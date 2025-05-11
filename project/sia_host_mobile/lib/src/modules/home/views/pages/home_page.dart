@@ -74,6 +74,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: const NeverScrollableScrollPhysics(),
       padding: const EdgeInsets.only(top: 16),
       child: Column(
         children: [

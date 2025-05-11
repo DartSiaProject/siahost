@@ -61,10 +61,10 @@ class NotificationDetailsPage extends StatelessWidget {
 
   void _showDismissDialog(BuildContext context) {
     final l10n = context.l10n;
-    showCupertinoDialog<dynamic>(
+    showDialog<dynamic>(
       context: context,
       builder: (context) {
-        return CupertinoAlertDialog(
+        return AlertDialog.adaptive(
           title: Text(
             l10n.notice,
             style: const TextStyle(

@@ -23,9 +23,6 @@ class FileManagerPage extends StatelessWidget {
       body: RefreshIndicator.adaptive(
         onRefresh: context.read<BucketListCubit>().findAll,
         child: CustomScrollView(
-          physics: const BouncingScrollPhysics(
-            parent: AlwaysScrollableScrollPhysics(),
-          ),
           slivers: [
             SliverAppBar(
               title: Text(context.l10n.filesTitle),
@@ -82,6 +79,7 @@ class FileManagerView extends StatelessWidget {
         }
 
         return ListView.separated(
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           primary: false,
           itemCount: buckets.length,

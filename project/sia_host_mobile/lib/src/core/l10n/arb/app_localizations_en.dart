@@ -138,15 +138,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get createAt => 'Created at';
 
   @override
-  String get downloadFile => 'Download File';
-
-  @override
-  String get downloadFileNotice => 'You need to download the file first beforre opening';
-
-  @override
-  String get download => 'Download';
-
-  @override
   String get navHome => 'Home';
 
   @override
@@ -430,4 +421,108 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get bucketNameRules => 'Bucket name must:\n- Be 3–63 characters\n- Use only letters, numbers, dots (.), and hyphens (-)\n- Start and end with a letter or number\n- Not be formatted as an IP address\n- Not contain consecutive periods';
+
+  @override
+  String get newFileNameField => 'New File name';
+
+  @override
+  String get newFileNameHint => 'Enter new file name';
+
+  @override
+  String get uploadFile => 'Upload a File';
+
+  @override
+  String get uploadFormNameField => 'Save File As';
+
+  @override
+  String get uploadAction => 'Upload';
+
+  @override
+  String get pickFileTitle => 'Select a file';
+
+  @override
+  String get pickFileDesc => 'Please select the file to upload';
+
+  @override
+  String get pickedFileTitle => 'File picked';
+
+  @override
+  String get newFileOrDefault => 'Enter new file name or leave blank to save as default name';
+
+  @override
+  String get copyFormUseOldname => 'Keep Old file name';
+
+  @override
+  String get selectDestBucket => 'Select destination bucket';
+
+  @override
+  String fileCopied(String name) {
+    return 'The file $name has been copied successfully.';
+  }
+
+  @override
+  String fileRenamed(String name) {
+    return 'The file $name has been renamed successfully.';
+  }
+
+  @override
+  String fileMoved(String name) {
+    return 'The file $name has been moved successfully.';
+  }
+
+  @override
+  String fileDeleted(String name) {
+    return 'The file $name has been deleted successfully.';
+  }
+
+  @override
+  String fileUploaded(String name) {
+    return 'The file $name has been uploaded successfully.';
+  }
+
+  @override
+  String fileDownload(String name) {
+    return 'The file $name has been downloaded successfully.';
+  }
+
+  @override
+  String get deleteFileNotice => 'Delete a file';
+
+  @override
+  String get deleteFileDesc => 'You are about to delete a file.\n Continue ?';
+
+  @override
+  String get downloadFile => 'Download File';
+
+  @override
+  String get downloadFileNotice => 'You need to download the file first before opening it';
+
+  @override
+  String get downloadAction => 'Download';
+
+  @override
+  String downloadedFile(String name) {
+    return 'The file $name has been downloaded successfully.';
+  }
+
+  @override
+  String get downloadStart => 'Download started in background.';
+
+  @override
+  String get downloadAlreadyInProgress => 'Your file download is already in progress.';
+
+  @override
+  String get unsupportedFileNotice => 'Unsupported file';
+
+  @override
+  String get unsupportedFileDesc => 'We cannot open this file because it\'s unsupported.';
+
+  @override
+  String get unsupportedOpenExternally => 'Try Externally';
+
+  @override
+  String get chooseDifferentName => 'Choose a different name';
+
+  @override
+  String get wait => 'Please wait';
 }

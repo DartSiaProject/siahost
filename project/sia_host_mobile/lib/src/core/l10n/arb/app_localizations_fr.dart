@@ -138,15 +138,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get createAt => 'Créer le';
 
   @override
-  String get downloadFile => 'Télécharger le fichier';
-
-  @override
-  String get downloadFileNotice => 'Vous devez télécharger ce fichier avant de pouvoir l\'ouvrir';
-
-  @override
-  String get download => 'Télécharger';
-
-  @override
   String get navHome => 'Accueil';
 
   @override
@@ -430,4 +421,108 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get bucketNameRules => 'Le nom du bucket doit:\n- Contenir entre 3 et 63 caractères\n- Utiliser uniquement des lettres, des chiffres, des points (.) et des tirets (-)\n- Commencer et finir par une lettre ou un chiffre\n- Ne pas être au format d\'adresse IP\n- Ne pas contenir de points consécutifs';
+
+  @override
+  String get newFileNameField => 'Nouveau nom';
+
+  @override
+  String get newFileNameHint => 'Saisir un nouveau nom';
+
+  @override
+  String get uploadFile => 'Uploader un fichier';
+
+  @override
+  String get uploadFormNameField => 'Sauvegarder comme';
+
+  @override
+  String get uploadAction => 'Uploader';
+
+  @override
+  String get pickFileTitle => 'Choisir un fichier';
+
+  @override
+  String get pickFileDesc => 'Veuillez choisir le fichier a uploader';
+
+  @override
+  String get pickedFileTitle => 'Fichier choisi';
+
+  @override
+  String get newFileOrDefault => 'Saisir le nom du fichier ou laisser le champ vide pour utiliser le nom par defaut.';
+
+  @override
+  String get copyFormUseOldname => 'Conserver l\'ancien nom';
+
+  @override
+  String get selectDestBucket => 'Choisir la destination';
+
+  @override
+  String fileCopied(String name) {
+    return 'Le fichier $name a été copié avec succès.';
+  }
+
+  @override
+  String fileRenamed(String name) {
+    return 'Le fichier $name a été renommé avec succès.';
+  }
+
+  @override
+  String fileMoved(String name) {
+    return 'Le fichier $name a été déplacé avec succès.';
+  }
+
+  @override
+  String fileDeleted(String name) {
+    return 'Le fichier $name a été supprimé avec succès.';
+  }
+
+  @override
+  String fileUploaded(String name) {
+    return 'Le fichier $name a été uploadé avec succès.';
+  }
+
+  @override
+  String fileDownload(String name) {
+    return 'Le fichier $name a été téléchargé avec succès.';
+  }
+
+  @override
+  String get deleteFileNotice => 'Supprimer un fichier';
+
+  @override
+  String get deleteFileDesc => 'Votre fichier sera définitivement supprimé.\n Continuer ?';
+
+  @override
+  String get downloadFile => 'Télécharger le fichier';
+
+  @override
+  String get downloadFileNotice => 'Vous devez télécharger ce fichier avant de pouvoir l\'ouvrir';
+
+  @override
+  String get downloadAction => 'Télécharger';
+
+  @override
+  String downloadedFile(String name) {
+    return 'Le fichier $name a été téléchargé avec succès.';
+  }
+
+  @override
+  String get downloadStart => 'Téléchargement en cours en arrière-plan.';
+
+  @override
+  String get downloadAlreadyInProgress => 'Le téléchargement de votre fichier est déjà en cours. Veuillez patienter.';
+
+  @override
+  String get unsupportedFileNotice => 'Fichier non supporté';
+
+  @override
+  String get unsupportedFileDesc => 'Nous ne pouvons pas ouvrir ce fichier car son format est non supporté.';
+
+  @override
+  String get unsupportedOpenExternally => 'Ouvrir avec une app externe';
+
+  @override
+  String get chooseDifferentName => 'Choisir un nom différent';
+
+  @override
+  String get wait => 'Veuillez patienter';
 }

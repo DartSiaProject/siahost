@@ -1,7 +1,6 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /// The [AppTheme] defines theme for the app.
 ///
@@ -82,9 +81,8 @@ abstract final class AppTheme {
   );
 
   static ThemeData theme = _theme.copyWith(
-    // cardColor: const Color(0xFF37364B),
     cardTheme: _theme.cardTheme.copyWith(
-      color: const Color(0xFF37364B),
+      color: boxBgColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
@@ -92,11 +90,14 @@ abstract final class AppTheme {
     ),
     appBarTheme: _theme.appBarTheme.copyWith(
       backgroundColor: backgoundColor,
-      titleTextStyle: GoogleFonts.manrope(
+      titleTextStyle: const TextStyle(
         color: Colors.white,
         fontSize: 28,
         fontWeight: FontWeight.w600,
       ),
+    ),
+    popupMenuTheme: _theme.popupMenuTheme.copyWith(
+      surfaceTintColor: boxBgColor,
     ),
     bottomSheetTheme: _theme.bottomSheetTheme.copyWith(
       backgroundColor: boxBgColor,
@@ -105,52 +106,5 @@ abstract final class AppTheme {
       hintStyle: const TextStyle(color: inputColor),
       floatingLabelBehavior: FloatingLabelBehavior.never,
     ),
-    // textTheme: _theme.textTheme.copyWith(
-    //   headlineLarge: GoogleFonts.manrope(fontWeight: FontWeight.bold),
-    //   headlineMedium: GoogleFonts.manrope(fontWeight: FontWeight.bold),
-    // ),
-    // textTheme: GoogleFonts.manropeTextTheme().copyWith(
-    // displayLarge: GoogleFonts.manrope(
-    //   color: Colors.white,
-    //   fontSize: 28,
-    //   fontWeight: FontWeight.w800,
-    // ),
-    // displayMedium: GoogleFonts.manrope(color: Colors.white,
-    //   fontSize: 24,
-    //   fontWeight: FontWeight.w800,
-    // ),
-    // displaySmall: GoogleFonts.manrope(color: Colors.white,
-    //   fontSize: 20,
-    //   fontWeight: FontWeight.w800,
-    // ),
-
-    // // headline
-    // headlineLarge: GoogleFonts.manrope(color: Colors.white,
-    //   fontSize: 20,
-    //   fontWeight: FontWeight.w800,
-    // ),
-    // headlineMedium: GoogleFonts.manrope(
-    //   color: Colors.white,
-    //   fontWeight: FontWeight.bold,
-    // ),
-    // headlineSmall: GoogleFonts.manrope(color: Colors.white),
-    // titleLarge: GoogleFonts.manrope(color: const Color(0xFFBDBDBD)),
-    // titleMedium: GoogleFonts.manrope(
-    //   color: const Color(0xFFBDBDBD),
-    //   fontSize: 17,
-    // ),
-    // titleSmall: GoogleFonts.manrope(color: const Color(0xFFBDBDBD)),
-    // // bodyLarge: GoogleFonts.manrope(color: Color(0xFFBDBDBD)),
-    // // bodyMedium: GoogleFonts.manrope(color: Color(0xFFBDBDBD)),
-    // bodySmall: GoogleFonts.manrope(color: const Color(0xFFBDBDBD)),
-    // labelLarge: GoogleFonts.manrope(
-    //   color: const Color(0xFFBDBDBD),
-    //   fontSize: 17,
-    // ),
-    // labelMedium: GoogleFonts.manrope(color: const Color(0xFFBDBDBD)),
-    // labelSmall: GoogleFonts.manrope(color: const Color(0xFFBDBDBD)),
-    // bodyLarge: GoogleFonts.manrope(color: const Color(0xFF666666)),
-    // bodyMedium: GoogleFonts.manrope(color: const Color(0xFF666666)),
-    //     ),
   );
 }

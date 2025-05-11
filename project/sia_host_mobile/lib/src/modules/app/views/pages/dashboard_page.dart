@@ -40,10 +40,13 @@ class DashboardView extends StatelessWidget {
       appBarBuilder: (context, tabsRouter) {
         return AppBar(
           actions: [
-            IconButton(
-              icon: const Icon(
-                Icons.mail_outline_rounded,
-                color: AppTheme.primaryColor,
+            IconButton.outlined(
+              icon: const Badge(
+                backgroundColor: AppTheme.primaryColor,
+                child: Icon(
+                  Icons.mail_outline_rounded,
+                  color: AppTheme.primaryColor,
+                ),
               ),
               onPressed: () {
                 context.router.push(const NotificationListRoute());

@@ -17,20 +17,20 @@ class AddBucketWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => BucketCubit(sl.get()),
-      child: const AddBucketView(),
+      create: (context) => BucketCubit(di.get()),
+      child: const _AddBucketView(),
     );
   }
 }
 
-class AddBucketView extends StatefulWidget {
-  const AddBucketView({super.key});
+class _AddBucketView extends StatefulWidget {
+  const _AddBucketView();
 
   @override
-  State<AddBucketView> createState() => _AddBucketViewState();
+  State<_AddBucketView> createState() => _AddBucketViewState();
 }
 
-class _AddBucketViewState extends State<AddBucketView> {
+class _AddBucketViewState extends State<_AddBucketView> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _bucketNameController = TextEditingController();
 

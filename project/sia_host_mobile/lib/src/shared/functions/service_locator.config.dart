@@ -39,25 +39,36 @@ import '../../modules/notifications/data/repositories/notification_repository.da
     as _i350;
 import '../../modules/notifications/logic/bloc/notification_bloc.dart' as _i955;
 import '../../modules/notifications/notifications.dart' as _i859;
+import '../handler/audio_player_handler.dart' as _i1058;
 import '../services/api_client.dart' as _i933;
 import '../services/file_storage_service.dart' as _i178;
 import '../services/storage_service.dart' as _i306;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
-  _i174.GetIt init({
+  Future<_i174.GetIt> init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
-  }) {
+  }) async {
     final gh = _i526.GetItHelper(
       this,
       environment,
       environmentFilter,
     );
+    final audioModule = _$AudioModule();
     gh.singleton<_i933.ApiClient>(() => _i933.ApiClient()..init());
-    gh.singleton<_i178.FileStorageService>(
-        () => _i178.FileStorageService()..init());
-    gh.singleton<_i306.StorageService>(() => _i306.StorageService()..init());
+    gh.singleton<_i178.FileStorageService>(() => _i178.FileStorageService());
+    await gh.singletonAsync<_i306.StorageService>(
+      () {
+        final i = _i306.StorageService();
+        return i.init().then((_) => i);
+      },
+      preResolve: true,
+    );
+    await gh.singletonAsync<_i1058.AudioPlayerHandler>(
+      () => audioModule.audioHandler,
+      preResolve: true,
+    );
     gh.lazySingleton<_i798.AppRouter>(() => _i798.AppRouter());
     gh.lazySingleton<_i168.BucketRepository>(
         () => _i168.BucketRepository(gh<_i306.StorageService>()));
@@ -99,3 +110,5 @@ extension GetItInjectableX on _i174.GetIt {
     return this;
   }
 }
+
+class _$AudioModule extends _i1058.AudioModule {}

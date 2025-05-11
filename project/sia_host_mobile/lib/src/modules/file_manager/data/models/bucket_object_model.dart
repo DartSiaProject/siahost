@@ -8,24 +8,30 @@ class BucketObjectModel {
     required this.bucket,
     required this.key,
     required this.size,
-    required this.etag,
-    required this.health,
-    required this.modTime,
     required this.isFolder,
+    required this.health,
+    this.etag,
+    this.modTime,
     this.mimeType,
     this.childrenCount,
   });
 
   factory BucketObjectModel.fromJson(Map<String, dynamic> json) {
-    final key = json['key'] as String;
+    var key = json['name'] as String;
+    if (key.startsWith('/')) {
+      // remove the leading slash
+      key = key.substring(1);
+    }
     final isFolder = key.endsWith('/');
     return BucketObjectModel(
       bucket: json['bucket'] as String,
       key: key,
       size: json['size'] as int,
-      etag: json['etag'] as String,
+      etag: json['etag'] as String? ?? '',
       health: (json['health'] as num).toDouble(),
-      modTime: DateTime.parse(json['modTime'] as String),
+      modTime: json['modTime'] == null
+          ? null
+          : DateTime.parse(json['modTime'] as String),
       isFolder: isFolder,
       mimeType: json['mimeType'] as String? ?? '',
       childrenCount:
@@ -35,16 +41,83 @@ class BucketObjectModel {
   final String bucket;
   final String key;
   final int size;
-  final String etag;
   final double health;
-  final DateTime modTime;
   final bool isFolder;
+  final String? etag;
+  final DateTime? modTime;
   final String? mimeType;
   final int? childrenCount;
+
+  // toJson
+  Map<String, dynamic> toJson() {
+    return {
+      'bucket': bucket,
+      'key': key,
+      'size': size,
+      'etag': etag,
+      'health': health,
+      'modTime': modTime?.toIso8601String(),
+      'isFolder': isFolder,
+      'mimeType': mimeType,
+      'childrenCount': childrenCount,
+    };
+  }
+
+  // copyWith
+  BucketObjectModel copyWith({
+    String? bucket,
+    String? key,
+    int? size,
+    double? health,
+    bool? isFolder,
+    String? etag,
+    DateTime? modTime,
+    String? mimeType,
+    int? childrenCount,
+  }) {
+    return BucketObjectModel(
+      bucket: bucket ?? this.bucket,
+      key: key == null
+          ? this.key
+          : key.startsWith('/')
+              ? key.substring(1)
+              : key,
+      size: size ?? this.size,
+      health: health ?? this.health,
+      isFolder: isFolder ?? this.isFolder,
+      etag: etag ?? this.etag,
+      modTime: modTime ?? this.modTime,
+      mimeType: mimeType ?? this.mimeType,
+      childrenCount: childrenCount ?? this.childrenCount,
+    );
+  }
 
   String get name {
     final parts = key.split('/');
     return isFolder ? parts[parts.length - 2] : parts.last;
+  }
+
+  String get nameWithoutExtension {
+    if (isFolder) return name;
+    final parts = key.split('.');
+    return parts.length > 1
+        ? parts.sublist(0, parts.length - 1).join('.')
+        : name;
+  }
+
+  String get displayName {
+    if (isFolder) return name;
+
+    if (type == SupportedFileType.other) {
+      return name;
+    }
+    return nameWithoutExtension;
+  }
+
+  String get extension {
+    if (isFolder) return '';
+    final ext = key.split('.').lastOrNull;
+    return ext != null ? '.$ext' : '';
   }
 
   String sizeFormatted(BuildContext context) {

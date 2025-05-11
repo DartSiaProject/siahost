@@ -13,6 +13,7 @@ class AppBottomSheet {
     return showModalBottomSheet<T>(
       context: context,
       isDismissible: isDismissible,
+      barrierColor: AppTheme.primaryColor.withValues(alpha: .03),
       builder: (context) {
         return Material(
           color: AppTheme.backgoundColor,

@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:sia_host_mobile/src/modules/file_manager/data/models/bucket_object_model.dart';
 import 'package:sia_host_mobile/src/modules/file_manager/data/repositories/file_action_repository.dart';
 import 'package:sia_host_mobile/src/shared/exceptions/exceptions.dart';
+import 'package:sia_host_mobile/src/shared/utils/utils.dart';
 
 part 'file_action_state.dart';
 
@@ -28,11 +29,15 @@ class FileActionCubit extends Cubit<FileActionState> {
         fileName: fileName,
         file: file,
         onSendProgress: (sent, total) {
-          emit(FileActionUploadProgress((sent / total) * 100));
+          Future<dynamic>.delayed(
+            const Duration(seconds: 1),
+            () =>
+                emit(FileActionUploadProgress(((sent / total) * 100).floor())),
+          );
         },
       );
 
-      emit(FileActionSuccess());
+      emit(FileActionUploaded(fileName));
     } catch (e) {
       emit(FileActionFailure(DartSiaException.handleError(e)));
     }
@@ -40,24 +45,39 @@ class FileActionCubit extends Cubit<FileActionState> {
 
   /// Download a file
   ///
-  Future<void> download(
-    BucketObjectModel fileObject,
-  ) async {
-    emit(FileActionLoading());
+  // Future<void> download(
+  //   BucketObjectModel fileObject,
+  // ) async {
+  //   // emit(FileActionLoading());
 
-    try {
-      await _repository.downloadFile(
-        fileObject: fileObject,
-        onReceiveProgress: (sent, total) {
-          emit(FileActionUploadProgress((sent / total) * 100));
-        },
-      );
+  //   // try {
+  //   //   await _repository.downloadFile(
+  //   //     fileObject: fileObject,
+  //   //     onReceiveProgress: (received, total) {
+  //   //       Future<dynamic>.delayed(
+  //   //         const Duration(seconds: 1),
+  //   //         () => emit(FileActionUploadProgress((received / total) * 100)),
+  //   //       );
+  //   //     },
+  //   //   );
 
-      emit(FileActionSuccess());
-    } catch (e) {
-      emit(FileActionFailure(DartSiaException.handleError(e)));
-    }
-  }
+  //   //   emit(FileActionDownloaded());
+  //   // } catch (e) {
+  //   //   emit(FileActionFailure(DartSiaException.handleError(e)));
+  //   // }
+
+  //   emit(FileActionLoading());
+
+  //   final enqueued = await downloadService.enqueueDownload(
+  //     url: event.url,
+  //     fileId: event.fileId,
+  //     filename: event.filename,
+  //   );
+
+  //   emit(enqueued
+  //     ? DownloadStarted(event.fileId)
+  //     : DownloadError(event.fileId, 'Download already in progress'));
+  // }
 
   /// COpy a file
   ///
@@ -75,7 +95,7 @@ class FileActionCubit extends Cubit<FileActionState> {
         destBucketName: destBucketName,
       );
 
-      emit(FileActionSuccess());
+      emit(FileActionCopied());
     } catch (e) {
       emit(FileActionFailure(DartSiaException.handleError(e)));
     }
@@ -90,12 +110,12 @@ class FileActionCubit extends Cubit<FileActionState> {
     emit(FileActionLoading());
 
     try {
-      await _repository.renameFile(
+      final newName = await _repository.renameFile(
         file: file,
         newFileName: newFileName,
       );
 
-      emit(FileActionSuccess());
+      emit(FileActionRenamed(newName));
     } catch (e) {
       emit(FileActionFailure(DartSiaException.handleError(e)));
     }
@@ -113,7 +133,28 @@ class FileActionCubit extends Cubit<FileActionState> {
         file: file,
       );
 
-      emit(FileActionSuccess());
+      emit(FileActionDeleted());
+    } catch (e) {
+      emit(FileActionFailure(DartSiaException.handleError(e)));
+    }
+  }
+
+  /// check if the user can open the file
+  ///
+  Future<void> canOpenFile(BucketObjectModel fileObject) async {
+    emit(FileActionLoading());
+
+    try {
+      final filePath = await _repository.canOpenFile(fileObject);
+
+      emit(
+        FileActionOpening(
+          filePath: filePath,
+          isSupported: fileObject.type != SupportedFileType.archive &&
+                  fileObject.type != SupportedFileType.other ||
+              fileObject.type == SupportedFileType.document,
+        ),
+      );
     } catch (e) {
       emit(FileActionFailure(DartSiaException.handleError(e)));
     }

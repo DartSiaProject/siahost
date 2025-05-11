@@ -21,7 +21,7 @@ class HostDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HostLocationCubit(sl.get())
+      create: (context) => HostLocationCubit(di.get())
         ..getLocationAddress(
           host.netAddress,
         ),

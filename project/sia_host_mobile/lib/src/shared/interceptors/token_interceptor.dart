@@ -6,7 +6,7 @@ class TokenInterceptor extends QueuedInterceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    // final accessToken = sl.get<LocalDbService>().getAccessToken();
+    // final accessToken = di.get<LocalDbService>().getAccessToken();
     // final reqUrl = options.uri.path;
 
     // if (accessToken != null && reqUrl != '/auth/refresh') {
@@ -25,14 +25,14 @@ class TokenInterceptor extends QueuedInterceptor {
     //     (err.response?.statusCode == 401)) {
     //   final options = err.requestOptions;
     //   try {
-    //     final refreshToken = sl.get<LocalDbService>().getRefreshToken();
+    //     final refreshToken = di.get<LocalDbService>().getRefreshToken();
     //     if (refreshToken == null) {
     //       return handler.reject(err);
     //     }
 
     //     String? newToken;
     //     try {
-    //       newToken = await sl.get<AuthRepository>().refreshToken(refreshToken);
+    //       newToken = await di.get<AuthRepository>().refreshToken(refreshToken);
     //     } catch (e) {
     //       log('$e');
     //     }
@@ -40,7 +40,7 @@ class TokenInterceptor extends QueuedInterceptor {
     //     if (newToken != null) {
     //       try {
     //         options.headers['Authorization'] = 'Bearer $newToken';
-    //         final response = await sl.get<Dio>().fetch<dynamic>(options);
+    //         final response = await di.get<Dio>().fetch<dynamic>(options);
 
     //         return handler.resolve(response);
     //       } catch (e) {

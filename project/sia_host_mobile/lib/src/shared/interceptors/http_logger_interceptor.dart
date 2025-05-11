@@ -4,7 +4,7 @@ import 'package:logger/logger.dart';
 import 'package:sia_host_mobile/src/shared/utils/utils.dart';
 
 class HttpLoggerInterceptor extends Interceptor {
-  final appLogger = sl.get<Logger>();
+  final appLogger = di.get<Logger>();
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {

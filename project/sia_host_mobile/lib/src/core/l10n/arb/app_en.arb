@@ -46,9 +46,6 @@
   "delete": "Delete",
   "save": "Save",
   "createAt": "Created at",
-  "downloadFile": "Download File",
-  "downloadFileNotice": "You need to download the file first beforre opening",
-  "download": "Download",
 
   "navHome": "Home",
   "navSearch": "Search",
@@ -161,6 +158,104 @@
   "bucketNameHint": "Enter the bucket name",
   "invalidBucketNamePattern": "The bucket name pattern is invalid",
   "bucketCreated": "The bucket was successfully created.",
-  "bucketNameRules": "Bucket name must:\n- Be 3–63 characters\n- Use only letters, numbers, dots (.), and hyphens (-)\n- Start and end with a letter or number\n- Not be formatted as an IP address\n- Not contain consecutive periods"
+  "bucketNameRules": "Bucket name must:\n- Be 3–63 characters\n- Use only letters, numbers, dots (.), and hyphens (-)\n- Start and end with a letter or number\n- Not be formatted as an IP address\n- Not contain consecutive periods",
+  "newFileNameField": "New File name",
+  "newFileNameHint": "Enter new file name",
+  
+  "uploadFile": "Upload a File",
+  "uploadFormNameField": "Save File As",
+  "uploadAction": "Upload",
+  "pickFileTitle": "Select a file",
+  "pickFileDesc": "Please select the file to upload",
+  "pickedFileTitle": "File picked",
+  "newFileOrDefault": "Enter new file name or leave blank to save as default name",
 
+  "copyFormUseOldname": "Keep Old file name",
+  "selectDestBucket": "Select destination bucket",
+
+  "fileCopied": "The file {name} has been copied successfully.",
+  "@fileCopied": {
+    "description": "fileCopied",
+    "placeholders": {
+      "name":{
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+  "fileRenamed": "The file {name} has been renamed successfully.",
+  "@fileRenamed": {
+    "description": "fileRenamed",
+    "placeholders": {
+      "name":{
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+  "fileMoved": "The file {name} has been moved successfully.",
+  "@fileMoved": {
+    "description": "fileMoved",
+    "placeholders": {
+      "name":{
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+  "fileDeleted": "The file {name} has been deleted successfully.",
+  "@fileDeleted": {
+    "description": "fileDeleted",
+    "placeholders": {
+      "name":{
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+  "fileUploaded": "The file {name} has been uploaded successfully.",
+  "@fileUploaded": {
+    "description": "fileUploaded",
+    "placeholders": {
+      "name":{
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+  "fileDownload": "The file {name} has been downloaded successfully.",
+  "@fileDownload": {
+    "description": "fileDownload",
+    "placeholders": {
+      "name":{
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+
+  "deleteFileNotice": "Delete a file",
+  "deleteFileDesc": "You are about to delete a file.\n Continue ?",
+
+  "downloadFile": "Download File",
+  "downloadFileNotice": "You need to download the file first before opening it",
+  "downloadAction": "Download",
+  "downloadedFile": "The file {name} has been downloaded successfully.",
+  "@downloadedFile": {
+    "description": "downloadedFile",
+    "placeholders": {
+      "name":{
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+  "downloadStart": "Download started in background.",
+  "downloadAlreadyInProgress": "Your file download is already in progress.",
+
+  "unsupportedFileNotice": "Unsupported file",
+  "unsupportedFileDesc": "We cannot open this file because it's unsupported.",
+  "unsupportedOpenExternally": "Try Externally",
+  "chooseDifferentName": "Choose a different name",
+  "wait": "Please wait"
 }

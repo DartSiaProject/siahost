@@ -7,10 +7,6 @@ final class BucketObjectListState extends Equatable {
     this.objects = const [],
     this.visibleObjects = const [],
     this.prefix,
-    this.marker,
-    this.sortBy,
-    this.sortDir,
-    this.substring,
     this.hasMore = false,
   });
 
@@ -21,10 +17,6 @@ final class BucketObjectListState extends Equatable {
 
   // for filtrering
   final String? prefix;
-  final String? marker;
-  final String? sortBy;
-  final String? sortDir;
-  final String? substring;
 
   // for pagination
   final bool hasMore;
@@ -35,10 +27,6 @@ final class BucketObjectListState extends Equatable {
     List<BucketObjectModel>? objects,
     List<BucketObjectModel>? visibleObjects,
     String? prefix,
-    String? marker,
-    String? sortBy,
-    String? sortDir,
-    String? substring,
     bool? hasMore,
   }) {
     return BucketObjectListState(
@@ -47,10 +35,6 @@ final class BucketObjectListState extends Equatable {
       visibleObjects: visibleObjects ?? this.visibleObjects,
       prefix: prefix ?? this.prefix,
       error: error,
-      marker: marker,
-      sortBy: sortBy ?? this.sortBy,
-      sortDir: sortDir ?? this.sortDir,
-      substring: substring ?? this.substring,
       hasMore: hasMore ?? this.hasMore,
     );
   }

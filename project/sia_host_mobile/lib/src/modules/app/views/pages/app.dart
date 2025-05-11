@@ -13,6 +13,13 @@ import 'package:sia_host_mobile/src/modules/host_list/logic/bloc/host_list_bloc.
 import 'package:sia_host_mobile/src/modules/notifications/logic/bloc/notification_bloc.dart';
 import 'package:sia_host_mobile/src/shared/utils/constants.dart';
 
+class CustomScrollBehavior extends MaterialScrollBehavior {
+  @override
+  ScrollPhysics getScrollPhysics(BuildContext context) {
+    return const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics());
+  }
+}
+
 class App extends StatelessWidget {
   const App({super.key});
 
@@ -21,36 +28,37 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<OnboardingCubit>(
-          create: (context) => sl.get(),
+          create: (context) => di.get(),
         ),
         BlocProvider<AuthCubit>(
-          create: (context) => sl.get(),
+          create: (context) => di.get(),
         ),
         BlocProvider<NetworkOverviewCubit>(
-          create: (context) => sl.get()..getData(),
+          create: (context) => di.get()..getData(),
         ),
         BlocProvider<HostListBloc>(
-          create: (context) => sl.get()..add(HostListFetchedEvent()),
+          create: (context) => di.get()..add(HostListFetchedEvent()),
         ),
         BlocProvider<CurrentHostCubit>(
-          create: (context) => sl.get()..getData(),
+          create: (context) => di.get()..getData(),
         ),
         BlocProvider<NotificationBloc>(
-          create: (context) => sl.get()..add(const NotificationFetchedEvent()),
+          create: (context) => di.get()..add(const NotificationFetchedEvent()),
         ),
         BlocProvider<BucketListCubit>(
-          create: (context) => sl.get()..findAll(),
+          create: (context) => di.get()..findAll(),
         ),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
         child: MaterialApp.router(
+          scrollBehavior: CustomScrollBehavior(),
           scaffoldMessengerKey: scaffoldMessengerKey,
           debugShowCheckedModeBanner: false,
           theme: AppTheme.theme,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
-          routerConfig: sl.get<AppRouter>().config(),
+          routerConfig: di.get<AppRouter>().config(),
           builder: (context, child) => _unFocusWrapper(child),
         ),
       ),
