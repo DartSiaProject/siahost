@@ -84,7 +84,7 @@ class _DeleteFileView extends StatelessWidget {
                   onPressed: () {
                     context.read<DownloadFileCubit>().downloadFile(fileObject);
                   },
-                  label: context.l10n.delete,
+                  label: context.l10n.downloadAction,
                 );
               },
             ),

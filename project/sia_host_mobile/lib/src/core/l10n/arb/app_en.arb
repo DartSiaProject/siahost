@@ -97,10 +97,10 @@
   "notifDetail": "Alert Details",
 
   "errorCancelled": "Request was cancelled.",
-  "errorConnectionTimeout": "Connection timed out.",
+  "errorConnectionTimeout": "Your device took too long time to connect to the server.",
   "errorNoInternet": "No internet connection.",
-  "errorReceiveTimeout": "Receive timeout occurred.",
-  "errorSendTimeout": "Send timeout occurred.",
+  "errorReceiveTimeout": "Your device took too long time to receive data from the server.",
+  "errorSendTimeout": "Your device took too long time to send data to the server.",
   "errorInvalidCertificate": "Invalid certificate.",
   "errorUnauthorized": "Unauthorized access.",
   "errorForbidden": "Access forbidden.",

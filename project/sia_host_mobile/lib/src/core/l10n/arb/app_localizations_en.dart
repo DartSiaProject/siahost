@@ -264,16 +264,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get errorCancelled => 'Request was cancelled.';
 
   @override
-  String get errorConnectionTimeout => 'Connection timed out.';
+  String get errorConnectionTimeout => 'Your device took too long time to connect to the server.';
 
   @override
   String get errorNoInternet => 'No internet connection.';
 
   @override
-  String get errorReceiveTimeout => 'Receive timeout occurred.';
+  String get errorReceiveTimeout => 'Your device took too long time to receive data from the server.';
 
   @override
-  String get errorSendTimeout => 'Send timeout occurred.';
+  String get errorSendTimeout => 'Your device took too long time to send data to the server.';
 
   @override
   String get errorInvalidCertificate => 'Invalid certificate.';

@@ -1,5 +1,4 @@
 import 'package:injectable/injectable.dart';
-import 'package:logger/logger.dart';
 import 'package:renterd/renterd.dart';
 import 'package:sia_host_mobile/src/modules/auth/data/models/dto/login_dto.dart';
 import 'package:sia_host_mobile/src/modules/auth/data/models/user_info.dart';
@@ -21,7 +20,6 @@ class AuthRepository {
   /// secure local storage.
   Future<bool> isAuthenticated() async {
     final user = await _stoage.getUser();
-    Logger().i('User: $user');
     return user != null;
   }
 
@@ -30,21 +28,13 @@ class AuthRepository {
   Future<void> login(LoginDto dto) async {
     try {
       final url = '${dto.serverAddress}/auth/login';
-      final response = await _api.post(
+      await _api.post(
         url,
         data: {
           'email': dto.email,
           'password': dto.password,
         },
       );
-
-      // final data = response.data as Map<String, dynamic>;
-      // save accessToken using secure storage
-      // final accessToken = data['AccessToken'] as String;
-      // await _stoage.i.write(
-      //   key: 'accessToken',
-      //   value: accessToken,
-      // );
 
       final userKeys = Crypto.generateTheKey(
         mailAndPassword: dto.email + dto.password,
@@ -62,7 +52,6 @@ class AuthRepository {
 
       return;
     } catch (e) {
-      Logger().w(e);
       throw DartSiaException.handleError(e);
     }
   }

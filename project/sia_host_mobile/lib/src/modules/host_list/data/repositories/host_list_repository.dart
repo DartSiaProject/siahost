@@ -42,11 +42,7 @@ class HostListRepository {
 
         // Filter the hosts that are gouging
         // and map them to HostInfoModel
-        final hosts = dataList
-            .where(
-          (h) => h['checks']['autopilot']['usability']['gouging'] == true,
-        )
-            .map((e) {
+        final hosts = HostHelper.filterActiveHosts(dataList).map((e) {
           final map = e as Map<String, dynamic>;
           final settings = map['settings'] as Map<String, dynamic>;
 

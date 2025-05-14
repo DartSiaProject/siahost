@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:logger/logger.dart';
 import 'package:renterd/renterd.dart' as renterd;
 import 'package:sia_host_mobile/src/modules/auth/data/models/user_info.dart';
 import 'package:sia_host_mobile/src/modules/file_manager/data/models/bucket_object_model.dart';
@@ -83,7 +82,7 @@ class FileActionRepository {
           newName: newFileName,
         );
       } catch (e) {
-        Logger().e('Error renaming file in local storage: $e');
+        //
       }
       return newFileName;
     } else {
@@ -129,7 +128,7 @@ class FileActionRepository {
 
     final userInfo = _storage.currentUserDecrypted!;
     try {
-      final res = await renterd.Object.uploadFile(
+      await renterd.Object.uploadFile(
         serverAddress: userInfo.serverAddress,
         key: userInfo.key,
         iv: userInfo.iv,
@@ -138,11 +137,7 @@ class FileActionRepository {
         file: file,
         onSendProgress: onSendProgress,
       );
-
-      Logger().f(res);
     } catch (e) {
-      Logger().w(e);
-
       if (e is DioException) {
         if (e.response != null) {
           final resData = e.response!.data as Map<String, dynamic>;

@@ -608,7 +608,7 @@ abstract class AppLocalizations {
   /// No description provided for @errorConnectionTimeout.
   ///
   /// In en, this message translates to:
-  /// **'Connection timed out.'**
+  /// **'Your device took too long time to connect to the server.'**
   String get errorConnectionTimeout;
 
   /// No description provided for @errorNoInternet.
@@ -620,13 +620,13 @@ abstract class AppLocalizations {
   /// No description provided for @errorReceiveTimeout.
   ///
   /// In en, this message translates to:
-  /// **'Receive timeout occurred.'**
+  /// **'Your device took too long time to receive data from the server.'**
   String get errorReceiveTimeout;
 
   /// No description provided for @errorSendTimeout.
   ///
   /// In en, this message translates to:
-  /// **'Send timeout occurred.'**
+  /// **'Your device took too long time to send data to the server.'**
   String get errorSendTimeout;
 
   /// No description provided for @errorInvalidCertificate.

@@ -111,60 +111,6 @@ class _AudioViewerState extends State<AudioViewer> {
 
                   const Spacer(),
 
-                  // Position slider
-                  // StreamBuilder<PlaybackState>(
-                  //   stream: _playbackState,
-                  //   builder: (c, snap) {
-                  //     final state = snap.data;
-                  //     final pos = state?.position ?? Duration.zero;
-                  //     final total = item?.duration ?? Duration.zero;
-
-                  //     log('AudioViewer: $pos / $total');
-                  //     return Column(
-                  //       children: [
-                  //         SliderTheme(
-                  //           data: SliderTheme.of(context).copyWith(
-                  //             thumbShape: const RoundSliderThumbShape(
-                  //               enabledThumbRadius: 6,
-                  //             ),
-                  //             overlayShape: const RoundSliderOverlayShape(
-                  //               overlayRadius: 12,
-                  //             ),
-                  //             activeTrackColor: AppTheme.primaryColor,
-                  //             inactiveTrackColor: Colors.white24,
-                  //           ),
-                  //           child: Slider(
-                  //             max: total.inMilliseconds.toDouble(),
-                  //             value: pos.inMilliseconds
-                  //                 .clamp(0, total.inMilliseconds)
-                  //                 .toDouble(),
-                  //             onChanged: (v) {
-                  //               _handler.seek(
-                  //                 Duration(milliseconds: v.toInt()),
-                  //               );
-                  //             },
-                  //           ),
-                  //         ),
-                  //         Padding(
-                  //           padding: const EdgeInsets.symmetric(horizontal: 16),
-                  //           child: Row(
-                  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //             children: [
-                  //               Text(
-                  //                 _format(pos),
-                  //                 style: const TextStyle(color: Colors.white70),
-                  //               ),
-                  //               Text(
-                  //                 _format(total),
-                  //                 style: const TextStyle(color: Colors.white70),
-                  //               ),
-                  //             ],
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     );
-                  //   },
-                  // ),
                   StreamBuilder<Duration>(
                     stream: _positionStream,
                     builder: (context, snap) {

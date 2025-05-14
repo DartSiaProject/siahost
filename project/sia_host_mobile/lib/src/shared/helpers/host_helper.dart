@@ -43,11 +43,11 @@ class HostHelper {
   static double getFinalScore(Map<String, dynamic> hostData) {
     var finalScore = 0.0;
 
-    if (hostData.containsKey('checks') &&
-        (hostData['checks'] as Map).containsKey('autopilot') &&
-        (hostData['checks']['autopilot'] as Map).containsKey('score')) {
+    try {
       final scores =
-          hostData['checks']['autopilot']['score'] as Map<String, dynamic>;
+          hostData['checks']['autopilot']['score'] as Map<String, dynamic>?;
+
+      if (scores == null) return finalScore;
 
       finalScore += (scores['age'] as num) * _weightAge;
       finalScore += (scores['collateral'] as num) * _weightCollateral;
@@ -57,9 +57,11 @@ class HostHelper {
       finalScore += (scores['uptime'] as num) * _weightUptime;
       finalScore += (scores['version'] as num) * _weightVersion;
       finalScore += (scores['prices'] as num) * _weightPrices;
-    }
 
-    return finalScore;
+      return finalScore;
+    } catch (e) {
+      return finalScore;
+    }
   }
 
   /// Convert storage
@@ -120,5 +122,24 @@ class HostHelper {
   ///
   static double calculateUsedStorage(num total, num remaining) {
     return (total - remaining) / 1e12;
+  }
+
+  /// Get active host list mapped
+  ///
+  static List<dynamic> filterActiveHosts(
+    List<dynamic> dataList,
+  ) {
+    return dataList
+        .where((h) {
+          try {
+            final isOnline =
+                h['checks']['autopilot']['usability']['gouging'] as bool?;
+            return isOnline ?? false;
+          } catch (e) {
+            return false;
+          }
+        })
+        .map((e) => e)
+        .toList();
   }
 }

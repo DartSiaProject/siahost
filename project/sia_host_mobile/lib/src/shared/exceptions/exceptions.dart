@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
-import 'package:logger/logger.dart';
 import 'package:sia_host_mobile/src/shared/utils/utils.dart';
 
 class DartSiaException extends Equatable implements Exception {
@@ -19,7 +18,6 @@ class DartSiaException extends Equatable implements Exception {
   factory DartSiaException.handleError(
     dynamic error,
   ) {
-    Logger().e(error);
     if (error is DartSiaException) return error;
 
     var code = 0;

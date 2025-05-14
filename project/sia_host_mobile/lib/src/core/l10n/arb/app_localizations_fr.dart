@@ -264,16 +264,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get errorCancelled => 'La requête a été annulée.';
 
   @override
-  String get errorConnectionTimeout => 'Délai de connexion dépassé.';
+  String get errorConnectionTimeout => 'Votre appareil a mis trop de temps à se connecter au serveur.';
 
   @override
   String get errorNoInternet => 'Pas de connexion internet.';
 
   @override
-  String get errorReceiveTimeout => 'Délai de réception dépassé.';
+  String get errorReceiveTimeout => 'Votre appareil a mis trop de temps à recevoir des données du serveur.';
 
   @override
-  String get errorSendTimeout => 'Délai d\'envoi dépassé.';
+  String get errorSendTimeout => 'Votre appareil a mis trop de temps à envoyer des données au serveur.';
 
   @override
   String get errorInvalidCertificate => 'Certificat invalide.';

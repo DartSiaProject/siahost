@@ -8,7 +8,7 @@ class OrientationWrapper extends StatefulWidget {
   final Widget child;
 
   @override
-  _OrientationWrapperState createState() => _OrientationWrapperState();
+  State<OrientationWrapper> createState() => _OrientationWrapperState();
 }
 
 class _OrientationWrapperState extends State<OrientationWrapper> {

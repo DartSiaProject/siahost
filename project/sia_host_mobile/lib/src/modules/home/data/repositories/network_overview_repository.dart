@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:renterd/renterd.dart';
 import 'package:sia_host_mobile/src/modules/home/data/models/models.dart';
 import 'package:sia_host_mobile/src/shared/exceptions/exceptions.dart';
+import 'package:sia_host_mobile/src/shared/helpers/host_helper.dart';
 import 'package:sia_host_mobile/src/shared/security/data_decrypter.dart';
 import 'package:sia_host_mobile/src/shared/services/storage_service.dart';
 
@@ -56,11 +57,7 @@ class NetworkOverviewRepository {
   /// to get the detailled overview of the network
   ///
   NetworkDataModel _calculateResult(List<dynamic> dataList) {
-    final activeHosts = dataList
-        .where(
-          (h) => h['checks']['autopilot']['usability']['gouging'] == true,
-        )
-        .toList();
+    final activeHosts = HostHelper.filterActiveHosts(dataList);
 
     // 1. Count hosts
     final hostCount = activeHosts.length;

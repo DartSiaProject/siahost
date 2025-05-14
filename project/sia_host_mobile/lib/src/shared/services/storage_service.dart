@@ -1,6 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sia_host_mobile/src/modules/auth/data/models/user_info.dart';
 import 'package:sia_host_mobile/src/shared/security/data_decrypter.dart';
 
@@ -17,24 +16,17 @@ class StorageService {
       ),
     );
     _currentUser = null;
-
-    // Initialize shared preferences
-    _prefs = await SharedPreferences.getInstance();
   }
 
   // secure storage
   late FlutterSecureStorage _storage;
   FlutterSecureStorage get i => _storage;
 
-  // shared preferences
-  late SharedPreferences _prefs;
-  SharedPreferences get prefs => _prefs;
-
   UserInfo? _currentUser;
 
   /// This return the current user data decrypted
   ///
-  /// Only the [key], [iv] and [serverAddress] are decrypted
+  /// Only the key, iv and serverAddress are decrypted
   /// since they are needed for interacting with renterd package
   ///
   UserInfo? get currentUserDecrypted {
