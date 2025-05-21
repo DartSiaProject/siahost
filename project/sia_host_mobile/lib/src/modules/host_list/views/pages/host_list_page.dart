@@ -17,51 +17,53 @@ class HostListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<HostListBloc, HostListState>(
-      listener: (context, state) {
-        if (state.status == StateStatus.searchingFailure) {
-          AppSnackBar.error(
-            message: context.l10n.cannotFindHostByKey,
-          );
-          return;
-        }
+    return Scaffold(
+      body: BlocListener<HostListBloc, HostListState>(
+        listener: (context, state) {
+          if (state.status == StateStatus.searchingFailure) {
+            AppSnackBar.error(
+              message: context.l10n.cannotFindHostByKey,
+            );
+            return;
+          }
 
-        if (state.status == StateStatus.failure) {
-          AppSnackBar.error(
-            message: translateErrorMessage(context, state.error!),
-          );
-        }
-      },
-      listenWhen: (previous, current) {
-        return current.status == StateStatus.searchingFailure ||
-            current.status == StateStatus.failure;
-      },
-      child: RefreshIndicator.adaptive(
-        onRefresh: () async {
-          context.read<HostListBloc>().add(HostListFetchedEvent());
+          if (state.status == StateStatus.failure) {
+            AppSnackBar.error(
+              message: translateErrorMessage(context, state.error!),
+            );
+          }
         },
-        child: CustomScrollView(
-          physics: const BouncingScrollPhysics(),
-          slivers: [
-            SliverAppBar(
-              title: Text(context.l10n.searchTitle),
-              floating: true,
-              snap: true,
-              bottom: const PreferredSize(
-                preferredSize: Size.fromHeight(kToolbarHeight + 50),
-                child: Padding(
-                  padding: EdgeInsets.all(16),
-                  child: SearchHostWidget(),
+        listenWhen: (previous, current) {
+          return current.status == StateStatus.searchingFailure ||
+              current.status == StateStatus.failure;
+        },
+        child: RefreshIndicator.adaptive(
+          onRefresh: () async {
+            context.read<HostListBloc>().add(HostListFetchedEvent());
+          },
+          child: CustomScrollView(
+            physics: const BouncingScrollPhysics(),
+            slivers: [
+              SliverAppBar(
+                title: Text(context.l10n.searchTitle),
+                floating: true,
+                snap: true,
+                bottom: const PreferredSize(
+                  preferredSize: Size.fromHeight(kToolbarHeight + 50),
+                  child: Padding(
+                    padding: EdgeInsets.all(16),
+                    child: SearchHostWidget(),
+                  ),
                 ),
               ),
-            ),
-            const SliverPadding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              sliver: SliverToBoxAdapter(
-                child: HostListView(),
+              const SliverPadding(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                sliver: SliverToBoxAdapter(
+                  child: HostListView(),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

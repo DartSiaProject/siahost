@@ -1102,6 +1102,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please wait'**
   String get wait;
+
+  /// No description provided for @preferences.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferences'**
+  String get preferences;
+
+  /// No description provided for @changeLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Language'**
+  String get changeLanguage;
+
+  /// No description provided for @chooseLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your language'**
+  String get chooseLanguage;
+
+  /// No description provided for @french.
+  ///
+  /// In en, this message translates to:
+  /// **'French'**
+  String get french;
+
+  /// No description provided for @english.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get english;
+
+  /// No description provided for @languageChanged.
+  ///
+  /// In en, this message translates to:
+  /// **'Language changed successfully.'**
+  String get languageChanged;
+
+  /// No description provided for @dbBackup.
+  ///
+  /// In en, this message translates to:
+  /// **'Database Backup'**
+  String get dbBackup;
+
+  /// No description provided for @dbBackupDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup your database to a file or restore it from a file.'**
+  String get dbBackupDesc;
+
+  /// No description provided for @dbBackupButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup'**
+  String get dbBackupButton;
+
+  /// No description provided for @dbRestoreButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore'**
+  String get dbRestoreButton;
+
+  /// No description provided for @dbBackupSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Database backup was successful.'**
+  String get dbBackupSuccess;
+
+  /// No description provided for @dbRestoreSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Database restore was successful.'**
+  String get dbRestoreSuccess;
+
+  /// No description provided for @cacheManager.
+  ///
+  /// In en, this message translates to:
+  /// **'Cache Manager'**
+  String get cacheManager;
+
+  /// No description provided for @cacheManagerDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage your cache and clear it if needed.'**
+  String get cacheManagerDesc;
+
+  /// No description provided for @about.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get about;
+
+  /// No description provided for @aboutDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'DartSia is a mobile application that allows you to manage your host on the Sia network. It is open source and free to use.'**
+  String get aboutDesc;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

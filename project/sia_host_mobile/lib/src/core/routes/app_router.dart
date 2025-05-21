@@ -100,5 +100,16 @@ class AppRouter extends RootStackRouter {
           path: '/viewer',
           guards: [OnboardingGuard(), AuthGuard()],
         ),
+
+        // settings
+        AutoRoute(
+          page: const EmptyShellRoute('settings'),
+          path: '/settings',
+          children: [
+            AutoRoute(page: PreferenceRoute.page, path: ''),
+            // AutoRoute(page: PreferenceRoute.page, path: 'backups'),
+          ],
+          guards: [OnboardingGuard(), AuthGuard()],
+        ),
       ];
 }

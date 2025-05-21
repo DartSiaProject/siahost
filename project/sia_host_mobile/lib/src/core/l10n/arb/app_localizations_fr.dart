@@ -525,4 +525,52 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get wait => 'Veuillez patienter';
+
+  @override
+  String get preferences => 'Preferences';
+
+  @override
+  String get changeLanguage => 'Changer la langue d\'affichage';
+
+  @override
+  String get chooseLanguage => 'Choisir une langue';
+
+  @override
+  String get french => 'Français';
+
+  @override
+  String get english => 'Anglais';
+
+  @override
+  String get languageChanged => 'La langue a été changée avec succès.';
+
+  @override
+  String get dbBackup => 'Sauvegarde et restauration';
+
+  @override
+  String get dbBackupDesc => 'Sauvegarder votre base de données sur un fichier ou la restaurer à partir d\'un fichier.';
+
+  @override
+  String get dbBackupButton => 'Sauvegarder';
+
+  @override
+  String get dbRestoreButton => 'Restaurer';
+
+  @override
+  String get dbBackupSuccess => 'La sauvegarde de la base de données a été effectuée avec succès.';
+
+  @override
+  String get dbRestoreSuccess => 'La restauration de la base de données a été effectuée avec succès.';
+
+  @override
+  String get cacheManager => 'Gestionnaire de cache';
+
+  @override
+  String get cacheManagerDesc => 'Gérer votre cache et le vider si nécessaire.';
+
+  @override
+  String get about => 'À propos de l\'application';
+
+  @override
+  String get aboutDesc => 'DartSia est une application mobile qui vous permet de gérer votre hôte sur le réseau Sia. Elle est open source et gratuite à utiliser.';
 }

@@ -17,9 +17,11 @@ class HostConfigPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => HostConfigCubit(di.get()),
-      child: const HostConfigView(),
+    return Scaffold(
+      body: BlocProvider(
+        create: (context) => HostConfigCubit(di.get()),
+        child: const HostConfigView(),
+      ),
     );
   }
 }

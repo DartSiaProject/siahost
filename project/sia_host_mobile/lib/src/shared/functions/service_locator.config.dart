@@ -39,6 +39,9 @@ import '../../modules/notifications/data/repositories/notification_repository.da
     as _i350;
 import '../../modules/notifications/logic/bloc/notification_bloc.dart' as _i955;
 import '../../modules/notifications/notifications.dart' as _i859;
+import '../../modules/preference/data/repositories/preference_repository.dart'
+    as _i685;
+import '../../modules/preference/logic/cubit/language_cubit.dart' as _i207;
 import '../handler/audio_player_handler.dart' as _i1058;
 import '../services/api_client.dart' as _i933;
 import '../services/file_storage_service.dart' as _i178;
@@ -82,10 +85,14 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i350.NotificationRepository(gh<_i306.StorageService>()));
     gh.lazySingleton<_i251.NetworkOverviewRepository>(
         () => _i251.NetworkOverviewRepository(gh<_i306.StorageService>()));
+    gh.singleton<_i685.PreferenceRepository>(
+        () => _i685.PreferenceRepository(gh<_i306.StorageService>()));
     gh.factory<_i362.HostConfigRepository>(
         () => _i362.HostConfigRepository(gh<_i306.StorageService>()));
     gh.lazySingleton<_i955.NotificationBloc>(
         () => _i955.NotificationBloc(gh<_i859.NotificationRepository>()));
+    gh.factory<_i207.LanguageCubit>(
+        () => _i207.LanguageCubit(gh<_i685.PreferenceRepository>()));
     gh.lazySingleton<_i451.BucketListCubit>(
         () => _i451.BucketListCubit(gh<_i168.BucketRepository>()));
     gh.lazySingleton<_i731.NetworkOverviewCubit>(() =>

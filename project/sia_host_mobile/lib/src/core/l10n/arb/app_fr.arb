@@ -234,5 +234,25 @@
   "unsupportedFileDesc": "Nous ne pouvons pas ouvrir ce fichier car son format est non supporté.",
   "unsupportedOpenExternally": "Ouvrir avec une app externe",
   "chooseDifferentName": "Choisir un nom différent",
-  "wait": "Veuillez patienter"
+  "wait": "Veuillez patienter",
+
+  "preferences": "Preferences",
+  "changeLanguage": "Changer la langue d'affichage",
+  "chooseLanguage": "Choisir une langue",
+  "french": "Français",
+  "english": "Anglais",
+  "languageChanged": "La langue a été changée avec succès.",
+
+  "dbBackup": "Sauvegarde et restauration",
+  "dbBackupDesc": "Sauvegarder votre base de données sur un fichier ou la restaurer à partir d'un fichier.",
+  "dbBackupButton": "Sauvegarder",
+  "dbRestoreButton": "Restaurer",
+  "dbBackupSuccess": "La sauvegarde de la base de données a été effectuée avec succès.",
+  "dbRestoreSuccess": "La restauration de la base de données a été effectuée avec succès.",
+
+  "cacheManager": "Gestionnaire de cache",
+  "cacheManagerDesc": "Gérer votre cache et le vider si nécessaire.",
+
+  "about": "À propos de l'application",
+  "aboutDesc": "DartSia est une application mobile qui vous permet de gérer votre hôte sur le réseau Sia. Elle est open source et gratuite à utiliser."
 }

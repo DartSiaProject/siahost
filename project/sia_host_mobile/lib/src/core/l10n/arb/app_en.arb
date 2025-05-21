@@ -257,5 +257,25 @@
   "unsupportedFileDesc": "We cannot open this file because it's unsupported.",
   "unsupportedOpenExternally": "Try Externally",
   "chooseDifferentName": "Choose a different name",
-  "wait": "Please wait"
+  "wait": "Please wait",
+
+  "preferences": "Preferences",
+  "changeLanguage": "Change Language",
+  "chooseLanguage": "Choose your language",
+  "french": "French",
+  "english": "English",
+  "languageChanged": "Language changed successfully.",
+
+  "dbBackup": "Database Backup",
+  "dbBackupDesc": "Backup your database to a file or restore it from a file.",
+  "dbBackupButton": "Backup",
+  "dbRestoreButton": "Restore",
+  "dbBackupSuccess": "Database backup was successful.",
+  "dbRestoreSuccess": "Database restore was successful.",
+
+  "cacheManager": "Cache Manager",
+  "cacheManagerDesc": "Manage your cache and clear it if needed.",
+
+  "about": "About",
+  "aboutDesc": "DartSia is a mobile application that allows you to manage your host on the Sia network. It is open source and free to use."
 }

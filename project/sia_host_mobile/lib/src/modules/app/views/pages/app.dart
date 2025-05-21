@@ -11,6 +11,7 @@ import 'package:sia_host_mobile/src/modules/file_manager/logic/buckets/bucket_li
 import 'package:sia_host_mobile/src/modules/home/logic/cubit/network_overview_cubit.dart';
 import 'package:sia_host_mobile/src/modules/host_list/logic/bloc/host_list_bloc.dart';
 import 'package:sia_host_mobile/src/modules/notifications/logic/bloc/notification_bloc.dart';
+import 'package:sia_host_mobile/src/modules/preference/logic/cubit/language_cubit.dart';
 import 'package:sia_host_mobile/src/shared/utils/constants.dart';
 
 class CustomScrollBehavior extends MaterialScrollBehavior {
@@ -48,18 +49,41 @@ class App extends StatelessWidget {
         BlocProvider<BucketListCubit>(
           create: (context) => di.get()..findAll(),
         ),
+        BlocProvider<LanguageCubit>(
+          create: (context) => di.get()..getCurrentLanguage(),
+        ),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
-        child: MaterialApp.router(
-          scrollBehavior: CustomScrollBehavior(),
-          scaffoldMessengerKey: scaffoldMessengerKey,
-          debugShowCheckedModeBanner: false,
-          theme: AppTheme.theme,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          routerConfig: di.get<AppRouter>().config(),
-          builder: (context, child) => _unFocusWrapper(child),
+        child: BlocBuilder<LanguageCubit, LanguageState>(
+          buildWhen: (previous, current) =>
+              previous != current && current is LanguageSuccess,
+          builder: (context, state) {
+            Locale? locale;
+            if (state is LanguageSuccess) {
+              locale = state.locale;
+            }
+
+            return MaterialApp.router(
+              locale: locale,
+              scrollBehavior: CustomScrollBehavior(),
+              scaffoldMessengerKey: scaffoldMessengerKey,
+              debugShowCheckedModeBanner: false,
+              theme: AppTheme.theme,
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              routerConfig: di.get<AppRouter>().config(),
+              builder: (context, child) => _unFocusWrapper(child),
+              localeResolutionCallback: (locale, supportedLocales) {
+                for (final supportedLocale in supportedLocales) {
+                  if (supportedLocale.languageCode == locale!.languageCode) {
+                    return supportedLocale;
+                  }
+                }
+                return supportedLocales.first;
+              },
+            );
+          },
         ),
       ),
     );
