@@ -1,103 +1,79 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:multiple_result/multiple_result.dart';
 import 'package:renterd/renterd.dart';
 import 'package:sia_host_mobile/src/modules/notifications/data/models/notification_response_model.dart';
-
-import '../../../../shared/constants/lang_const.dart';
-import '../../../../shared/features/fetch_user_credentials/data/local_source/absts/fetch_the_user_credential_abst.dart';
-import '../../../../shared/global/map_variable.dart' as global;
-import '../../../../shared/services/connection/requests/connection_request.dart';
-import '../../../../shared/services/cryptography/requests/decrypt_request.dart';
-import '../../../../shared/services/security/requests/encrypter_request.dart';
+import 'package:sia_host_mobile/src/shared/exceptions/exceptions.dart';
+import 'package:sia_host_mobile/src/shared/security/data_decrypter.dart';
+import 'package:sia_host_mobile/src/shared/services/storage_service.dart';
 
 @LazySingleton()
 class NotificationRepository {
-  NotificationRepository({
-    required FetchTheUserCredentialAbst fetchTheUserCredentialAbst,
-  }) : _fetchTheUserCredentialAbst = fetchTheUserCredentialAbst;
+  NotificationRepository(this._storage);
 
-  final FetchTheUserCredentialAbst _fetchTheUserCredentialAbst;
+  final StorageService _storage;
 
-  Future<Result<NotificationResponseModel, String>> findAll({
+  Future<NotificationResponseModel> findAll({
     int page = 0,
   }) async {
     const limit = 10;
     final offset = page * limit;
-    if ((await ConnectionRequest.checkConnectivity())) {
-      if (global.userInfo.isEmpty) {
-        final resCredentials =
-            await _fetchTheUserCredentialAbst.fetchUserCredential();
 
-        if (resCredentials['status'] == false) {
-          return const Result.error(Lang.makeLoginDemandText);
-        }
-
-        global.userInfo = json.decode(resCredentials['data']);
-      }
+    try {
+      final userInfo = _storage.currentUserDecrypted!;
 
       final result = await Notification.findAll(
-        serverAddress: EncrypterRequest.decrypt(
-          dataEncrypted: global.userInfo["userServerAdress"],
-        ),
-        key: EncrypterRequest.decrypt(
-          dataEncrypted: global.userInfo["userKey"],
-        ),
-        iv: EncrypterRequest.decrypt(dataEncrypted: global.userInfo["userIv"]),
-        limit: limit,
+        serverAddress: userInfo.serverAddress,
+        key: userInfo.key,
+        iv: userInfo.iv,
         offset: offset,
       );
 
-      if (result['status'] == true) {
-        final response = result['response'] as Response<dynamic>;
+      if (result['status'] == true && result.containsKey('response')) {
+        final response =
+            (result['response'] as Response<dynamic>).data as String;
+        final resData = json.decode(response) as Map<String, dynamic>;
 
-        if (response.statusCode == HttpStatus.ok) {
-          dynamic dataList = json.decode(
-            DecryptRequest.decryptStringWithAES256CBC(
-              chipherText: json.decode(response.data!)["data"],
-              key: EncrypterRequest.decrypt(
-                dataEncrypted: global.userInfo["userKey"],
-              ),
-              iv: EncrypterRequest.decrypt(
-                dataEncrypted: global.userInfo["userIv"],
-              ),
-            ),
-          );
+        // decode the data
+        final data = json.decode(
+          DataDecrypter.decryptStringWithAES256CBC(
+            chipherText: resData['data'] as String,
+            key: userInfo.key,
+            iv: userInfo.iv,
+          ),
+        ) as Map<String, dynamic>;
 
-          // Printing the list of alerts
-          if (kDebugMode) print(dataList);
-
-          // Returning the list of alerts
-          return Result.success(
-            NotificationResponseModel.fromJson(dataList),
-          );
-        } else {
-          // Printing the error which actually occured
-          print('An error has occured');
-          if (kDebugMode) print(response.data);
-          return const Result.error(Lang.internalServerErrorText);
-        }
+        // Return the list of alerts
+        return NotificationResponseModel.fromJson(data);
       } else {
-        final error = result['error'] as DioException;
-
-        if (error.type == DioExceptionType.receiveTimeout ||
-            error.type == DioExceptionType.sendTimeout ||
-            error.type == DioExceptionType.connectionTimeout) {
-          return const Result.error(Lang.timeErrorText);
-        }
-
-        return const Result.error(Lang.internalServerErrorText);
+        throw DartSiaException.handleError(result['error']);
       }
-    } else {
-      return const Result.error(Lang.noConnectionText);
+    } catch (e) {
+      throw DartSiaException.handleError(e);
     }
   }
 
-  Future<dynamic> dismissList({
+  Future<void> dismissList({
     required List<String> ids,
-  }) async {}
+  }) async {
+    try {
+      final userInfo = _storage.currentUserDecrypted!;
+
+      final result = await Notification.dismissList(
+        serverAddress: userInfo.serverAddress,
+        key: userInfo.key,
+        iv: userInfo.iv,
+        ids: ids,
+      );
+
+      if (result['status'] == true && result.containsKey('response')) {
+        return;
+      } else {
+        throw DartSiaException.handleError(result['error']);
+      }
+    } catch (e) {
+      throw DartSiaException.handleError(e);
+    }
+  }
 }

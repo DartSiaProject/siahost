@@ -1,25 +1,23 @@
 import 'package:equatable/equatable.dart';
-
-import '../../notifications.dart';
+import 'package:sia_host_mobile/src/modules/notifications/notifications.dart';
 
 class NotificationResponseModel extends Equatable {
-  final List<NotificationModel> notifications;
-  final bool hasMore;
-
   const NotificationResponseModel({
     required this.notifications,
     required this.hasMore,
   });
 
-  @override
-  List<Object?> get props => [notifications, hasMore];
-
   factory NotificationResponseModel.fromJson(Map<String, dynamic> json) {
     return NotificationResponseModel(
       notifications: (json['alerts'] as List? ?? [])
-          .map((e) => NotificationModel.fromJson(e))
+          .map((e) => NotificationModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      hasMore: json['hasMore'] ?? false,
+      hasMore: json['hasMore'] as bool? ?? false,
     );
   }
+  final List<NotificationModel> notifications;
+  final bool hasMore;
+
+  @override
+  List<Object?> get props => [notifications, hasMore];
 }

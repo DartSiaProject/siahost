@@ -1,0 +1,261 @@
+{
+  "@@locale": "en",
+  "appTitle": "DartSia",
+  "@appTitle": {
+    "description": "Title of the app"
+  },
+  "onTrack": "On track",
+  "totalStorage": "Total Storage",
+  "usedStorage": "Used Storage",
+  "availableStorage": "Available Storage",
+  "totalContracts": "Total Contracts",
+  "activeContracts": "Active Contracts",
+  "uploadPrice": "Upload Price",
+  "downloadPrice": "Download Price",
+  "storagePrice": "Storage Price",
+  "currentStatus": "Current Status",
+  "acceptingContracts": "Accepting Contract",
+  "hostPublicAddress": "Host Public Address",
+  "addressCopiedSuccessfully": "Address Copied successfully",
+  "scPerTB": "SC/TB",
+  "siaCoin": "SC",
+  "byte": "B",
+  "kiloByte": "KB",
+  "megaByte": "MB",
+  "gigaByte": "GB",
+  "teraByte": "TB",
+  "petaByte": "PB",
+  "host": "Host",
+  "yes": "Yes",
+  "no": "No",
+  "cancel": "Cancel",
+  "ok": "OK",
+  "online": "Online",
+  "offline": "Offline",
+  "files": "Files",
+  "buckets": "Buckets",
+  "file": "File",
+  "addFile": "Add File",
+  "openFile": "Open File",
+  "deleteFile": "Delete File",
+  "renameFile": "Rename File",
+  "copyFile": "Copy File",
+  "moveFile": "Move File",
+  "notice": "Notice",
+  "retry": "Retry",
+  "delete": "Delete",
+  "save": "Save",
+  "createAt": "Created at",
+
+  "navHome": "Home",
+  "navSearch": "Search",
+  "navMyHost": "My Host",
+  "navConfig": "Configs",
+  "navFiles": "Files",
+  "navNotifications": "Notifications",
+
+  "homeTitle": "Network Overview",
+  "currentActiveHosts": "Current Active \nHosts",
+  "totalNetworkStorage": "Total Network \nStorage",
+  "totalUsedStorage": "Total Used \nStorage",
+  "pricePerTB": "Price per TB",
+  "pricePerTBPerMonth": "Price per \nTB/Month",
+  "dailyActiveContracts": "Daily Active Contracts",
+
+
+  "searchTitle": "Research a host",
+  "searchHint": "Host public key",
+  "searchLabel": "Enter the host public key address",
+  "hostInfo": "Host Informations",
+
+  "myHostTitle": "My Host Overview",
+  "currentHostHeight": "Current Host Height",
+  "maxDownloadPrice": "Max Download Price",
+  "maxUploadPrice": "Max Upload Price",
+  "downloadSpeed": "Download Speed",
+  "uploadSpeed": "Upload Speed",
+  "maxStoragePrice": "Max Storage Price",
+  "maxContractsPrice": "Max Contracts Price",
+  "minAccountExpiry": "Min Account Expiry",
+  "maxRPCPrice": "Max RPC Price",
+
+  "hostConfigTitle": "Host Configurations",
+  "configButton": "Configure",
+  "hostConfigSuccess": "Host data updated successfully",
+
+  "filesTitle": "My Buckets",
+
+  "notificationsTitle": "Notifications",
+  "deleteNotifText": "You are about to delete this alert.",
+  "deleteAllNotifText": "You are about to delete all alerts from Renterd.",
+  "message": "Message",
+  "date": "Date",
+  "source": "Source",
+  "failedDismissAlert": "Failed to dismiss the alert.",
+  "failedFetchedMoreAlert": "Failed to fetch more alerts.",
+  "noAlertFound": "No Alert found !",
+  "notifDetail": "Alert Details",
+
+  "errorCancelled": "Request was cancelled.",
+  "errorConnectionTimeout": "Your device took too long time to connect to the server.",
+  "errorNoInternet": "No internet connection.",
+  "errorReceiveTimeout": "Your device took too long time to receive data from the server.",
+  "errorSendTimeout": "Your device took too long time to send data to the server.",
+  "errorInvalidCertificate": "Invalid certificate.",
+  "errorUnauthorized": "Unauthorized access.",
+  "errorForbidden": "Access forbidden.",
+  "errorBadRequest": "Bad request.",
+  "errorNotFound": "Resource not found.",
+  "errorConflict": "Conflict detected.",
+  "errorBadManip": "Bad manipulation.",
+  "errorAccountDisabled": "Account is disabled.",
+  "errorUnprocessableEntity": "Unprocessable entity.",
+  "errorInternalServer": "Internal server error.",
+  "errorProvider": "Provider error.",
+  "errorOther": "An unknown error occurred.",
+  "errorBadMethod": "Bad method.",
+  "errorUnknown": "Unknown error.",
+
+
+  "serverAddressField": "Renterd Public Address",
+  "serverAddressFieldHint": "IPV4 address",
+  "passwordField": "Password",
+  "emailField": "Email Address",
+  "loginButton": "Connect",
+  "getStartedButton": "Get Started",
+
+  "onboardingTitle1": "Host Control",
+  "onboardingTitle2": "Visualize data",
+  "onboardingTitle3": "Network data",
+
+  "onboardingDesc1": "Easily take control of your host no matter where you are via our mobile application.",
+  "onboardingDesc2": "View your host's status data in real time as well as all of its activity on the Sia network.",
+  "onboardingDesc3": "You can visualize the state of the Sia network as well as all the exchanges of the hosts.",
+
+  "loginDesc": "To start interacting with the Sia network, please fill in the following fields.",
+
+  "requiredField": "This field is required.",
+  "invalidEmail": "Invalid email address.",
+  "invalidAddress": "Invalid server address.",
+  "invalidCredentials": "Invalid credentials.",
+  "invalidAddressFormat": "Invalid address format.",
+  "invalidForm": "Please fill in all fields.",
+
+  "cannotFindHostByKey": "Cannot find the host with this public key.",
+
+  "fileManagerTitle": "File Manager",
+  "fileManagerDesc": "Manage your files and folders in the Sia network.",
+  "fileManagerEmpty": "No files or folders found.",
+  "fileManagerEmptyDesc": "You can create a new folder or upload files to the Sia network.",
+  "fileManagerUpload": "Upload",
+  "fileManagerCreateFolder": "Create Folder",
+
+  "fileManagerLocal": "Local Files",
+  "fileManagerRemote": "Remote Files",
+  "noStoragePermission": "Please accept storage permission first.",
+  "notEnoughSpace": "Not enough space to download the file.",
+  "bucketName": "Bucket Name",
+  "bucketNameHint": "Enter the bucket name",
+  "invalidBucketNamePattern": "The bucket name pattern is invalid",
+  "bucketCreated": "The bucket was successfully created.",
+  "bucketNameRules": "Bucket name must:\n- Be 3–63 characters\n- Use only letters, numbers, dots (.), and hyphens (-)\n- Start and end with a letter or number\n- Not be formatted as an IP address\n- Not contain consecutive periods",
+  "newFileNameField": "New File name",
+  "newFileNameHint": "Enter new file name",
+  
+  "uploadFile": "Upload a File",
+  "uploadFormNameField": "Save File As",
+  "uploadAction": "Upload",
+  "pickFileTitle": "Select a file",
+  "pickFileDesc": "Please select the file to upload",
+  "pickedFileTitle": "File picked",
+  "newFileOrDefault": "Enter new file name or leave blank to save as default name",
+
+  "copyFormUseOldname": "Keep Old file name",
+  "selectDestBucket": "Select destination bucket",
+
+  "fileCopied": "The file {name} has been copied successfully.",
+  "@fileCopied": {
+    "description": "fileCopied",
+    "placeholders": {
+      "name":{
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+  "fileRenamed": "The file {name} has been renamed successfully.",
+  "@fileRenamed": {
+    "description": "fileRenamed",
+    "placeholders": {
+      "name":{
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+  "fileMoved": "The file {name} has been moved successfully.",
+  "@fileMoved": {
+    "description": "fileMoved",
+    "placeholders": {
+      "name":{
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+  "fileDeleted": "The file {name} has been deleted successfully.",
+  "@fileDeleted": {
+    "description": "fileDeleted",
+    "placeholders": {
+      "name":{
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+  "fileUploaded": "The file {name} has been uploaded successfully.",
+  "@fileUploaded": {
+    "description": "fileUploaded",
+    "placeholders": {
+      "name":{
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+  "fileDownload": "The file {name} has been downloaded successfully.",
+  "@fileDownload": {
+    "description": "fileDownload",
+    "placeholders": {
+      "name":{
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+
+  "deleteFileNotice": "Delete a file",
+  "deleteFileDesc": "You are about to delete a file.\n Continue ?",
+
+  "downloadFile": "Download File",
+  "downloadFileNotice": "You need to download the file first before opening it",
+  "downloadAction": "Download",
+  "downloadedFile": "The file {name} has been downloaded successfully.",
+  "@downloadedFile": {
+    "description": "downloadedFile",
+    "placeholders": {
+      "name":{
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+  "downloadStart": "Download started in background.",
+  "downloadAlreadyInProgress": "Your file download is already in progress.",
+
+  "unsupportedFileNotice": "Unsupported file",
+  "unsupportedFileDesc": "We cannot open this file because it's unsupported.",
+  "unsupportedOpenExternally": "Try Externally",
+  "chooseDifferentName": "Choose a different name",
+  "wait": "Please wait"
+}

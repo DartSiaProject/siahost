@@ -1,36 +1,24 @@
 part of 'notification_bloc.dart';
 
-enum NotificationStatus {
-  initial,
-  loading,
-  success,
-  failure,
-  paginating,
-  paginatingFailure,
-  dismissing,
-  dismissingFailure,
-  dismissed,
-}
-
 final class NotificationState extends Equatable {
   const NotificationState({
-    this.status = NotificationStatus.initial,
+    this.status = StateStatus.initial,
     this.notifications,
     this.error,
     this.hasMore = false,
     this.page = 0,
   });
 
-  final NotificationStatus status;
+  final StateStatus status;
   final List<NotificationModel>? notifications;
-  final String? error;
+  final DartSiaException? error;
   final bool hasMore;
   final int page;
 
   NotificationState copyWith({
-    NotificationStatus? status,
+    StateStatus? status,
     List<NotificationModel>? notifications,
-    String? error,
+    DartSiaException? error,
     bool? hasMore,
     int? page,
   }) {

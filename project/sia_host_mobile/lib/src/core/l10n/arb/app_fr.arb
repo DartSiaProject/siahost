@@ -1,0 +1,238 @@
+{
+  "@@locale": "fr",
+  "appTitle": "DartSia",
+  "@appTitle": {
+    "description": "Titre de l'application"
+  },
+  "onTrack": "Sur la bonne voie",
+  "totalStorage": "Stockage total",
+  "usedStorage": "Stockage utilisé",
+  "availableStorage": "Stockage disponible",
+  "totalContracts": "Contrats totaux",
+  "activeContracts": "Contrats actifs",
+  "uploadPrice": "Prix d'envoi",
+  "downloadPrice": "Prix de téléchargement",
+  "storagePrice": "Prix de stockage",
+  "currentStatus": "Statut actuel",
+  "acceptingContracts": "Accepte des contrats",
+  "hostPublicAddress": "Adresse publique de l'hôte",
+  "addressCopiedSuccessfully": "Adresse copiée avec succès.",
+  "scPerTB": "SC/To",
+  "siaCoin": "SC",
+  "byte": "o",
+  "kiloByte": "Ko",
+  "megaByte": "Mo",
+  "gigaByte": "Go",
+  "teraByte": "To",
+  "petaByte": "Po",
+  "host": "Hôte",
+  "yes": "Oui",
+  "no": "Non",
+  "cancel": "Annuler",
+  "ok": "OK",
+  "online": "En ligne",
+  "offline": "Hors ligne",
+  "files": "Fichiers",
+  "buckets": "Buckets",
+  "file": "Fichier",
+  "addFile": "Ajouter un fichier",
+  "openFile": "Ouvrir le fichier",
+  "deleteFile": "Supprimer le fichier",
+  "renameFile": "Renommer le fichier",
+  "copyFile": "Copier le fichier",
+  "moveFile": "Déplacer le fichier",
+  "notice": "Avis",
+  "retry": "Réessayer",
+  "delete": "Supprimer",
+  "save": "Enregistrer",
+  "createAt": "Créer le",
+  "download": "Télécharger",
+  "navHome": "Accueil",
+  "navSearch": "Recherche",
+  "navMyHost": "Mon Hôte",
+  "navConfig": "Configs",
+  "navFiles": "Fichiers",
+  "navNotifications": "Notifications",
+  "homeTitle": "Aperçu du réseau",
+  "currentActiveHosts": "Hôtes actifs \nactuels",
+  "totalNetworkStorage": "Stockage total \ndu réseau",
+  "totalUsedStorage": "Stockage total \nutilisé",
+  "pricePerTB": "Prix par To",
+  "pricePerTBPerMonth": "Prix par \nTo/Mois",
+  "dailyActiveContracts": "Contrats actifs quotidiens",
+  "searchTitle": "Rechercher un hôte",
+  "searchHint": "Clé publique de l'hôte",
+  "searchLabel": "Entrez l'adresse de la clé publique de l'hôte",
+  "hostInfo": "Informations sur l'hôte",
+  "myHostTitle": "Aperçu de mon hôte",
+  "currentHostHeight": "Hauteur actuelle de l'hôte",
+  "maxDownloadPrice": "Prix max de téléchargement",
+  "maxUploadPrice": "Prix max d'envoi",
+  "downloadSpeed": "Vitesse de téléchargement",
+  "uploadSpeed": "Vitesse d'envoi",
+  "maxStoragePrice": "Prix max de stockage",
+  "maxContractsPrice": "Prix max des contrats",
+  "minAccountExpiry": "Expiration min du compte",
+  "maxRPCPrice": "Prix max RPC",
+  "hostConfigTitle": "Configurations de l'hôte",
+  "configButton": "Configurer",
+  "hostConfigSuccess": "Les données du server on été mises à jour.",
+  "filesTitle": "Mes Buckets",
+  "notificationsTitle": "Notifications",
+  "deleteNotifText": "Vous êtes sur le point de supprimer cette alerte.",
+  "deleteAllNotifText": "Vous êtes sur le point de supprimer toutes les alertes de Renterd.",
+  "message": "Message",
+  "date": "Date",
+  "source": "Source",
+  "failedDismissAlert": "Échec de la suppression de l'alerte.",
+  "failedFetchedMoreAlert": "Échec de la récupération de plus d'alertes.",
+  "noAlertFound": "Aucune alerte trouvée!",
+  "notifDetail": "Détails de l'alerte",
+  "errorCancelled": "La requête a été annulée.",
+  "errorConnectionTimeout": "Votre appareil a mis trop de temps à se connecter au serveur.",
+  "errorNoInternet": "Pas de connexion internet.",
+  "errorReceiveTimeout": "Votre appareil a mis trop de temps à recevoir des données du serveur.",
+  "errorSendTimeout": "Votre appareil a mis trop de temps à envoyer des données au serveur.",
+  "errorInvalidCertificate": "Certificat invalide.",
+  "errorUnauthorized": "Accès non autorisé.",
+  "errorForbidden": "Accès interdit.",
+  "errorBadRequest": "Mauvaise requête.",
+  "errorNotFound": "Ressource non trouvée.",
+  "errorConflict": "Conflit détecté.",
+  "errorBadManip": "Mauvaise manipulation.",
+  "errorAccountDisabled": "Le compte est désactivé.",
+  "errorUnprocessableEntity": "Entité non traitable.",
+  "errorInternalServer": "Erreur interne du serveur.",
+  "errorProvider": "Erreur du fournisseur.",
+  "errorOther": "Une erreur inconnue est survenue.",
+  "errorBadMethod": "Mauvaise méthode.",
+  "errorUnknown": "Erreur inconnue.",
+  "serverAddressField": "Adresse publique Renterd",
+  "serverAddressFieldHint": "Adresse IPV4",
+  "passwordField": "Mot de passe Renterd",
+  "emailField": "Adresse e-mail",
+  "loginButton": "Se connecter",
+  "getStartedButton": "Commencer",
+  "onboardingTitle1": "Contrôle de l'hôte",
+  "onboardingTitle2": "Visualiser les données",
+  "onboardingTitle3": "Données du réseau",
+  "onboardingDesc1": "Prenez facilement le contrôle de votre hôte où que vous soyez via notre application mobile.",
+  "onboardingDesc2": "Consultez les données de statut de votre hôte en temps réel ainsi que toute son activité sur le réseau Sia.",
+  "onboardingDesc3": "Vous pouvez visualiser l'état du réseau Sia ainsi que tous les échanges des hôtes.",
+  "loginDesc": "Pour commencer à interagir avec le réseau Sia, veuillez remplir les champs suivants.",
+  "requiredField": "Ce champ est requis.",
+  "invalidEmail": "L'adresse e-mail est invalide.",
+  "invalidAddress": "L'adresse de l'hôte est invalide.",
+  "invalidCredentials": "Données d'identification invalides.",
+  "invalidAddressFormat": "Le format de l'adresse est invalide.",
+  "invalidForm": "Veuillez remplir tous les champs requis.",
+  "cannotFindHostByKey": "Aucun server n'a été trouvé avec cette clé publique.",
+  "fileManagerTitle": "Gestionnaire de fichiers",
+  "fileManagerDesc": "Gerer vos fichiers.",
+  "fileManagerEmpty": "Aucun fichiers ou dossiers trouvés.",
+  "fileManagerEmptyDesc": "Vous pouvez téléverser de nouveaux fichiers.",
+  "fileManagerUpload": "Téléverser",
+  "fileManagerCreateFolder": "Créer un dossier",
+  "fileManagerLocal": "Fichier Locaux",
+  "fileManagerRemote": "Fichiers Servers",
+  "noStoragePermission": "Veuillez accepter les permissions d'accès au stockage.",
+  "notEnoughSpace": "Vous n'avez pas assez d'espace de stockage dans votre appareil.",
+  "bucketName": "Nom du bucket",
+  "bucketNameHint": "Saisir le nom du bucket",
+  "invalidBucketNamePattern": "Le pattern utilisé n'est pas correct",
+  "bucketCreated": "Le bucket a été créé avec succès.",
+  "bucketNameRules": "Le nom du bucket doit:\n- Contenir entre 3 et 63 caractères\n- Utiliser uniquement des lettres, des chiffres, des points (.) et des tirets (-)\n- Commencer et finir par une lettre ou un chiffre\n- Ne pas être au format d'adresse IP\n- Ne pas contenir de points consécutifs",
+  "newFileNameField": "Nouveau nom",
+  "newFileNameHint": "Saisir un nouveau nom",
+  "uploadFile": "Uploader un fichier",
+  "uploadFormNameField": "Sauvegarder comme",
+  "uploadAction": "Uploader",
+  "pickFileTitle": "Choisir un fichier",
+  "pickFileDesc": "Veuillez choisir le fichier a uploader",
+  "pickedFileTitle": "Fichier choisi",
+  "newFileOrDefault": "Saisir le nom du fichier ou laisser le champ vide pour utiliser le nom par defaut.",
+  "copyFormUseOldname": "Conserver l'ancien nom",
+  "selectDestBucket": "Choisir la destination",
+  "fileCopied": "Le fichier {name} a été copié avec succès.",
+  "@fileCopied": {
+    "description": "fileCopied",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+  "fileRenamed": "Le fichier {name} a été renommé avec succès.",
+  "@fileRenamed": {
+    "description": "fileRenamed",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+  "fileMoved": "Le fichier {name} a été déplacé avec succès.",
+  "@fileMoved": {
+    "description": "fileMoved",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+  "fileDeleted": "Le fichier {name} a été supprimé avec succès.",
+  "@fileDeleted": {
+    "description": "fileDeleted",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+  "fileUploaded": "Le fichier {name} a été uploadé avec succès.",
+  "@fileUploaded": {
+    "description": "fileUploaded",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+  "fileDownload": "Le fichier {name} a été téléchargé avec succès.",
+  "@fileDownload": {
+    "description": "fileDownload",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+  "deleteFileNotice": "Supprimer un fichier",
+  "deleteFileDesc": "Votre fichier sera définitivement supprimé.\n Continuer ?",
+  "downloadFile": "Télécharger le fichier",
+  "downloadFileNotice": "Vous devez télécharger ce fichier avant de pouvoir l'ouvrir",
+  "downloadAction": "Télécharger",
+  "downloadedFile": "Le fichier {name} a été téléchargé avec succès.",
+  "@downloadedFile": {
+    "description": "downloadedFile",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "file_example.dart"
+      }
+    }
+  },
+  "downloadStart": "Téléchargement en cours en arrière-plan.",
+  "downloadAlreadyInProgress": "Le téléchargement de votre fichier est déjà en cours. Veuillez patienter.",
+  "unsupportedFileNotice": "Fichier non supporté",
+  "unsupportedFileDesc": "Nous ne pouvons pas ouvrir ce fichier car son format est non supporté.",
+  "unsupportedOpenExternally": "Ouvrir avec une app externe",
+  "chooseDifferentName": "Choisir un nom différent",
+  "wait": "Veuillez patienter"
+}

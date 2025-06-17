@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-
-import '../../../../shared/constants/colors_const.dart';
+import 'package:sia_host_mobile/src/core/theme/app_theme.dart';
 
 class NotificationDetailRow extends StatelessWidget {
   const NotificationDetailRow({
-    super.key,
     required this.value,
+    super.key,
     this.label,
-    this.labelColor = ColorsApp.caribbeanGreenColor,
+    this.labelColor = AppTheme.primaryColor,
     this.valueColor = Colors.white,
   });
 
@@ -21,10 +20,8 @@ class NotificationDetailRow extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Row(
-        // direction: Axis.horizontal,
         spacing: 8,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           if (label != null)
             Text(

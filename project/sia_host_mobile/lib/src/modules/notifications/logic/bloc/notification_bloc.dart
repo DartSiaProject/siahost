@@ -4,64 +4,72 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sia_host_mobile/src/modules/notifications/notifications.dart';
+import 'package:sia_host_mobile/src/shared/exceptions/exceptions.dart';
+import 'package:sia_host_mobile/src/shared/utils/utils.dart';
 
 part 'notification_event.dart';
 part 'notification_state.dart';
 
-@Injectable()
+@LazySingleton()
 class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
-  NotificationBloc({
-    required NotificationRepository repository,
-  })  : _repository = repository,
-        super(const NotificationState()) {
+  NotificationBloc(this._repository) : super(const NotificationState()) {
     on<NotificationFetchedEvent>(_handleFetchedEvent);
     on<NotificationDismissedEvent>(_handleDismissedEvent);
   }
 
   final NotificationRepository _repository;
 
+  /// Handle the fetched event
+  ///
   FutureOr<void> _handleFetchedEvent(
     NotificationFetchedEvent event,
     Emitter<NotificationState> emit,
   ) async {
     final isRefresh = event.isRefresh;
     if (isRefresh) {
-      emit(state.copyWith(
-        status: NotificationStatus.loading,
-        page: 0,
-        notifications: null,
-      ));
+      emit(
+        state.copyWith(
+          status: StateStatus.loading,
+          page: 0,
+        ),
+      );
     } else {
-      if (state.status == NotificationStatus.paginating) return;
+      if (state.status == StateStatus.paginating) return;
       if (!state.hasMore) return;
 
-      emit(state.copyWith(status: NotificationStatus.paginating));
+      emit(state.copyWith(status: StateStatus.paginating));
     }
 
-    final result = await _repository.findAll(page: state.page);
+    try {
+      final result = await _repository.findAll(page: state.page);
 
-    result.when(
-      (success) {
-        final List<NotificationModel> notifications = isRefresh
-            ? success.notifications
-            : [...(state.notifications ?? []), ...success.notifications];
+      var notifications = result.notifications;
+      if (!isRefresh) {
+        final oldNotifs = state.notifications ?? [];
 
-        emit(state.copyWith(
-          status: NotificationStatus.success,
+        notifications = oldNotifs + notifications;
+      }
+
+      emit(
+        state.copyWith(
+          status: StateStatus.success,
           notifications: notifications,
-          hasMore: success.hasMore,
+          hasMore: result.hasMore,
           page: state.page + 1,
-        ));
-      },
-      (error) {
-        emit(state.copyWith(
-          status: NotificationStatus.failure,
-          error: error,
-        ));
-      },
-    );
+        ),
+      );
+    } on DartSiaException catch (e) {
+      emit(
+        state.copyWith(
+          status: StateStatus.failure,
+          error: e,
+        ),
+      );
+    }
   }
 
+  /// Handle the dismissed event
+  ///
   FutureOr<void> _handleDismissedEvent(
     NotificationDismissedEvent event,
     Emitter<NotificationState> emit,
@@ -69,34 +77,40 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     if (state.notifications == null) return;
     if (state.notifications!.isEmpty) return;
 
-    emit(state.copyWith(status: NotificationStatus.dismissing));
+    emit(state.copyWith(status: StateStatus.dismissing));
 
     final isAll = event.ids.isEmpty;
-    List<String> ids = [];
+    var ids = <String>[];
     if (isAll) {
-      ids =
-          state.notifications!.map((notification) => notification.id).toList();
+      ids = state.notifications!
+          .map(
+            (notification) => notification.id,
+          )
+          .toList();
     } else {
       ids = event.ids;
     }
 
-    final result = await _repository.dismissList(ids: ids);
+    try {
+      await _repository.dismissList(ids: ids);
 
-    result.when(
-      (success) {
-        emit(state.copyWith(
-          status: NotificationStatus.dismissed,
-          notifications: isAll ? [] : state.notifications
-              ?.where((notification) => !ids.contains(notification.id))
-              .toList(),
-        ));
-      },
-      (error) {
-        emit(state.copyWith(
-          status: NotificationStatus.dismissingFailure,
-          error: error,
-        ));
-      },
-    );
+      emit(
+        state.copyWith(
+          status: StateStatus.dismissed,
+          notifications: isAll
+              ? []
+              : state.notifications
+                  ?.where((notification) => !ids.contains(notification.id))
+                  .toList(),
+        ),
+      );
+    } on DartSiaException catch (e) {
+      emit(
+        state.copyWith(
+          status: StateStatus.dismissingFailure,
+          error: e,
+        ),
+      );
+    }
   }
 }

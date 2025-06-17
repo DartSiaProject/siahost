@@ -8,17 +8,11 @@ enum NotificationSeverity {
   critical('Critical'),
   unknown('Unknown');
 
-  final String desc;
   const NotificationSeverity(this.desc);
+  final String desc;
 }
 
 class NotificationModel extends Equatable {
-  final String id;
-  final NotificationSeverity severity;
-  final String message;
-  final NotificationDataModel? data;
-  final DateTime timestamp;
-
   const NotificationModel({
     required this.id,
     required this.severity,
@@ -26,6 +20,30 @@ class NotificationModel extends Equatable {
     required this.data,
     required this.timestamp,
   });
+
+  factory NotificationModel.fromJson(Map<String, dynamic> json) {
+    return NotificationModel(
+      id: json['id'] as String? ?? '',
+      severity: json['severity'] != null
+          ? NotificationSeverity.values.firstWhere(
+              (e) => e.name == json['severity'].toString().toLowerCase(),
+              orElse: () => NotificationSeverity.unknown,
+            )
+          : NotificationSeverity.unknown,
+      message: json['message'] as String? ?? '',
+      data: json['data'] != null
+          ? NotificationDataModel.fromJson(json['data'] as Map<String, dynamic>)
+          : null,
+      timestamp: json['timestamp'] != null
+          ? DateTime.parse(json['timestamp'] as String)
+          : DateTime.now(),
+    );
+  }
+  final String id;
+  final NotificationSeverity severity;
+  final String message;
+  final NotificationDataModel? data;
+  final DateTime timestamp;
 
   @override
   List<Object?> get props => [
@@ -35,41 +53,13 @@ class NotificationModel extends Equatable {
         data,
         timestamp,
       ];
-
-  factory NotificationModel.fromJson(Map<String, dynamic> json) {
-    return NotificationModel(
-      id: json['id'] ?? '',
-      severity: json['severity'] != null
-          ? NotificationSeverity.values.firstWhere(
-              (e) => e.name == json['severity'].toString().toLowerCase(),
-              orElse: () => NotificationSeverity.unknown,
-            )
-          : NotificationSeverity.unknown,
-      message: json['message'] ?? '',
-      data: json['data'] != null
-          ? NotificationDataModel.fromJson(json['data'])
-          : null,
-      timestamp: json['timestamp'] != null
-          ? DateTime.parse(json['timestamp'])
-          : DateTime.now(),
-    );
-  }
 }
 
 class NotificationDataModel extends Equatable {
-  final String? hint;
-  final String? name;
-
   const NotificationDataModel({
     this.hint,
     this.name,
   });
-
-  @override
-  List<Object?> get props => [
-        hint,
-        name,
-      ];
 
   factory NotificationDataModel.fromJson(Map<String, dynamic> json) {
     return NotificationDataModel(
@@ -77,6 +67,14 @@ class NotificationDataModel extends Equatable {
       name: json['name'] as String? ?? '---',
     );
   }
+  final String? hint;
+  final String? name;
+
+  @override
+  List<Object?> get props => [
+        hint,
+        name,
+      ];
 }
 
 extension NotificationX on NotificationModel {
