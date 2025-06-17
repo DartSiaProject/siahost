@@ -20,26 +20,28 @@ class HostDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => HostLocationCubit(di.get())
-        ..getLocationAddress(
-          host.netAddress,
-        ),
-      child: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
-        slivers: [
-          SliverAppBar.medium(
-            title: Text(context.l10n.hostInfo),
+    return Scaffold(
+      body: BlocProvider(
+        create: (context) => HostLocationCubit(di.get())
+          ..getLocationAddress(
+            host.netAddress,
           ),
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            sliver: SliverToBoxAdapter(
-              child: HostDetailsView(
-                host: host,
+        child: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+          slivers: [
+            SliverAppBar.medium(
+              title: Text(context.l10n.hostInfo),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              sliver: SliverToBoxAdapter(
+                child: HostDetailsView(
+                  host: host,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

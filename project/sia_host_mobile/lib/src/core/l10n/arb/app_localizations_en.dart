@@ -525,4 +525,52 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get wait => 'Please wait';
+
+  @override
+  String get preferences => 'Preferences';
+
+  @override
+  String get changeLanguage => 'Change Language';
+
+  @override
+  String get chooseLanguage => 'Choose your language';
+
+  @override
+  String get french => 'French';
+
+  @override
+  String get english => 'English';
+
+  @override
+  String get languageChanged => 'Language changed successfully.';
+
+  @override
+  String get dbBackup => 'Database Backup';
+
+  @override
+  String get dbBackupDesc => 'Backup your database to a file or restore it from a file.';
+
+  @override
+  String get dbBackupButton => 'Backup';
+
+  @override
+  String get dbRestoreButton => 'Restore';
+
+  @override
+  String get dbBackupSuccess => 'Database backup was successful.';
+
+  @override
+  String get dbRestoreSuccess => 'Database restore was successful.';
+
+  @override
+  String get cacheManager => 'Cache Manager';
+
+  @override
+  String get cacheManagerDesc => 'Manage your cache and clear it if needed.';
+
+  @override
+  String get about => 'About';
+
+  @override
+  String get aboutDesc => 'DartSia is a mobile application that allows you to manage your host on the Sia network. It is open source and free to use.';
 }

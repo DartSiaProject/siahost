@@ -33,6 +33,7 @@ class HomePage extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           slivers: [
             SliverAppBar(
+              automaticallyImplyLeading: false,
               title: Text(context.l10n.homeTitle),
               floating: true,
               snap: true,

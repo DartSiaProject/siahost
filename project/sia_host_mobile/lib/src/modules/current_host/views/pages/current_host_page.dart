@@ -20,57 +20,60 @@ class CurrentHostPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<CurrentHostCubit, CurrentHostState>(
-      listener: (context, state) {
-        if (state is CurrentHostFailure) {
-          AppSnackBar.error(
-            message: translateErrorMessage(context, state.error),
-          );
-        }
-      },
-      listenWhen: (previous, current) {
-        return current is CurrentHostFailure;
-      },
-      child: RefreshIndicator.adaptive(
-        onRefresh: context.read<CurrentHostCubit>().getData,
-        child: CustomScrollView(
-          physics: const BouncingScrollPhysics(
-            parent: AlwaysScrollableScrollPhysics(),
-          ),
-          slivers: [
-            SliverAppBar(
-              title: Text(context.l10n.myHostTitle),
-              floating: true,
-              snap: true,
+    return Scaffold(
+      body: BlocListener<CurrentHostCubit, CurrentHostState>(
+        listener: (context, state) {
+          if (state is CurrentHostFailure) {
+            AppSnackBar.error(
+              message: translateErrorMessage(context, state.error),
+            );
+          }
+        },
+        listenWhen: (previous, current) {
+          return current is CurrentHostFailure;
+        },
+        child: RefreshIndicator.adaptive(
+          onRefresh: context.read<CurrentHostCubit>().getData,
+          child: CustomScrollView(
+            physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics(),
             ),
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              sliver: SliverToBoxAdapter(
-                child: BlocBuilder<CurrentHostCubit, CurrentHostState>(
-                  builder: (context, state) {
-                    if (state is CurrentHostLoading) return const AppLoader();
+            slivers: [
+              SliverAppBar(
+                title: Text(context.l10n.myHostTitle),
+                floating: true,
+                snap: true,
+              ),
+              SliverPadding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                sliver: SliverToBoxAdapter(
+                  child: BlocBuilder<CurrentHostCubit, CurrentHostState>(
+                    builder: (context, state) {
+                      if (state is CurrentHostLoading) return const AppLoader();
 
-                    if (state is CurrentHostFailure) {
-                      return AppErrorWidget(
-                        onRefresh: () {
-                          context.read<CurrentHostCubit>().getData();
-                        },
-                        message: translateErrorMessage(context, state.error),
-                      );
-                    }
+                      if (state is CurrentHostFailure) {
+                        return AppErrorWidget(
+                          onRefresh: () {
+                            context.read<CurrentHostCubit>().getData();
+                          },
+                          message: translateErrorMessage(context, state.error),
+                        );
+                      }
 
-                    if (state is CurrentHostSuccess) {
-                      return CurrentHostView(
-                        hostInfo: state.hostInfo,
-                      );
-                    }
+                      if (state is CurrentHostSuccess) {
+                        return CurrentHostView(
+                          hostInfo: state.hostInfo,
+                        );
+                      }
 
-                    return const SizedBox.shrink();
-                  },
+                      return const SizedBox.shrink();
+                    },
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
