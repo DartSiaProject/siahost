@@ -51,5 +51,7 @@ String translateErrorMessage(BuildContext context, DartSiaException exception) {
       return l10n.noStoragePermission;
     case ResponseStatus.notEnoughSpace:
       return l10n.notEnoughSpace;
+    case ResponseStatus.cantBeDelete:
+      return l10n.cantBeDelete;
   }
 }

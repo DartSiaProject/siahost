@@ -6,6 +6,8 @@ final class HostListState extends Equatable {
     this.hosts = const [],
     this.error,
     this.searchedHost,
+    this.page = 0,
+    this.hasMore = false,
   });
 
   final StateStatus status;
@@ -13,17 +15,27 @@ final class HostListState extends Equatable {
   final DartSiaException? error;
   final HostInfoModel? searchedHost;
 
+  // for temporary pagination
+  final int page;
+  final bool hasMore;
+
   HostListState copyWith({
     StateStatus? status,
     List<HostInfoModel>? hosts,
     DartSiaException? error,
     HostInfoModel? searchedHost,
+    int? page,
+    bool? hasMore,
   }) {
     return HostListState(
       status: status ?? this.status,
       hosts: hosts ?? this.hosts,
       error: error,
       searchedHost: searchedHost,
+
+      //
+      page: page ?? this.page,
+      hasMore: hasMore ?? this.hasMore,
     );
   }
 
@@ -33,5 +45,9 @@ final class HostListState extends Equatable {
         hosts,
         error,
         searchedHost,
+
+        //
+        page,
+        hasMore,
       ];
 }

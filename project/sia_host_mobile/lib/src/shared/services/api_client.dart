@@ -16,11 +16,15 @@ class ApiClient {
   Future<Response<dynamic>> get(
     String url, {
     Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? headers,
   }) {
+    final finalHeaders = headers ?? {};
+    finalHeaders['accept'] = 'application/json';
+
     return _dio.get(
       url,
       queryParameters: queryParameters,
-      options: Options(headers: {'accept': 'application/json'}),
+      options: Options(headers: finalHeaders),
     );
   }
 

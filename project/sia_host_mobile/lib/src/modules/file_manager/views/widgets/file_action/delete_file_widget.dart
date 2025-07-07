@@ -52,20 +52,20 @@ class _DeleteFileView extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           spacing: 16,
           children: [
-            // delete title
+            // title
             Text(
               context.l10n.deleteFileNotice,
               style: context.textTheme.headlineMedium,
             ),
 
-            // delete description
+            // description
             Text(
               context.l10n.deleteFileDesc,
               style: context.textTheme.bodyLarge,
               textAlign: TextAlign.center,
             ),
 
-            // button uploader
+            // button
             BlocBuilder<FileActionCubit, FileActionState>(
               builder: (context, state) {
                 return AppButton(

@@ -57,6 +57,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get siaCoin => 'SC';
 
   @override
+  String get month => 'month';
+
+  @override
   String get byte => 'B';
 
   @override
@@ -138,6 +141,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get createAt => 'Created at';
 
   @override
+  String get perMonth => 'per month';
+
+  @override
+  String get v2OnlyHost => 'Note: The current host list is from Hostd V2 only';
+
+  @override
+  String get v2OnlyBadge => 'V2 only';
+
+  @override
   String get navHome => 'Home';
 
   @override
@@ -175,6 +187,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dailyActiveContracts => 'Daily Active Contracts';
+
+  @override
+  String get perTBPerMonth => 'per TB/Month';
+
+  @override
+  String get perTB => 'per TB';
 
   @override
   String get searchTitle => 'Research a host';
@@ -226,9 +244,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get hostConfigSuccess => 'Host data updated successfully';
-
-  @override
-  String get filesTitle => 'My Buckets';
 
   @override
   String get notificationsTitle => 'Notifications';
@@ -376,6 +391,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cannotFindHostByKey => 'Cannot find the host with this public key.';
+
+  @override
+  String get filesTitle => 'My Buckets';
+
+  @override
+  String get noBucketsFound => 'No Buckets found';
 
   @override
   String get fileManagerTitle => 'File Manager';
@@ -545,10 +566,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get languageChanged => 'Language changed successfully.';
 
   @override
-  String get dbBackup => 'Database Backup';
+  String get dbBackup => 'Backup & Restore';
 
   @override
-  String get dbBackupDesc => 'Backup your database to a file or restore it from a file.';
+  String get dbBackupDesc => 'Backup your database to a file to easily restore it from a point.';
 
   @override
   String get dbBackupButton => 'Backup';
@@ -563,6 +584,36 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dbRestoreSuccess => 'Database restore was successful.';
 
   @override
+  String get noBackupsFound => 'No backups found.';
+
+  @override
+  String get restoreVia => 'Restore from a file';
+
+  @override
+  String get backupTitle => 'Backup';
+
+  @override
+  String get waitingBackup => 'Please wait while we backup your database.';
+
+  @override
+  String get restoreTitle => 'Restore';
+
+  @override
+  String get waitingRestore => 'Please wait while we restore your database.';
+
+  @override
+  String get chooseExternalFile => 'Choose an external file';
+
+  @override
+  String get chooseExternalFileDesc => 'Please choose an external file to restore your database.';
+
+  @override
+  String get restoreUsingFile => 'You are about to restore your database using a backup file. Continue ?';
+
+  @override
+  String get chooseRealBackup => 'Choose a real backup file (.bak file)';
+
+  @override
   String get cacheManager => 'Cache Manager';
 
   @override
@@ -573,4 +624,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get aboutDesc => 'DartSia is a mobile application that allows you to manage your host on the Sia network. It is open source and free to use.';
+
+  @override
+  String get cantBeDelete => 'The resource cannot be deleted.';
+
+  @override
+  String get shareFile => 'Share File';
+
+  @override
+  String get generatingLink => 'Generating Link';
+
+  @override
+  String get generatingProgress => 'We are generating the shared link for you. Please wait.';
+
+  @override
+  String get shareLink => 'Share Link';
+
+  @override
+  String get notAvailableYet => 'This feature will be available soon';
 }

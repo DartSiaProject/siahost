@@ -19,6 +19,7 @@
   "addressCopiedSuccessfully": "Adresse copiée avec succès.",
   "scPerTB": "SC/To",
   "siaCoin": "SC",
+  "month": "mois",
   "byte": "o",
   "kiloByte": "Ko",
   "megaByte": "Mo",
@@ -47,12 +48,18 @@
   "save": "Enregistrer",
   "createAt": "Créer le",
   "download": "Télécharger",
+  "perMonth": "par mois",
+  "v2OnlyHost": "Note: La liste suivante est celle de la V2 de Hostd",
+  "v2OnlyBadge": "V2 seulement",
+
+
   "navHome": "Accueil",
   "navSearch": "Recherche",
   "navMyHost": "Mon Hôte",
   "navConfig": "Configs",
   "navFiles": "Fichiers",
   "navNotifications": "Notifications",
+  
   "homeTitle": "Aperçu du réseau",
   "currentActiveHosts": "Hôtes actifs \nactuels",
   "totalNetworkStorage": "Stockage total \ndu réseau",
@@ -60,9 +67,14 @@
   "pricePerTB": "Prix par To",
   "pricePerTBPerMonth": "Prix par \nTo/Mois",
   "dailyActiveContracts": "Contrats actifs quotidiens",
+  "perTBPerMonth": "par To/mois",
+  "perTB": "par To",
+
+  
   "searchTitle": "Rechercher un hôte",
   "searchHint": "Clé publique de l'hôte",
   "searchLabel": "Entrez l'adresse de la clé publique de l'hôte",
+  
   "hostInfo": "Informations sur l'hôte",
   "myHostTitle": "Aperçu de mon hôte",
   "currentHostHeight": "Hauteur actuelle de l'hôte",
@@ -74,10 +86,11 @@
   "maxContractsPrice": "Prix max des contrats",
   "minAccountExpiry": "Expiration min du compte",
   "maxRPCPrice": "Prix max RPC",
+  
   "hostConfigTitle": "Configurations de l'hôte",
   "configButton": "Configurer",
   "hostConfigSuccess": "Les données du server on été mises à jour.",
-  "filesTitle": "Mes Buckets",
+  
   "notificationsTitle": "Notifications",
   "deleteNotifText": "Vous êtes sur le point de supprimer cette alerte.",
   "deleteAllNotifText": "Vous êtes sur le point de supprimer toutes les alertes de Renterd.",
@@ -88,6 +101,8 @@
   "failedFetchedMoreAlert": "Échec de la récupération de plus d'alertes.",
   "noAlertFound": "Aucune alerte trouvée!",
   "notifDetail": "Détails de l'alerte",
+  
+  
   "errorCancelled": "La requête a été annulée.",
   "errorConnectionTimeout": "Votre appareil a mis trop de temps à se connecter au serveur.",
   "errorNoInternet": "Pas de connexion internet.",
@@ -109,9 +124,12 @@
   "errorUnknown": "Erreur inconnue.",
   "serverAddressField": "Adresse publique Renterd",
   "serverAddressFieldHint": "Adresse IPV4",
-  "passwordField": "Mot de passe Renterd",
+  "passwordField": "Mot de passe",
+  
   "emailField": "Adresse e-mail",
   "loginButton": "Se connecter",
+  
+  
   "getStartedButton": "Commencer",
   "onboardingTitle1": "Contrôle de l'hôte",
   "onboardingTitle2": "Visualiser les données",
@@ -120,6 +138,8 @@
   "onboardingDesc2": "Consultez les données de statut de votre hôte en temps réel ainsi que toute son activité sur le réseau Sia.",
   "onboardingDesc3": "Vous pouvez visualiser l'état du réseau Sia ainsi que tous les échanges des hôtes.",
   "loginDesc": "Pour commencer à interagir avec le réseau Sia, veuillez remplir les champs suivants.",
+  
+  
   "requiredField": "Ce champ est requis.",
   "invalidEmail": "L'adresse e-mail est invalide.",
   "invalidAddress": "L'adresse de l'hôte est invalide.",
@@ -127,6 +147,10 @@
   "invalidAddressFormat": "Le format de l'adresse est invalide.",
   "invalidForm": "Veuillez remplir tous les champs requis.",
   "cannotFindHostByKey": "Aucun server n'a été trouvé avec cette clé publique.",
+  
+  
+  "filesTitle": "Mes Buckets",
+  "noBucketsFound": "Aucun buckets trouvés.",
   "fileManagerTitle": "Gestionnaire de fichiers",
   "fileManagerDesc": "Gerer vos fichiers.",
   "fileManagerEmpty": "Aucun fichiers ou dossiers trouvés.",
@@ -244,15 +268,32 @@
   "languageChanged": "La langue a été changée avec succès.",
 
   "dbBackup": "Sauvegarde et restauration",
-  "dbBackupDesc": "Sauvegarder votre base de données sur un fichier ou la restaurer à partir d'un fichier.",
+  "dbBackupDesc": "Sauvegarder votre base de données sur un fichier afin de la restaurer à partir d'un point.",
   "dbBackupButton": "Sauvegarder",
   "dbRestoreButton": "Restaurer",
   "dbBackupSuccess": "La sauvegarde de la base de données a été effectuée avec succès.",
   "dbRestoreSuccess": "La restauration de la base de données a été effectuée avec succès.",
+  "noBackupsFound": "Aucune sauvegarde trouvée.",
+  "restoreVia": "Restaurer à partir d'un fichier",
+  "backupTitle": "Sauvegarde",
+  "waitingBackup": "Veuillez patienter pendant que nous sauvegardons votre base de données.",
+  "restoreTitle": "Restauration",
+  "waitingRestore": "Veuillez patienter pendant que nous restaurons votre base de données.",
+  "chooseExternalFile": "Choisir un fichier externe",
+  "chooseExternalFileDesc": "Veuillez choisir le fichier de sauvegarde à restaurer.",
+  "restoreUsingFile": "Vous allez restaurer votre base de données à partir d'un fichier de sauvegarde. Continuer ?",
+  "chooseRealBackup": "Veuillez choisir un fichier de sauvegarde valide (extension .bak).",
 
   "cacheManager": "Gestionnaire de cache",
   "cacheManagerDesc": "Gérer votre cache et le vider si nécessaire.",
 
   "about": "À propos de l'application",
-  "aboutDesc": "DartSia est une application mobile qui vous permet de gérer votre hôte sur le réseau Sia. Elle est open source et gratuite à utiliser."
+  "aboutDesc": "DartSia est une application mobile qui vous permet de gérer votre hôte sur le réseau Sia. Elle est open source et gratuite à utiliser.",
+  "cantBeDelete": "Une erreur est survenue lors de la suppression de la ressource.",
+
+  "shareFile": "Partager le fichier",
+  "generatingLink": "Génération du lien",
+  "generatingProgress": "Veuillez patienter pendant que nous générons le lien de partage.",
+  "shareLink": "Partager le lien",
+  "notAvailableYet": "Cette fonctionnalité n'est pas encore disponible."
 }

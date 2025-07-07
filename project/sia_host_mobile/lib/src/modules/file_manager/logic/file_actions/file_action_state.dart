@@ -11,6 +11,15 @@ final class FileActionInitial extends FileActionState {}
 
 final class FileActionLoading extends FileActionState {}
 
+final class FileActionSharedLinkCreated extends FileActionState {
+  const FileActionSharedLinkCreated(this.link);
+
+  final String link;
+
+  @override
+  List<Object?> get props => [link];
+}
+
 final class FileActionUploaded extends FileActionState {
   const FileActionUploaded(this.name);
 

@@ -8,6 +8,7 @@ import 'package:sia_host_mobile/src/modules/home/logic/cubit/network_overview_cu
 import 'package:sia_host_mobile/src/modules/home/views/widgets/bar_chart_networking.dart';
 import 'package:sia_host_mobile/src/modules/home/views/widgets/card_network_widget.dart';
 import 'package:sia_host_mobile/src/shared/functions/translate_error_message.dart';
+import 'package:sia_host_mobile/src/shared/helpers/host_helper.dart';
 import 'package:sia_host_mobile/src/shared/ui/widgets/app_error_widget.dart';
 import 'package:sia_host_mobile/src/shared/ui/widgets/app_loader.dart';
 import 'package:sia_host_mobile/src/shared/ui/widgets/app_snackbar.dart';
@@ -70,10 +71,13 @@ class HomePage extends StatelessWidget {
 class HomeView extends StatelessWidget {
   const HomeView({required this.networkData, super.key});
 
-  final NetworkDataModel networkData;
+  // final NetworkDataModel networkData;
+  final NetworkOverviewData networkData;
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
     return SingleChildScrollView(
       physics: const NeverScrollableScrollPhysics(),
       padding: const EdgeInsets.only(top: 16),
@@ -86,34 +90,82 @@ class HomeView extends StatelessWidget {
             crossAxisSpacing: 35,
             mainAxisSpacing: 35,
             children: <Widget>[
+              // CardNetworkWidget(
+              //   value: networkData.totalCurrentHosts.toString(),
+              //   description: l10n.currentActiveHosts,
+              //   percentage: 2,
+              // ),
+              // CardNetworkWidget(
+              //   value: networkData.networkStorageFormatted(context),
+              //   description: l10n.totalNetworkStorage,
+              //   percentage: 2,
+              // ),
+              // CardNetworkWidget(
+              //   value: networkData.usedStorageFormatted(context),
+              //   description: l10n.totalUsedStorage,
+              //   percentage: 2,
+              // ),
+              // CardNetworkWidget(
+              //   value: networkData.pricePerTBFormatted(context),
+              //   description: l10n.pricePerTBPerMonth,
+              //   percentage: 2,
+              // ),
               CardNetworkWidget(
-                value: networkData.totalCurrentHosts.toString(),
-                description: context.l10n.currentActiveHosts,
-                percentage: 2,
+                value: networkData.hostCount.toString(),
+                description: l10n.currentActiveHosts,
+                helper: networkData.allHostCount.toString(),
               ),
               CardNetworkWidget(
-                value: networkData.networkStorageFormatted(context),
-                description: context.l10n.totalNetworkStorage,
-                percentage: 2,
+                value: HostHelper.formatPricing(
+                  networkData.storagePrice,
+                  suffix: '/${l10n.teraByte}',
+                ),
+                description: '${l10n.storagePrice} (${l10n.perTBPerMonth})',
+                helper: networkData.storagePriceUSD == null
+                    ? null
+                    : HostHelper.formatPricing(
+                        networkData.storagePriceUSD!,
+                        withCurrency: false,
+                        prefix: r'$',
+                      ),
               ),
               CardNetworkWidget(
-                value: networkData.usedStorageFormatted(context),
-                description: context.l10n.totalUsedStorage,
-                percentage: 2,
+                value: HostHelper.formatPricing(
+                  networkData.downloadPrice,
+                  suffix: '/${l10n.teraByte}',
+                ),
+                description: '${l10n.downloadPrice} (${l10n.perTB})',
+                helper: networkData.downloadPriceUSD == null
+                    ? null
+                    : HostHelper.formatPricing(
+                        networkData.downloadPriceUSD!,
+                        withCurrency: false,
+                        prefix: r'$',
+                      ),
               ),
               CardNetworkWidget(
-                value: networkData.pricePerTBFormatted(context),
-                description: context.l10n.pricePerTBPerMonth,
-                percentage: 2,
+                value: HostHelper.formatPricing(
+                  networkData.uploadPrice,
+                  suffix: '/${l10n.teraByte}',
+                ),
+                description: '${l10n.uploadPrice} (${l10n.perTB})',
+                helper: networkData.uploadPriceUSD == null
+                    ? null
+                    : HostHelper.formatPricing(
+                        networkData.uploadPriceUSD!,
+                        withCurrency: false,
+                        prefix: r'$',
+                      ),
               ),
             ],
           ),
           SizedBox(
             height: 20.0.h,
           ),
-          BarChartNetworking(
-            activeContractCount: networkData.activeContractCount,
-          ),
+          if (networkData.siaUsdQuote != null)
+            BarChartNetworking(
+              siaUsdQuote: networkData.siaUsdQuote!,
+            ),
         ],
       ),
     );

@@ -3,15 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sia_host_mobile/src/core/l10n/l10n.dart';
 import 'package:sia_host_mobile/src/core/theme/app_theme.dart';
+import 'package:sia_host_mobile/src/modules/home/data/models/network_data.dart';
 import 'package:sia_host_mobile/src/shared/extensions/theme_ext.dart';
 
 class BarChartNetworking extends StatelessWidget {
   const BarChartNetworking({
-    required this.activeContractCount,
+    required this.siaUsdQuote,
     super.key,
   });
 
-  final List<int> activeContractCount;
+  List<int> get activeContractCount => [1, 2, 3, 4, 5, 6, 4, 8, 9, 10];
+  final SiaUsdQuote siaUsdQuote;
 
   @override
   Widget build(BuildContext context) {
@@ -25,20 +27,31 @@ class BarChartNetworking extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
+                spacing: 4.0.h,
                 children: <Widget>[
+                  // Text(
+                  //   context.l10n.dailyActiveContracts,
+                  //   style: context.textTheme.bodyMedium,
+                  // ),
+                  // Text(
+                  //   activeContractCount.length.toString(),
+                  //   style: context.textTheme.headlineMedium,
+                  // ),
                   Text(
-                    context.l10n.dailyActiveContracts,
+                    'SC/USDT',
                     style: context.textTheme.bodyMedium,
                   ),
-                  SizedBox(
-                    height: 4.0.h,
-                  ),
-                  Text(
-                    activeContractCount.length.toString(),
-                    style: context.textTheme.headlineMedium,
-                  ),
-                  SizedBox(
-                    height: 4.0.h,
+                  Text.rich(
+                    TextSpan(
+                      text: siaUsdQuote.price.toStringAsFixed(6),
+                      style: context.textTheme.headlineMedium,
+                      children: [
+                        TextSpan(
+                          text: 'USDT',
+                          style: context.textTheme.bodyMedium,
+                        ),
+                      ],
+                    ),
                   ),
                   Flex(
                     direction: Axis.horizontal,

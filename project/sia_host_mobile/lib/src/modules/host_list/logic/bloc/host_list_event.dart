@@ -7,7 +7,13 @@ sealed class HostListEvent extends Equatable {
   List<Object> get props => [];
 }
 
-final class HostListFetchedEvent extends HostListEvent {}
+final class HostListFetchedEvent extends HostListEvent {
+  const HostListFetchedEvent({this.reset = false});
+  final bool reset;
+
+  @override
+  List<Object> get props => [reset];
+}
 
 final class HostListSearchedEvent extends HostListEvent {
   const HostListSearchedEvent({required this.publicKey});

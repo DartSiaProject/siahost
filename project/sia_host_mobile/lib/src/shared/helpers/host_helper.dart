@@ -42,18 +42,27 @@ class HostHelper {
   ///
   static double getFinalScore(Map<String, dynamic> hostData) {
     var finalScore = 0.0;
+    // final settings = hostData['v2Settings'] as Map<String, dynamic>?;
 
     try {
-      final scores =
-          hostData['checks']['autopilot']['score'] as Map<String, dynamic>?;
+      // final score = hostData['checks']['score'] as num?;
+
+      // // round the score to 2 decimal places
+      // if (score != null) {
+      //   finalScore = double.parse(score.toStringAsFixed(2));
+      // } else {
+      //   finalScore = 0.0;
+      // }
+      // return finalScore;
+
+      final scores = hostData['score'] as Map<String, dynamic>?;
 
       if (scores == null) return finalScore;
 
       finalScore += (scores['age'] as num) * _weightAge;
       finalScore += (scores['collateral'] as num) * _weightCollateral;
       finalScore += (scores['interactions'] as num) * _weightInteractions;
-      finalScore +=
-          (scores['storageRemaining'] as num) * _weightStorageRemaining;
+      finalScore += (scores['storage'] as num) * _weightStorageRemaining;
       finalScore += (scores['uptime'] as num) * _weightUptime;
       finalScore += (scores['version'] as num) * _weightVersion;
       finalScore += (scores['prices'] as num) * _weightPrices;
@@ -66,7 +75,7 @@ class HostHelper {
 
   /// Convert storage
   ///
-  static double convertStorage(num storage) => storage / 1e12;
+  static double convertStorage(num storage) => storage / 1e6; //1e6 in v2
 
   /// Format storage value
   static String formatStorage(BuildContext context, num storage) {
@@ -89,24 +98,67 @@ class HostHelper {
 
   /// Format pricing amount
   ///
-  static String formatPricing(num amount) {
-    // return amount.toStringAsExponential(1);
+  static String formatPricing(
+    num amount, {
+    bool lowerCase = false,
+    String suffix = '',
+    String prefix = '',
+    bool withCurrency = true,
+  }) {
+    var currency = 'SC';
+    var finalAmount = amount;
+    var finalPrefix = prefix;
+    var finalSuffix = suffix;
+
+    if (amount >= 1e3 && amount < 1e6) {
+      currency = 'KS';
+      finalAmount /= 1e3;
+    } else if (amount >= 1e6 && amount < 1e9) {
+      currency = 'MS';
+      finalAmount /= 1e6;
+    } else if (amount >= 1e9) {
+      currency = 'GS';
+      finalAmount /= 1e9;
+    }
+
+    currency = !withCurrency
+        ? ''
+        : lowerCase
+            ? currency.toLowerCase()
+            : currency;
     final formattedValue = NumberFormat.decimalPatternDigits(
       decimalDigits: 2,
     ).format(
-      amount,
+      finalAmount,
     );
 
-    return formattedValue;
+    finalSuffix = lowerCase ? suffix.toLowerCase() : suffix;
+    finalPrefix = lowerCase ? prefix.toLowerCase() : prefix;
+
+    return '$finalPrefix$formattedValue $currency$finalSuffix';
   }
 
   /// 💰 Convert pricing Hastings To SC
   ///
   static num convertPricing(
-    String amount, {
+    dynamic amount, {
     double divideBy = 1e12,
+    bool perBlock = false, // If true, times 144 * 30
   }) {
-    return BigInt.parse(amount).toDouble() / divideBy;
+    assert(amount is String || amount is num, 'Amount should be String or num');
+
+    var finalAmount = 0.0;
+    if (amount is num) {
+      finalAmount = amount.toDouble();
+    } else if (amount is String) {
+      finalAmount = BigInt.parse(amount).toDouble();
+    }
+
+    finalAmount = perBlock
+        ? finalAmount * 144 * 30 // 144 blocks per day, 30 days per month
+        : finalAmount;
+
+    return (finalAmount as num).toDouble() / divideBy;
   }
 
   /// 💰 Revert pricing SC To Hastings
@@ -121,7 +173,7 @@ class HostHelper {
   /// Calculate used storage
   ///
   static double calculateUsedStorage(num total, num remaining) {
-    return (total - remaining) / 1e12;
+    return (total - remaining) / 1e6; // 1e6 for v2
   }
 
   /// Get active host list mapped

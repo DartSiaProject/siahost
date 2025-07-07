@@ -25,7 +25,8 @@ enum ResponseStatus {
   other,
 
   noStoragePermission,
-  notEnoughSpace;
+  notEnoughSpace,
+  cantBeDelete;
 }
 
 enum StateStatus {

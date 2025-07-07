@@ -6,13 +6,13 @@ class CardNetworkWidget extends StatelessWidget {
   const CardNetworkWidget({
     required this.value,
     required this.description,
-    required this.percentage,
+    this.helper,
     super.key,
   });
 
   final String value;
   final String description;
-  final double percentage;
+  final String? helper;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +23,7 @@ class CardNetworkWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: 4,
           children: <Widget>[
             FittedBox(
               child: Text(
@@ -34,20 +35,15 @@ class CardNetworkWidget extends StatelessWidget {
               description,
               style: context.textTheme.bodyMedium,
             ),
-            Row(
-              children: <Widget>[
-                const Icon(
-                  Icons.arrow_drop_up_rounded,
+            if (helper != null) ...[
+              // const Spacer(),
+              Text(
+                helper!,
+                style: context.textTheme.labelLarge!.copyWith(
                   color: AppTheme.primaryColor,
                 ),
-                Text(
-                  '+$percentage%',
-                  style: context.textTheme.labelLarge!.copyWith(
-                    color: AppTheme.primaryColor,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ],
         ),
       ),

@@ -107,7 +107,7 @@ class AppRouter extends RootStackRouter {
           path: '/settings',
           children: [
             AutoRoute(page: PreferenceRoute.page, path: ''),
-            // AutoRoute(page: PreferenceRoute.page, path: 'backups'),
+            AutoRoute(page: BackupRoute.page, path: 'backups'),
           ],
           guards: [OnboardingGuard(), AuthGuard()],
         ),

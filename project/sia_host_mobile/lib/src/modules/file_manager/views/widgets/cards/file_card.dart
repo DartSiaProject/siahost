@@ -1,5 +1,8 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:sia_host_mobile/src/core/l10n/l10n.dart';
 import 'package:sia_host_mobile/src/core/routes/app_router.gr.dart';
 import 'package:sia_host_mobile/src/core/theme/app_theme.dart';
@@ -9,6 +12,7 @@ import 'package:sia_host_mobile/src/modules/file_manager/views/widgets/file_acti
 import 'package:sia_host_mobile/src/modules/file_manager/views/widgets/file_action/delete_file_widget.dart';
 import 'package:sia_host_mobile/src/modules/file_manager/views/widgets/file_action/download_file_widget.dart';
 import 'package:sia_host_mobile/src/modules/file_manager/views/widgets/file_action/rename_file_widget.dart';
+import 'package:sia_host_mobile/src/modules/file_manager/views/widgets/file_action/share_file_widget.dart';
 import 'package:sia_host_mobile/src/shared/helpers/asset_helper.dart';
 import 'package:sia_host_mobile/src/shared/ui/widgets/app_bottom_sheet.dart';
 import 'package:sia_host_mobile/src/shared/utils/utils.dart';
@@ -54,6 +58,8 @@ class FileCard extends StatelessWidget {
             _onCopyFile(context);
           } else if (value == FileActionEnum.delete) {
             _onDeleteFile(context);
+          } else if (value == FileActionEnum.share) {
+            _onShareFile(context);
           }
         },
         itemBuilder: (context) => [
@@ -68,6 +74,10 @@ class FileCard extends StatelessWidget {
           PopupMenuItem(
             value: FileActionEnum.copy,
             child: Text(l10n.copyFile),
+          ),
+          PopupMenuItem(
+            value: FileActionEnum.share,
+            child: Text(l10n.shareFile),
           ),
           PopupMenuItem(
             value: FileActionEnum.delete,
@@ -130,5 +140,37 @@ class FileCard extends StatelessWidget {
     if (result ?? false) {
       onDeleted.call();
     }
+  }
+
+  Future<void> _onShareFile(BuildContext context) async {
+    // if the shareLink already exists, just open share
+    if (fileObject.shareLink != null) {
+      await _shareFile(
+        name: fileObject.displayName,
+        link: fileObject.shareLink!,
+      );
+      return;
+    }
+
+    final result = await AppBottomSheet.show<String>(
+      context,
+      child: ShareFileWidget(fileObject: fileObject),
+    );
+
+    if (result != null && result.isNotEmpty) {
+      await _shareFile(
+        name: fileObject.displayName,
+        link: result,
+      );
+    }
+  }
+
+  Future<void> _shareFile({required String name, required String link}) async {
+    await SharePlus.instance.share(
+      ShareParams(
+        text: link,
+        subject: name,
+      ),
+    );
   }
 }

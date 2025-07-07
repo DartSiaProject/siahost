@@ -11,6 +11,7 @@ import 'package:sia_host_mobile/src/shared/functions/translate_error_message.dar
 import 'package:sia_host_mobile/src/shared/ui/widgets/app_bottom_sheet.dart';
 import 'package:sia_host_mobile/src/shared/ui/widgets/app_error_widget.dart';
 import 'package:sia_host_mobile/src/shared/ui/widgets/app_loader.dart';
+import 'package:sia_host_mobile/src/shared/ui/widgets/empty_list_widget.dart';
 import 'package:sia_host_mobile/src/shared/utils/utils.dart';
 
 @RoutePage()
@@ -76,6 +77,15 @@ class FileManagerView extends StatelessWidget {
               message: translateErrorMessage(context, state.error!),
             );
           }
+        }
+
+        if (buckets.isEmpty) {
+          return EmptyListWidget(
+            message: context.l10n.noBucketsFound,
+            onRefresh: () {
+              context.read<BucketListCubit>().findAll();
+            },
+          );
         }
 
         return ListView.separated(

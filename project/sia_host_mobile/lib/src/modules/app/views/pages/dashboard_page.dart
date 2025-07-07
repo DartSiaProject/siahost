@@ -8,6 +8,7 @@ import 'package:sia_host_mobile/src/core/l10n/l10n.dart';
 import 'package:sia_host_mobile/src/core/routes/app_router.gr.dart';
 import 'package:sia_host_mobile/src/core/theme/app_theme.dart';
 import 'package:sia_host_mobile/src/shared/ui/widgets/app_loader.dart';
+import 'package:sia_host_mobile/src/shared/ui/widgets/app_snackbar.dart';
 
 @RoutePage()
 class DashboardPage extends StatelessWidget {
@@ -15,9 +16,7 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: DashboardView(),
-    );
+    return DashboardView();
   }
 }
 
@@ -108,7 +107,7 @@ class DashboardView extends StatelessWidget {
     );
   }
 
-  /// build a drawer with those details
+  /// Building a drawer with those details
   /// - Header containing the logo and the app name
   /// - List of items
   ///   * Preferences
@@ -125,9 +124,6 @@ class DashboardView extends StatelessWidget {
       child: Column(
         children: [
           DrawerHeader(
-            // decoration: const BoxDecoration(
-            //   color: AppTheme.primaryColor,
-            // ),
             child: SizedBox(
               width: 1.sw,
               child: Column(
@@ -162,21 +158,60 @@ class DashboardView extends StatelessWidget {
             leading: const Icon(Icons.backup),
             title: Text(l10n.dbBackup),
             onTap: () {
-              // context.router.push(const DBBackupRoute());
+              context.router.push(const BackupRoute());
             },
           ),
           ListTile(
             leading: const Icon(CupertinoIcons.folder_fill_badge_person_crop),
             title: Text(l10n.cacheManager),
             onTap: () {
-              // context.router.push(const CacheManagementRoute());
+              context.maybePop();
+              AppSnackBar.info(message: l10n.notAvailableYet);
             },
           ),
           ListTile(
             leading: const Icon(Icons.info),
             title: Text(l10n.about),
             onTap: () {
-              // context.router.push(const AboutRoute());
+              // show about app dialog
+              showAdaptiveDialog<dynamic>(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    icon: Image.asset(
+                      'assets/icons/logo.png',
+                      width: 50,
+                      height: 50,
+                    ),
+                    title: const Text(
+                      'DartSia',
+                      style: TextStyle(
+                        fontSize: 24,
+                        color: Colors.white,
+                      ),
+                    ),
+                    content: FutureBuilder(
+                      future: PackageInfo.fromPlatform(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const AppLoader();
+                        }
+
+                        if (snapshot.hasData) {
+                          final deviceInfo = snapshot.data;
+                          return Text(
+                            'Version ${deviceInfo?.version} +${deviceInfo?.buildNumber}',
+                            textAlign: TextAlign.center,
+                          );
+                        }
+
+                        return const SizedBox.shrink();
+                      },
+                    ),
+                  );
+                },
+              );
             },
           ),
           Expanded(

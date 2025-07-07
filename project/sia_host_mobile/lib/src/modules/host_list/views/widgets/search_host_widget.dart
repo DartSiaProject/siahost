@@ -32,6 +32,9 @@ class _SearchHostWidgetState extends State<SearchHostWidget> {
           controller: _textController,
           labelText: context.l10n.searchLabel,
           hintText: context.l10n.searchHint,
+          helperText: context.l10n.v2OnlyHost,
+          helperColor: Colors.red,
+          helperTextSize: 14,
           prefix: _textController.text.trim().isEmpty
               ? null
               : IconButton(

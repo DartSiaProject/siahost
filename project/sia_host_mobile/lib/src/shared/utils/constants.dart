@@ -14,3 +14,7 @@ const applicationName = 'DartSia';
 
 const String bucketNamePattern =
     r'^(?!\d+\.\d+\.\d+\.\d+$)(?!.*\.\.)(?!.*\.$)[a-zA-Z0-9]([a-zA-Z0-9\-\.]{1,61}[a-zA-Z0-9])?$';
+
+// coin market cap api_key_var
+const String coinMarketCapApiVar = 'CMC_PRO_API_KEY';
+const String coinMarketCapApiKey = String.fromEnvironment(coinMarketCapApiVar);

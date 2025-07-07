@@ -29,11 +29,10 @@ class FileActionCubit extends Cubit<FileActionState> {
         fileName: fileName,
         file: file,
         onSendProgress: (sent, total) {
-          Future<dynamic>.delayed(
-            const Duration(seconds: 1),
-            () =>
-                emit(FileActionUploadProgress(((sent / total) * 100).floor())),
-          );
+          Future<dynamic>.delayed(const Duration(seconds: 1), () {
+            if (state is! FileActionLoading) return;
+            emit(FileActionUploadProgress(((sent / total) * 100).floor()));
+          });
         },
       );
 
@@ -42,42 +41,6 @@ class FileActionCubit extends Cubit<FileActionState> {
       emit(FileActionFailure(DartSiaException.handleError(e)));
     }
   }
-
-  /// Download a file
-  ///
-  // Future<void> download(
-  //   BucketObjectModel fileObject,
-  // ) async {
-  //   // emit(FileActionLoading());
-
-  //   // try {
-  //   //   await _repository.downloadFile(
-  //   //     fileObject: fileObject,
-  //   //     onReceiveProgress: (received, total) {
-  //   //       Future<dynamic>.delayed(
-  //   //         const Duration(seconds: 1),
-  //   //         () => emit(FileActionUploadProgress((received / total) * 100)),
-  //   //       );
-  //   //     },
-  //   //   );
-
-  //   //   emit(FileActionDownloaded());
-  //   // } catch (e) {
-  //   //   emit(FileActionFailure(DartSiaException.handleError(e)));
-  //   // }
-
-  //   emit(FileActionLoading());
-
-  //   final enqueued = await downloadService.enqueueDownload(
-  //     url: event.url,
-  //     fileId: event.fileId,
-  //     filename: event.filename,
-  //   );
-
-  //   emit(enqueued
-  //     ? DownloadStarted(event.fileId)
-  //     : DownloadError(event.fileId, 'Download already in progress'));
-  // }
 
   /// COpy a file
   ///
@@ -134,6 +97,24 @@ class FileActionCubit extends Cubit<FileActionState> {
       );
 
       emit(FileActionDeleted());
+    } catch (e) {
+      emit(FileActionFailure(DartSiaException.handleError(e)));
+    }
+  }
+
+  /// Share a file by getting the link
+  ///
+  Future<void> shareFile(
+    BucketObjectModel file,
+  ) async {
+    emit(FileActionLoading());
+
+    try {
+      final sharedLink = await _repository.shareLink(
+        bucketName: file.bucket,
+        fileName: file.key,
+      );
+      emit(FileActionSharedLinkCreated(sharedLink));
     } catch (e) {
       emit(FileActionFailure(DartSiaException.handleError(e)));
     }

@@ -191,6 +191,12 @@ abstract class AppLocalizations {
   /// **'SC'**
   String get siaCoin;
 
+  /// No description provided for @month.
+  ///
+  /// In en, this message translates to:
+  /// **'month'**
+  String get month;
+
   /// No description provided for @byte.
   ///
   /// In en, this message translates to:
@@ -353,6 +359,24 @@ abstract class AppLocalizations {
   /// **'Created at'**
   String get createAt;
 
+  /// No description provided for @perMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'per month'**
+  String get perMonth;
+
+  /// No description provided for @v2OnlyHost.
+  ///
+  /// In en, this message translates to:
+  /// **'Note: The current host list is from Hostd V2 only'**
+  String get v2OnlyHost;
+
+  /// No description provided for @v2OnlyBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'V2 only'**
+  String get v2OnlyBadge;
+
   /// No description provided for @navHome.
   ///
   /// In en, this message translates to:
@@ -430,6 +454,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Daily Active Contracts'**
   String get dailyActiveContracts;
+
+  /// No description provided for @perTBPerMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'per TB/Month'**
+  String get perTBPerMonth;
+
+  /// No description provided for @perTB.
+  ///
+  /// In en, this message translates to:
+  /// **'per TB'**
+  String get perTB;
 
   /// No description provided for @searchTitle.
   ///
@@ -532,12 +568,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Host data updated successfully'**
   String get hostConfigSuccess;
-
-  /// No description provided for @filesTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'My Buckets'**
-  String get filesTitle;
 
   /// No description provided for @notificationsTitle.
   ///
@@ -832,6 +862,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cannot find the host with this public key.'**
   String get cannotFindHostByKey;
+
+  /// No description provided for @filesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My Buckets'**
+  String get filesTitle;
+
+  /// No description provided for @noBucketsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No Buckets found'**
+  String get noBucketsFound;
 
   /// No description provided for @fileManagerTitle.
   ///
@@ -1142,13 +1184,13 @@ abstract class AppLocalizations {
   /// No description provided for @dbBackup.
   ///
   /// In en, this message translates to:
-  /// **'Database Backup'**
+  /// **'Backup & Restore'**
   String get dbBackup;
 
   /// No description provided for @dbBackupDesc.
   ///
   /// In en, this message translates to:
-  /// **'Backup your database to a file or restore it from a file.'**
+  /// **'Backup your database to a file to easily restore it from a point.'**
   String get dbBackupDesc;
 
   /// No description provided for @dbBackupButton.
@@ -1175,6 +1217,66 @@ abstract class AppLocalizations {
   /// **'Database restore was successful.'**
   String get dbRestoreSuccess;
 
+  /// No description provided for @noBackupsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No backups found.'**
+  String get noBackupsFound;
+
+  /// No description provided for @restoreVia.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore from a file'**
+  String get restoreVia;
+
+  /// No description provided for @backupTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup'**
+  String get backupTitle;
+
+  /// No description provided for @waitingBackup.
+  ///
+  /// In en, this message translates to:
+  /// **'Please wait while we backup your database.'**
+  String get waitingBackup;
+
+  /// No description provided for @restoreTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore'**
+  String get restoreTitle;
+
+  /// No description provided for @waitingRestore.
+  ///
+  /// In en, this message translates to:
+  /// **'Please wait while we restore your database.'**
+  String get waitingRestore;
+
+  /// No description provided for @chooseExternalFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose an external file'**
+  String get chooseExternalFile;
+
+  /// No description provided for @chooseExternalFileDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Please choose an external file to restore your database.'**
+  String get chooseExternalFileDesc;
+
+  /// No description provided for @restoreUsingFile.
+  ///
+  /// In en, this message translates to:
+  /// **'You are about to restore your database using a backup file. Continue ?'**
+  String get restoreUsingFile;
+
+  /// No description provided for @chooseRealBackup.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a real backup file (.bak file)'**
+  String get chooseRealBackup;
+
   /// No description provided for @cacheManager.
   ///
   /// In en, this message translates to:
@@ -1198,6 +1300,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'DartSia is a mobile application that allows you to manage your host on the Sia network. It is open source and free to use.'**
   String get aboutDesc;
+
+  /// No description provided for @cantBeDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'The resource cannot be deleted.'**
+  String get cantBeDelete;
+
+  /// No description provided for @shareFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Share File'**
+  String get shareFile;
+
+  /// No description provided for @generatingLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Generating Link'**
+  String get generatingLink;
+
+  /// No description provided for @generatingProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'We are generating the shared link for you. Please wait.'**
+  String get generatingProgress;
+
+  /// No description provided for @shareLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Share Link'**
+  String get shareLink;
+
+  /// No description provided for @notAvailableYet.
+  ///
+  /// In en, this message translates to:
+  /// **'This feature will be available soon'**
+  String get notAvailableYet;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -32,9 +32,14 @@ class FileStorageService {
 
   /// Get the directory for a specific file type
   ///
-  Future<Directory> _getTypeDir(SupportedFileType fileType) async {
+  Future<Directory> _getTypeDir(
+    SupportedFileType fileType, {
+    bool isBackup = false,
+  }) async {
+    final dirName = isBackup ? 'Backups' : fileType.dirName;
+
     final appDir = await _getAppDownloadDir(applicationName);
-    final typeDir = Directory(p.join(appDir.path, fileType.dirName));
+    final typeDir = Directory(p.join(appDir.path, dirName));
 
     if (!typeDir.existsSync()) {
       await typeDir.create(recursive: true);
@@ -66,6 +71,19 @@ class FileStorageService {
   }
 
   /// Save a fileBytes to the specified directory
+  ///
+  Future<File> saveBackup({
+    required List<int> fileBytes,
+  }) async {
+    final todayString = DateTime.now().toIso8601String();
+    final fileName = 'renterd.sqlite3.$todayString.bak';
+
+    final typeDir = await _getTypeDir(SupportedFileType.other, isBackup: true);
+    final destFile = File(p.join(typeDir.path, fileName));
+    return destFile.writeAsBytes(fileBytes);
+  }
+
+  /// Save a fileBytes backup
   ///
   Future<File> saveFileBytes({
     required List<int> fileBytes,
@@ -127,5 +145,11 @@ class FileStorageService {
     } else {
       return null;
     }
+  }
+
+  /// Get backup directory
+  ///
+  Future<Directory> getBackupDir() async {
+    return _getTypeDir(SupportedFileType.other, isBackup: true);
   }
 }

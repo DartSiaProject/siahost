@@ -19,6 +19,7 @@
   "addressCopiedSuccessfully": "Address Copied successfully",
   "scPerTB": "SC/TB",
   "siaCoin": "SC",
+  "month": "month",
   "byte": "B",
   "kiloByte": "KB",
   "megaByte": "MB",
@@ -46,6 +47,9 @@
   "delete": "Delete",
   "save": "Save",
   "createAt": "Created at",
+  "perMonth": "per month",
+  "v2OnlyHost": "Note: The current host list is from Hostd V2 only",
+  "v2OnlyBadge": "V2 only",
 
   "navHome": "Home",
   "navSearch": "Search",
@@ -61,13 +65,14 @@
   "pricePerTB": "Price per TB",
   "pricePerTBPerMonth": "Price per \nTB/Month",
   "dailyActiveContracts": "Daily Active Contracts",
-
-
+  "perTBPerMonth": "per TB/Month",
+  "perTB": "per TB",
+  
   "searchTitle": "Research a host",
   "searchHint": "Host public key",
   "searchLabel": "Enter the host public key address",
   "hostInfo": "Host Informations",
-
+  
   "myHostTitle": "My Host Overview",
   "currentHostHeight": "Current Host Height",
   "maxDownloadPrice": "Max Download Price",
@@ -78,13 +83,12 @@
   "maxContractsPrice": "Max Contracts Price",
   "minAccountExpiry": "Min Account Expiry",
   "maxRPCPrice": "Max RPC Price",
-
+  
   "hostConfigTitle": "Host Configurations",
   "configButton": "Configure",
   "hostConfigSuccess": "Host data updated successfully",
 
-  "filesTitle": "My Buckets",
-
+  
   "notificationsTitle": "Notifications",
   "deleteNotifText": "You are about to delete this alert.",
   "deleteAllNotifText": "You are about to delete all alerts from Renterd.",
@@ -95,7 +99,7 @@
   "failedFetchedMoreAlert": "Failed to fetch more alerts.",
   "noAlertFound": "No Alert found !",
   "notifDetail": "Alert Details",
-
+  
   "errorCancelled": "Request was cancelled.",
   "errorConnectionTimeout": "Your device took too long time to connect to the server.",
   "errorNoInternet": "No internet connection.",
@@ -115,34 +119,36 @@
   "errorOther": "An unknown error occurred.",
   "errorBadMethod": "Bad method.",
   "errorUnknown": "Unknown error.",
-
-
+  
+  
   "serverAddressField": "Renterd Public Address",
   "serverAddressFieldHint": "IPV4 address",
   "passwordField": "Password",
   "emailField": "Email Address",
   "loginButton": "Connect",
   "getStartedButton": "Get Started",
-
+  
   "onboardingTitle1": "Host Control",
   "onboardingTitle2": "Visualize data",
   "onboardingTitle3": "Network data",
-
+  
   "onboardingDesc1": "Easily take control of your host no matter where you are via our mobile application.",
   "onboardingDesc2": "View your host's status data in real time as well as all of its activity on the Sia network.",
   "onboardingDesc3": "You can visualize the state of the Sia network as well as all the exchanges of the hosts.",
-
+  
   "loginDesc": "To start interacting with the Sia network, please fill in the following fields.",
-
+  
   "requiredField": "This field is required.",
   "invalidEmail": "Invalid email address.",
   "invalidAddress": "Invalid server address.",
   "invalidCredentials": "Invalid credentials.",
   "invalidAddressFormat": "Invalid address format.",
   "invalidForm": "Please fill in all fields.",
-
+  
   "cannotFindHostByKey": "Cannot find the host with this public key.",
-
+  
+  "filesTitle": "My Buckets",
+  "noBucketsFound": "No Buckets found",
   "fileManagerTitle": "File Manager",
   "fileManagerDesc": "Manage your files and folders in the Sia network.",
   "fileManagerEmpty": "No files or folders found.",
@@ -266,16 +272,33 @@
   "english": "English",
   "languageChanged": "Language changed successfully.",
 
-  "dbBackup": "Database Backup",
-  "dbBackupDesc": "Backup your database to a file or restore it from a file.",
+  "dbBackup": "Backup & Restore",
+  "dbBackupDesc": "Backup your database to a file to easily restore it from a point.",
   "dbBackupButton": "Backup",
   "dbRestoreButton": "Restore",
   "dbBackupSuccess": "Database backup was successful.",
   "dbRestoreSuccess": "Database restore was successful.",
+  "noBackupsFound": "No backups found.",
+  "restoreVia": "Restore from a file",
+  "backupTitle": "Backup",
+  "waitingBackup": "Please wait while we backup your database.",
+  "restoreTitle": "Restore",
+  "waitingRestore": "Please wait while we restore your database.",
+  "chooseExternalFile": "Choose an external file",
+  "chooseExternalFileDesc": "Please choose an external file to restore your database.",
+  "restoreUsingFile": "You are about to restore your database using a backup file. Continue ?",
+  "chooseRealBackup": "Choose a real backup file (.bak file)",
 
   "cacheManager": "Cache Manager",
   "cacheManagerDesc": "Manage your cache and clear it if needed.",
 
   "about": "About",
-  "aboutDesc": "DartSia is a mobile application that allows you to manage your host on the Sia network. It is open source and free to use."
+  "aboutDesc": "DartSia is a mobile application that allows you to manage your host on the Sia network. It is open source and free to use.",
+  "cantBeDelete": "The resource cannot be deleted.",
+
+  "shareFile": "Share File",
+  "generatingLink": "Generating Link",
+  "generatingProgress": "We are generating the shared link for you. Please wait.",
+  "shareLink": "Share Link",
+  "notAvailableYet": "This feature will be available soon"
 }

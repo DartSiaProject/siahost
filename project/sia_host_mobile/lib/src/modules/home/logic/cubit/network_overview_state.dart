@@ -16,7 +16,8 @@ final class NetworkOverviewSuccess extends NetworkOverviewState {
     required this.networkData,
   });
 
-  final NetworkDataModel networkData;
+  // final NetworkDataModel networkData;
+  final NetworkOverviewData networkData;
 
   @override
   List<Object> get props => [networkData];

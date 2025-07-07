@@ -57,6 +57,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get siaCoin => 'SC';
 
   @override
+  String get month => 'mois';
+
+  @override
   String get byte => 'o';
 
   @override
@@ -138,6 +141,15 @@ class AppLocalizationsFr extends AppLocalizations {
   String get createAt => 'Créer le';
 
   @override
+  String get perMonth => 'par mois';
+
+  @override
+  String get v2OnlyHost => 'Note: La liste suivante est celle de la V2 de Hostd';
+
+  @override
+  String get v2OnlyBadge => 'V2 seulement';
+
+  @override
   String get navHome => 'Accueil';
 
   @override
@@ -175,6 +187,12 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get dailyActiveContracts => 'Contrats actifs quotidiens';
+
+  @override
+  String get perTBPerMonth => 'par To/mois';
+
+  @override
+  String get perTB => 'par To';
 
   @override
   String get searchTitle => 'Rechercher un hôte';
@@ -226,9 +244,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get hostConfigSuccess => 'Les données du server on été mises à jour.';
-
-  @override
-  String get filesTitle => 'Mes Buckets';
 
   @override
   String get notificationsTitle => 'Notifications';
@@ -324,7 +339,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get serverAddressFieldHint => 'Adresse IPV4';
 
   @override
-  String get passwordField => 'Mot de passe Renterd';
+  String get passwordField => 'Mot de passe';
 
   @override
   String get emailField => 'Adresse e-mail';
@@ -376,6 +391,12 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get cannotFindHostByKey => 'Aucun server n\'a été trouvé avec cette clé publique.';
+
+  @override
+  String get filesTitle => 'Mes Buckets';
+
+  @override
+  String get noBucketsFound => 'Aucun buckets trouvés.';
 
   @override
   String get fileManagerTitle => 'Gestionnaire de fichiers';
@@ -548,7 +569,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get dbBackup => 'Sauvegarde et restauration';
 
   @override
-  String get dbBackupDesc => 'Sauvegarder votre base de données sur un fichier ou la restaurer à partir d\'un fichier.';
+  String get dbBackupDesc => 'Sauvegarder votre base de données sur un fichier afin de la restaurer à partir d\'un point.';
 
   @override
   String get dbBackupButton => 'Sauvegarder';
@@ -563,6 +584,36 @@ class AppLocalizationsFr extends AppLocalizations {
   String get dbRestoreSuccess => 'La restauration de la base de données a été effectuée avec succès.';
 
   @override
+  String get noBackupsFound => 'Aucune sauvegarde trouvée.';
+
+  @override
+  String get restoreVia => 'Restaurer à partir d\'un fichier';
+
+  @override
+  String get backupTitle => 'Sauvegarde';
+
+  @override
+  String get waitingBackup => 'Veuillez patienter pendant que nous sauvegardons votre base de données.';
+
+  @override
+  String get restoreTitle => 'Restauration';
+
+  @override
+  String get waitingRestore => 'Veuillez patienter pendant que nous restaurons votre base de données.';
+
+  @override
+  String get chooseExternalFile => 'Choisir un fichier externe';
+
+  @override
+  String get chooseExternalFileDesc => 'Veuillez choisir le fichier de sauvegarde à restaurer.';
+
+  @override
+  String get restoreUsingFile => 'Vous allez restaurer votre base de données à partir d\'un fichier de sauvegarde. Continuer ?';
+
+  @override
+  String get chooseRealBackup => 'Veuillez choisir un fichier de sauvegarde valide (extension .bak).';
+
+  @override
   String get cacheManager => 'Gestionnaire de cache';
 
   @override
@@ -573,4 +624,22 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get aboutDesc => 'DartSia est une application mobile qui vous permet de gérer votre hôte sur le réseau Sia. Elle est open source et gratuite à utiliser.';
+
+  @override
+  String get cantBeDelete => 'Une erreur est survenue lors de la suppression de la ressource.';
+
+  @override
+  String get shareFile => 'Partager le fichier';
+
+  @override
+  String get generatingLink => 'Génération du lien';
+
+  @override
+  String get generatingProgress => 'Veuillez patienter pendant que nous générons le lien de partage.';
+
+  @override
+  String get shareLink => 'Partager le lien';
+
+  @override
+  String get notAvailableYet => 'Cette fonctionnalité n\'est pas encore disponible.';
 }

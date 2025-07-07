@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:sia_host_mobile/src/core/l10n/l10n.dart';
 import 'package:sia_host_mobile/src/core/theme/app_theme.dart';
 import 'package:sia_host_mobile/src/modules/current_host/data/models/current_host_info.dart';
@@ -123,7 +124,7 @@ class CurrentHostView extends StatelessWidget {
                         // style: context.textTheme.labelMedium,
                       ),
                       Text(
-                        hostInfo.blockHeight.substring(0, 3),
+                        NumberFormat().format(int.parse(hostInfo.blockHeight)),
                         style: context.textTheme.headlineSmall?.copyWith(
                           fontSize: 24.0.sp,
                           color: Colors.white,

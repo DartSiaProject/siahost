@@ -89,7 +89,7 @@ class _RenameFileViewState extends State<_RenameFileView> {
                 hintText: context.l10n.newFileNameHint,
               ),
 
-              // button uploader
+              // button
               BlocBuilder<FileActionCubit, FileActionState>(
                 builder: (context, state) {
                   return AppButton(

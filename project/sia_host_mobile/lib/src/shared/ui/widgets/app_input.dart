@@ -26,6 +26,8 @@ class AppInput extends StatelessWidget {
     this.isEnabled = true,
     this.initialValue,
     this.helperText,
+    this.helperColor,
+    this.helperTextSize,
   });
 
   /// The controller for the text field
@@ -75,6 +77,8 @@ class AppInput extends StatelessWidget {
 
   // helper text
   final String? helperText;
+  final Color? helperColor;
+  final double? helperTextSize;
 
   @override
   Widget build(BuildContext context) {
@@ -105,6 +109,11 @@ class AppInput extends StatelessWidget {
             prefixIcon: prefix,
             suffixIcon: suffix,
             helperText: helperText,
+            helperStyle: TextStyle(
+              color: helperColor,
+              fontWeight: FontWeight.bold,
+              fontSize: helperTextSize,
+            ),
             helperMaxLines: 5,
           ),
           textInputAction: textInputAction,

@@ -186,6 +186,7 @@ class NotificationListView extends StatelessWidget {
         }
 
         return ListView.separated(
+          padding: EdgeInsets.zero,
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           primary: false,

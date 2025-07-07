@@ -147,7 +147,7 @@ class _CopyFileViewState extends State<_CopyFileView> {
                 helperText: context.l10n.newFileOrDefault,
               ),
 
-              // button uploader
+              // button
               BlocBuilder<FileActionCubit, FileActionState>(
                 builder: (context, state) {
                   return AppButton(

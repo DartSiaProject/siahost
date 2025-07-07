@@ -18,6 +18,66 @@ class FileActionRepository {
   final StorageService _storage;
   final FileStorageService _fileStorageService;
 
+  /// Share File
+  ///
+  Future<String> shareLink({
+    required String bucketName,
+    required String fileName,
+  }) async {
+    final userInfo = _storage.currentUserDecrypted!;
+
+    final result = await renterd.Object.getSharedLink(
+      serverAddress: userInfo.serverAddress,
+      key: userInfo.key,
+      iv: userInfo.iv,
+      bucketName: bucketName,
+      fileName: fileName,
+    );
+
+    if (result['status'] == true && result.containsKey('response')) {
+      final response = (result['response'] as Response<dynamic>).data as String;
+      final resData = json.decode(response) as Map<String, dynamic>;
+
+      final data = json.decode(
+        DataDecrypter.decryptStringWithAES256CBC(
+          chipherText: resData['data'] as String,
+          key: userInfo.key,
+          iv: userInfo.iv,
+        ),
+      ) as Map<String, dynamic>;
+
+      final linkData = data['data'] as Map<String, dynamic>;
+
+      //  since the link is a relative path, we need to append the server address
+      // it comes like this: "\link\for\the\file";
+      // so we need to remove the leading backslash and append it to the server address
+      var link = linkData['Link'] as String?;
+      if (link == null) {
+        throw const DartSiaException(
+          'The link is not available.',
+          error: ResponseStatus.unknown,
+        );
+      }
+
+      // return the full link
+      // the link is a relative path, so we need to append the server address
+      // and the link to the server address
+      // e.g. http://myhost:0000\link\for\the\file to http://myhost:0000/link/for/the/file
+      // so we need to replace the backslashes with forward slashes
+      link = link.replaceAll(r'\', '/');
+
+      // return the full link
+      // e.g. http://myhost:0000/link/for/the/file
+      if (!link.startsWith('/')) {
+        link = '/$link';
+      }
+
+      return userInfo.serverAddress + link;
+    } else {
+      throw DartSiaException.handleError(result['error']);
+    }
+  }
+
   /// Copy File
   ///
   Future<void> copyFile({

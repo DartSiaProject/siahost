@@ -30,12 +30,13 @@ class BucketRepository {
 
       // decode the network list
       final dataList = json.decode(
-        DataDecrypter.decryptStringWithAES256CBC(
-          chipherText: data['data'] as String,
-          key: userInfo.key,
-          iv: userInfo.iv,
-        ),
-      ) as List;
+            DataDecrypter.decryptStringWithAES256CBC(
+              chipherText: data['data'] as String,
+              key: userInfo.key,
+              iv: userInfo.iv,
+            ),
+          ) as List? ??
+          [];
 
       // Map the data to BucketModel
       return dataList.map((e) {
@@ -87,7 +88,7 @@ class BucketRepository {
       key: userInfo.key,
       iv: userInfo.iv,
       bucketName: bucketName,
-      prefix: prefix,
+      prefix: prefix ?? '',
       delimiter: delimiter,
       limit: limit,
       marker: marker,
@@ -100,7 +101,7 @@ class BucketRepository {
       final response = (result['response'] as Response<dynamic>).data as String;
       final data = json.decode(response) as Map<String, dynamic>;
 
-      // decode the network list
+      // decode the data
       final dataMapped = json.decode(
         DataDecrypter.decryptStringWithAES256CBC(
           chipherText: data['data'] as String,

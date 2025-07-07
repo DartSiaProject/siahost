@@ -6,6 +6,7 @@ import 'package:sia_host_mobile/src/core/routes/app_router.dart';
 import 'package:sia_host_mobile/src/core/theme/app_theme.dart';
 import 'package:sia_host_mobile/src/modules/app/logic/cubit/onboarding_cubit.dart';
 import 'package:sia_host_mobile/src/modules/auth/logic/cubit/auth_cubit.dart';
+import 'package:sia_host_mobile/src/modules/backup/logic/cubit/backup_list_cubit.dart';
 import 'package:sia_host_mobile/src/modules/current_host/logic/cubit/current_host_cubit.dart';
 import 'package:sia_host_mobile/src/modules/file_manager/logic/buckets/bucket_list_cubit.dart';
 import 'package:sia_host_mobile/src/modules/home/logic/cubit/network_overview_cubit.dart';
@@ -38,7 +39,9 @@ class App extends StatelessWidget {
           create: (context) => di.get()..getData(),
         ),
         BlocProvider<HostListBloc>(
-          create: (context) => di.get()..add(HostListFetchedEvent()),
+          // create: (context) => di.get()..add(HostListFetchedEvent()),
+          create: (context) =>
+              di.get()..add(const HostListFetchedEvent(reset: true)),
         ),
         BlocProvider<CurrentHostCubit>(
           create: (context) => di.get()..getData(),
@@ -51,6 +54,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<LanguageCubit>(
           create: (context) => di.get()..getCurrentLanguage(),
+        ),
+        BlocProvider<BackupListCubit>(
+          create: (context) => di.get()..findAll(),
         ),
       ],
       child: ScreenUtilInit(

@@ -60,7 +60,6 @@
 			<string>fetch</string>
 			<string>processing</string>
 		</array>
-
 		<!-- Notification permissions -->
 		<key>NSAppTransportSecurity</key>
 		<dict>

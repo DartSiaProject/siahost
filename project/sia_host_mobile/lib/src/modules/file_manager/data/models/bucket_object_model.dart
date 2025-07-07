@@ -1,10 +1,11 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mime/mime.dart';
 import 'package:sia_host_mobile/src/core/l10n/l10n.dart';
 import 'package:sia_host_mobile/src/shared/utils/enums.dart';
 
-class BucketObjectModel {
-  BucketObjectModel({
+class BucketObjectModel extends Equatable {
+  const BucketObjectModel({
     required this.bucket,
     required this.key,
     required this.size,
@@ -14,10 +15,11 @@ class BucketObjectModel {
     this.modTime,
     this.mimeType,
     this.childrenCount,
+    this.shareLink,
   });
 
   factory BucketObjectModel.fromJson(Map<String, dynamic> json) {
-    var key = json['name'] as String;
+    var key = json['key'] as String;
     if (key.startsWith('/')) {
       // remove the leading slash
       key = key.substring(1);
@@ -36,6 +38,7 @@ class BucketObjectModel {
       mimeType: json['mimeType'] as String? ?? '',
       childrenCount:
           json['childrenCount'] as int?, // optional, backend may provide
+      shareLink: json['shareLink'] as String?,
     );
   }
   final String bucket;
@@ -47,6 +50,7 @@ class BucketObjectModel {
   final DateTime? modTime;
   final String? mimeType;
   final int? childrenCount;
+  final String? shareLink;
 
   // toJson
   Map<String, dynamic> toJson() {
@@ -60,6 +64,7 @@ class BucketObjectModel {
       'isFolder': isFolder,
       'mimeType': mimeType,
       'childrenCount': childrenCount,
+      'shareLink': shareLink,
     };
   }
 
@@ -74,6 +79,7 @@ class BucketObjectModel {
     DateTime? modTime,
     String? mimeType,
     int? childrenCount,
+    String? shareLink,
   }) {
     return BucketObjectModel(
       bucket: bucket ?? this.bucket,
@@ -89,6 +95,7 @@ class BucketObjectModel {
       modTime: modTime ?? this.modTime,
       mimeType: mimeType ?? this.mimeType,
       childrenCount: childrenCount ?? this.childrenCount,
+      shareLink: shareLink ?? this.shareLink,
     );
   }
 
@@ -192,4 +199,18 @@ class BucketObjectModel {
         mime.contains('application/x-rar-compressed') ||
         mime.contains('application/x-7z-compressed');
   }
+
+  @override
+  List<Object?> get props => [
+        bucket,
+        key,
+        size,
+        health,
+        isFolder,
+        etag,
+        modTime,
+        mimeType,
+        childrenCount,
+        shareLink,
+      ];
 }
